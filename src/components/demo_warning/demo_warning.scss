@@ -1,0 +1,30 @@
+@import 'global';
+
+#demo-warning {
+  align-items: center;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: 45px;
+  padding: 5px;
+  width: 100vw;
+
+  .icon {
+    color: $dark-grey;
+    font-size: 35px;
+    margin: 10px 5px 5px 5px;
+  }
+
+  .paragraph-text {
+    color: $primary-red;
+    margin: 0;
+  }
+}
+
+// mobile
+@media (min-width: 350px) {
+  #demo-warning {
+    .icon {
+      font-size: 40px;
+    }
+  }
+}

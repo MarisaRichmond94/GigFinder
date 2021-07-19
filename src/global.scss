@@ -1,13 +1,127 @@
+// global variables - color theme
+$primary-blue: #083F89;
+$secondary-blue: #5BA1C5;
+$off-white: #E3E5EC;
+$off-black: #232332;
+$primary-red: #C6302C;
+$primary-yellow: #FFDF2B;
+$primary-green: #008037;
+$light-grey: #D9D9D9;
+$grey: #868686;
+$medium-grey: #737373;
+$dark-grey: #545454;
+
+// global variables - text sizing
+$font-family: 'Nunito';
+$paragraph-font-size-small-phone: 15px;
+$paragraph-font-size-large-phone: 20px;
+$paragraph-font-size-tablet: 25px;
+$paragraph-font-size-laptop: 25px;
+$paragraph-font-size-monitor: 30px;
+
+// root styling
 body {
+  height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: $font-family;
+  font-weight: 100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  height: 100%;
+}
+
+// global button styling
+button {
+  font-family: $font-family;
+}
+
+.primary-blue-gig-button {
+  background: $primary-blue;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  padding: 10px 20px;
+
+  &:hover {
+    background: $secondary-blue;
+  }
+}
+
+.primary-blue-text-gig-button {
+  background: transparent;
+  border: none;
+  color: $primary-blue;
+  padding: 0;
+
+  &:hover {
+    color: $secondary-blue;
+  }
+}
+
+// old mobile
+@media (min-width: 0) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-small-phone;
+  }
+  .primary-blue-gig-button {
+    font-size: $paragraph-font-size-small-phone;
+  }
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-small-phone;
+  }
+}
+
+// mobile
+@media (min-width: 350px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-large-phone;
+  }
+  .primary-blue-gig-button {
+    font-size: $paragraph-font-size-large-phone;
+  }
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-large-phone;
+  }
+}
+
+// tablet
+@media (min-width: 750px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-tablet;
+  }
+  .primary-blue-gig-button {
+    font-size: $paragraph-font-size-tablet;
+  }
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-tablet;
+  }
+}
+
+// laptop
+@media (min-width: 1024px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-laptop;
+  }
+  .primary-blue-gig-button {
+    font-size: $paragraph-font-size-laptop;
+  }
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-laptop;
+  }
+}
+
+// monitor
+@media (min-width: 1600px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-monitor;
+  }
+  .primary-blue-gig-button {
+    font-size: $paragraph-font-size-monitor;
+  }
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-monitor;
+  }
 }
