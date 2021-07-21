@@ -67,20 +67,11 @@
   }
 
   .search-form-input {
-    input {
+    input,
+    .gig-dropdown > button,
+    .gig-dropdown > .gig-dropdown-menu {
       margin: 0 5%;
       width: 90%;
-    }
-    .gig-dropdown {
-      button {
-        margin: 0 5%;
-        width: 90%;
-      }
-
-      .gig-dropdown-menu {
-        margin: 0 5%;
-        width: 90%;
-      }
     }
   }
 
@@ -115,6 +106,7 @@
 // laptop
 @media (min-width: 1024px) {
   #search-form-name-and-logo {
+    font-family: $header-font-family;
     font-size: 55px;
     img {
       width: 65px;
@@ -122,20 +114,11 @@
   }
 
   .search-form-input {
-    input {
+    input,
+    .gig-dropdown > button,
+    .gig-dropdown > .gig-dropdown-menu {
       margin: 0 10%;
       width: 80%;
-    }
-    .gig-dropdown {
-      button {
-        margin: 0 10%;
-        width: 80%;
-      }
-
-      .gig-dropdown-menu {
-        margin: 0 10%;
-        width: 80%;
-      }
     }
   }
 
@@ -154,27 +137,18 @@
   }
 
   #search-form-name-and-logo {
-    font-size: 65px;
+    font-size: 75px;
     img {
-      width: 65px;
+      width: 80px;
     }
   }
 
   .search-form-input {
-    input {
+    input,
+    .gig-dropdown > button,
+    .gig-dropdown > .gig-dropdown-menu {
       margin: 0 15%;
       width: 70%;
-    }
-    .gig-dropdown {
-      button {
-        margin: 0 15%;
-        width: 70%;
-      }
-
-      .gig-dropdown-menu {
-        margin: 0 15%;
-        width: 70%;
-      }
     }
   }
 

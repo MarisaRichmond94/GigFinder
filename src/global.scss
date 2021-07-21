@@ -12,7 +12,8 @@ $medium-grey: #737373;
 $dark-grey: #545454;
 
 // global variables - text sizing
-$font-family: 'Nunito';
+$font-family: 'Roboto', sans-serif;
+$header-font-family: 'Poppins', sans-serif;
 $paragraph-font-size-small-phone: 15px;
 $paragraph-font-size-large-phone: 20px;
 $paragraph-font-size-tablet: 25px;
@@ -63,12 +64,8 @@ button {
 
 // old mobile
 @media (min-width: 0) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-small-phone;
-  }
-  .primary-blue-gig-button {
-    font-size: $paragraph-font-size-small-phone;
-  }
+  .paragraph-text,
+  .primary-blue-gig-button,
   .primary-blue-text-gig-button {
     font-size: $paragraph-font-size-small-phone;
   }
@@ -76,12 +73,8 @@ button {
 
 // mobile
 @media (min-width: 350px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-large-phone;
-  }
-  .primary-blue-gig-button {
-    font-size: $paragraph-font-size-large-phone;
-  }
+  .paragraph-text,
+  .primary-blue-gig-button,
   .primary-blue-text-gig-button {
     font-size: $paragraph-font-size-large-phone;
   }
@@ -89,12 +82,8 @@ button {
 
 // tablet
 @media (min-width: 750px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-tablet;
-  }
-  .primary-blue-gig-button {
-    font-size: $paragraph-font-size-tablet;
-  }
+  .paragraph-text,
+  .primary-blue-gig-button,
   .primary-blue-text-gig-button {
     font-size: $paragraph-font-size-tablet;
   }
@@ -102,12 +91,8 @@ button {
 
 // laptop
 @media (min-width: 1024px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-laptop;
-  }
-  .primary-blue-gig-button {
-    font-size: $paragraph-font-size-laptop;
-  }
+  .paragraph-text,
+  .primary-blue-gig-button,
   .primary-blue-text-gig-button {
     font-size: $paragraph-font-size-laptop;
   }
@@ -115,12 +100,8 @@ button {
 
 // monitor
 @media (min-width: 1600px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-monitor;
-  }
-  .primary-blue-gig-button {
-    font-size: $paragraph-font-size-monitor;
-  }
+  .paragraph-text,
+  .primary-blue-gig-button,
   .primary-blue-text-gig-button {
     font-size: $paragraph-font-size-monitor;
   }
