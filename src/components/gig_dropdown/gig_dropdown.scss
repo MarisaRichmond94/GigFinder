@@ -11,13 +11,17 @@
     border-radius: 5px;
     box-shadow: none !important;
     box-sizing: border-box;
-    color: #767676;
+    color: black !important;
     display: flex;
     text-align: left;
     width: 100%;
 
     &::after {
       display: none;
+    }
+
+    .placeholder-text {
+      color: #767676 !important;
     }
   }
 }

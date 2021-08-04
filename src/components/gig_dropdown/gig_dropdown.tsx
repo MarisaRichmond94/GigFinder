@@ -10,6 +10,7 @@ type Option = {
 }
 
 type GigDropdownProps = {
+  classNames?: string,
   id: string,
   isDisabled?: boolean,
   onOptionSelect?: (option: Option) => void,
@@ -65,8 +66,10 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
   }
 
   return (
-    <Dropdown className='remove-focus-highlight gig-dropdown'>
-      <Dropdown.Toggle disabled={props.isDisabled || false}>{props.title}</Dropdown.Toggle>
+    <Dropdown className={`remove-focus-highlight gig-dropdown ${props.classNames}`}>
+      <Dropdown.Toggle disabled={props.isDisabled || false}>
+        {props.selectedOption?.displayName || props.title}
+      </Dropdown.Toggle>
       <Dropdown.Menu className='gig-dropdown-menu'>
         {populateDropdownItems()}
       </Dropdown.Menu>

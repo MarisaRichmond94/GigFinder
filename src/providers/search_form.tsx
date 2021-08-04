@@ -43,7 +43,7 @@ function UseProvideSearchForm(): SearchFormContextType {
   };
 
   const onFormSubmit = (): void => {
-    // add functionality
+    // route to results page with input in the url
   };
 
   const onKeyPress = (e: KeyboardEvent): void => {
@@ -65,7 +65,7 @@ function UseProvideSearchForm(): SearchFormContextType {
 const UseSearchForm = () => {
   const context = useContext(SearchFormContext);
   if (context === undefined) {
-    throw new Error("useSearchForm should only be used within the SearchFormProvider.");
+    throw new Error("UseSearchForm should only be used within the SearchFormProvider.");
   }
   return context;
 }

@@ -1,0 +1,39 @@
+.paragraph-text {
+  cursor: default;
+  user-select: none;
+}
+
+// old mobile
+@media (min-width: 0) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-small-phone;
+  }
+}
+
+// mobile
+@media (min-width: 350px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-large-phone;
+  }
+}
+
+// tablet
+@media (min-width: 750px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-tablet;
+  }
+}
+
+// laptop
+@media (min-width: 1024px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-laptop;
+  }
+}
+
+// monitor
+@media (min-width: 1600px) {
+  .paragraph-text {
+    font-size: $paragraph-font-size-monitor;
+  }
+}

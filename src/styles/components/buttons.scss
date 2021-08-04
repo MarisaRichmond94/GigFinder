@@ -1,0 +1,66 @@
+button {
+  font-family: $paragraph-font-family;
+}
+
+.primary-blue-gig-button {
+  background: $primary-blue;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  padding: 10px 20px;
+
+  &:hover {
+    background: $secondary-blue;
+  }
+}
+
+.primary-blue-text-gig-button {
+  background: transparent;
+  border: none;
+  color: $primary-blue;
+  padding: 0;
+
+  &:hover {
+    color: $secondary-blue;
+  }
+}
+
+// old mobile
+@media (min-width: 0) {
+  .primary-blue-gig-button,
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-small-phone;
+  }
+}
+
+// mobile
+@media (min-width: 350px) {
+  .primary-blue-gig-button,
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-large-phone;
+  }
+}
+
+// tablet
+@media (min-width: 750px) {
+  .primary-blue-gig-button,
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-tablet;
+  }
+}
+
+// laptop
+@media (min-width: 1024px) {
+  .primary-blue-gig-button,
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-laptop;
+  }
+}
+
+// monitor
+@media (min-width: 1600px) {
+  .primary-blue-gig-button,
+  .primary-blue-text-gig-button {
+    font-size: $paragraph-font-size-monitor;
+  }
+}

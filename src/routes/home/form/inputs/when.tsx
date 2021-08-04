@@ -22,6 +22,7 @@ const WhenInput = (): ReactElement => {
 
   return (
     <GigDropdown
+      classNames={when?.displayName ? '' : 'placeholder-text'}
       id='search-form-when-input'
       onOptionSelect={(option: Option): void => updateInput('when', option)}
       options={OPTIONS}
