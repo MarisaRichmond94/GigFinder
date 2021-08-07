@@ -66,7 +66,7 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
   }
 
   return (
-    <Dropdown className={`remove-focus-highlight gig-dropdown ${props.classNames}`}>
+    <Dropdown className={`gig-dropdown ${props.classNames}`}>
       <Dropdown.Toggle className='paragraph-text' disabled={props.isDisabled || false}>
         {props.selectedOption?.displayName || props.title}
       </Dropdown.Toggle>

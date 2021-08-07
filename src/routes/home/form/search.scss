@@ -29,37 +29,25 @@
 
   img {
     margin-right: 10px;
-    width: 5rem;
+    width: 3rem;
   }
 }
 
 .search-form-input {
   align-self: stretch;
+
+  input,
+  .gig-dropdown > button,
+  .gig-dropdown > .gig-dropdown-menu {
+    margin: 0 10%;
+    width: 80%;
+  }
 }
 
 #search-form-submit {
   button {
     background: $primary-blue;
     color: #FFFFFF;
-  }
-}
-
-
-
-// old mobile
-@media (min-width: 0) {
-}
-
-// mobile
-@media (min-width: 350px) {
-
-  .search-form-input {
-    input,
-    .gig-dropdown > button,
-    .gig-dropdown > .gig-dropdown-menu {
-      margin: 0 5%;
-      width: 90%;
-    }
   }
 }
 
@@ -71,31 +59,10 @@
   }
 }
 
-// laptop
-@media (min-width: 1024px) {
-  .search-form-input {
-    input,
-    .gig-dropdown > button,
-    .gig-dropdown > .gig-dropdown-menu {
-      margin: 0 10%;
-      width: 80%;
-    }
-  }
-}
-
 // monitor
 @media (min-width: 1600px) {
   #main-search-form-container {
     margin: 15vh 30vw;
     width: 40vw;
-  }
-
-  .search-form-input {
-    input,
-    .gig-dropdown > button,
-    .gig-dropdown > .gig-dropdown-menu {
-      margin: 0 15%;
-      width: 70%;
-    }
   }
 }
