@@ -1,39 +1,23 @@
-.paragraph-text {
+.title-text {
   cursor: default;
+  font-size: $title-font-size;
   user-select: none;
 }
 
-// old mobile
-@media (min-width: 0) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-small-phone;
-  }
+.header-text {
+  cursor: default;
+  font-size: $header-font-size;
+  user-select: none;
 }
 
-// mobile
-@media (min-width: 350px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-large-phone;
-  }
+.sub-header-text {
+  cursor: default;
+  font-size: $sub-header-font-size;
+  user-select: none;
 }
 
-// tablet
-@media (min-width: 750px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-tablet;
-  }
-}
-
-// laptop
-@media (min-width: 1024px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-laptop;
-  }
-}
-
-// monitor
-@media (min-width: 1600px) {
-  .paragraph-text {
-    font-size: $paragraph-font-size-monitor;
-  }
+.paragraph-text {
+  cursor: default;
+  font-size: $paragraph-font-size;
+  user-select: none;
 }

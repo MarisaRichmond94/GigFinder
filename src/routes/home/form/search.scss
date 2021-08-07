@@ -13,22 +13,23 @@
   row-gap: 10px;
   width: 80vw;
 
-  .paragraph-text {
+  #search-form-tag-line,
+  #search-form-switch-portal {
     color: $off-white;
     text-align: center;
   }
 }
 
 #search-form-name-and-logo {
+  align-items: center;
   color: $primary-blue;
-  cursor: default;
-  font-size: 60px;
+  display: inline-flex;
+  font-family: $header-font-family;
   font-weight: 800;
-  user-select: none;
 
   img {
     margin-right: 10px;
-    width: 75px;
+    width: 5rem;
   }
 }
 
@@ -47,28 +48,10 @@
 
 // old mobile
 @media (min-width: 0) {
-  #search-form-name-and-logo {
-    font-size: 30px;
-    img {
-      width: 35px;
-    }
-  }
-
-  #search-form-submit {
-    button {
-      font-size: $paragraph-font-size-small-phone - 5px;
-    }
-  }
 }
 
 // mobile
 @media (min-width: 350px) {
-  #search-form-name-and-logo {
-    font-size: 35px;
-    img {
-      width: 40px;
-    }
-  }
 
   .search-form-input {
     input,
@@ -76,12 +59,6 @@
     .gig-dropdown > .gig-dropdown-menu {
       margin: 0 5%;
       width: 90%;
-    }
-  }
-
-  #search-form-submit {
-    button {
-      font-size: $paragraph-font-size-large-phone - 5px;
     }
   }
 }
@@ -92,43 +69,16 @@
     margin: 15vh 15vw;
     width: 70vw;
   }
-
-  #search-form-name-and-logo {
-    font-size: 45px;
-    img {
-      width: 55px;
-    }
-  }
-
-  #search-form-submit {
-    button {
-      font-size: $paragraph-font-size-tablet - 5px;
-    }
-  }
 }
 
 // laptop
 @media (min-width: 1024px) {
-  #search-form-name-and-logo {
-    font-family: $header-font-family;
-    font-size: 55px;
-    img {
-      width: 65px;
-    }
-  }
-
   .search-form-input {
     input,
     .gig-dropdown > button,
     .gig-dropdown > .gig-dropdown-menu {
       margin: 0 10%;
       width: 80%;
-    }
-  }
-
-  #search-form-submit {
-    button {
-      font-size: $paragraph-font-size-laptop - 5px;
     }
   }
 }
@@ -140,25 +90,12 @@
     width: 40vw;
   }
 
-  #search-form-name-and-logo {
-    font-size: 75px;
-    img {
-      width: 80px;
-    }
-  }
-
   .search-form-input {
     input,
     .gig-dropdown > button,
     .gig-dropdown > .gig-dropdown-menu {
       margin: 0 15%;
       width: 70%;
-    }
-  }
-
-  #search-form-submit {
-    button {
-      font-size: $paragraph-font-size-monitor - 5px;
     }
   }
 }

@@ -6,7 +6,7 @@ const SubmitButton = (): ReactElement => {
   const { onFormSubmit } = UseSearchForm();
 
   return (
-    <button className='primary-blue-gig-button' onClick={onFormSubmit}>
+    <button className='primary-blue-gig-button paragraph-text' onClick={onFormSubmit}>
       Find My Dream Gig
     </button>
   )

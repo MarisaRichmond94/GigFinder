@@ -24,7 +24,7 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
     if (!props.options || !props.options.length) {
       return (
         <Dropdown.Item>
-          <span>
+          <span className='paragraph-text'>
             {!props.options ? 'Loading...' : 'No options available'}
           </span>
         </Dropdown.Item>
@@ -67,10 +67,10 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
 
   return (
     <Dropdown className={`remove-focus-highlight gig-dropdown ${props.classNames}`}>
-      <Dropdown.Toggle disabled={props.isDisabled || false}>
+      <Dropdown.Toggle className='paragraph-text' disabled={props.isDisabled || false}>
         {props.selectedOption?.displayName || props.title}
       </Dropdown.Toggle>
-      <Dropdown.Menu className='gig-dropdown-menu'>
+      <Dropdown.Menu className='gig-dropdown-menu paragraph-text'>
         {populateDropdownItems()}
       </Dropdown.Menu>
     </Dropdown>

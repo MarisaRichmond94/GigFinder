@@ -24,7 +24,7 @@ const GigInput = (props: GigInputProps): ReactElement => {
   return (
     <input
       autoComplete='none'
-      className={`remove-focus-highlight gig-form-input ${props.classNames}`}
+      className={`remove-focus-highlight gig-form-input paragraph-text ${props.classNames}`}
       id={props.id}
       name={Math.random().toString()}
       onChange={e => onChange(e.target.value)}
