@@ -1,4 +1,7 @@
 import { createContext, KeyboardEvent, ReactElement, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import settings from 'settings';
 
 interface Option {
   displayName: string,
@@ -26,6 +29,8 @@ function UseProvideSearchForm(): SearchFormContextType {
   const [where, setWhere] = useState('');
   const [when, setWhen] = useState<undefined | Option>();
 
+  const history = useHistory();
+
   const updateInput = (type: string, value: string | Option): void => {
     switch (type) {
       case 'what':
@@ -43,7 +48,14 @@ function UseProvideSearchForm(): SearchFormContextType {
   };
 
   const onFormSubmit = (): void => {
-    // route to results page with input in the url
+    let search = `?type=${when?.displayName.toLowerCase() || 'any'}`;
+    if (what) search += `&title=${encodeURI(what.toLowerCase())}`;
+    if (where) search += `&location=${encodeURI(where.toLowerCase())}`;
+
+    history.push({
+      pathname: settings.searchRoute,
+      search,
+    });
   };
 
   const onKeyPress = (e: KeyboardEvent): void => {

@@ -4,7 +4,7 @@ import GigInput from 'components/gig_input/gig_input';
 import { UseSearchForm } from 'providers/search_form';
 
 const WhereInput = (): ReactElement => {
-  const { where, updateInput } = UseSearchForm();
+  const { where, onKeyPress, updateInput } = UseSearchForm();
 
   return (
     <div className='input-wrapper'>
@@ -12,6 +12,7 @@ const WhereInput = (): ReactElement => {
         classNames='search-form-input'
         formValue={where}
         id='search-form-where-input'
+        onKeyPress={onKeyPress}
         placeholder='city and state'
         setFormValue={(value: string) => updateInput('where', value)}
       />

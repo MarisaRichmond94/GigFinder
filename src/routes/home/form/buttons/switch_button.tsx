@@ -1,15 +1,16 @@
 import { ReactElement } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import settings from 'settings';
 
 const SwitchButton = (): ReactElement => {
-  const onClick = (): void => {
-
-  }
+  const history = useHistory();
 
   return (
     <button
       className='primary-blue-text-gig-button'
       id='search-form-switch-button'
-      onClick={onClick}
+      onClick={() => history.push(settings.createRoute)}
     >
       Switch
     </button>
