@@ -1,23 +1,20 @@
-import './gig_input.scss';
+import './text.scss';
 
 import { ReactElement } from 'react';
 
-type GigInputProps = {
-  classNames?: string,
-  formValue: string,
-  id: string,
-  onKeyPress?: (e: object) => void,
-  placeholder: string,
-  setFormValue: (input: string) => void,
-  type?: string,
-  validateFormValue?: (input: string) => void
-}
+import { GigTextInputProps } from './text_props';
 
-const GigInput = (props: GigInputProps): ReactElement => {
+const GigTextInput = (props: GigTextInputProps): ReactElement => {
   const onChange = (input: string): void => {
     props.setFormValue(input);
     if (props.validateFormValue) {
       props.validateFormValue(input);
+    }
+  }
+
+  const onKeyPress = (e: any): void => {
+    if (props.onKeyPress) {
+      props.onKeyPress(e);
     }
   }
 
@@ -28,18 +25,13 @@ const GigInput = (props: GigInputProps): ReactElement => {
       id={props.id}
       name={Math.random().toString()}
       onChange={e => onChange(e.target.value)}
-      onKeyPress={
-        e => {
-          if (props.onKeyPress) props.onKeyPress(e)
-        }
-      }
+      onKeyPress={onKeyPress}
       placeholder={props.placeholder}
       spellCheck='false'
       type={props.type || 'text'}
       value={props.formValue}
-    >
-    </input>
+    />
   )
 }
 
-export default GigInput;
+export default GigTextInput;

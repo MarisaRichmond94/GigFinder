@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import GigInput from 'components/gig_input/gig_input';
+import GigTextInput from 'components/gig_input/text/text';
 import { UseSearchForm } from 'providers/search_form';
 
 const WhereInput = (): ReactElement => {
@@ -8,7 +8,7 @@ const WhereInput = (): ReactElement => {
 
   return (
     <div className='input-wrapper'>
-      <GigInput
+      <GigTextInput
         classNames='search-form-input'
         formValue={where}
         id='search-form-where-input'

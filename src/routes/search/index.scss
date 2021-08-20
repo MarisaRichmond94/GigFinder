@@ -1,0 +1,46 @@
+#search-page {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+}
+
+// mobile view
+@media (min-width: 0) {
+  #search-page {
+    grid-template-columns: [center-start] 1fr [center-end];
+    grid-template-rows: [header-start] 75px [header-end center-start] 1fr [center-end];
+
+    #header {
+      grid-column: center-start / center-end;
+      grid-row: header-start / header-end;
+    }
+
+    #center-panel {
+      grid-column: center-start / center-end;
+      grid-row: center-start / center-end;
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #search-page {
+    grid-template-columns: [center-start] 1fr [center-end right-start] 350px [right-end];
+    grid-template-rows: [header-start] 75px [header-end center-start] 1fr [center-end];
+
+    #header {
+      grid-column: center-start / center-end;
+      grid-row: header-start / header-end;
+    }
+
+    #center-panel {
+      grid-column: center-start / center-end;
+      grid-row: center-start / center-end;
+    }
+
+    #right-panel {
+      grid-column: right-start / right-end;
+      grid-row: header-start / center-end;
+    }
+  }
+}

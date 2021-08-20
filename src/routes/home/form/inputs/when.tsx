@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import GigDropdown from 'components/gig_dropdown/gig_dropdown';
+import GigDropdown from 'components/gig_input/dropdown/dropdown';
 import { UseSearchForm } from 'providers/search_form';
 
 interface Option {

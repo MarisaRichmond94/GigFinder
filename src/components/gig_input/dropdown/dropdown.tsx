@@ -1,23 +1,9 @@
-import './gig_dropdown.scss';
+import './dropdown.scss';
 
 import { ReactElement } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
-type Option = {
-  displayName: string,
-  icon?: ReactElement,
-  onClick?: () => void,
-}
-
-type GigDropdownProps = {
-  classNames?: string,
-  id: string,
-  isDisabled?: boolean,
-  onOptionSelect?: (option: Option) => void,
-  options?: Option[] | undefined,
-  selectedOption: Option | undefined,
-  title: object | string
-}
+import { GigDropdownProps, Option } from './dropdown_types';
 
 const GigDropdown = (props: GigDropdownProps): ReactElement => {
   const populateDropdownItems = () => {
