@@ -1,7 +1,7 @@
 import './header.scss';
 
 import { ReactElement } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { GrLogout } from 'react-icons/gr';
 
 import logo from 'assets/icons/logo.png';
@@ -10,6 +10,7 @@ import { useAuth } from 'providers/auth';
 import settings from 'settings';
 
 const Header = (): ReactElement => {
+  const history = useHistory();
   const { companyName, isLoggedIn, userName, logout, loginUser } = useAuth();
   const { pathname } = useLocation();
 
@@ -34,7 +35,7 @@ const Header = (): ReactElement => {
 
   return (
     <div id='header'>
-      <div id='header-title'>
+      <div id='header-title' onClick={() => history.push('/')}>
         <img alt='logo' id='header-title-icon' src={logo} />
         <div className='title-text' id='header-title-text'>Gig Search</div>
       </div>

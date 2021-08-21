@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from './home';
+import HomePage from './home/home';
 import CreatePage from './create';
 import SearchPage from './search';
 

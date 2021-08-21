@@ -1,0 +1,12 @@
+@import 'global';
+
+.search-form-input {
+  align-self: stretch;
+
+  input,
+  .gig-dropdown > button,
+  .gig-dropdown > .gig-dropdown-menu {
+    margin: 0 10%;
+    width: 80%;
+  }
+}

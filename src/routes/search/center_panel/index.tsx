@@ -1,11 +1,12 @@
 import { ReactElement } from 'react';
 
-type CenterPanelProps = {
-}
+import SearchPanel from 'routes/components/search_panel/search_panel';
 
-const CenterPanel = (props: CenterPanelProps): ReactElement => {
+const CenterPanel = (): ReactElement => {
   return (
-    <div id='center-panel'/>
+    <div id='center-panel'>
+      <SearchPanel />
+    </div>
   );
 }
 
