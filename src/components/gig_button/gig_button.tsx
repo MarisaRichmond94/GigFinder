@@ -1,23 +1,12 @@
-import './gig_button.scss';
-
 import { ReactElement } from 'react';
 import { Button } from 'react-bootstrap';
 
-type GigButtonProps = {
-  classNames?: string,
-  icon?: string,
-  id: string,
-  isDisabled?: boolean,
-  onClick: (e: object) => void,
-  style?: object,
-  text?: string,
-  textBlock?: ReactElement,
-}
+import { GigButtonProps } from './gig_button_types';
 
 const GigButton = (props: GigButtonProps): ReactElement => {
   return (
     <Button
-      className={`smart-button${props.classNames ? ` ${props.classNames}` : ''}`}
+      className={`gig-button${props.classNames ? ` ${props.classNames}` : ''}`}
       disabled={props.isDisabled || false}
       id={props.id}
       onClick={props.onClick}

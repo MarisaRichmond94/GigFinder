@@ -6,13 +6,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import GigRouter from './routes/router';
+import App from 'app';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <GigRouter />
+      <App />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

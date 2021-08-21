@@ -33,10 +33,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:server": "cd src/api && json-server --watch mock.json --port 8080",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "run:server": "cd api && json-server --watch mock.json --port 8080"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

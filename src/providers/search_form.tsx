@@ -74,12 +74,12 @@ function UseProvideSearchForm(): SearchFormContextType {
   };
 }
 
-const UseSearchForm = () => {
+const useSearchForm = () => {
   const context = useContext(SearchFormContext);
   if (context === undefined) {
-    throw new Error("UseSearchForm should only be used within the SearchFormProvider.");
+    throw new Error("useSearchForm should only be used within the SearchFormProvider.");
   }
   return context;
 }
 
-export { SearchFormProvider, UseSearchForm };
+export { SearchFormProvider, useSearchForm };

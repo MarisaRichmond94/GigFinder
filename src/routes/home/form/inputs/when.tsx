@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
 import GigDropdown from 'components/gig_input/dropdown/dropdown';
-import { UseSearchForm } from 'providers/search_form';
+import { useSearchForm } from 'providers/search_form';
 
 interface Option {
   displayName: string,
@@ -18,7 +18,7 @@ const OPTIONS = [
 ];
 
 const WhenInput = (): ReactElement => {
-  const { when, updateInput } = UseSearchForm();
+  const { when, updateInput } = useSearchForm();
 
   return (
     <GigDropdown

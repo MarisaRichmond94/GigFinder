@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 
-import { UseSearchForm } from 'providers/search_form';
+import { useSearchForm } from 'providers/search_form';
 
 const SubmitButton = (): ReactElement => {
-  const { onFormSubmit } = UseSearchForm();
+  const { onFormSubmit } = useSearchForm();
 
   return (
     <button className='primary-blue-gig-button paragraph-text' onClick={onFormSubmit}>

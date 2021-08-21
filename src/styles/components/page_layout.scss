@@ -1,4 +1,6 @@
-#search-page {
+@import 'styles/variables/variables';
+
+#page-container {
   display: grid;
   height: 100vh;
   width: 100vw;
@@ -6,9 +8,9 @@
 
 // mobile view
 @media (min-width: 0) {
-  #search-page {
+  #page-container {
     grid-template-columns: [center-start] 1fr [center-end];
-    grid-template-rows: [header-start] 75px [header-end center-start] 1fr [center-end];
+    grid-template-rows: [header-start] $header-height [header-end center-start] 1fr [center-end];
 
     #header {
       grid-column: center-start / center-end;
@@ -24,9 +26,9 @@
 
 // desktop view
 @media (min-width: 850px) {
-  #search-page {
+  #page-container {
     grid-template-columns: [center-start] 1fr [center-end right-start] 350px [right-end];
-    grid-template-rows: [header-start] 75px [header-end center-start] 1fr [center-end];
+    grid-template-rows: [header-start] $header-height [header-end center-start] 1fr [center-end];
 
     #header {
       grid-column: center-start / center-end;

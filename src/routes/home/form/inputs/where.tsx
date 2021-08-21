@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
 
 import GigTextInput from 'components/gig_input/text/text';
-import { UseSearchForm } from 'providers/search_form';
+import { useSearchForm } from 'providers/search_form';
 
 const WhereInput = (): ReactElement => {
-  const { where, onKeyPress, updateInput } = UseSearchForm();
+  const { where, onKeyPress, updateInput } = useSearchForm();
 
   return (
     <div className='input-wrapper'>

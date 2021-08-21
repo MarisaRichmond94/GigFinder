@@ -1,23 +1,36 @@
-.title-text {
+@mixin prevent-highlight {
   cursor: default;
-  font-size: $title-font-size;
   user-select: none;
+}
+
+@mixin thick-font-family {
+  font-family: $header-font-family;
+  font-weight: 800;
+}
+
+.large-title-text {
+  @include prevent-highlight;
+  @include thick-font-family;
+  font-size: $large-title-font-size;
+}
+
+.title-text {
+  @include prevent-highlight;
+  @include thick-font-family;
+  font-size: $title-font-size;
 }
 
 .header-text {
-  cursor: default;
+  @include prevent-highlight;
   font-size: $header-font-size;
-  user-select: none;
 }
 
 .sub-header-text {
-  cursor: default;
+  @include prevent-highlight;
   font-size: $sub-header-font-size;
-  user-select: none;
 }
 
 .paragraph-text {
-  cursor: default;
+  @include prevent-highlight;
   font-size: $paragraph-font-size;
-  user-select: none;
 }

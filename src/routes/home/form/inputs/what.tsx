@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
 
 import GigTextInput from 'components/gig_input/text/text';
-import { UseSearchForm } from 'providers/search_form';
+import { useSearchForm } from 'providers/search_form';
 
 const WhatInput = (): ReactElement => {
-  const { what, onKeyPress, updateInput } = UseSearchForm();
+  const { what, onKeyPress, updateInput } = useSearchForm();
 
   return (
     <GigTextInput

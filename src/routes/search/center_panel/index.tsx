@@ -5,7 +5,7 @@ type CenterPanelProps = {
 
 const CenterPanel = (props: CenterPanelProps): ReactElement => {
   return (
-    <div id='center-panel' style={{ backgroundColor: '#E3E5EC' }}/>
+    <div id='center-panel'/>
   );
 }
 

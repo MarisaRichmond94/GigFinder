@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement } from 'react';
 
 import Header from 'routes/components/header/header';
@@ -8,7 +6,7 @@ import RightPanel from './right_panel';
 
 const SearchPage = (): ReactElement => {
   return (
-    <div id='search-page'>
+    <div id='page-container'>
       <Header />
       <CenterPanel />
       <RightPanel />
