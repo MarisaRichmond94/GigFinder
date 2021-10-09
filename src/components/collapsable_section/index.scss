@@ -1,0 +1,28 @@
+.collapsable-section {
+  .collapsable-section-header {
+    margin: 10px;
+
+    .collapsable-section-title {
+      width: calc(100% - 27px);
+    }
+  }
+
+  .collapsable-section-divider {
+    margin: auto;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  .collapsable-section-header {
+    display: flex;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  .collapsable-section-header,
+  .collapsable-section-divider {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-import './demo_warning.scss';
+import './index.scss';
 
 import { ReactElement } from 'react';
 import { AiFillInfoCircle } from 'react-icons/ai';

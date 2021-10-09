@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
 
-import Header from 'routes/components/header/header';
+import Header from 'routes/components/header';
 import CenterPanel from './center_panel';
 import RightPanel from './right_panel';
 
-const SearchPage = (): ReactElement => {
+const FindPage = (): ReactElement => {
   return (
     <div id='page-container'>
       <Header />
@@ -14,4 +14,4 @@ const SearchPage = (): ReactElement => {
   )
 }
 
-export default SearchPage;
+export default FindPage;

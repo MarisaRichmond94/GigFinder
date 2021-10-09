@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Button } from 'react-bootstrap';
 
-import { GigButtonProps } from './gig_button_types';
+import { GigButtonProps } from './types';
 
 const GigButton = (props: GigButtonProps): ReactElement => {
   return (

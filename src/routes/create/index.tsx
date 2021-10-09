@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import Header from 'routes/components/header/header';
+import Header from 'routes/components/header';
 
 const CreatePage = (): ReactElement => {
   return (

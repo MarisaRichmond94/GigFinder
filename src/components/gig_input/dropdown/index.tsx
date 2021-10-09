@@ -1,9 +1,9 @@
-import './dropdown.scss';
+import './index.scss';
 
 import { ReactElement } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
-import { GigDropdownProps, Option } from './dropdown_types';
+import { GigDropdownProps, Option } from './types';
 
 const GigDropdown = (props: GigDropdownProps): ReactElement => {
   const populateDropdownItems = () => {
@@ -15,27 +15,27 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
           </span>
         </Dropdown.Item>
       )
-    } else {
-      const options = props.selectedOption
-        ? props.options.filter(option => option.displayName !== props.selectedOption?.displayName)
-        : props.options;
-
-      return options.map((option, index) => {
-        const content = option.icon
-          ? <>{option.icon}&nbsp;&nbsp;{option.displayName}</>
-          : option.displayName;
-        return (
-          <Dropdown.Item
-            className='overflow-ellipsis gig-dropdown-item'
-            key={`${props.id}-${index}`}
-            id={`${props.id}-${index}`}
-            onClick={() => handleOptionSelect(option)}
-          >
-            {content}
-          </Dropdown.Item>
-        )
-      })
     }
+
+    const options = props.selectedOption
+      ? props.options.filter(option => option.displayName !== props.selectedOption?.displayName)
+      : props.options;
+
+    return options.map((option, index) => {
+      const content = option.icon
+        ? <>{option.icon}&nbsp;&nbsp;{option.displayName}</>
+        : option.displayName;
+      return (
+        <Dropdown.Item
+          className='overflow-ellipsis gig-dropdown-item'
+          key={`${props.id}-${index}`}
+          id={`${props.id}-${index}`}
+          onClick={() => handleOptionSelect(option)}
+        >
+          {content}
+        </Dropdown.Item>
+      )
+    })
   }
 
   const handleOptionSelect = (option: Option): void => {

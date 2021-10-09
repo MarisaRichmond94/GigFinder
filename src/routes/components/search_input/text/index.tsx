@@ -1,16 +1,16 @@
 import { ReactElement } from 'react';
 
-import GigTextInput from 'components/gig_input/text/text';
-import { SearchTextInputProps } from './text_types';
+import GigTextInput from 'components/gig_input/text';
+import { SearchTextInputProps } from './types';
 
 const SearchTextInput = (props: SearchTextInputProps): ReactElement => {
   return (
     <GigTextInput
       classNames='search-form-input'
       formValue={props.value}
-      id='search-form-what-input'
+      id={props.id}
       onKeyPress={props.onKeyPress}
-      placeholder='job title, keyword, or company'
+      placeholder={props.placeholder}
       setFormValue={(value: string) => props.updateInput(props.fieldName, value)}
     />
   )

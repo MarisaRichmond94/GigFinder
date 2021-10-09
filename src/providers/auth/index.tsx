@@ -1,16 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-interface AuthContextType {
-  companyName: string,
-  isLoggedIn: boolean,
-  userName: string,
-  createCompanyAccount: (name: string) => void,
-  createUserAccount: (name: string) => void,
-  loginCompany: () => void,
-  loginUser: () => void,
-  logout: () => void,
-}
+import { AuthContextType } from './types';
 
 const AuthContext = createContext<undefined | AuthContextType>(undefined);
 

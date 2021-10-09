@@ -1,0 +1,59 @@
+@import 'global';
+
+#search-panel {
+  width: 90%;
+
+  .search-panel-input {
+    align-self: stretch;
+    padding-bottom: 10px;
+
+    input,
+    .gig-dropdown > button,
+    .gig-dropdown > .gig-dropdown-menu {
+      margin: 0 10%;
+      width: 80%;
+    }
+  }
+}
+
+.find {
+  input,
+  .gig-dropdown > button {
+    background: $off-white !important;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #find-search-panel {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    div {
+      width: 100%;
+
+      &:not(:last-child) {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #find-search-panel {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+
+    div {
+      width: 100%;
+
+      &:not(:last-child) {
+        padding-right: 10px;
+      }
+    }
+  }
+}
+

@@ -1,11 +1,11 @@
-import './header.scss';
+import './index.scss';
 
 import { ReactElement } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { GrLogout } from 'react-icons/gr';
+import { GrLogin, GrLogout } from 'react-icons/gr';
 
 import logo from 'assets/icons/logo.png';
-import GigButton from 'components/gig_button/gig_button';
+import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import settings from 'settings';
 
@@ -44,7 +44,7 @@ const Header = (): ReactElement => {
         <GigButton
           id='logout-icon-button'
           onClick={handleAuthButtonClick}
-          textBlock={<GrLogout />}
+          textBlock={isLoggedIn ? <GrLogout /> : <GrLogin />}
         />
       </div>
     </div>

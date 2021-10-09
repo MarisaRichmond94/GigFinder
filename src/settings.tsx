@@ -1,7 +1,7 @@
 const settings = {
-  createRoute: '/gig-create',
-  searchRoute: '/gig-search',
-  whenOptions: [
+  createRoute: '/create',
+  searchRoute: '/find',
+  typeOptions: [
     { displayName: 'Any' },
     { displayName: 'Part-Time' },
     { displayName: 'Full-Time' },

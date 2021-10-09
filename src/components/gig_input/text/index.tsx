@@ -1,8 +1,8 @@
-import './text.scss';
+import './index.scss';
 
 import { ReactElement } from 'react';
 
-import { GigTextInputProps } from './text_props';
+import { GigTextInputProps } from './types';
 
 const GigTextInput = (props: GigTextInputProps): ReactElement => {
   const onChange = (input: string): void => {

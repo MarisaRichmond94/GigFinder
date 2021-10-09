@@ -1,13 +1,13 @@
-import './home.scss';
+import './index.scss';
 
 import { ReactElement } from 'react';
 
-import DemoWarning from 'components/demo_warning/demo_warning';
-import SearchForm from './search_form/search_form';
+import DemoWarning from 'components/demo_warning';
 import logo from 'assets/icons/logo.png';
 import { SearchFormProvider } from 'providers/search_form';
-import SubmitButton from './submit_button/submit_button';
-import SwitchButton from './switch_button/switch_button';
+import SubmitButton from './submit_button';
+import SwitchButton from './switch_button';
+import SearchPanel from 'routes/components/search_panel';
 
 const HomePage = (): ReactElement => {
   return (
@@ -22,7 +22,7 @@ const HomePage = (): ReactElement => {
           <div className='search-form-item paragraph-text' id='search-form-tag-line'>
             The ultimate tool for finding your next big gig
           </div>
-          <SearchForm />
+          <SearchPanel />
           <SubmitButton />
           <div className='search-form-item paragraph-text' id='search-form-switch-portal'>
             Looking to hire? <SwitchButton /> to our employer portal instead

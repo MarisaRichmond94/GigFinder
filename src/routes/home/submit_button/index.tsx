@@ -1,4 +1,4 @@
-import './submit_button.scss';
+import './index.scss';
 
 import { ReactElement } from 'react';
 
