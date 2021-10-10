@@ -7,11 +7,23 @@ button {
   background: $primary-blue;
   border: none;
   border-radius: 8px;
-  color: #FFFFFF;
+  color: $white;
   padding: 10px 20px;
 
   &:hover {
     background: $secondary-blue;
+  }
+}
+
+.secondary-blue-gig-button {
+  background: $secondary-blue;
+  border: none;
+  border-radius: 8px;
+  color: $white;
+  padding: 10px 20px;
+
+  &:hover {
+    background: $grey;
   }
 }
 

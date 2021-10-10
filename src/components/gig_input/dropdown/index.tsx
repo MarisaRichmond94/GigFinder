@@ -10,7 +10,7 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
     if (!props.options || !props.options.length) {
       return (
         <Dropdown.Item>
-          <span className='paragraph-text'>
+          <span className='small-paragraph-text'>
             {!props.options ? 'Loading...' : 'No options available'}
           </span>
         </Dropdown.Item>
@@ -53,10 +53,10 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
 
   return (
     <Dropdown className={`gig-dropdown ${props.classNames}`}>
-      <Dropdown.Toggle className='paragraph-text' disabled={props.isDisabled || false}>
+      <Dropdown.Toggle className='small-paragraph-text' disabled={props.isDisabled || false}>
         {props.selectedOption?.displayName || props.title}
       </Dropdown.Toggle>
-      <Dropdown.Menu className='gig-dropdown-menu paragraph-text'>
+      <Dropdown.Menu className='gig-dropdown-menu small-paragraph-text'>
         {populateDropdownItems()}
       </Dropdown.Menu>
     </Dropdown>

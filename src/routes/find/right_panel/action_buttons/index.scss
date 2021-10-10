@@ -1,0 +1,9 @@
+#right-panel-action-buttons {
+  display: flex;
+  margin: 15px;
+
+  :nth-child(2) {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+}

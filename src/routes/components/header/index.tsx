@@ -39,7 +39,7 @@ const Header = (): ReactElement => {
         <img alt='logo' id='header-title-icon' src={logo} />
         <div className='title-text' id='header-title-text'>Gig Search</div>
       </div>
-      <div className='paragraph-text' id='header-message'>
+      <div className='small-paragraph-text' id='header-message'>
         {isLoggedIn && generateHeaderMessage()}
         <GigButton
           id='logout-icon-button'

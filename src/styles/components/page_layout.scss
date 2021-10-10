@@ -21,6 +21,10 @@
       grid-column: center-start / center-end;
       grid-row: center-start / center-end;
     }
+
+    #right-panel {
+      display: none;
+    }
   }
 }
 
@@ -41,6 +45,7 @@
     }
 
     #right-panel {
+      display: inline-block;
       grid-column: right-start / right-end;
       grid-row: header-start / center-end;
     }

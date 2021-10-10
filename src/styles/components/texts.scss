@@ -34,3 +34,13 @@
   @include prevent-highlight;
   font-size: $paragraph-font-size;
 }
+
+.small-paragraph-text {
+  @include prevent-highlight;
+  font-size: $small-paragraph-font-size;
+}
+
+.sub-header {
+  color: $white;
+  text-align: center;
+}
