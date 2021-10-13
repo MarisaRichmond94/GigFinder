@@ -10,23 +10,25 @@ const ActionButtons = (): ReactElement => {
 
   return isLoggedIn
     ? (
-      <div id='right-panel-action-buttons'>
-        <GigButton
-          classNames='secondary-blue-gig-button sub-header-text'
-          id='upload-resume-button'
-          onClick={() => console.log('Upload Resume')}
-          text='Upload Resume'
-        />
-        <GigButton
-          classNames='secondary-blue-gig-button sub-header-text'
-          id='sign-out-button'
-          onClick={logout}
-          text='Sign Out'
-        />
+      <div id='action-button-wrapper'>
+        <div id='right-panel-action-buttons'>
+          <GigButton
+            classNames='secondary-blue-gig-button sub-header-text'
+            id='upload-resume-button'
+            onClick={() => console.log('Upload Resume')}
+            text='Upload Resume'
+          />
+          <GigButton
+            classNames='secondary-blue-gig-button sub-header-text'
+            id='sign-out-button'
+            onClick={logout}
+            text='Sign Out'
+          />
+        </div>
       </div>
     )
     : (
-      <>
+      <div id='action-button-wrapper'>
         <div id='right-panel-action-buttons'>
           <GigButton
             classNames='secondary-blue-gig-button sub-header-text'
@@ -44,7 +46,7 @@ const ActionButtons = (): ReactElement => {
         <div className='sub-header sub-header-text'>
           Create an account or sign in to ensure none of your favorite gigs get lost!
         </div>
-      </>
+      </div>
     );
 }
 

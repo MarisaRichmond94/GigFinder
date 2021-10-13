@@ -12,6 +12,6 @@ export type GigDropdownProps = {
   isDisabled?: boolean,
   onOptionSelect?: (option: Option) => void,
   options?: Option[] | undefined,
+  placeholder: object | string,
   selectedOption: Option | undefined,
-  title: object | string
 }

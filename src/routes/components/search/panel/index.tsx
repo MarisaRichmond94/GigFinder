@@ -42,7 +42,7 @@ const SearchPanel = (): ReactElement => {
         <SearchDropdownInput
           fieldName='type'
           options={settings.typeOptions}
-          title='full-time, part-time, etc.'
+          placeholder='full-time, part-time, etc.'
           value={type}
           updateInput={updateInput}
         />

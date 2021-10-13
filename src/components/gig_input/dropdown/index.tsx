@@ -2,6 +2,7 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { IoIosArrowDown } from 'react-icons/io';
 
 import { GigDropdownProps, Option } from './types';
 
@@ -9,7 +10,7 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
   const populateDropdownItems = () => {
     if (!props.options || !props.options.length) {
       return (
-        <Dropdown.Item>
+        <Dropdown.Item className='overflow-ellipsis gig-dropdown-item'>
           <span className='sub-header-text'>
             {!props.options ? 'Loading...' : 'No options available'}
           </span>
@@ -52,9 +53,14 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
   }
 
   return (
-    <Dropdown className={`gig-dropdown ${props.classNames}`}>
+    <Dropdown className={`gig-dropdown${props.classNames ? ` ${props.classNames}` : ''}`}>
       <Dropdown.Toggle className='sub-header-text' disabled={props.isDisabled || false}>
-        {props.selectedOption?.displayName || props.title}
+        <div className='gig-dropdown-content-wrapper'>
+          <div className='gig-dropdown-text'>
+            {props.selectedOption?.displayName || props.placeholder}
+          </div>
+          <IoIosArrowDown className='gig-dropdown-icon' />
+        </div>
       </Dropdown.Toggle>
       <Dropdown.Menu className='gig-dropdown-menu sub-header-text'>
         {populateDropdownItems()}

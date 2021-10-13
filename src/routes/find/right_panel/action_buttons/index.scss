@@ -1,9 +1,13 @@
-#right-panel-action-buttons {
-  display: flex;
-  margin: 15px;
+#action-button-wrapper {
+  min-height: 110px;
 
-  :nth-child(2) {
-    flex-grow: 1;
-    margin-left: 15px;
+  #right-panel-action-buttons {
+    display: flex;
+    margin-bottom: 15px;
+
+    :nth-child(2) {
+      flex-grow: 1;
+      margin-left: 15px;
+    }
   }
 }

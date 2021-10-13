@@ -5,7 +5,10 @@
 
 @mixin bold-font-family {
   font-family: $header-font-family;
-  font-weight: 800;
+}
+
+@mixin thick-font-family {
+  font-family: $sub-header-font-family;
 }
 
 .large-title-text {
@@ -25,6 +28,12 @@
   font-size: $header-font-size;
 }
 
+.thick-header-text {
+  @include prevent-highlight;
+  @include thick-font-family;
+  font-size: $header-font-size;
+}
+
 .bold-header-text {
   @include prevent-highlight;
   @include bold-font-family;
@@ -33,6 +42,12 @@
 
 .sub-header-text {
   @include prevent-highlight;
+  font-size: $sub-header-font-size;
+}
+
+.thick-sub-header-text {
+  @include prevent-highlight;
+  @include thick-font-family;
   font-size: $sub-header-font-size;
 }
 
