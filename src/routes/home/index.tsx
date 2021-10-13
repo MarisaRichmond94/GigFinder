@@ -7,7 +7,7 @@ import logo from 'assets/icons/logo.png';
 import { SearchFormProvider } from 'providers/search_form';
 import SubmitButton from './submit_button';
 import SwitchButton from './switch_button';
-import SearchPanel from 'routes/components/search_panel';
+import SearchPanel from 'routes/components/search/panel';
 
 const HomePage = (): ReactElement => {
   return (
@@ -19,12 +19,12 @@ const HomePage = (): ReactElement => {
             <img alt='logo' src={logo} />
             <span className='large-title-text'>Gig Search</span>
           </div>
-          <div className='search-form-item paragraph-text' id='search-form-tag-line'>
+          <div className='search-form-item header-text' id='search-form-tag-line'>
             The ultimate tool for finding your next big gig
           </div>
           <SearchPanel />
           <SubmitButton />
-          <div className='search-form-item paragraph-text' id='search-form-switch-portal'>
+          <div className='search-form-item header-text' id='search-form-switch-portal'>
             Looking to hire? <SwitchButton /> to our employer portal instead
           </div>
         </div>

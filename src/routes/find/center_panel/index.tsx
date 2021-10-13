@@ -4,7 +4,8 @@ import { ReactElement } from 'react';
 import { GoSearch } from 'react-icons/go';
 
 import CollapsableSection from 'components/collapsable_section';
-import SearchPanelWrapper from 'routes/components/search_panel/wrapper';
+import SearchPanelWrapper from 'routes/components/search/panel/wrapper';
+import SearchResults from 'routes/components/search/results';
 
 const CenterPanel = (): ReactElement => {
   return (
@@ -12,6 +13,7 @@ const CenterPanel = (): ReactElement => {
       <CollapsableSection icon={<GoSearch />} sectionTitle='Search'>
         <SearchPanelWrapper />
       </CollapsableSection>
+      <SearchResults />
     </div>
   );
 }

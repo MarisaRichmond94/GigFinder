@@ -9,7 +9,7 @@ const DemoWarning = (): ReactElement => {
       <div className='icon'>
         <AiFillInfoCircle />
       </div>
-      <p className='paragraph-text'>This is just a demo site</p>
+      <p className='header-text'>This is just a demo site</p>
     </div>
   )
 }

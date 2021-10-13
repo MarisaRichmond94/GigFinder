@@ -4,8 +4,8 @@ import { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useSearchForm } from 'providers/search_form';
-import SearchTextInput from 'routes/components/search_input/text';
-import SearchDropdownInput from 'routes/components/search_input/dropdown';
+import SearchTextInput from 'routes/components/search/input/text';
+import SearchDropdownInput from 'routes/components/search/input/dropdown';
 import settings from 'settings';
 
 const SearchPanel = (): ReactElement => {

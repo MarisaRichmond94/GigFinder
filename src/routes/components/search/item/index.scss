@@ -1,0 +1,26 @@
+@import 'global';
+
+.search-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  .sub-header-row,
+  .requirements-row,
+  .posted-row {
+    margin: 0 15px;
+  }
+
+  .sub-header-row,
+  .posted-row {
+    color: $medium-grey;
+  }
+
+  .requirements-row {
+    padding: 5px 0;
+
+    .job-requirements-list {
+      margin-bottom: 0;
+    }
+  }
+}

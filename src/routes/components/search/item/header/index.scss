@@ -1,0 +1,34 @@
+@import 'global';
+
+.header-row {
+  @include vertically-centered-inline-flex-box;
+  margin: 0 15px;
+
+  .gig-item-job-title,
+  .gig-item-company,
+  .gig-item-rating {
+    @include hide-overflow-ellipsis;
+  }
+
+  .vertical-line {
+    height: 24px;
+    border-right: 1px solid $light-grey;
+  }
+
+  .search-item-star {
+    font-size: 1.25rem;
+  }
+}
+
+.favorite-gig-button {
+  margin-left: auto;
+  padding: 0;
+
+  .favorite-gig-button-wrapper {
+    @include vertically-centered-inline-flex-box;
+
+    .favorite-gig-button-icon {
+      font-size: 1.5rem;
+    }
+  }
+}

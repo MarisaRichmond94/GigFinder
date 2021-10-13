@@ -13,6 +13,11 @@ button {
   &:hover {
     background: $secondary-blue;
   }
+
+  &:active,
+  &:focus {
+    background: $primary-blue;
+  }
 }
 
 .secondary-blue-gig-button {
@@ -38,15 +43,23 @@ button {
   }
 }
 
-.nav-text-button {
-  background-color: transparent;
+button.text-button {
+  background-color: transparent !important;
   border: none;
   color: $off-black;
   display: inline-block;
+
+  &:hover {
+    color: $dark-grey;
+  }
 
   &.active {
     border-bottom: 6px solid $primary-blue;
     border-radius: 0;
     padding-bottom: 0;
   }
+}
+
+.red-icon {
+  color: $primary-red;
 }

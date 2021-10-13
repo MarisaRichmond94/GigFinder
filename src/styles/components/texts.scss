@@ -3,20 +3,20 @@
   user-select: none;
 }
 
-@mixin thick-font-family {
+@mixin bold-font-family {
   font-family: $header-font-family;
   font-weight: 800;
 }
 
 .large-title-text {
   @include prevent-highlight;
-  @include thick-font-family;
+  @include bold-font-family;
   font-size: $large-title-font-size;
 }
 
 .title-text {
   @include prevent-highlight;
-  @include thick-font-family;
+  @include bold-font-family;
   font-size: $title-font-size;
 }
 
@@ -25,8 +25,20 @@
   font-size: $header-font-size;
 }
 
+.bold-header-text {
+  @include prevent-highlight;
+  @include bold-font-family;
+  font-size: $header-font-size;
+}
+
 .sub-header-text {
   @include prevent-highlight;
+  font-size: $sub-header-font-size;
+}
+
+.bold-sub-header-text {
+  @include prevent-highlight;
+  @include bold-font-family;
   font-size: $sub-header-font-size;
 }
 

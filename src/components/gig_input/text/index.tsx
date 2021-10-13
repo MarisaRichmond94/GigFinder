@@ -21,7 +21,7 @@ const GigTextInput = (props: GigTextInputProps): ReactElement => {
   return (
     <input
       autoComplete='none'
-      className={`gig-form-input small-paragraph-text ${props.classNames}`}
+      className={`gig-form-input sub-header-text ${props.classNames}`}
       id={props.id}
       name={Math.random().toString()}
       onChange={e => onChange(e.target.value)}

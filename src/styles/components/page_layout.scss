@@ -1,5 +1,16 @@
 @import 'styles/variables/variables';
 
+@mixin vertically-centered-inline-flex-box {
+  align-items: center;
+  display: inline-flex;
+}
+
+@mixin hide-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 #page-container {
   display: grid;
   height: 100vh;
