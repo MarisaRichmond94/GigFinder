@@ -2,7 +2,6 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-
 import SearchItem from '../item';
 import { SearchResult, SearchResultsProps } from './types';
 // TODO - Delete this once functionality is added

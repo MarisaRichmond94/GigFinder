@@ -12,9 +12,11 @@
 }
 
 #page-container {
+  box-sizing: border-box;
   display: grid;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
 }
 
 // mobile view
@@ -29,6 +31,8 @@
     }
 
     #center-panel {
+      display: flex;
+      flex-direction: column;
       grid-column: center-start / center-end;
       grid-row: center-start / center-end;
     }
@@ -42,7 +46,7 @@
 // desktop view
 @media (min-width: 850px) {
   #page-container {
-    grid-template-columns: [center-start] 1fr [center-end right-start] 350px [right-end];
+    grid-template-columns: [center-start] 1fr [center-end right-start] $right-sidebar-width [right-end];
     grid-template-rows: [header-start] $header-height [header-end center-start] 1fr [center-end];
 
     #header {
@@ -51,6 +55,8 @@
     }
 
     #center-panel {
+      display: flex;
+      flex-direction: column;
       grid-column: center-start / center-end;
       grid-row: center-start / center-end;
     }

@@ -8,7 +8,7 @@ import Filters from './filters';
 
 const RightPanel = (): ReactElement => {
   return (
-    <div id='right-panel' style={{ backgroundColor: '#083F89' }} >
+    <div id='right-panel'>
       <ActionButtons />
       <ActiveResume />
       <Filters />
