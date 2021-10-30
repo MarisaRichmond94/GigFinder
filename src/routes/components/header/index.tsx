@@ -16,9 +16,9 @@ const Header = (): ReactElement => {
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {
-      case settings.createRoute:
+      case settings.CREATE_ROUTE:
         return companyName;
-      case settings.searchRoute:
+      case settings.SEARCH_ROUTE:
       default:
         return `Welcome back, ${userName}!`;
     }

@@ -4,15 +4,15 @@ import { debounce } from 'throttle-debounce';
 
 import useQuery from 'hooks/useQuery';
 import settings from 'settings';
-import { Option, SearchFormContextType } from './types';
+import { Option, SearchContextType } from './types';
 
-const SearchFormContext = createContext<undefined | SearchFormContextType>(undefined);
+const SearchFormContext = createContext<undefined | SearchContextType>(undefined);
 
-const SearchFormProvider = (props: object) => {
-  return <SearchFormContext.Provider value={UseProvideSearchForm()} {...props} />;
+const SearchProvider = (props: object) => {
+  return <SearchFormContext.Provider value={UseProvideSearch()} {...props} />;
 };
 
-function UseProvideSearchForm(): SearchFormContextType {
+function UseProvideSearch(): SearchContextType {
   const history = useHistory();
   const { search } = useLocation();
   const query = useQuery();
@@ -20,7 +20,7 @@ function UseProvideSearchForm(): SearchFormContextType {
   const [title, setTitle] = useState(query.get('title') || '');
   const [location, setLocation] = useState(query.get('location') || '');
   const [type, setType] = useState<undefined | Option>(
-    settings.typeOptions.find(x => x.displayName === query.get('type')) || undefined
+    settings.TYPE_OPTIONS.find(x => x.displayName === query.get('type')) || undefined
   );
   const [debounceUpdateSearch] = useState(
     () => debounce(500, false, (key: string, value: string): void => {
@@ -69,7 +69,7 @@ function UseProvideSearchForm(): SearchFormContextType {
     if (location) search += `&location=${encodeURI(location)}`;
 
     history.push({
-      pathname: settings.searchRoute,
+      pathname: settings.SEARCH_ROUTE,
       search,
     });
   };
@@ -90,12 +90,12 @@ function UseProvideSearchForm(): SearchFormContextType {
   };
 }
 
-const useSearchForm = () => {
+const useSearch = () => {
   const context = useContext(SearchFormContext);
   if (context === undefined) {
-    throw new Error("useSearchForm should only be used within the SearchFormProvider.");
+    throw new Error("useSearch should only be used within the SearchProvider.");
   }
   return context;
 }
 
-export { SearchFormProvider, useSearchForm };
+export { SearchProvider, useSearch };

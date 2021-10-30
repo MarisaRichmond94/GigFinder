@@ -1,14 +1,14 @@
 import { ReactElement } from 'react';
 
-import { SearchFormProvider } from 'providers/search_form';
+import { SearchProvider } from 'providers/search';
 import SearchPanel from './index';
 
 
 const SearchPanelWrapper = (): ReactElement => {
   return (
-    <SearchFormProvider>
+    <SearchProvider>
       <SearchPanel />
-    </SearchFormProvider>
+    </SearchProvider>
   );
 }
 

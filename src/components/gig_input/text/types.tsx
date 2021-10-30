@@ -1,10 +1,11 @@
 export type GigTextInputProps = {
   classNames?: string,
-  formValue: string,
+  clearKey?: string,
+  formValue?: string,
   id: string,
   onKeyPress?: (e: object) => void,
   placeholder: string,
-  setFormValue: (input: string) => void,
+  setFormValue?: (input: string) => void,
   type?: string,
   validateFormValue?: (input: string) => void
 }

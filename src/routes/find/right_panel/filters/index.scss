@@ -1,0 +1,11 @@
+@import 'global';
+
+#search-filters-section {
+  color: $off-white;
+  padding-top: 25px;
+
+  #search-filters-header {
+    align-items: center;
+    display: inline-flex;
+  }
+}

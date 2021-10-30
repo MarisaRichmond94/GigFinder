@@ -1,7 +1,8 @@
 const settings = {
-  createRoute: '/create',
-  searchRoute: '/find',
-  typeOptions: [
+  CREATE_ROUTE: '/create',
+  MIN_DESKTOP_WIDTH: 850,
+  SEARCH_ROUTE: '/find',
+  TYPE_OPTIONS: [
     { displayName: 'Any' },
     { displayName: 'Part-Time' },
     { displayName: 'Full-Time' },

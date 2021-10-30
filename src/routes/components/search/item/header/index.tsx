@@ -15,18 +15,9 @@ const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
     const randomInt = Math.floor(Math.random() * (10 - 1)) + 1;
     const isFavorite = randomInt % 2 === 0;
 
-    return (
-      <div className='favorite-gig-button-wrapper'>
-        <div className='sub-header-text'>
-          {isFavorite ? 'Favorite Gig' : 'Add Gig To Favorites'}
-        </div>&nbsp;&nbsp;
-        {
-          isFavorite
-            ? <BsHeartFill className='favorite-gig-button-icon red-icon' />
-            : <BsHeart className='favorite-gig-button-icon' />
-        }
-      </div>
-    );
+    return isFavorite
+      ? <BsHeartFill className='favorite-gig-button-icon red-icon' />
+      : <BsHeart className='favorite-gig-button-icon' />;
   }
 
   return (

@@ -1,20 +1,31 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
 import { GigTextInputProps } from './types';
 
 const GigTextInput = (props: GigTextInputProps): ReactElement => {
+  const [value, setValue] = useState<string>('');
+
   const onChange = (input: string): void => {
-    props.setFormValue(input);
-    if (props.validateFormValue) {
-      props.validateFormValue(input);
+    if (props.formValue && props.setFormValue) {
+      props.setFormValue(input);
+
+      if (props.validateFormValue) {
+        props.validateFormValue(input);
+      }
+    } else {
+      setValue(input);
     }
   }
 
   const onKeyPress = (e: any): void => {
     if (props.onKeyPress) {
       props.onKeyPress(e);
+
+      if (props.clearKey && e.key === props.clearKey) {
+        setValue('');
+      }
     }
   }
 
@@ -29,7 +40,7 @@ const GigTextInput = (props: GigTextInputProps): ReactElement => {
       placeholder={props.placeholder}
       spellCheck='false'
       type={props.type || 'text'}
-      value={props.formValue}
+      value={props.formValue || value}
     />
   )
 }

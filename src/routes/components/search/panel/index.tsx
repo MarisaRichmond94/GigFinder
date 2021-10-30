@@ -3,17 +3,20 @@ import './index.scss';
 import { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useSearchForm } from 'providers/search_form';
+import { useSearch } from 'providers/search';
+import { useViewport } from 'hooks/useViewport';
 import SearchTextInput from 'routes/components/search/input/text';
 import SearchDropdownInput from 'routes/components/search/input/dropdown';
 import settings from 'settings';
 
 const SearchPanel = (): ReactElement => {
   const { pathname } = useLocation();
-  const { location, title, type, onKeyPress, updateInput } = useSearchForm();
+  const { location, title, type, onKeyPress, updateInput } = useSearch();
+  const { width } = useViewport();
 
   const getClassNames = (): string => {
-    return `search-panel-item search-panel-input ${pathname.replace('/', '')}`
+    const pageType = width >= settings.MIN_DESKTOP_WIDTH ? 'desktop': 'mobile';
+    return `${pageType} search-panel-item search-panel-input ${pathname.replace('/', '')}`
   }
 
   return (
@@ -41,7 +44,7 @@ const SearchPanel = (): ReactElement => {
       <div className={getClassNames()}>
         <SearchDropdownInput
           fieldName='type'
-          options={settings.typeOptions}
+          options={settings.TYPE_OPTIONS}
           placeholder='full-time, part-time, etc.'
           value={type}
           updateInput={updateInput}

@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 
 import DemoWarning from 'components/demo_warning';
 import logo from 'assets/icons/logo.png';
-import { SearchFormProvider } from 'providers/search_form';
+import { SearchProvider } from 'providers/search';
 import SubmitButton from './submit_button';
 import SwitchButton from './switch_button';
 import SearchPanel from 'routes/components/search/panel';
@@ -13,7 +13,7 @@ const HomePage = (): ReactElement => {
   return (
     <div id='home-page' >
       <DemoWarning />
-      <SearchFormProvider>
+      <SearchProvider>
         <div id='main-search-form-container'>
           <div className='search-form-item' id='search-form-name-and-logo'>
             <img alt='logo' src={logo} />
@@ -28,7 +28,7 @@ const HomePage = (): ReactElement => {
             Looking to hire? <SwitchButton /> to our employer portal instead
           </div>
         </div>
-      </SearchFormProvider>
+      </SearchProvider>
     </div>
   )
 }

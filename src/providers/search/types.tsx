@@ -6,7 +6,7 @@ export interface Option {
   onClick?: () => void,
 }
 
-export interface SearchFormContextType {
+export interface SearchContextType {
   title: string,
   type?: undefined | Option,
   location: string,

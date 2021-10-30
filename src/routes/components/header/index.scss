@@ -23,14 +23,14 @@
   #header-message {
     float: right;
     line-height: $header-height;
-    padding: 10px 20px 0 0;
+    padding: 10px 0 0 0;
 
     #logout-icon-button {
       background: transparent !important;
       border: none;
       color: $grey;
       font-size: 1.5rem;
-      margin-right: 10px;
+      margin: 0 10px 6px 0;
 
       &:hover {
         color: $light-grey
@@ -57,6 +57,10 @@
 // desktop view
 @media (min-width: 850px) {
   #header {
+    #header-message {
+      padding: 10px 20px 0 0;
+    }
+
     #header-title {
       #header-title-icon {
         margin: 0 5px 10px 15px;

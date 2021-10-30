@@ -4,15 +4,14 @@ import { ReactElement } from 'react';
 
 import ActionButtons from './action_buttons';
 import ActiveResume from './active_resume';
+import Filters from './filters';
 
-type RightPanelProps = {
-}
-
-const RightPanel = (props: RightPanelProps): ReactElement => {
+const RightPanel = (): ReactElement => {
   return (
     <div id='right-panel' style={{ backgroundColor: '#083F89' }} >
       <ActionButtons />
       <ActiveResume />
+      <Filters />
     </div>
   );
 }

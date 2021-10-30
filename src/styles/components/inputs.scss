@@ -1,0 +1,7 @@
+@import 'styles/variables/variables';
+
+.off-white-text-input {
+  background-color: $off-white;
+  margin: 15px 10px;
+  width: calc(100% - 20px);
+}

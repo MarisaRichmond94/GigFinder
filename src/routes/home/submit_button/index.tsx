@@ -2,10 +2,10 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import { useSearchForm } from 'providers/search_form';
+import { useSearch } from 'providers/search';
 
 const SubmitButton = (): ReactElement => {
-  const { onFormSubmit } = useSearchForm();
+  const { onFormSubmit } = useSearch();
 
   return (
     <div className='search-form-item' id='search-form-submit'>

@@ -1,0 +1,50 @@
+@import 'global';
+
+#search-filters {
+  .filter-button {
+    margin-right: 10px;
+    margin-bottom: 15px;
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+#center-panel-filters {
+  #search-filters {
+    margin: 0 10px;
+
+    .filter-button {
+      background-color: $primary-blue;
+      border-color: $primary-blue;
+    }
+  }
+}
+
+#right-panel-filters {
+  #filter-panel-text-input {
+    margin: 0 0 15px 0;
+    width: 100%;
+  }
+
+  .filter-button {
+    background-color: $secondary-blue;
+    border-color: $secondary-blue;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #center-panel-filters {
+    display: block;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #center-panel-filters {
+    display: none;
+  }
+}
+
