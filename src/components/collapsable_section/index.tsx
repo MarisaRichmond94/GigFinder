@@ -3,7 +3,11 @@ import './index.scss'
 import { ReactElement, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-import { CollapsableSectionProps } from './types';
+type CollapsableSectionProps = {
+  children: ReactElement,
+  icon: ReactElement,
+  sectionTitle: string,
+}
 
 const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
   const [isVisible, setIsVisible] = useState(true);

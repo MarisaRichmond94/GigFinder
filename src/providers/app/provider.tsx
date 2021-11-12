@@ -1,4 +1,4 @@
-import AppContext from './context';
+import AppContext from 'providers/app/context';
 
 const AppProvider = (props: object) => {
   const value = {

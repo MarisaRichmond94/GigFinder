@@ -27,4 +27,4 @@ const calculateDurationSincePosted = (createdAt: string): string => {
   return `${seconds} seconds`;
 }
 
-export default calculateDurationSincePosted;
+export { calculateDurationSincePosted };

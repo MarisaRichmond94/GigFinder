@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import AuthContext from './context';
+import AuthContext from 'providers/auth/context';
 
 const AuthProvider = (props: object) => {
   const history = useHistory();

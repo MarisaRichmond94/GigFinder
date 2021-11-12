@@ -3,9 +3,8 @@ import './index.scss';
 import { ReactElement } from 'react';
 
 import { useSearch } from 'providers/search';
-
-import SearchItem from '../item';
-import { SearchResult } from './types';
+import SearchItem from 'routes/components/search/item';
+import { SearchResult } from 'types';
 
 const SearchResults = (): ReactElement => {
   const { searchResults } = useSearch();

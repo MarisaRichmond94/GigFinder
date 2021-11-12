@@ -1,4 +1,4 @@
-import './global.scss';
+import 'global.scss';
 import "@fontsource/cooper-hewitt";
 import 'bootstrap/dist/css/bootstrap.css';
 

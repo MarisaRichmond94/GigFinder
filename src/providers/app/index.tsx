@@ -1,5 +1,5 @@
-import AppProvider from "./provider";
-import useApp from './use';
+import AppProvider from "providers/app/provider";
+import useApp from 'providers/app/use';
 
 export {
   AppProvider,

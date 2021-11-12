@@ -2,7 +2,17 @@ import './index.scss';
 
 import { ReactElement, useState } from 'react';
 
-import { GigTextInputProps } from './types';
+type GigTextInputProps = {
+  classNames?: string,
+  clearKey?: string,
+  formValue?: string,
+  id: string,
+  onKeyPress?: (e: object) => void,
+  placeholder: string,
+  setFormValue?: (input: string) => void,
+  type?: string,
+  validateFormValue?: (input: string) => void
+}
 
 const GigTextInput = (props: GigTextInputProps): ReactElement => {
   const [value, setValue] = useState<string>('');

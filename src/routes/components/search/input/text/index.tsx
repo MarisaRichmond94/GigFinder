@@ -2,7 +2,13 @@ import { ReactElement } from 'react';
 
 import GigTextInput from 'components/gig_input/text';
 
-import { SearchTextInputProps } from './types';
+type SearchTextInputProps = {
+  fieldName: string,
+  id: string,
+  placeholder: string,
+  updateSearchText: (key: string, value: string) => void,
+  value: string,
+}
 
 const SearchTextInput = (props: SearchTextInputProps): ReactElement => {
   return (

@@ -4,7 +4,17 @@ import { ReactElement } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { IoIosArrowDown } from 'react-icons/io';
 
-import { GigDropdownProps, Option } from './types';
+import { Option } from 'types';
+
+type GigDropdownProps = {
+  classNames?: string,
+  id: string,
+  isDisabled?: boolean,
+  onOptionSelect?: (option: Option) => void,
+  options?: Option[] | undefined,
+  placeholder: object | string,
+  selectedOption: Option | undefined,
+}
 
 const GigDropdown = (props: GigDropdownProps): ReactElement => {
   const populateDropdownItems = () => {

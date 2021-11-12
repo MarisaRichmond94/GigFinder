@@ -1,17 +1,6 @@
 import settings from 'settings';
 
-const searchGigs = (setSearchResults: any): void => {
-  const url = buildUrl();
-  fetch(url)
-    .then(response => response.json())
-    .then(results => {
-      setSearchResults(results);
-    });
-
-  setSearchResults([]);
-}
-
-const buildUrl = (): string => {
+const buildSearchUrl = (): string => {
   const query = new URLSearchParams(window.location.search);
   let url = 'http://localhost:8080/jobs?';
 
@@ -35,4 +24,4 @@ const buildUrl = (): string => {
   return url.slice(0, -1);
 }
 
-export { searchGigs };
+export { buildSearchUrl };

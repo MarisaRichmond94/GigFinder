@@ -3,8 +3,15 @@ import { useLocation } from 'react-router-dom';
 
 import GigDropdown from 'components/gig_input/dropdown';
 import settings from 'settings';
+import { Option } from 'types';
 
-import { Option, SearchDropdownInputProps } from './types';
+type SearchDropdownInputProps = {
+  fieldName: string,
+  options?: Option[],
+  placeholder: string,
+  selectedOption?: Option,
+  updateInput: (value: Option) => void,
+}
 
 const SearchDropdownInput = (props: SearchDropdownInputProps): ReactElement => {
   const { pathname } = useLocation();
@@ -21,7 +28,7 @@ const SearchDropdownInput = (props: SearchDropdownInputProps): ReactElement => {
     <GigDropdown
       classNames={getClassNames()}
       id='search-form-type-input'
-      onOptionSelect={(value: Option) => props.updateInput(props.fieldName, value)}
+      onOptionSelect={(value: Option) => props.updateInput(value)}
       options={props.options}
       placeholder={props.placeholder}
       selectedOption={props.selectedOption}

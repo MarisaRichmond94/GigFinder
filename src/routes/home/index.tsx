@@ -5,8 +5,8 @@ import { ReactElement } from 'react';
 import DemoWarning from 'components/demo_warning';
 import logo from 'assets/icons/logo.png';
 import { SearchProvider } from 'providers/search';
-import SubmitButton from './submit_button';
-import SwitchButton from './switch_button';
+import SubmitButton from 'routes/home/submit_button';
+import SwitchButton from 'routes/home/switch_button';
 import SearchPanel from 'routes/components/search/panel';
 
 const HomePage = (): ReactElement => {

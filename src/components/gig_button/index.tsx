@@ -1,7 +1,16 @@
 import { ReactElement } from 'react';
 import { Button } from 'react-bootstrap';
 
-import { GigButtonProps } from './types';
+type GigButtonProps = {
+  classNames?: string,
+  icon?: string,
+  id: string,
+  isDisabled?: boolean,
+  onClick: (e: object) => void,
+  style?: object,
+  text?: string,
+  textBlock?: ReactElement,
+}
 
 const GigButton = (props: GigButtonProps): ReactElement => {
   return (

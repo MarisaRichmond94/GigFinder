@@ -3,9 +3,14 @@ import './index.scss';
 import { ReactElement } from 'react';
 import { BsHeart, BsHeartFill, BsStarFill } from 'react-icons/bs';
 
-import { SearchItemHeaderProps } from './types';
-
 import GigButton from 'components/gig_button';
+
+type SearchItemHeaderProps = {
+  company: string,
+  id: string,
+  rating: number,
+  title: string,
+}
 
 const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
   const { id, company, rating, title } = props;

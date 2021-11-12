@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from './home';
-import CreatePage from './create';
-import FindPage from './find';
+import HomePage from 'routes/home';
+import CreatePage from 'routes/create';
+import FindPage from 'routes/find';
 
 const GigRouter = (): ReactElement => {
   return (

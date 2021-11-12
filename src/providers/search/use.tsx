@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import SearchFormContext from './context';
+import SearchFormContext from 'providers/search/context';
 
 const useSearch = () => {
   const context = useContext(SearchFormContext);
