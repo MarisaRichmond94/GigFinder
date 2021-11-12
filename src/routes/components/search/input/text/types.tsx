@@ -1,10 +1,7 @@
-import { KeyboardEvent } from 'react';
-
 export type SearchTextInputProps = {
   fieldName: string,
   id: string,
   placeholder: string,
+  updateSearchText: (key: string, value: string) => void,
   value: string,
-  onKeyPress?: (e: KeyboardEvent) => void,
-  updateInput: (type: string, value: string) => void
 }

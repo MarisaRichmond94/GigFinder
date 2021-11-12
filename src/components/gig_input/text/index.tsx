@@ -8,7 +8,7 @@ const GigTextInput = (props: GigTextInputProps): ReactElement => {
   const [value, setValue] = useState<string>('');
 
   const onChange = (input: string): void => {
-    if (props.formValue && props.setFormValue) {
+    if (props.setFormValue) {
       props.setFormValue(input);
 
       if (props.validateFormValue) {

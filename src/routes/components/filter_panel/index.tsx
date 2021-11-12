@@ -5,23 +5,23 @@ import { FaTimes } from 'react-icons/fa';
 
 import GigButton from 'components/gig_button';
 import GigTextInput from 'components/gig_input/text';
-import { useFilter } from 'providers/filter';
+import { useSearch } from 'providers/search';
 
 type FilterPanelProps = {
   id: string,
 }
 
 const FilterPanel = (props: FilterPanelProps): ReactElement => {
-  const { filters, deleteFilter, onKeyPress } = useFilter();
+  const { searchFilters, deleteSearchFilter, onFilterKeyPress } = useSearch();
 
-  const populateFilters = (filters: Array<string>): Array<ReactElement> => {
+  const populateFilters = (filters: string[]): ReactElement[] => {
     return filters.map((filter, index) => {
       return (
         <GigButton
           classNames='filter-button'
           id={`${filter}-filter-button`}
           key={`${filter}-filter-button`}
-          onClick={() => deleteFilter(filter)}
+          onClick={() => deleteSearchFilter(filter)}
           textBlock={
             <div className='filter-item' key={`${filter.replace(' ', '-')}-${index}`}>
               {filter}&nbsp;&nbsp;
@@ -39,13 +39,13 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
         classNames='off-white-text-input'
         clearKey='Enter'
         id='filter-panel-text-input'
-        onKeyPress={onKeyPress}
+        onKeyPress={onFilterKeyPress}
         placeholder='Add keyword filters to narrow your search...'
       />
       {
-        !!filters.length &&
+        !!searchFilters.length &&
         <div id='search-filters'>
-          {populateFilters(filters)}
+          {populateFilters(searchFilters)}
         </div>
       }
     </div>

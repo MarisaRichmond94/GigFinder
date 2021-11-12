@@ -10,10 +10,10 @@ const SearchDropdownInput = (props: SearchDropdownInputProps): ReactElement => {
   const { pathname } = useLocation();
 
   const getClassNames = (): string => {
-    let classNames = props.value?.displayName ? '' : 'placeholder-text';
+    let classNames = props.selectedOption?.displayName ? '' : 'placeholder-text';
     classNames += pathname === settings.SEARCH_ROUTE
-      ? 'off-white-gig-dropdown'
-      : 'white-gig-dropdown';
+      ? ' off-white-gig-dropdown'
+      : ' white-gig-dropdown';
     return classNames;
   };
 
@@ -21,10 +21,10 @@ const SearchDropdownInput = (props: SearchDropdownInputProps): ReactElement => {
     <GigDropdown
       classNames={getClassNames()}
       id='search-form-type-input'
-      onOptionSelect={(option: Option): void => props.updateInput(props.fieldName, option)}
+      onOptionSelect={(value: Option) => props.updateInput(props.fieldName, value)}
       options={props.options}
       placeholder={props.placeholder}
-      selectedOption={props.value}
+      selectedOption={props.selectedOption}
     />
   )
 }

@@ -2,21 +2,23 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import SearchItem from '../item';
-import { SearchResult, SearchResultsProps } from './types';
-// TODO - Delete this once functionality is added
-import mockSearchResults from './mock.json';
+import { useSearch } from 'providers/search';
 
-const SearchResults = (props: SearchResultsProps): ReactElement => {
-  const buildSearchResults = (searchResults: Array<SearchResult>): Array<ReactElement> => {
-    return searchResults.map(
+import SearchItem from '../item';
+import { SearchResult } from './types';
+
+const SearchResults = (): ReactElement => {
+  const { searchResults } = useSearch();
+
+  const buildSearchResults = (searchResults: SearchResult[]): ReactElement[] => {
+    return searchResults?.map(
       searchResult => <SearchItem item={searchResult} key={`search-item-${searchResult.id}`}/>
     );
   }
 
   return (
     <div id='search-results'>
-      {buildSearchResults(mockSearchResults)}
+      {searchResults && buildSearchResults(searchResults)}
     </div>
   );
 }

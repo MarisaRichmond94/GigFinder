@@ -1,4 +1,5 @@
 const settings = {
+  ANY_TYPE: 'Any',
   CREATE_ROUTE: '/create',
   MIN_DESKTOP_WIDTH: 850,
   SEARCH_ROUTE: '/find',

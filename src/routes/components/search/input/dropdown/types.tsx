@@ -2,10 +2,10 @@ import { ReactElement } from 'react';
 
 export type SearchDropdownInputProps = {
   fieldName: string,
-  options?: Array<Option>,
+  options?: Option[],
   placeholder: string,
-  value: Option,
-  updateInput: (type: string, value: Option) => void
+  selectedOption?: Option,
+  updateInput: (key: string, value: Option) => void,
 }
 
 export interface Option {

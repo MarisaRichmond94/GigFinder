@@ -5,11 +5,11 @@ import { ReactElement } from 'react';
 import { useSearch } from 'providers/search';
 
 const SubmitButton = (): ReactElement => {
-  const { onFormSubmit } = useSearch();
+  const { onSearchFormSubmit } = useSearch();
 
   return (
     <div className='search-form-item' id='search-form-submit'>
-      <button className='primary-blue-gig-button header-text' onClick={onFormSubmit}>
+      <button className='primary-blue-gig-button header-text' onClick={onSearchFormSubmit}>
         Find My Dream Gig
       </button>
     </div>

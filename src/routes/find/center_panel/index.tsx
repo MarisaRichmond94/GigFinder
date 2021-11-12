@@ -5,18 +5,18 @@ import { FaFilter } from 'react-icons/fa';
 import { GoSearch } from 'react-icons/go';
 
 import CollapsableSection from 'components/collapsable_section';
-import FilterPanelWrapper from 'routes/components/filter_panel/wrapper';
-import SearchPanelWrapper from 'routes/components/search/panel/wrapper';
+import FilterPanel from 'routes/components/filter_panel';
+import SearchPanel from 'routes/components/search/panel';
 import SearchResults from 'routes/components/search/results';
 
 const CenterPanel = (): ReactElement => {
   return (
     <div id='center-panel'>
       <CollapsableSection icon={<GoSearch />} sectionTitle='Search'>
-        <SearchPanelWrapper />
+        <SearchPanel />
       </CollapsableSection>
       <CollapsableSection icon={<FaFilter />} sectionTitle='Filter'>
-        <FilterPanelWrapper id='center-panel-filters' />
+        <FilterPanel id='center-panel-filters' />
       </CollapsableSection>
       <SearchResults />
     </div>

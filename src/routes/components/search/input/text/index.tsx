@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 
 import GigTextInput from 'components/gig_input/text';
+
 import { SearchTextInputProps } from './types';
 
 const SearchTextInput = (props: SearchTextInputProps): ReactElement => {
@@ -9,9 +10,8 @@ const SearchTextInput = (props: SearchTextInputProps): ReactElement => {
       classNames='search-form-input'
       formValue={props.value}
       id={props.id}
-      onKeyPress={props.onKeyPress}
       placeholder={props.placeholder}
-      setFormValue={(value: string) => props.updateInput(props.fieldName, value)}
+      setFormValue={(value: string) => props.updateSearchText(props.fieldName, value)}
     />
   )
 }
