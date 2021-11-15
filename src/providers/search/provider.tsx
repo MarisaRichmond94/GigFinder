@@ -21,7 +21,7 @@ const SearchProvider = (props: object) => {
 
   // This is a hack to prevent the debounce function from rebuilding and restarting the debounce
   const [debounceUpdateSearch] = useState(
-    () => debounce(2000, false, (searchParameters: SearchParameters): void => {
+    () => debounce(250, false, (searchParameters: SearchParameters): void => {
       // update search parameters in the url
       const searchParams = new URLSearchParams();
       for (const [key, value] of Object.entries(searchParameters)) {
@@ -31,12 +31,15 @@ const SearchProvider = (props: object) => {
 
       // search gigs and update search results if on the find page
       if (pathname === settings.SEARCH_ROUTE) {
-        const url = buildSearchUrl();
-        fetch(url)
-          .then(response => response.json())
-          .then(results => {
-            setSearchResults(results);
-          });
+        setSearchResults(undefined);
+        setTimeout(() => {
+          const url = buildSearchUrl();
+          fetch(url)
+            .then(response => response.json())
+            .then(results => {
+              setSearchResults(results);
+            });
+      }, 2000);
       }
     }),
   );
@@ -44,12 +47,15 @@ const SearchProvider = (props: object) => {
   useEffect(() => {
     // search gigs on page mount if on the find page
     if (pathname === settings.SEARCH_ROUTE) {
-      const url = buildSearchUrl();
-      fetch(url)
-        .then(response => response.json())
-        .then(results => {
-          setSearchResults(results);
-        });
+      setSearchResults(undefined);
+      setTimeout(() => {
+        const url = buildSearchUrl();
+        fetch(url)
+          .then(response => response.json())
+          .then(results => {
+            setSearchResults(results);
+          });
+      }, 2000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

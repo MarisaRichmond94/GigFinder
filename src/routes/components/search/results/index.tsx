@@ -1,23 +1,63 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
+import GigLoader from 'components/gig_loader';
+import { usePrevious } from 'hooks/usePrevious';
 import { useSearch } from 'providers/search';
 import SearchItem from 'routes/components/search/item';
-import { SearchResult } from 'types';
+import settings from 'settings';
 
 const SearchResults = (): ReactElement => {
   const { searchResults } = useSearch();
+  const [resultsCount, setResultsCount] = useState(0);
+  const prevSearchResults = usePrevious(searchResults);
 
-  const buildSearchResults = (searchResults: SearchResult[]): ReactElement[] => {
-    return searchResults?.map(
+  useEffect(() => {
+    if (!prevSearchResults && searchResults?.length) {
+      setResultsCount(
+        searchResults.length >= settings.MIN_RESULTS_PER_LOAD
+          ? settings.MIN_RESULTS_PER_LOAD
+          : searchResults.length
+      );
+    }
+    // eslint-disable-next-line
+  }, [searchResults, prevSearchResults])
+
+  const buildSearchResults = (): ReactElement[] => {
+    const visibleSearchResults = searchResults.slice(0, resultsCount + 1);
+    return visibleSearchResults?.map(
       searchResult => <SearchItem item={searchResult} key={`search-item-${searchResult.id}`}/>
     );
-  }
+  };
+
+  const getMoreSearchResults = (): void => {
+    const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
+    setResultsCount(
+      nextResultsCount <= searchResults.length
+        ? nextResultsCount
+        : searchResults.length
+    );
+  };
 
   return (
     <div id='search-results'>
-      {searchResults && buildSearchResults(searchResults)}
+      {
+        searchResults
+          ? (
+            <InfiniteScroll
+              dataLength={resultsCount}
+              next={getMoreSearchResults}
+              hasMore={resultsCount !== searchResults.length}
+              loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
+              scrollableTarget='search-results'
+            >
+              {buildSearchResults()}
+            </InfiniteScroll>
+          )
+          : <GigLoader color='#5BA1C5' type='cylon'/>
+      }
     </div>
   );
 }
