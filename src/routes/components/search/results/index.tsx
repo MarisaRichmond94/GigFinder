@@ -41,10 +41,18 @@ const SearchResults = (): ReactElement => {
     );
   };
 
+  if (searchResults === undefined) {
+    return (
+      <div id='search-results'>
+        <GigLoader color='#5BA1C5' type='cylon'/>
+      </div>
+    );
+  }
+
   return (
     <div id='search-results'>
       {
-        searchResults
+        searchResults.length
           ? (
             <InfiniteScroll
               dataLength={resultsCount}
@@ -56,7 +64,11 @@ const SearchResults = (): ReactElement => {
               {buildSearchResults()}
             </InfiniteScroll>
           )
-          : <GigLoader color='#5BA1C5' type='cylon'/>
+          : (
+            <div id='no-search-results' className='header-text'>
+              No gigs found matching this search
+            </div>
+          )
       }
     </div>
   );
