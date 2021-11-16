@@ -19,6 +19,14 @@
   width: 100%;
 }
 
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
 // mobile view
 @media (min-width: 0) {
   #page-container {

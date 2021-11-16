@@ -1,6 +1,8 @@
 @import 'global';
 
 #search-filters {
+  padding-top: 15px;
+
   .filter-button {
     margin-right: 10px;
     margin-bottom: 15px;
@@ -14,6 +16,7 @@
 #center-panel-filters {
   #search-filters {
     margin: 0 10px;
+    padding-top: 15px;
 
     .filter-button {
       background-color: $primary-blue;
@@ -24,7 +27,7 @@
 
 #right-panel-filters {
   #filter-panel-text-input {
-    margin: 0 0 15px 0;
+    margin: 0;
     width: 100%;
   }
 

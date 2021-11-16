@@ -10,7 +10,7 @@ import SearchItem from 'routes/components/search/item';
 import settings from 'settings';
 
 const SearchResults = (): ReactElement => {
-  const { searchResults } = useSearch();
+  const { filteredResults, searchResults } = useSearch();
   const [resultsCount, setResultsCount] = useState(0);
   const prevSearchResults = usePrevious(searchResults);
 
@@ -26,7 +26,8 @@ const SearchResults = (): ReactElement => {
   }, [searchResults, prevSearchResults])
 
   const buildSearchResults = (): ReactElement[] => {
-    const visibleSearchResults = searchResults.slice(0, resultsCount + 1);
+    const results = filteredResults || searchResults;
+    const visibleSearchResults = results.slice(0, resultsCount + 1);
     return visibleSearchResults?.map(
       searchResult => <SearchItem item={searchResult} key={`search-item-${searchResult.id}`}/>
     );
@@ -52,7 +53,7 @@ const SearchResults = (): ReactElement => {
   return (
     <div id='search-results'>
       {
-        searchResults.length
+        (!filteredResults && searchResults.length) || filteredResults?.length
           ? (
             <InfiniteScroll
               dataLength={resultsCount}

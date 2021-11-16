@@ -7,6 +7,7 @@ import { buildSearchUrl } from 'providers/search/utils/buildSearchUrl';
 import {
   createSearchFilter,
   deleteFilterFromUrl,
+  filterSearchResults,
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
@@ -16,6 +17,8 @@ const SearchProvider = (props: object) => {
   const history = useHistory();
   const { pathname, search } = useLocation();
 
+  const [filterOptions, setFilterOptions] = useState<string[] | undefined>();
+  const [filteredResults, setFilteredResults] = useState<SearchResult[] | undefined>();
   const [searchFilters, setSearchFilters] = useState<string[]>(getSearchFilters(search));
   const [searchResults, setSearchResults] = useState<SearchResult[] | undefined>(undefined);
 
@@ -24,6 +27,7 @@ const SearchProvider = (props: object) => {
     () => debounce(250, false, (searchParameters: SearchParameters): void => {
       // update search parameters in the url
       const searchParams = new URLSearchParams();
+      searchParameters['filters'] = searchFilters ? searchFilters.join(',') : '';
       for (const [key, value] of Object.entries(searchParameters)) {
         if (value !== '') searchParams.set(key, value);
       }
@@ -31,34 +35,40 @@ const SearchProvider = (props: object) => {
 
       // search gigs and update search results if on the find page
       if (pathname === settings.SEARCH_ROUTE) {
-        setSearchResults(undefined);
-        setTimeout(() => {
-          const url = buildSearchUrl();
-          fetch(url)
-            .then(response => response.json())
-            .then(results => {
-              setSearchResults(results);
-            });
-      }, 2000);
+        searchGigs();
       }
     }),
   );
 
   useEffect(() => {
-    // search gigs on page mount if on the find page
     if (pathname === settings.SEARCH_ROUTE) {
-      setSearchResults(undefined);
-      setTimeout(() => {
-        const url = buildSearchUrl();
-        fetch(url)
-          .then(response => response.json())
-          .then(results => {
-            setSearchResults(results);
-          });
-      }, 2000);
+      searchGigs();
+      getFilterOptions();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getFilterOptions = useCallback((): void => {
+    fetch('http://localhost:8080/filters')
+      .then(response => response.json())
+      .then(filters => setFilterOptions(filters));
+  }, []);
+
+  const searchGigs = useCallback((): void => {
+    setSearchResults(undefined);
+    setTimeout(() => {
+      const url = buildSearchUrl();
+      fetch(url)
+        .then(response => response.json())
+        .then(results => {
+          if (searchFilters.length) {
+            const filteredResults = filterSearchResults(results, searchFilters);
+            setFilteredResults(filteredResults);
+          }
+          setSearchResults(results);
+        });
+    }, 2000);
+  }, [searchFilters]);
 
   const onSearchFormSubmit = useCallback((): void => {
     history.push({
@@ -67,26 +77,30 @@ const SearchProvider = (props: object) => {
     });
   }, [history, search]);
 
-  const onFilterKeyPress = useCallback((e: any): void => {
-    if (e.key === 'Enter' && e.target.value) {
-      const updatedFilters = createSearchFilter(e.target.value, search, history);
-      setSearchFilters(updatedFilters);
-    }
-  }, [history, search]);
+  const onFilterSelect = useCallback((filter: string): void => {
+    const updatedFilters = createSearchFilter(filter, search, history);
+    setSearchFilters(updatedFilters);
+    const filteredResults = filterSearchResults(searchResults, updatedFilters);
+    setFilteredResults(filteredResults);
+  }, [history, search, searchResults]);
 
   const deleteSearchFilter = useCallback((filter: string): void => {
     if (filter) {
       const updatedFilters = deleteFilterFromUrl(filter, search, history);
       setSearchFilters(updatedFilters);
+      const filteredResults = filterSearchResults(searchResults, updatedFilters);
+      setFilteredResults(filteredResults);
     }
-  }, [history, search]);
+  }, [history, search, searchResults]);
 
   const value = {
+    filterOptions,
+    filteredResults,
     searchFilters,
     searchResults,
     debounceUpdateSearch,
     deleteSearchFilter,
-    onFilterKeyPress,
+    onFilterSelect,
     onSearchFormSubmit,
   };
 

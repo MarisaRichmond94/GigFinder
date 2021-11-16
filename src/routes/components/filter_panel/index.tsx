@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 import GigButton from 'components/gig_button';
-import GigTextInput from 'components/gig_input/text';
+import SearchableGigInput from 'components/gig_input/searchable';
 import { useSearch } from 'providers/search';
 
 type FilterPanelProps = {
@@ -12,7 +12,7 @@ type FilterPanelProps = {
 }
 
 const FilterPanel = (props: FilterPanelProps): ReactElement => {
-  const { searchFilters, deleteSearchFilter, onFilterKeyPress } = useSearch();
+  const { filterOptions, searchFilters, deleteSearchFilter, onFilterSelect } = useSearch();
 
   const populateFilters = (filters: string[]): ReactElement[] => {
     return filters.map((filter, index) => {
@@ -35,13 +35,18 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
 
   return (
     <div id={props.id}>
-      <GigTextInput
-        classNames='off-white-text-input'
-        clearKey='Enter'
-        id='filter-panel-text-input'
-        onKeyPress={onFilterKeyPress}
-        placeholder='Add keyword filters to narrow your search...'
-      />
+      {
+        filterOptions &&
+        <SearchableGigInput
+          classNames='off-white-text-input'
+          clearKey='Enter'
+          id='filter-panel-text-input'
+          onOptionSelect={onFilterSelect}
+          options={filterOptions}
+          placeholder='Filter gigs by benefits...'
+          selectedOptions={searchFilters}
+        />
+      }
       {
         !!searchFilters.length &&
         <div id='search-filters'>

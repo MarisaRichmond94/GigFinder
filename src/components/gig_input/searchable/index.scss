@@ -1,0 +1,24 @@
+@import 'global';
+
+.searchable-gig-input {
+  .focused {
+    border-radius: 5px 5px 0 0;
+  }
+
+  .filter-options-list {
+    background-color: $off-white;
+    border-radius: 0 0 5px 5px;
+    color: $off-black;
+    list-style-type: none;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-left: 12px;
+    position: absolute;
+    width: 320px;
+
+    .best-match {
+      font-weight: bold;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { SearchResult } from 'types';
+
 interface historyType {
   replace: (entry: object) => void,
 }
@@ -28,8 +30,14 @@ const deleteFilterFromUrl = (filter: string, search: string, history: historyTyp
   return [];
 }
 
+const filterSearchResults = (searchResults: SearchResult[], filters: string[]): SearchResult[] => {
+  return searchResults?.filter(result =>
+    filters.every(filter => result.benefits.indexOf(filter) >= 0)
+  );
+}
+
 const getSearchFilters = (search: string): string[] => {
-    const searchParams = new URLSearchParams(search);
+  const searchParams = new URLSearchParams(search);
   const searchFilters = searchParams.get('filters');
   return searchFilters ?  searchFilters.split(',') : [];
 };
@@ -37,5 +45,6 @@ const getSearchFilters = (search: string): string[] => {
 export {
   createSearchFilter,
   deleteFilterFromUrl,
+  filterSearchResults,
   getSearchFilters,
 }

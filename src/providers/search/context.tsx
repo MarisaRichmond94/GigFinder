@@ -3,11 +3,13 @@ import { createContext } from 'react';
 import { SearchParameters, SearchResult } from 'types';
 
 interface SearchContextType {
+  filterOptions?: string[],
+  filteredResults?: SearchResult[],
   searchFilters: string[],
   searchResults?: SearchResult[],
   debounceUpdateSearch: (searchParameters: SearchParameters) => void,
   deleteSearchFilter: (filter: string) => void,
-  onFilterKeyPress: (e: any) => void,
+  onFilterSelect: (filter: string) => void,
   onSearchFormSubmit: () => void,
 }
 
