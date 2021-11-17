@@ -1,10 +1,11 @@
 import { createContext } from 'react';
 
-import { SearchParameters, SearchResult } from 'types';
+import { Option, SearchParameters, SearchResult } from 'types';
 
 interface SearchContextType {
   filterOptions?: string[],
   filteredResults?: SearchResult[],
+  gigTypes?: Option[],
   searchFilters: string[],
   searchResults?: SearchResult[],
   debounceUpdateSearch: (searchParameters: SearchParameters) => void,

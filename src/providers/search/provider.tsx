@@ -11,7 +11,7 @@ import {
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
-import { SearchParameters, SearchResult } from 'types';
+import { Option, SearchParameters, SearchResult } from 'types';
 
 const SearchProvider = (props: object) => {
   const history = useHistory();
@@ -19,6 +19,7 @@ const SearchProvider = (props: object) => {
 
   const [filterOptions, setFilterOptions] = useState<string[] | undefined>();
   const [filteredResults, setFilteredResults] = useState<SearchResult[] | undefined>();
+  const [gigTypes, setGigTypes] = useState<Option[] | undefined>();
   const [searchFilters, setSearchFilters] = useState<string[]>(getSearchFilters(search));
   const [searchResults, setSearchResults] = useState<SearchResult[] | undefined>(undefined);
 
@@ -41,11 +42,18 @@ const SearchProvider = (props: object) => {
   );
 
   useEffect(() => {
+    getGigTypes();
     if (pathname === settings.SEARCH_ROUTE) {
       searchGigs();
       getFilterOptions();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getGigTypes = useCallback((): void => {
+    fetch('http://localhost:8080/types')
+      .then(response => response.json())
+      .then(types => setGigTypes(types));
   }, []);
 
   const getFilterOptions = useCallback((): void => {
@@ -57,7 +65,7 @@ const SearchProvider = (props: object) => {
   const searchGigs = useCallback((): void => {
     setSearchResults(undefined);
     setTimeout(() => {
-      const url = buildSearchUrl();
+      const url = buildSearchUrl(gigTypes);
       fetch(url)
         .then(response => response.json())
         .then(results => {
@@ -68,7 +76,7 @@ const SearchProvider = (props: object) => {
           setSearchResults(results);
         });
     }, 2000);
-  }, [searchFilters]);
+  }, [gigTypes, searchFilters]);
 
   const onSearchFormSubmit = useCallback((): void => {
     history.push({
@@ -96,6 +104,7 @@ const SearchProvider = (props: object) => {
   const value = {
     filterOptions,
     filteredResults,
+    gigTypes,
     searchFilters,
     searchResults,
     debounceUpdateSearch,

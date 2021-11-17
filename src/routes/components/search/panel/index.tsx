@@ -12,7 +12,7 @@ import settings from 'settings';
 import { Option } from 'types';
 
 const SearchPanel = (): ReactElement => {
-  const { debounceUpdateSearch } = useSearch();
+  const { debounceUpdateSearch, gigTypes } = useSearch();
   const { pathname, search } = useLocation();
   const query = useQuery(search);
   const { width } = useViewport();
@@ -20,7 +20,7 @@ const SearchPanel = (): ReactElement => {
   const [title, setTitle] = useState(query.get('title') || '');
   const [location, setLocation] = useState(query.get('location') || '');
   const [type, setType] = useState<undefined | Option>(
-    settings.TYPE_OPTIONS.find(x => x.displayName === query.get('type')) || undefined
+    gigTypes?.find(x => x.displayName === query.get('type')) || undefined
   );
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const SearchPanel = (): ReactElement => {
   }
 
   const updateSelectedOption = (option: Option): void => {
-    setType(settings.TYPE_OPTIONS.find(x => x.displayName === option.displayName) || undefined);
+    setType(gigTypes?.find(x => x.displayName === option.displayName) || undefined);
   }
 
   const getClassNames = (): string => {
@@ -76,7 +76,7 @@ const SearchPanel = (): ReactElement => {
       <div className={getClassNames()}>
         <SearchDropdownInput
           fieldName='type'
-          options={settings.TYPE_OPTIONS}
+          options={gigTypes}
           placeholder='full-time, part-time, etc.'
           selectedOption={type}
           updateInput={updateSelectedOption}

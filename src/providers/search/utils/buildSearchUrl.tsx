@@ -1,6 +1,6 @@
 import settings from 'settings';
 
-const buildSearchUrl = (): string => {
+const buildSearchUrl = (gigTypes): string => {
   const query = new URLSearchParams(window.location.search);
   let url = 'http://localhost:8080/jobs?';
 
@@ -16,7 +16,7 @@ const buildSearchUrl = (): string => {
       : `state_like=${state.trim()}&`;
   }
 
-  const type = settings.TYPE_OPTIONS.find(x => x.displayName === query.get('type')) || undefined;
+  const type = gigTypes?.find(x => x.displayName === query.get('type')) || undefined;
   if (type && type.displayName !== settings.ANY_TYPE) {
     url += `type=${type.displayName.toLowerCase()}&`;
   }
