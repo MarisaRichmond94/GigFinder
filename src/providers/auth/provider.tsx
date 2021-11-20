@@ -1,48 +1,77 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from 'providers/auth/context';
+import { Employer, User } from 'types';
+import generateUUID from 'utils/generateGUID';
 
 const AuthProvider = (props: object) => {
   const history = useHistory();
+  const [user, setUser] = useState<User | undefined>();
+  const [employer, setEmployer] = useState<Employer | undefined>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [companyName, setCompanyName] = useState('Macrosoft');
-  const [userName, setUserName] = useState('Drake Styker');
 
-  const createCompanyAccount = (name: string): void => {
-    setCompanyName(name);
-    setIsLoggedIn(true);
+  const signUpEmployer = (name: string, email: string): void => {
+    axios.post(
+      'http://localhost:8080/employers',
+      { id: generateUUID(), name, email },
+    ).then(response => {
+      if (response?.data?.length) {
+        setEmployer(response.data?.[0]);
+        setIsLoggedIn(true);
+      }
+    });
   }
 
-  const createUserAccount = (name: string): void => {
-    setUserName(name);
-    setIsLoggedIn(true);
+  const signUpUser = (name: string, email: string): void => {
+    axios.post(
+      'http://localhost:8080/users',
+      { id: generateUUID(), name, email },
+    ).then(response => {
+      if (response?.data?.length) {
+        setUser(response.data?.[0]);
+        setIsLoggedIn(true);
+      }
+    });
   }
 
-  const loginCompany = (): void => {
-    setIsLoggedIn(true);
+  const loginEmployer = (email: string): void => {
+    axios.get(`http://localhost:8080/employers?email=${email}`)
+      .then(response => {
+        if (response?.data?.length) {
+          setEmployer(response.data?.[0]);
+          setIsLoggedIn(true);
+        }
+      });
   }
 
-  const loginUser = (): void => {
-    setIsLoggedIn(true);
+  const loginUser = (email: string): void => {
+    axios.get(`http://localhost:8080/users?email=${email}`)
+      .then(response => {
+        if (response?.data?.length) {
+          setUser(response.data?.[0]);
+          setIsLoggedIn(true);
+        }
+      });
   }
 
   const logout = (): void => {
-    setCompanyName(undefined);
-    setUserName(undefined);
+    setEmployer(undefined);
+    setUser(undefined);
     setIsLoggedIn(false);
     history.replace('/');
   }
 
   const value = {
-    companyName,
+    employer,
     isLoggedIn,
-    userName,
-    createCompanyAccount,
-    createUserAccount,
-    loginCompany,
+    user,
+    loginEmployer,
     loginUser,
     logout,
+    signUpEmployer,
+    signUpUser,
   };
 
   return <AuthContext.Provider value={value} {...props} />;

@@ -2,7 +2,7 @@ import settings from 'settings';
 
 const buildSearchUrl = (gigTypes): string => {
   const query = new URLSearchParams(window.location.search);
-  let url = 'http://localhost:8080/jobs?';
+  let url = 'http://localhost:8080/gigs?';
 
   const title = query.get('title') || '';
   if (title !== '') url += `title_like=${title}&`;

@@ -1,0 +1,31 @@
+@import 'global';
+
+#auth-panel {
+  .gig-modal-content {
+    background-color: $primary-blue;
+    border-radius: 15px;
+    color: $off-white;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #auth-panel {
+    .gig-modal-content {
+      left: 5vw;
+      top: 8vh;
+      width: 90vw;
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #auth-panel {
+    .gig-modal-content {
+      left: 2vw;
+      top: 25vh;
+      width: calc(96vw - 350px);
+    }
+  }
+}

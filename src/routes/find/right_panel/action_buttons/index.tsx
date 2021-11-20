@@ -1,12 +1,26 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
+import { useAuthForm } from 'providers/auth_form';
+import AuthModal from 'routes/components/auth_modal';
 
 const ActionButtons = (): ReactElement => {
-  const { isLoggedIn, logout, loginUser } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
+  const { setIsSignUp } = useAuthForm();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  const handleLoginUser = (): void => {
+    setIsAuthModalOpen(true);
+    setIsSignUp(false);
+  }
+
+  const handleSignUpUser = (): void => {
+    setIsAuthModalOpen(true);
+    setIsSignUp(true);
+  }
 
   return isLoggedIn
     ? (
@@ -29,17 +43,21 @@ const ActionButtons = (): ReactElement => {
     )
     : (
       <div id='action-button-wrapper'>
+        <AuthModal
+          isOpen={isAuthModalOpen}
+          setIsOpen={setIsAuthModalOpen}
+        />
         <div id='right-panel-action-buttons'>
           <GigButton
             classNames='secondary-blue-gig-button sub-header-text'
             id='create-account-button'
-            onClick={loginUser}
+            onClick={handleSignUpUser}
             text='Create Account'
           />
           <GigButton
             classNames='secondary-blue-gig-button sub-header-text'
             id='sign-in-button'
-            onClick={loginUser}
+            onClick={handleLoginUser}
             text='Sign In'
           />
         </div>

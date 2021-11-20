@@ -1,0 +1,28 @@
+@import 'global';
+
+.gig-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+
+  .gig-modal-content {
+    border-radius: 5px;
+    position: absolute;
+
+    .gig-modal-header {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .gig-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px;
+    }
+  }
+}

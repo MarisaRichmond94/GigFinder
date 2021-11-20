@@ -39,7 +39,7 @@ const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
         {rating}
       </div>
       <GigButton
-        classNames='favorite-gig-button text-button'
+        classNames='favorite-gig-button icon-button off-black'
         id={`favorite-gig-button-${id}`}
         onClick={() => console.log('Favorite this gig!')}
         textBlock={getFavoriteGigButton()}

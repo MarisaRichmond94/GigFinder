@@ -8,7 +8,7 @@ const SwitchButton = (): ReactElement => {
 
   return (
     <button
-      className='primary-blue-text-gig-button'
+      className='primary-blue text-gig-button'
       id='search-form-switch-button'
       onClick={() => history.push(settings.CREATE_ROUTE)}
     >

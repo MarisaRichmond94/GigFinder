@@ -1,0 +1,45 @@
+@import 'global';
+
+.gig-modal-body {
+  #auth-selector-container {
+    display: flex;
+    padding: 0 20px;
+
+    #applicant-selector-button {
+      margin-right: 25px;
+    }
+  }
+
+  #auth-selector-divider {
+    color: white;
+    margin: 0 2%;
+    width: 96%;
+  }
+
+  #auth-form-container {
+    .auth-modal-input-container {
+      width: 96%;
+      margin: 8px 2%;
+    }
+  }
+
+  .auth-modal-input-container {
+    display: flex;
+
+    .auth-input {
+      margin-left: 15px;
+      width: 100%;
+    }
+
+    #password-hide-button {
+      color: $grey;
+      margin-top: 4px;
+      position: absolute;
+      right: 30px;
+    }
+  }
+}
+
+.valid-icon {
+  color: $primary-green;
+}

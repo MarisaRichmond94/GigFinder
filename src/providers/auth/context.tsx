@@ -1,14 +1,16 @@
 import { createContext } from 'react';
 
+import { Employer, User } from 'types';
+
 interface AuthContextType {
-  companyName: string,
+  employer?: Employer,
   isLoggedIn: boolean,
-  userName: string,
-  createCompanyAccount: (name: string) => void,
-  createUserAccount: (name: string) => void,
-  loginCompany: () => void,
-  loginUser: () => void,
+  user?: User,
+  loginEmployer: (email: string) => void,
+  loginUser: (email: string) => void,
   logout: () => void,
+  signUpEmployer: (name: string, email: string) => void,
+  signUpUser: (name: string, email: string) => void,
 }
 
 const AuthContext = createContext<undefined | AuthContextType>(undefined);
