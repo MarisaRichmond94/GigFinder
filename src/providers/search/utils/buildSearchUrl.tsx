@@ -8,13 +8,7 @@ const buildSearchUrl = (gigTypes): string => {
   if (title !== '') url += `title_like=${title}&`;
 
   const location = query.get('location') || '';
-  const [city, state] = location.split(',');
-  if (city && city !== '') url += `city_like=${city.trim()}&`;
-  if (state && state !== '') {
-    url += (state.trim().length <= 2)
-      ? `abbrev_state_like=${state.trim().toUpperCase()}&`
-      : `state_like=${state.trim()}&`;
-  }
+  if (location && location !== '') url += `city_like=${location.trim()}&`;
 
   const type = gigTypes?.find(x => x.displayName === query.get('type')) || undefined;
   if (type && type.displayName !== settings.ANY_TYPE) {

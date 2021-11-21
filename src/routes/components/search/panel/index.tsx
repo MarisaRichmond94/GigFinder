@@ -59,7 +59,7 @@ const SearchPanel = (): ReactElement => {
         <SearchTextInput
           fieldName='title'
           id='search-text-title-input'
-          placeholder='job title, keyword, or company'
+          placeholder='tech job title (e.g. "Software Engineer")'
           updateSearchText={updateSearchText}
           value={title}
         />
@@ -68,7 +68,7 @@ const SearchPanel = (): ReactElement => {
         <SearchTextInput
           fieldName='location'
           id='search-text-location-input'
-          placeholder='city and state'
+          placeholder='city in California (e.g. "Los Angeles")'
           updateSearchText={updateSearchText}
           value={location}
         />
