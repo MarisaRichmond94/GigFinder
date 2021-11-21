@@ -11,17 +11,17 @@ import {
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
-import { Option, SearchParameters, SearchResult } from 'types';
+import { Gig, Option, SearchParameters } from 'types';
 
 const SearchProvider = (props: object) => {
   const history = useHistory();
   const { pathname, search } = useLocation();
 
   const [filterOptions, setFilterOptions] = useState<string[] | undefined>();
-  const [filteredResults, setFilteredResults] = useState<SearchResult[] | undefined>();
+  const [filteredResults, setFilteredResults] = useState<Gig[] | undefined>();
   const [gigTypes, setGigTypes] = useState<Option[] | undefined>();
   const [searchFilters, setSearchFilters] = useState<string[]>(getSearchFilters(search));
-  const [searchResults, setSearchResults] = useState<SearchResult[] | undefined>(undefined);
+  const [searchResults, setSearchResults] = useState<Gig[] | undefined>(undefined);
 
   // This is a hack to prevent the debounce function from rebuilding and restarting the debounce
   const [debounceUpdateSearch] = useState(

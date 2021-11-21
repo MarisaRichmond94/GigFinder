@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 
+import { Gig } from 'types';
+
 interface UserContextType {
-  favoriteGigs?: string[],
+  favoriteGigs?: Gig[],
   getFavoriteGigs: (userId: string) => void,
   toggleFavoriteGig: (userId: string, gigId: string) => void,
 }

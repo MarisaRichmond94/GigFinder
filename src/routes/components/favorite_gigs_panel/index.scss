@@ -1,0 +1,37 @@
+@import 'global';
+
+#favorite-gigs-panel {
+  #favorite-gigs-panel-header {
+    color: $off-white;
+  }
+
+  #favorite-gigs-panel-divider {
+    color: $off-white;
+    margin: 2px;
+  }
+
+  #favorite-gigs-list {
+    border-top: 1px solid $light-grey;
+    height: 50vh;
+    overflow: hidden auto;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #favorite-gigs-panel-header,
+  #favorite-gigs-panel-divider {
+    display: none;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #favorite-gigs-panel {
+    margin-top: 15px;
+
+    #favorite-gigs-panel-header {
+      display: block;
+    }
+  }
+}

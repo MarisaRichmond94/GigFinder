@@ -40,6 +40,7 @@ const SearchResults = (): ReactElement => {
   }
 
   const buildSearchResults = (): ReactElement[] => {
+    const favoriteGigIds = favoriteGigs?.map(favoriteGig => favoriteGig.id);
     const results = filteredResults || searchResults;
     const visibleSearchResults = results.slice(0, resultsCount + 1);
     return visibleSearchResults?.map(
@@ -48,7 +49,7 @@ const SearchResults = (): ReactElement => {
           key={`search-item-${searchResult.id}`}
           handleToggleFavoriteGig={() => handleToggleFavoriteGig(searchResult.id)}
           item={searchResult}
-          isFavorite={favoriteGigs?.includes(searchResult.id) || false}
+          isFavorite={favoriteGigIds?.includes(searchResult.id) || false}
         />
       )
     );

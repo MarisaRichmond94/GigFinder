@@ -1,4 +1,4 @@
-import { SearchResult } from 'types';
+import { Gig } from 'types';
 
 interface historyType {
   replace: (entry: object) => void,
@@ -30,7 +30,7 @@ const deleteFilterFromUrl = (filter: string, search: string, history: historyTyp
   return [];
 }
 
-const filterSearchResults = (searchResults: SearchResult[], filters: string[]): SearchResult[] => {
+const filterSearchResults = (searchResults: Gig[], filters: string[]): Gig[] => {
   return searchResults?.filter(result =>
     filters.every(filter => result.benefits.indexOf(filter) >= 0)
   );

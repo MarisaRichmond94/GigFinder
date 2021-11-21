@@ -4,14 +4,14 @@ import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';
 import SearchItemHeader from 'routes/components/search/item/header';
-import { SearchResult } from 'types';
+import { Gig } from 'types';
 import {
   calculateDurationSincePosted
 } from 'routes/components/search/utils/calculateDurationSincePosted';
 
 type SearchItemProps = {
   handleToggleFavoriteGig: () => void,
-  item: SearchResult,
+  item: Gig,
   isFavorite: boolean,
 }
 

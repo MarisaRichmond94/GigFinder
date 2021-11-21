@@ -6,13 +6,7 @@ export interface Employer {
   email: string,
 }
 
-export interface Option {
-  displayName: string,
-  icon?: ReactElement,
-  onClick?: () => void,
-}
-
-export interface SearchResult {
+export interface Gig {
   abbrev_state: string,
   benefits: string,
   city: string,
@@ -28,6 +22,13 @@ export interface SearchResult {
   type: string,
   views: number,
 }
+
+export interface Option {
+  displayName: string,
+  icon?: ReactElement,
+  onClick?: () => void,
+}
+
 export interface SearchParameters {
   title: string,
   location: string,
