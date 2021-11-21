@@ -1,11 +1,9 @@
 import { createContext } from 'react';
 
-import { FavoriteGig, User } from 'types';
-
 interface UserContextType {
-  favoriteGigs?: FavoriteGig[],
-  user?: User,
-  toggleFavoriteGig: (gigId: string) => void,
+  favoriteGigs?: string[],
+  getFavoriteGigs: (userId: string) => void,
+  toggleFavoriteGig: (userId: string, gigId: string) => void,
 }
 
 const UserContext = createContext<undefined | UserContextType>(undefined);

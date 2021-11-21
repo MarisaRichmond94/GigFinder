@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from 'providers/auth/context';
@@ -12,6 +12,30 @@ const AuthProvider = (props: object) => {
   const [employer, setEmployer] = useState<Employer | undefined>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const userId = window.localStorage.getItem('userId');
+    if (userId) {
+      axios.get(`http://localhost:8080/users/${userId}`).then(response => {
+        if (response?.data) {
+          setUser(response.data);
+          setIsLoggedIn(true);
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const employerId = window.localStorage.getItem('employerId');
+    if (employerId) {
+      axios.get(`http://localhost:8080/employers/${employerId}`).then(response => {
+        if (response?.data) {
+          setEmployer(response.data);
+          setIsLoggedIn(true);
+        }
+      });
+    }
+  }, []);
+
   const signUpEmployer = (name: string, email: string): void => {
     axios.post(
       'http://localhost:8080/employers',
@@ -20,6 +44,7 @@ const AuthProvider = (props: object) => {
       if (response?.data?.length) {
         setEmployer(response.data?.[0]);
         setIsLoggedIn(true);
+        window.localStorage.setItem("employerId", response.data?.[0].id);
       }
     });
   }
@@ -32,6 +57,7 @@ const AuthProvider = (props: object) => {
       if (response?.data?.length) {
         setUser(response.data?.[0]);
         setIsLoggedIn(true);
+        window.localStorage.setItem("userId", response.data?.[0].id);
       }
     });
   }
@@ -42,6 +68,7 @@ const AuthProvider = (props: object) => {
         if (response?.data?.length) {
           setEmployer(response.data?.[0]);
           setIsLoggedIn(true);
+          window.localStorage.setItem("employerId", response.data?.[0].id);
         }
       });
   }
@@ -52,6 +79,7 @@ const AuthProvider = (props: object) => {
         if (response?.data?.length) {
           setUser(response.data?.[0]);
           setIsLoggedIn(true);
+          window.localStorage.setItem("userId", response.data?.[0].id);
         }
       });
   }

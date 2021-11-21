@@ -10,7 +10,9 @@ import {
 } from 'routes/components/search/utils/calculateDurationSincePosted';
 
 type SearchItemProps = {
+  handleToggleFavoriteGig: () => void,
   item: SearchResult,
+  isFavorite: boolean,
 }
 
 const SearchItem = (props: SearchItemProps): ReactElement => {
@@ -32,7 +34,14 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
 
   return (
     <div className='search-item'>
-      <SearchItemHeader company={company} id={id} rating={rating} title={title} />
+      <SearchItemHeader
+        company={company}
+        handleToggleFavoriteGig={props.handleToggleFavoriteGig}
+        id={id}
+        isFavorite={props.isFavorite}
+        rating={rating}
+        title={title}
+      />
       <div className='sub-header-row sub-header-text'>
         {city}, {state}
       </div>

@@ -6,11 +6,6 @@ export interface Employer {
   email: string,
 }
 
-export interface FavoriteGig {
-  "gigId": string,
-  "userId": string,
-}
-
 export interface Option {
   displayName: string,
   icon?: ReactElement,

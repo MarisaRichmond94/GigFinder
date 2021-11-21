@@ -65,9 +65,10 @@ button {
   }
 }
 
-button.icon-button {
+button.btn-primary.icon-button {
   background-color: transparent !important;
   border: none;
+  color: $off-black;
   display: inline-block;
 
   &.active {

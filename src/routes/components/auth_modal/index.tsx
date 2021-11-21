@@ -22,7 +22,7 @@ const AuthModal = (props: AuthModalProps): ReactElement => {
   );
 
   return (
-    <div id='auth-panel'>
+    <div id='auth-modal'>
       <GigModal
         bodyContent={<Body />}
         headerContent={headerContent}

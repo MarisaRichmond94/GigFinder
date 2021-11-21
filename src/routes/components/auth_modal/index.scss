@@ -1,6 +1,6 @@
 @import 'global';
 
-#auth-panel {
+#auth-modal {
   .gig-modal-content {
     background-color: $primary-blue;
     border-radius: 15px;
@@ -10,7 +10,7 @@
 
 // mobile view
 @media (min-width: 0) {
-  #auth-panel {
+  #auth-modal {
     .gig-modal-content {
       left: 5vw;
       top: 8vh;
@@ -21,7 +21,7 @@
 
 // desktop view
 @media (min-width: 850px) {
-  #auth-panel {
+  #auth-modal {
     .gig-modal-content {
       left: 2vw;
       top: 25vh;

@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
 import { GrLogin, GrLogout } from 'react-icons/gr';
@@ -9,6 +9,7 @@ import logo from 'assets/icons/logo.png';
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
+import { useUser } from 'providers/user';
 import AuthModal from 'routes/components/auth_modal';
 import settings from 'settings';
 
@@ -16,8 +17,17 @@ const Header = (): ReactElement => {
   const history = useHistory();
   const { pathname } = useLocation();
   const { employer, isLoggedIn, user, logout } = useAuth();
+  const userId = user?.id;
   const { setIsSignUp } = useAuthForm();
+  const { getFavoriteGigs } = useUser();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (userId) {
+      getFavoriteGigs(userId);
+    }
+    // eslint-ignore-next-line
+  }, [getFavoriteGigs, userId]);
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {

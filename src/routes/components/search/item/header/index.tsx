@@ -7,23 +7,15 @@ import GigButton from 'components/gig_button';
 
 type SearchItemHeaderProps = {
   company: string,
+  handleToggleFavoriteGig: () => void,
   id: string,
+  isFavorite: boolean,
   rating: number,
   title: string,
 }
 
 const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
-  const { id, company, rating, title } = props;
-
-  const getFavoriteGigButton = (): ReactElement => {
-    // TODO - dynamically determine button based on user favorites
-    const randomInt = Math.floor(Math.random() * (10 - 1)) + 1;
-    const isFavorite = randomInt % 2 === 0;
-
-    return isFavorite
-      ? <BsHeartFill className='favorite-gig-button-icon red-icon' />
-      : <BsHeart className='favorite-gig-button-icon' />;
-  }
+  const { id, isFavorite, company, rating, title } = props;
 
   return (
     <div className='header-row'>
@@ -41,8 +33,12 @@ const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
       <GigButton
         classNames='favorite-gig-button icon-button off-black'
         id={`favorite-gig-button-${id}`}
-        onClick={() => console.log('Favorite this gig!')}
-        textBlock={getFavoriteGigButton()}
+        onClick={() => props.handleToggleFavoriteGig()}
+        textBlock={
+          isFavorite
+            ? <BsHeartFill className='favorite-gig-button-icon red-icon' />
+            : <BsHeart className='favorite-gig-button-icon' />
+        }
       />
     </div>
   );
