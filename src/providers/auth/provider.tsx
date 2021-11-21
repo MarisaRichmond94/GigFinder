@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from 'providers/auth/context';
+import settings from 'settings';
 import { Employer, User } from 'types';
 import generateUUID from 'utils/generateGUID';
 
@@ -15,7 +16,7 @@ const AuthProvider = (props: object) => {
   useEffect(() => {
     const userId = window.localStorage.getItem('userId');
     if (userId) {
-      axios.get(`http://localhost:8080/users/${userId}`).then(response => {
+      axios.get(`${settings.BASE_SERVER_URL}/users/${userId}`).then(response => {
         if (response?.data) {
           setUser(response.data);
           setIsLoggedIn(true);
@@ -27,7 +28,7 @@ const AuthProvider = (props: object) => {
   useEffect(() => {
     const employerId = window.localStorage.getItem('employerId');
     if (employerId) {
-      axios.get(`http://localhost:8080/employers/${employerId}`).then(response => {
+      axios.get(`${settings.BASE_SERVER_URL}/employers/${employerId}`).then(response => {
         if (response?.data) {
           setEmployer(response.data);
           setIsLoggedIn(true);
@@ -38,7 +39,7 @@ const AuthProvider = (props: object) => {
 
   const signUpEmployer = (name: string, email: string): void => {
     axios.post(
-      'http://localhost:8080/employers',
+      `${settings.BASE_SERVER_URL}/employers`,
       { id: generateUUID(), name, email },
     ).then(response => {
       if (response?.data?.length) {
@@ -51,7 +52,7 @@ const AuthProvider = (props: object) => {
 
   const signUpUser = (name: string, email: string): void => {
     axios.post(
-      'http://localhost:8080/users',
+      `${settings.BASE_SERVER_URL}/users`,
       { id: generateUUID(), name, email },
     ).then(response => {
       if (response?.data?.length) {
@@ -63,7 +64,7 @@ const AuthProvider = (props: object) => {
   }
 
   const loginEmployer = (email: string): void => {
-    axios.get(`http://localhost:8080/employers?email=${email}`)
+    axios.get(`${settings.BASE_SERVER_URL}/employers?email=${email}`)
       .then(response => {
         if (response?.data?.length) {
           setEmployer(response.data?.[0]);
@@ -74,7 +75,7 @@ const AuthProvider = (props: object) => {
   }
 
   const loginUser = (email: string): void => {
-    axios.get(`http://localhost:8080/users?email=${email}`)
+    axios.get(`${settings.BASE_SERVER_URL}/users?email=${email}`)
       .then(response => {
         if (response?.data?.length) {
           setUser(response.data?.[0]);

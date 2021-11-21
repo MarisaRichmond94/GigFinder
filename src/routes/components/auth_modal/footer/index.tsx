@@ -5,6 +5,7 @@ import { ReactElement } from 'react';
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
+import settings from 'settings';
 
 type FooterProps = {
   setIsOpen: (isOpen: boolean) => void,
@@ -14,8 +15,15 @@ const Footer = (props: FooterProps): ReactElement => {
   const { email, isSignUp, isUserAuth, name, getIsValidInput } = useAuthForm();
   const { loginEmployer, loginUser, signUpEmployer, signUpUser } = useAuth();
   const isSubmitEnabled = isSignUp
-    ? getIsValidInput('name') && getIsValidInput('email') && getIsValidInput('password')
-    : getIsValidInput('email') && getIsValidInput('password');
+    ? (
+      getIsValidInput(settings.AUTH_FIELD_TYPES.name) &&
+      getIsValidInput(settings.AUTH_FIELD_TYPES.email) &&
+      getIsValidInput(settings.AUTH_FIELD_TYPES.password)
+    )
+    : (
+      getIsValidInput(settings.AUTH_FIELD_TYPES.email) &&
+      getIsValidInput(settings.AUTH_FIELD_TYPES.password)
+    );
 
   const cancel = (): void => props.setIsOpen(false);
 

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import AuthFormContext from 'providers/auth_form/context';
 import settings from 'settings';
+import { AuthFieldType } from 'types';
 
 const AuthFormProvider = (props: object) => {
   const { pathname } = useLocation();
@@ -25,15 +26,15 @@ const AuthFormProvider = (props: object) => {
     setIsValidPassword(false);
   }
 
-  const getIsValidInput = (type: string): boolean => {
+  const getIsValidInput = (type: AuthFieldType): boolean => {
     switch (type) {
-      case 'email':
+      case settings.AUTH_FIELD_TYPES.email:
         return isValidEmail;
-      case 'name':
+      case settings.AUTH_FIELD_TYPES.name:
         return isValidName;
-      case 'password':
+      case settings.AUTH_FIELD_TYPES.password:
         return isValidPassword;
-      case 'all':
+      case settings.AUTH_FIELD_TYPES.all:
         return isSignUp
           ? isValidName && isValidEmail && isValidPassword
           : isValidEmail && isValidPassword;
@@ -44,13 +45,13 @@ const AuthFormProvider = (props: object) => {
 
   const updateInput = (type: string, value: string): void => {
     switch (type) {
-      case 'email':
+      case settings.AUTH_FIELD_TYPES.email:
         setEmail(value);
         break;
-      case 'name':
+      case settings.AUTH_FIELD_TYPES.name:
         setName(value);
         break;
-      case 'password':
+      case settings.AUTH_FIELD_TYPES.password:
         setPassword(value);
         break;
       default:
@@ -60,13 +61,13 @@ const AuthFormProvider = (props: object) => {
 
   const validateInput = (type: string, value: string): void => {
     switch (type) {
-      case 'email':
+      case settings.AUTH_FIELD_TYPES.email:
         validateEmail(value);
         break;
-      case 'name':
+      case settings.AUTH_FIELD_TYPES.name:
         validateName(value);
         break;
-      case 'password':
+      case settings.AUTH_FIELD_TYPES.password:
         validatePassword(value);
         break;
       default:

@@ -3,10 +3,11 @@ import { HiOutlineMail, HiOutlineMailOpen } from 'react-icons/hi';
 
 import GigTextInput from 'components/gig_input/text';
 import { useAuthForm } from 'providers/auth_form';
+import settings from 'settings';
 
 const EmailInput = (): ReactElement => {
   const { email, isUserAuth, getIsValidInput, updateInput, validateInput } = useAuthForm();
-  const isValidEmail = getIsValidInput('email');
+  const isValidEmail = getIsValidInput(settings.AUTH_FIELD_TYPES.email);
 
   return (
     <div className='auth-modal-input-container'>
@@ -19,8 +20,10 @@ const EmailInput = (): ReactElement => {
           formValue={email}
           id='auth-email-input'
           placeholder={isUserAuth ? 'Email Address' : 'Company Email Address'}
-          setFormValue={updatedEmail => updateInput('email', updatedEmail)}
-          validateFormValue={updatedEmail => validateInput('email', updatedEmail)}
+          setFormValue={updatedEmail => updateInput(settings.AUTH_FIELD_TYPES.email, updatedEmail)}
+          validateFormValue={
+            updatedEmail => validateInput(settings.AUTH_FIELD_TYPES.email, updatedEmail)
+          }
         />
       </div>
     </div>

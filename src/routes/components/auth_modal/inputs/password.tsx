@@ -4,11 +4,12 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import GigTextInput from 'components/gig_input/text';
 import { useAuthForm } from 'providers/auth_form';
+import settings from 'settings';
 
 const PasswordInput = (): ReactElement => {
   const { password, getIsValidInput, updateInput, validateInput } = useAuthForm();
   const [isHidden, setIsHidden] = useState(true);
-  const isValidPassword = getIsValidInput('password');
+  const isValidPassword = getIsValidInput(settings.AUTH_FIELD_TYPES.password);
 
   return (
     <div className='auth-modal-input-container'>
@@ -21,9 +22,13 @@ const PasswordInput = (): ReactElement => {
           formValue={password}
           id='auth-password-input'
           placeholder='Password'
-          setFormValue={updatedPassword => updateInput('password', updatedPassword)}
-          type={(isHidden) ? 'password' : 'text'}
-          validateFormValue={updatedPassword => validateInput('password', updatedPassword)}
+          setFormValue={
+            updatedPassword => updateInput(settings.AUTH_FIELD_TYPES.password, updatedPassword)
+          }
+          type={(isHidden) ? settings.AUTH_FIELD_TYPES.password : 'text'}
+          validateFormValue={
+            updatedPassword => validateInput(settings.AUTH_FIELD_TYPES.password, updatedPassword)
+          }
         />
       </div>
       <div id='password-hide-button' onClick={() => setIsHidden(!isHidden)}>

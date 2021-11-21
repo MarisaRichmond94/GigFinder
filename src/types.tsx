@@ -1,5 +1,12 @@
 import { ReactElement } from 'react';
 
+export enum AuthFieldType {
+  name = 'name',
+  email = 'email',
+  password = 'password',
+  all = 'all',
+}
+
 export interface Employer {
   id: string,
   name: string,

@@ -51,13 +51,13 @@ const SearchProvider = (props: object) => {
   }, []);
 
   const getGigTypes = useCallback((): void => {
-    fetch('http://localhost:8080/types')
+    fetch(`${settings.BASE_SERVER_URL}/types`)
       .then(response => response.json())
       .then(types => setGigTypes(types));
   }, []);
 
   const getFilterOptions = useCallback((): void => {
-    fetch('http://localhost:8080/filters')
+    fetch(`${settings.BASE_SERVER_URL}/filters`)
       .then(response => response.json())
       .then(filters => setFilterOptions(filters));
   }, []);
