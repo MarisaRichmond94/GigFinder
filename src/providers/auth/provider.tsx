@@ -89,6 +89,8 @@ const AuthProvider = (props: object) => {
     setUser(undefined);
     setIsLoggedIn(false);
     history.replace('/');
+    window.localStorage.removeItem('userId');
+    window.localStorage.removeItem('employerId');
   }
 
   const value = {
