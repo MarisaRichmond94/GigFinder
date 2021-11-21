@@ -26,6 +26,7 @@ export interface Gig {
 export interface Option {
   displayName: string,
   icon?: ReactElement,
+  id?: string,
   onClick?: () => void,
 }
 
@@ -35,8 +36,20 @@ export interface SearchParameters {
   type: string,
 }
 
+export interface UploadFile {
+  id: string,
+  name: string,
+  status?: string,
+}
+
 export interface User {
   id: string,
   name: string,
   email: string,
+}
+
+export interface UserResume {
+  id: string,
+  name: string,
+  userId: string,
 }

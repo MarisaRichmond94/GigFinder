@@ -12,6 +12,7 @@
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-infinite-scroll-component": "^6.1.0",
@@ -40,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "cd src/api && json-server --watch mock.json --port 8080",
+    "start:server": "cd src/api && json-server --watch db.json --port 8080 --host 127.0.0.1",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

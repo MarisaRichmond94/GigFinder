@@ -24,6 +24,11 @@
   #favorite-gigs-panel-divider {
     display: none;
   }
+
+  #no-favorite-gigs-message {
+    color: $off-black;
+    padding: 10px;
+  }
 }
 
 // desktop view
@@ -33,6 +38,11 @@
 
     #favorite-gigs-panel-header {
       display: block;
+    }
+
+    #no-favorite-gigs-message {
+      color: $off-white;
+      padding: 10px 0;
     }
   }
 }

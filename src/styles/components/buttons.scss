@@ -43,6 +43,11 @@ button {
     background: $grey;
   }
 
+  &:active,
+  &:focus {
+    background: $secondary-blue;
+  }
+
   &:disabled {
     background: $grey;
   }

@@ -6,11 +6,13 @@ import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
 import AuthModal from 'routes/components/auth_modal';
+import UploadModal from 'routes/components/upload_modal';
 
 const ActionButtons = (): ReactElement => {
   const { isLoggedIn, logout } = useAuth();
   const { setIsSignUp } = useAuthForm();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   const handleLoginUser = (): void => {
     setIsAuthModalOpen(true);
@@ -25,11 +27,12 @@ const ActionButtons = (): ReactElement => {
   return isLoggedIn
     ? (
       <div id='action-button-wrapper'>
+        <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
         <div id='right-panel-action-buttons'>
           <GigButton
             classNames='secondary-blue-gig-button sub-header-text'
             id='upload-resume-button'
-            onClick={() => console.log('Upload Resume')}
+            onClick={() => setIsUploadModalOpen(true)}
             text='Upload Resume'
           />
           <GigButton
@@ -43,10 +46,7 @@ const ActionButtons = (): ReactElement => {
     )
     : (
       <div id='action-button-wrapper'>
-        <AuthModal
-          isOpen={isAuthModalOpen}
-          setIsOpen={setIsAuthModalOpen}
-        />
+        <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
         <div id='right-panel-action-buttons'>
           <GigButton
             classNames='secondary-blue-gig-button sub-header-text'

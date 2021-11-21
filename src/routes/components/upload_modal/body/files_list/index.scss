@@ -1,0 +1,35 @@
+@import 'global';
+
+#upload-files-list {
+  min-height: 33vh;
+  padding: 1vw;
+
+  .upload-file {
+    align-items: center;
+    border-bottom: 1px solid $grey;
+    color: $off-black;
+    display: flex;
+
+    .upload-file-name {
+      margin-left: 5px;
+    }
+
+    .upload-file-delete-button {
+      margin-left: auto;
+    }
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  .upload-file {
+    width: 86vw;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  .upload-file {
+    width: calc(92vw - 350px);
+  }
+}

@@ -1,0 +1,58 @@
+@import 'global';
+
+#upload-body-container {
+  #file-upload-drop-zone,
+  #drop-zone-dragging-hover {
+    align-items: center;
+    border: 2px dashed $off-black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin: 0 1vw;
+    min-height: 35vh;
+  }
+
+  #file-upload-drop-zone {
+    background-color: $off-white;
+
+    #no-files-text {
+      color: $off-black;
+    }
+  }
+
+  #drop-zone-dragging-hover {
+    background-color: $light-grey;
+
+    #drag-over-display {
+      align-items: center;
+      color: $off-black;
+      display: flex;
+      flex-direction: column;
+
+      #drag-over-icon {
+        color: $secondary-blue;
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+#document-drop-zone-input {
+  display: none;
+}
+
+// mobile view
+@media (min-width: 0) {
+  #file-upload-drop-zone,
+  #drop-zone-dragging-hover {
+    width: 88vw;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #file-upload-drop-zone,
+  #drop-zone-dragging-hover {
+    width: calc(94vw - 350px);
+  }
+}

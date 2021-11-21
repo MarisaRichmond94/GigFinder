@@ -25,7 +25,11 @@
     line-height: $header-height;
     padding: 10px 0 0 0;
 
-    .auth-icon-button {
+    #greeting {
+      display: inline-block;
+    }
+
+    .header-icon-button {
       background: transparent !important;
       border: none;
       color: $grey;
@@ -35,6 +39,10 @@
       &:hover {
         color: $light-grey
       }
+    }
+
+    #upload-resume-icon-button {
+      margin-right: -10px;
     }
 
     #sign-up-button {
@@ -60,6 +68,12 @@
   }
 }
 
+@media (max-width: 770px) {
+  #greeting {
+    display: none;
+  }
+}
+
 // desktop view
 @media (min-width: 850px) {
   #header {
@@ -78,7 +92,7 @@
     }
   }
 
-  .auth-icon-button {
+  .header-icon-button {
     display: none;
   }
 }

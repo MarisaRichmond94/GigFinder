@@ -6,11 +6,13 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
 import FavoriteGigItem from 'routes/components/favorite_gigs_panel/item';
 import settings from 'settings';
 
 const FavoriteGigsPanel = (): ReactElement => {
+  const { isLoggedIn } = useAuth();
   const { favoriteGigs } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
   const prevFavoriteGigs = usePrevious(favoriteGigs);
@@ -25,10 +27,6 @@ const FavoriteGigsPanel = (): ReactElement => {
     }
     // eslint-disable-next-line
   }, [favoriteGigs, prevFavoriteGigs]);
-
-  if (!favoriteGigs) {
-    return null;
-  }
 
   const buildFavoriteGigs = (): ReactElement[] => {
     return favoriteGigs.map(favoriteGig => {
@@ -57,17 +55,37 @@ const FavoriteGigsPanel = (): ReactElement => {
         Favorite Gigs
       </div>
       <hr id='favorite-gigs-panel-divider'/>
-      <div id='favorite-gigs-list'>
-        <InfiniteScroll
-          dataLength={resultsCount}
-          next={getMoreFavoriteGigs}
-          hasMore={resultsCount !== favoriteGigs.length}
-          loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
-          scrollableTarget='favorite-gigs-list'
-        >
-          {buildFavoriteGigs()}
-        </InfiniteScroll>
-      </div>
+      {
+        favoriteGigs?.length
+          ? (
+            <div id='favorite-gigs-list'>
+              <InfiniteScroll
+                dataLength={resultsCount}
+                next={getMoreFavoriteGigs}
+                hasMore={resultsCount !== favoriteGigs.length}
+                loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
+                scrollableTarget='favorite-gigs-list'
+              >
+                {buildFavoriteGigs()}
+              </InfiniteScroll>
+            </div>
+          )
+          : (
+            <div className='sub-header-text' id='no-favorite-gigs-message'>
+              {
+                isLoggedIn
+                  ? (
+                    `No favorite gigs to display. Consider adding to gigs to your favorites to
+                    make your application process faster and easier`
+                  )
+                  : (
+                    `Create an account or sign in to add favorite gigs and make the application
+                    process faster and easier`
+                  )
+              }
+            </div>
+          )
+      }
     </div>
   );
 }

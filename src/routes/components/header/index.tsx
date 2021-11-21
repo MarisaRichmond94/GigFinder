@@ -1,9 +1,10 @@
 import './index.scss';
 
 import { ReactElement, useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useHistory, useLocation } from 'react-router-dom';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
-import { GrLogin, GrLogout } from 'react-icons/gr';
+import { GrLogin, GrLogout, GrCloudUpload } from 'react-icons/gr';
 
 import logo from 'assets/icons/logo.png';
 import GigButton from 'components/gig_button';
@@ -11,6 +12,7 @@ import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
 import { useUser } from 'providers/user';
 import AuthModal from 'routes/components/auth_modal';
+import UploadModal from 'routes/components/upload_modal';
 import settings from 'settings';
 
 const Header = (): ReactElement => {
@@ -19,15 +21,16 @@ const Header = (): ReactElement => {
   const { employer, isLoggedIn, user, logout } = useAuth();
   const userId = user?.id;
   const { setIsSignUp } = useAuthForm();
-  const { getFavoriteGigs } = useUser();
+  const { getFavoriteGigs, getUserResumes } = useUser();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   useEffect(() => {
     if (userId) {
       getFavoriteGigs(userId);
+      getUserResumes(userId);
     }
-    // eslint-ignore-next-line
-  }, [getFavoriteGigs, userId]);
+  }, [getFavoriteGigs, getUserResumes, userId]);
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {
@@ -51,10 +54,8 @@ const Header = (): ReactElement => {
 
   return (
     <div id='header'>
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        setIsOpen={setIsAuthModalOpen}
-      />
+      <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
+      <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
       <div id='header-title' onClick={() => history.push('/')}>
         <img alt='logo' id='header-title-icon' src={logo} />
         <div className='title-text' id='header-title-text'>Gig Search</div>
@@ -62,18 +63,31 @@ const Header = (): ReactElement => {
       <div className='sub-header-text' id='header-message'>
         {
           isLoggedIn
-            ? generateHeaderMessage()
+            ? (
+              <div id='greeting'>
+                {generateHeaderMessage()}
+              </div>
+            )
             : (
               <GigButton
-                classNames='auth-icon-button'
+                classNames='header-icon-button'
                 id='sign-up-button'
                 onClick={handleSignUpUser}
                 textBlock={<BsFillPersonPlusFill />}
               />
             )
         }
+        {
+          isLoggedIn && !isMobile &&
+          <GigButton
+            classNames='header-icon-button'
+            id='upload-resume-icon-button'
+            onClick={() => setIsUploadModalOpen(true)}
+            textBlock={<GrCloudUpload />}
+          />
+        }
         <GigButton
-          classNames='auth-icon-button'
+          classNames='header-icon-button'
           id='auth-button'
           onClick={isLoggedIn ? logout : handleLoginUser}
           textBlock={isLoggedIn ? <GrLogout /> : <GrLogin />}
