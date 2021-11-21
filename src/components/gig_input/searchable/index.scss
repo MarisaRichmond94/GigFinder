@@ -1,6 +1,10 @@
 @import 'global';
 
 .searchable-gig-input {
+  input {
+    margin-bottom: 0;
+  }
+
   .focused {
     border-radius: 5px 5px 0 0;
   }
@@ -15,10 +19,24 @@
     overflow-y: auto;
     padding-left: 12px;
     position: absolute;
-    width: 320px;
 
     .best-match {
       font-weight: bold;
     }
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  .filter-options-list {
+    margin: 0 10px !important;
+    width: calc(92% - 3px);
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  .filter-options-list {
+    width: 320px;
   }
 }

@@ -25,7 +25,9 @@ const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
         </div>
       </div>
       <hr className='collapsable-section-divider'/>
-      {isVisible && props.children}
+      <div className={isVisible ? 'visible' : 'hidden'}>
+        {props.children}
+      </div>
     </div>
   );
 }

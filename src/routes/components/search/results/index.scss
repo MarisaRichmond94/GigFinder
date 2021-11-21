@@ -4,6 +4,7 @@
   border-top: 1px solid $light-grey;
   flex: 1 1 auto;
   height: 10vh;
+  max-width: 96vw;
   overflow-y: auto;
 
   .search-item {
@@ -18,5 +19,12 @@
   #no-search-results {
     padding-top: 20vh;
     text-align: center;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #search-results {
+    width: calc(96vw - 350px);
   }
 }
