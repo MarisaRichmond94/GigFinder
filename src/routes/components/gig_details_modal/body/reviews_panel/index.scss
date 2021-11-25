@@ -1,0 +1,83 @@
+@import 'global';
+
+#gig-details-modal-review-panel {
+  .company-review-container {
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+    width: 100%;
+
+    .rating-container {
+      align-items: center;
+      align-self: self-start;
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+
+      .rating {
+        font-size: 2rem;
+        height: 30px;
+      }
+    }
+
+    .details-container {
+      width: 80%;
+
+      .review-text {
+        @include hide-overflow-ellipsis;
+      }
+
+      .summary {
+        margin-top: 10px;
+      }
+
+      .review-feedback-container {
+        align-items: center;
+        display: flex;
+        margin-top: 10px;
+
+        .review-feedback {
+          color: $grey;
+        }
+
+        .review-feedback-button {
+          background-color: transparent !important;
+          border: none;
+          font-size: 1.25rem;
+          padding: 0 5px;
+        }
+
+        .review-positive-feedback-button {
+          color: $primary-green;
+        }
+
+        .review-negative-feedback-button {
+          color: $primary-red;
+        }
+      }
+    }
+
+    .review-divider {
+      color: $grey;
+      width: 100%;
+    }
+  }
+}
+
+hr:last-child {
+  display: none;
+}
+
+// mobile view
+@media (min-width: 0) {
+  .rating-star {
+    font-size: 0.5rem;
+  }
+}
+
+// desktop view
+@media (min-width: 500px) {
+  .rating-star {
+    font-size: 1rem;
+  }
+}

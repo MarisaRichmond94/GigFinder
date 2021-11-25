@@ -9,15 +9,21 @@ import { useAuth } from 'providers/auth';
 import { useSearch } from 'providers/search';
 import { useUser } from 'providers/user';
 import AlertModal from 'routes/components/alert_modal';
+import GigDetailsModal from 'routes/components/gig_details_modal';
 import SearchItem from 'routes/components/search/item';
 import settings from 'settings';
+import { Gig } from 'types';
 
 const SearchResults = (): ReactElement => {
+  // context variables and functions
   const { user } = useAuth();
-  const { filteredResults, searchResults } = useSearch();
+  const { filteredResults, searchResults, updateActiveGig } = useSearch();
   const { favoriteGigs, toggleFavoriteGig } = useUser();
-  const [resultsCount, setResultsCount] = useState(0);
+  // local variables and functions
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isGigDetailsModalOpen, setIsGigDetailsModalOpen] = useState(false);
+  const [resultsCount, setResultsCount] = useState(0);
+  // hook variables
   const prevSearchResults = usePrevious(searchResults);
 
   useEffect(() => {
@@ -28,7 +34,6 @@ const SearchResults = (): ReactElement => {
           : searchResults.length
       );
     }
-    // eslint-disable-next-line
   }, [searchResults, prevSearchResults]);
 
   const handleToggleFavoriteGig = (gigId: string): void => {
@@ -50,6 +55,7 @@ const SearchResults = (): ReactElement => {
           handleToggleFavoriteGig={() => handleToggleFavoriteGig(searchResult.id)}
           item={searchResult}
           isFavorite={favoriteGigIds?.includes(searchResult.id) || false}
+          learnMoreAboutGig={learnMoreAboutGig}
         />
       )
     );
@@ -63,6 +69,14 @@ const SearchResults = (): ReactElement => {
         : searchResults.length
     );
   };
+
+  const learnMoreAboutGig = (gigId: string): void => {
+    const matchingGig = searchResults?.find(gig => gig.id === gigId);
+    if (matchingGig) {
+      updateActiveGig(matchingGig);
+      setIsGigDetailsModalOpen(true);
+    }
+  }
 
   if (searchResults === undefined) {
     return (
@@ -80,6 +94,7 @@ const SearchResults = (): ReactElement => {
         title='Feature Restricted To Users'
         setIsOpen={setIsAlertModalOpen}
       />
+      <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
       {
         (!filteredResults && searchResults.length) || filteredResults?.length
           ? (

@@ -7,6 +7,20 @@ export enum AuthFieldType {
   all = 'all',
 }
 
+export interface CompanyReview {
+  id: string,
+  company: string,
+  rating: number,
+  headline: string,
+  title: string,
+  is_current_employee: boolean,
+  city: string,
+  state: string,
+  abbrev_state: string,
+  date_posted: string,
+  summary: string,
+}
+
 export interface Employer {
   id: string,
   name: string,
@@ -18,6 +32,24 @@ export interface Gig {
   benefits: string,
   city: string,
   company: string,
+  created_at: string,
+  description: string,
+  id: string,
+  rating: number,
+  requirements: string,
+  salary: string,
+  state: string,
+  title: string,
+  type: string,
+  views: number,
+}
+
+export interface GigWithReviews {
+  abbrev_state: string,
+  benefits: string,
+  city: string,
+  company: string,
+  company_reviews: CompanyReview[],
   created_at: string,
   description: string,
   id: string,

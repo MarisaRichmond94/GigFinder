@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 
 import { AuthFormProvider } from 'providers/auth_form';
 import ActionButtons from 'routes/find/right_panel/action_buttons';
-import ActiveResume from 'routes/find/right_panel/active_resume';
+import ActiveResume from 'routes/components/active_resume';
 import FavoriteGigsPanel from 'routes/components/favorite_gigs_panel';
 import Filters from 'routes/find/right_panel/filters';
 

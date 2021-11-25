@@ -61,7 +61,7 @@ const ActionButtons = (): ReactElement => {
             text='Sign In'
           />
         </div>
-        <div className='sub-header sub-header-text'>
+        <div className='white-text sub-header-text text-center'>
           Create an account or sign in to ensure none of your favorite gigs get lost!
         </div>
       </div>

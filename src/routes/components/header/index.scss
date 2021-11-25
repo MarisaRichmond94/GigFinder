@@ -25,10 +25,6 @@
     line-height: $header-height;
     padding: 10px 0 0 0;
 
-    #greeting {
-      display: inline-block;
-    }
-
     .header-icon-button {
       background: transparent !important;
       border: none;
@@ -55,6 +51,10 @@
 
 // mobile view
 @media (min-width: 0) {
+  #greeting {
+    display: inline-block;
+  }
+
   #header {
     #header-title {
       #header-title-icon {
@@ -68,7 +68,7 @@
   }
 }
 
-@media (max-width: 770px) {
+@media (min-width: 0) and (max-width: 499px) {
   #greeting {
     display: none;
   }
@@ -79,6 +79,10 @@
   #header {
     #header-message {
       padding: 10px 20px 0 0;
+
+      #greeting {
+        display: inline-block;
+      }
     }
 
     #header-title {

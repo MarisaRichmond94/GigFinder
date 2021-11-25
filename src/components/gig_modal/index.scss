@@ -26,3 +26,25 @@
     }
   }
 }
+
+// mobile view
+@media (min-width: 0) {
+  .gig-modal {
+    .gig-modal-content {
+      left: 5vw;
+      top: 8vh;
+      width: 90vw;
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  .gig-modal {
+    .gig-modal-content {
+      left: 2vw;
+      top: 25vh;
+      width: calc(96vw - 350px);
+    }
+  }
+}

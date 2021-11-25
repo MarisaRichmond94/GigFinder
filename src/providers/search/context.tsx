@@ -1,8 +1,9 @@
 import { createContext } from 'react';
 
-import { Gig, Option, SearchParameters } from 'types';
+import { Gig, GigWithReviews, Option, SearchParameters } from 'types';
 
 interface SearchContextType {
+  activeGig?: GigWithReviews,
   filterOptions?: string[],
   filteredResults?: Gig[],
   gigTypes?: Option[],
@@ -12,6 +13,7 @@ interface SearchContextType {
   deleteSearchFilter: (filter: string) => void,
   onFilterSelect: (filter: string) => void,
   onSearchFormSubmit: () => void,
+  updateActiveGig: (matchingGig: Gig) => void,
 }
 
 const SearchFormContext = createContext<undefined | SearchContextType>(undefined);

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
@@ -11,12 +12,13 @@ import {
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
-import { Gig, Option, SearchParameters } from 'types';
+import { CompanyReview, Gig, GigWithReviews, Option, SearchParameters } from 'types';
 
 const SearchProvider = (props: object) => {
   const history = useHistory();
   const { pathname, search } = useLocation();
 
+  const [activeGig, setActiveGig] = useState<GigWithReviews | undefined>();
   const [filterOptions, setFilterOptions] = useState<string[] | undefined>();
   const [filteredResults, setFilteredResults] = useState<Gig[] | undefined>();
   const [gigTypes, setGigTypes] = useState<Option[] | undefined>();
@@ -101,7 +103,26 @@ const SearchProvider = (props: object) => {
     }
   }, [history, search, searchResults]);
 
+  const getCompanyReviews = useCallback(async(company: string): CompanyReview[] => {
+    const response = await axios.get(
+      `${settings.BASE_SERVER_URL}/companyReviews?company=${company}`
+    );
+    return response.data;
+  }, []);
+
+  const updateActiveGig = useCallback(async(gig: Gig | undefined): void => {
+    if (!gig) {
+      setActiveGig(undefined);
+      return;
+    }
+
+    const gigCopy = { ...gig };
+    gigCopy.company_reviews = await getCompanyReviews(gig.company);
+    setActiveGig(gigCopy);
+  }, []);
+
   const value = {
+    activeGig,
     filterOptions,
     filteredResults,
     gigTypes,
@@ -111,6 +132,7 @@ const SearchProvider = (props: object) => {
     deleteSearchFilter,
     onFilterSelect,
     onSearchFormSubmit,
+    updateActiveGig,
   };
 
   return <SearchFormContext.Provider value={value} {...props} />;

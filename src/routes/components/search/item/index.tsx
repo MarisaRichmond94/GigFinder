@@ -13,6 +13,7 @@ type SearchItemProps = {
   handleToggleFavoriteGig: () => void,
   item: Gig,
   isFavorite: boolean,
+  learnMoreAboutGig: (gigId: string) => void,
 }
 
 const SearchItem = (props: SearchItemProps): ReactElement => {
@@ -55,7 +56,7 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
         <GigButton
           classNames='primary-blue-gig-button sub-header-text'
           id={`learn-more-button-${id}`}
-          onClick={() => console.log('Learn More')}
+          onClick={() => props.learnMoreAboutGig(id)}
           text='Learn More'
         />
       </div>

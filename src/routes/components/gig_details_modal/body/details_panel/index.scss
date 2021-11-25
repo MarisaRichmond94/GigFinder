@@ -1,0 +1,23 @@
+@import 'global';
+
+#gig-details-modal-details-panel {
+  .detail-row-flex-container {
+    align-items: center;
+    display: flex;
+
+    div {
+      &:nth-child(1) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  #benefits-list,
+  #requirements-list {
+    margin-bottom: 0;
+  }
+
+  .details {
+    padding-left: 15px;
+  }
+}

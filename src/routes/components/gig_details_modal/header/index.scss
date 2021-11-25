@@ -1,0 +1,38 @@
+@import 'global';
+
+#gig-details-modal-header {
+  width: 100%;
+
+  #primary-header {
+    align-items: center;
+    display: flex;
+    margin-left: 0;
+    width: 100%;
+
+    #gig-details-title {
+      font-size: 1.75rem;
+    }
+
+    #gig-details-title,
+    #gig-details-company {
+      @include hide-overflow-ellipsis;
+    }
+
+    #vertical-line {
+      border-right: 1px solid $grey;
+      height: 25px;
+    }
+
+    #gig-details-star-icon {
+      font-size: 1.25rem;
+    }
+
+    #favorite-gig-button-container {
+      margin-left: auto;
+
+      #favorite-gig-button {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}

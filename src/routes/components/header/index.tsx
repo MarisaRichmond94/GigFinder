@@ -16,12 +16,15 @@ import UploadModal from 'routes/components/upload_modal';
 import settings from 'settings';
 
 const Header = (): ReactElement => {
+  // hook variables
   const history = useHistory();
   const { pathname } = useLocation();
+  // context variables and functions
   const { employer, isLoggedIn, user, logout } = useAuth();
   const userId = user?.id;
   const { setIsSignUp } = useAuthForm();
   const { getFavoriteGigs, getUserResumes } = useUser();
+  // local state variables and functions
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 

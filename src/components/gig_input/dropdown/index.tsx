@@ -12,7 +12,7 @@ type GigDropdownProps = {
   isDisabled?: boolean,
   onOptionSelect?: (option: Option) => void,
   options?: Option[] | undefined,
-  placeholder: object | string,
+  placeholder: string,
   selectedOption: Option | undefined,
 }
 
@@ -38,10 +38,11 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
         : option.displayName;
       return (
         <Dropdown.Item
-          className='overflow-ellipsis gig-dropdown-item'
+          className='gig-dropdown-item'
           key={`${props.id}-${index}`}
           id={`${props.id}-${index}`}
           onClick={() => handleOptionSelect(option)}
+          title={option.displayName}
         >
           {content}
         </Dropdown.Item>
@@ -62,12 +63,14 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
     }
   }
 
+  const activeInputText = props.selectedOption?.displayName || props.placeholder;
+
   return (
     <Dropdown className={`gig-dropdown${props.classNames ? ` ${props.classNames}` : ''}`}>
       <Dropdown.Toggle className='sub-header-text' disabled={props.isDisabled || false}>
         <div className='gig-dropdown-content-wrapper'>
-          <div className='gig-dropdown-text'>
-            {props.selectedOption?.displayName || props.placeholder}
+          <div className='gig-dropdown-text' title={activeInputText}>
+            {activeInputText}
           </div>
           <IoIosArrowDown className='gig-dropdown-icon' />
         </div>
