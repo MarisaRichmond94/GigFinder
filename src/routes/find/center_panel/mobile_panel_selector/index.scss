@@ -1,6 +1,7 @@
 @import 'global';
 
 #mobile-panel-selector {
+  border-bottom: 1px solid $light-grey;
   display: flex;
   padding: 0 $medium-padding;
 }
