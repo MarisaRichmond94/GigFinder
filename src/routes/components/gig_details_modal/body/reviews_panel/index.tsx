@@ -103,7 +103,7 @@ const Review = (props: ReviewProps): ReactElement => {
           {getStars()}
         </div>
         <div className='details-container'>
-          <div className='review-text bold-sub-header-text' title={headline}>{headline}</div>
+          <div className='review-text bold sub-header-text' title={headline}>{headline}</div>
           <div className='review-text sub-header-text' title={employeeTitle}>{employeeTitle}</div>
           <div className='review-text sub-header-text' title={location}>{location}</div>
           <div className='review-text sub-header-text' title={datePosted}>{datePosted}</div>

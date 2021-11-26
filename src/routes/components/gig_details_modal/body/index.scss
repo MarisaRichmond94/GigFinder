@@ -3,13 +3,13 @@
 #gig-details-modal-body {
   #body-panel-selector-container {
     display: flex;
-    padding: 0 10px;
+    padding: 0 $medium-padding;
 
     button.text-gig-button {
       border-bottom: 3px solid transparent;
 
       &:nth-child(1) {
-        margin-right: 10px;
+        margin-right: $medium-margin;
       }
 
       &.active {
@@ -21,9 +21,9 @@
 
   .gig-modal-body-panel {
     border: 1px solid $light-grey;
-    margin: 0 10px;
+    margin: 0 $medium-margin;
     max-height: 50vh;
     overflow-y: auto;
-    padding: 10px;
+    padding: $medium-padding;
   }
 }

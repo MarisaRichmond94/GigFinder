@@ -4,57 +4,57 @@ button {
 }
 
 .primary-blue-gig-button {
-  background: $primary-blue;
+  background-color: $primary-blue;
   border: none;
   border-radius: 8px;
   color: $white;
-  padding: 10px 20px;
+  padding: $medium-padding $extra-large-padding;
 
   &:hover {
-    background: $secondary-blue;
+    background-color: $secondary-blue;
   }
 
   &:active,
   &:focus {
-    background: $primary-blue;
+    background-color: $primary-blue;
   }
 }
 
 .medium-grey-gig-button {
-  background: $medium-grey;
+  background-color: $medium-grey;
   border: none;
   border-radius: 8px;
   color: $white;
-  padding: 10px 20px;
+  padding: $medium-padding $extra-large-padding;
 
   &:hover {
-    background: $dark-grey;
+    background-color: $dark-grey;
   }
 }
 
 .secondary-blue-gig-button {
-  background: $secondary-blue;
+  background-color: $secondary-blue;
   border: none;
   border-radius: 8px;
   color: $white;
-  padding: 10px 20px;
+  padding: $medium-padding $extra-large-padding;
 
   &:hover {
-    background: $grey;
+    background-color: $grey;
   }
 
   &:active,
   &:focus {
-    background: $secondary-blue;
+    background-color: $secondary-blue;
   }
 
   &:disabled {
-    background: $grey;
+    background-color: $grey;
   }
 }
 
 .text-gig-button {
-  background: transparent !important;
+  background-color: transparent !important;
   border: none;
   border-radius: 0;
   padding: 0;

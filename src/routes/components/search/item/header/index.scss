@@ -2,7 +2,7 @@
 
 .header-row {
   @include vertically-centered-inline-flex-box;
-  margin: 0 15px;
+  margin: 0 $large-margin;
 
   .gig-item-job-title,
   .gig-item-company,

@@ -8,7 +8,7 @@ import FilterPanel from 'routes/components/filter_panel';
 const Filters = (): ReactElement => {
   return (
     <div id='search-filters-section'>
-      <div id='search-filters-header' className='thick-header-text'>
+      <div id='search-filters-header' className='thick header-text'>
         <FaFilter id='search-filters-header-icon' />&nbsp;
         Filters
       </div>

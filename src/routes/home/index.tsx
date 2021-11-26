@@ -17,7 +17,7 @@ const HomePage = (): ReactElement => {
         <div id='main-search-form-container'>
           <div className='search-form-item' id='search-form-name-and-logo'>
             <img alt='logo' src={logo} />
-            <span className='large-title-text'>Gig Search</span>
+            <span className='bold large-title-text'>Gig Search</span>
           </div>
           <div className='search-form-item header-text' id='search-form-tag-line'>
             The ultimate tool for finding your next big gig

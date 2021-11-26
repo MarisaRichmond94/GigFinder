@@ -2,7 +2,7 @@
 
 #active-resume-section {
   color: $off-white;
-  padding-top: 25px;
+  padding-top: $extra-large-padding + 5px;
 
   #active-resume-header {
     align-items: center;
@@ -10,6 +10,6 @@
   }
 
   #active-resume-dropdown {
-    background: $off-white;
+    background-color: $off-white;
   }
 }

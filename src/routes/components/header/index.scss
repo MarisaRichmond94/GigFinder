@@ -7,7 +7,7 @@
   #header-title {
     display: inline-block;
     height: 100%;
-    padding-left: 10px;
+    padding-left: $medium-padding;
 
     #header-title-icon {
       display: inline-block;
@@ -23,10 +23,10 @@
   #header-message {
     float: right;
     line-height: $header-height;
-    padding: 10px 0 0 0;
+    padding: $medium-padding 0 0 0;
 
     .header-icon-button {
-      background: transparent !important;
+      background-color: transparent !important;
       border: none;
       color: $grey;
       font-size: 1.5rem;
@@ -38,13 +38,13 @@
     }
 
     #upload-resume-icon-button {
-      margin-right: -10px;
+      margin-right: -$medium-margin;
     }
 
     #sign-up-button {
       color: $grey;
       font-size: 1.5rem;
-      margin-right: -10px;
+      margin-right: -$medium-margin;
     }
   }
 }
@@ -58,7 +58,7 @@
   #header {
     #header-title {
       #header-title-icon {
-        margin: 10px 5px 10px 15px;
+        margin: $medium-margin $small-margin $medium-margin $large-margin;
       }
 
       #header-title-text {
@@ -78,7 +78,7 @@
 @media (min-width: 850px) {
   #header {
     #header-message {
-      padding: 10px 20px 0 0;
+      padding: $medium-padding $extra-large-padding 0 0;
 
       #greeting {
         display: inline-block;
@@ -87,7 +87,7 @@
 
     #header-title {
       #header-title-icon {
-        margin: 0 5px 10px 15px;
+        margin: 0 $small-margin $medium-margin $large-margin;
       }
 
       #header-title-text {

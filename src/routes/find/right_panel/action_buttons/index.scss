@@ -1,13 +1,15 @@
+@import 'global';
+
 #action-button-wrapper {
   min-height: 110px;
 
   #right-panel-action-buttons {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: $large-margin;
 
     :nth-child(2) {
       flex-grow: 1;
-      margin-left: 15px;
+      margin-left: $large-margin;
     }
   }
 }

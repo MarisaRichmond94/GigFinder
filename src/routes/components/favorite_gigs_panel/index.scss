@@ -7,7 +7,7 @@
 
   #favorite-gigs-panel-divider {
     color: $off-white;
-    margin: 2px;
+    margin: $extra-small-margin;
   }
 
   #favorite-gigs-list {
@@ -27,14 +27,14 @@
 
   #no-favorite-gigs-message {
     color: $off-black;
-    padding: 10px;
+    padding: $medium-padding;
   }
 }
 
 // desktop view
 @media (min-width: 850px) {
   #favorite-gigs-panel {
-    margin-top: 15px;
+    margin-top: $large-margin;
 
     #favorite-gigs-panel-header {
       display: block;
@@ -42,7 +42,7 @@
 
     #no-favorite-gigs-message {
       color: $off-white;
-      padding: 10px 0;
+      padding: $medium-padding 0;
     }
   }
 }

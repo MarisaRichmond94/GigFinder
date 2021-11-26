@@ -7,7 +7,7 @@
     .gig-modal-header {
       background-color: $primary-blue;
       display: flex;
-      padding: 10px;
+      padding: $medium-padding;
 
       #alert-header-container {
         align-items: center;
@@ -26,11 +26,11 @@
     }
 
     .gig-modal-body {
-      padding: 15px;
+      padding: $large-padding;
     }
 
     .gig-modal-footer {
-      padding: 10px;
+      padding: $medium-padding;
 
       #alert-acknowledge-button {
         background-color: $primary-blue;

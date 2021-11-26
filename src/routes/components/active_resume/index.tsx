@@ -24,7 +24,7 @@ const ActiveResume = (props: ActiveResumeProps): ReactElement => {
     <div id='active-resume-section'>
       {
         isDisplayHeader &&
-        <div id='active-resume-header' className='thick-header-text'>
+        <div id='active-resume-header' className='thick header-text'>
           <FaFileAlt id='active-resume-header-icon' />&nbsp;
           Active Resume
         </div>

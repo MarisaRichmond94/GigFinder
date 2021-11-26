@@ -5,7 +5,7 @@
 
   .search-panel-input {
     align-self: stretch;
-    padding-bottom: 10px;
+    padding-bottom: $medium-padding;
 
     input,
     .gig-dropdown > button,
@@ -18,19 +18,19 @@
 
 .find {
   input {
-    background: $off-white !important;
+    background-color: $off-white !important;
   }
 }
 
 .search-panel-item.mobile {
   &:not(:last-child) {
-    padding-bottom: 10px;
+    padding-bottom: $medium-padding;
   }
 }
 
 .search-panel-item.desktop {
   &:last-child {
-    padding-top: 4px;
+    padding-top: $small-padding;
   }
 }
 
@@ -39,7 +39,7 @@
   #find-search-panel {
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: $medium-margin;
 
     search-panel-item {
       width: 100%;
@@ -52,13 +52,13 @@
   #find-search-panel {
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin: $medium-margin;
 
     div {
       width: 100%;
 
       &:not(:last-child) {
-        padding-right: 10px;
+        padding-right: $medium-padding;
       }
     }
   }

@@ -9,7 +9,7 @@
 
   .search-item {
     border-bottom: 1px solid $light-grey;
-    padding-bottom: 15px;
+    padding-bottom: $large-padding;
 
     &:last-child{
       border: 0;

@@ -49,23 +49,23 @@ const DetailPanel = (props: DetailPanelProps): ReactElement => {
   return (
     <div className='gig-modal-body-panel' id='gig-details-modal-details-panel'>
       <div className='detail-row-flex-container'>
-        <div id='salary-details' className='bold-sub-header-text'>Salary/Pay</div>
+        <div id='salary-details' className='bold sub-header-text'>Salary/Pay</div>
         <div className='sub-header-text'>{getSalary()}/year</div>
       </div>
       <div className='detail-row-flex-container'>
-        <div id='job-type-details' className='bold-sub-header-text'>Job Type</div>
+        <div id='job-type-details' className='bold sub-header-text'>Job Type</div>
         <div className='sub-header-text'>{type}</div>
       </div>
       <div className='detail-row-container'>
-        <div id='benefits-details' className='bold-sub-header-text'>Benefits</div>
+        <div id='benefits-details' className='bold sub-header-text'>Benefits</div>
         {getBenefits()}
       </div>
       <div className='detail-row-container'>
-        <div id='job-description-details' className='bold-sub-header-text'>Description</div>
+        <div id='job-description-details' className='bold sub-header-text'>Description</div>
         <div className='details sub-header-text'>{description}</div>
       </div>
       <div className='detail-row-container'>
-        <div id='requirements-details' className='bold-sub-header-text'>Requirements</div>
+        <div id='requirements-details' className='bold sub-header-text'>Requirements</div>
         {getRequirements()}
       </div>
     </div>

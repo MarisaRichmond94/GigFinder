@@ -2,13 +2,13 @@
 
 #mobile-panel-selector {
   display: flex;
-  padding: 0 10px;
+  padding: 0 $medium-padding;
 
   button.text-gig-button {
     border-bottom: 3px solid transparent;
 
     &:nth-child(1) {
-      margin-right: 10px;
+      margin-right: $medium-margin;
     }
 
     &.active {
@@ -22,7 +22,7 @@
 @media (min-width: 0) {
   #mobile-panel-selector {
     display: flex;
-    padding-top: 10px;
+    padding-top: $medium-padding;
   }
 }
 

@@ -16,7 +16,7 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
 
   return (
     <div className='favorite-gig-item'>
-      <div className='thick-header-text favorite-gig-item-row header'>
+      <div className='thick header-text favorite-gig-item-row header'>
         <GigButton
           classNames='favorite-gig-menu-button'
           id={`favorite-gig-menu-button-${id}`}

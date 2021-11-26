@@ -18,7 +18,7 @@
   flex-direction: column;
   min-height: 30vh;
   margin: 15vh 10vw;
-  padding: 20px;
+  padding: $extra-large-padding;
   row-gap: 10px;
   width: 80vw;
 
@@ -35,7 +35,7 @@
   display: inline-flex;
 
   img {
-    margin-right: 10px;
+    margin-right: $medium-margin;
     width: 4rem;
   }
 }

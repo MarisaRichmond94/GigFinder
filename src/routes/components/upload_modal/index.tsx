@@ -21,7 +21,7 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
   const [uploadFiles, setUploadFiles] = useState<UploadFile[]>([]);
 
   const headerContent = (
-    <div className='thick-header-text' id='upload-header-container'>
+    <div className='thick header-text' id='upload-header-container'>
       Upload Resume
     </div>
   );

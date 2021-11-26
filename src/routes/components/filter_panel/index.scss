@@ -1,11 +1,11 @@
 @import 'global';
 
 #search-filters {
-  padding-top: 15px;
+  padding-top: $large-padding;
 
   .filter-button {
-    margin-right: 10px;
-    margin-bottom: 15px;
+    margin-right: $medium-margin;
+    margin-bottom: $large-margin;
 
     :last-child {
       margin-right: 0;
@@ -15,8 +15,8 @@
 
 #center-panel-filters {
   #search-filters {
-    margin: 0 10px;
-    padding-top: 15px;
+    margin: 0 $medium-margin;
+    padding-top: $large-padding;
 
     .filter-button {
       background-color: $primary-blue;

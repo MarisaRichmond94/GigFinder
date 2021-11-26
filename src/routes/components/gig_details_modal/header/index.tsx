@@ -30,7 +30,7 @@ const Header = (props: HeaderProps): ReactElement => {
   return (
     <div id='gig-details-modal-header'>
       <div id='primary-header'>
-        <div id='gig-details-title' className='bold-header-text' title={title}>
+        <div id='gig-details-title' className='bold header-text' title={title}>
           {title}
         </div>
         &nbsp;<div id='vertical-line' />&nbsp;

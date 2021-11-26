@@ -61,7 +61,7 @@ const Header = (): ReactElement => {
       <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
       <div id='header-title' onClick={() => history.push('/')}>
         <img alt='logo' id='header-title-icon' src={logo} />
-        <div className='title-text' id='header-title-text'>Gig Search</div>
+        <div className='bold title-text' id='header-title-text'>Gig Search</div>
       </div>
       <div className='sub-header-text' id='header-message'>
         {

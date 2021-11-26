@@ -3,12 +3,12 @@
 .search-item {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: $medium-padding;
 
   .sub-header-row,
   .requirements-row,
   .posted-row {
-    margin: 0 15px;
+    margin: 0 $large-margin;
   }
 
   .sub-header-row,
@@ -17,7 +17,7 @@
   }
 
   .requirements-row {
-    padding: 5px 0;
+    padding: $small-padding 0;
 
     .job-requirements-list {
       margin-bottom: 0;

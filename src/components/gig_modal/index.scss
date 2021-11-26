@@ -16,13 +16,13 @@
     .gig-modal-header {
       display: flex;
       justify-content: center;
-      padding: 15px;
+      padding: $large-padding;
     }
 
     .gig-modal-footer {
       display: flex;
       justify-content: flex-end;
-      padding: 15px;
+      padding: $large-padding;
     }
   }
 }

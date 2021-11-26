@@ -1,4 +1,6 @@
+@import 'global';
+
 #right-panel {
   background-color: #083F89;
-  padding: 15px;
+  padding: $large-padding;
 }

@@ -5,13 +5,13 @@
   box-sizing: border-box;
   display: inline-flex;
   height: 45px;
-  padding: 5px;
+  padding: $small-padding;
   width: 100vw;
 
   .icon {
     color: $dark-grey;
     font-size: 35px;
-    margin-right: 5px;
+    margin-right: $small-margin;
   }
 
   .header-text {

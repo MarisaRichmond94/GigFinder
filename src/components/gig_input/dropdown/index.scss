@@ -26,7 +26,7 @@
   }
 
   .gig-dropdown-menu {
-    padding: 2px 0;
+    padding: $extra-small-padding 0;
     width: 100%;
   }
 }
@@ -72,7 +72,7 @@
 
 .gig-dropdown.off-white-gig-dropdown > button,
 .gig-dropdown.off-white-gig-dropdown > .gig-dropdown-menu {
-  background: $off-white !important;
+  background-color: $off-white !important;
 }
 
 .gig-dropdown.off-white-gig-dropdown > .gig-dropdown-menu {

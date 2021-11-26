@@ -1,6 +1,8 @@
+@import 'global';
+
 .collapsable-section {
   .collapsable-section-header {
-    margin: 10px;
+    margin: $medium-margin;
 
     .collapsable-section-title {
       width: calc(100% - 27px);

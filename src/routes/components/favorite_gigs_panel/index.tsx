@@ -50,7 +50,7 @@ const FavoriteGigsPanel = (): ReactElement => {
 
   return (
     <div id='favorite-gigs-panel'>
-      <div className='thick-header-text' id='favorite-gigs-panel-header'>
+      <div className='thick header-text' id='favorite-gigs-panel-header'>
         <BsHeartFill />&nbsp;
         Favorite Gigs
       </div>

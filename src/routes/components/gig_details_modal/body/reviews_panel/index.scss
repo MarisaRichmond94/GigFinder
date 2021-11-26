@@ -4,7 +4,7 @@
   .company-review-container {
     align-items: center;
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: $medium-margin;
     width: 100%;
 
     .rating-container {
@@ -28,13 +28,13 @@
       }
 
       .summary {
-        margin-top: 10px;
+        margin-top: $medium-margin;
       }
 
       .review-feedback-container {
         align-items: center;
         display: flex;
-        margin-top: 10px;
+        margin-top: $medium-margin;
 
         .review-feedback {
           color: $grey;
@@ -44,7 +44,7 @@
           background-color: transparent !important;
           border: none;
           font-size: 1.25rem;
-          padding: 0 5px;
+          padding: 0 $small-padding;
         }
 
         .review-positive-feedback-button {

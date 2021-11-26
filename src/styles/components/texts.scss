@@ -3,23 +3,21 @@
   user-select: none;
 }
 
-@mixin bold-font-family {
-  font-family: $header-font-family;
+.thick {
+  font-family: $sub-header-font-family;
 }
 
-@mixin thick-font-family {
-  font-family: $sub-header-font-family;
+.bold {
+  font-family: $header-font-family;
 }
 
 .large-title-text {
   @include prevent-highlight;
-  @include bold-font-family;
   font-size: $large-title-font-size;
 }
 
 .title-text {
   @include prevent-highlight;
-  @include bold-font-family;
   font-size: $title-font-size;
 }
 
@@ -28,43 +26,14 @@
   font-size: $header-font-size;
 }
 
-.thick-header-text {
-  @include prevent-highlight;
-  @include thick-font-family;
-  font-size: $header-font-size;
-}
-
-.bold-header-text {
-  @include prevent-highlight;
-  @include bold-font-family;
-  font-size: $header-font-size;
-}
-
 .sub-header-text {
   @include prevent-highlight;
-  font-size: $sub-header-font-size;
-}
-
-.thick-sub-header-text {
-  @include prevent-highlight;
-  @include thick-font-family;
-  font-size: $sub-header-font-size;
-}
-
-.bold-sub-header-text {
-  @include prevent-highlight;
-  @include bold-font-family;
   font-size: $sub-header-font-size;
 }
 
 .paragraph-text {
   @include prevent-highlight;
   font-size: $paragraph-font-size;
-}
-
-.small-paragraph-text {
-  @include prevent-highlight;
-  font-size: $small-paragraph-font-size;
 }
 
 .white-text {

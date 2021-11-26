@@ -14,10 +14,9 @@
     border-radius: 0 0 5px 5px;
     color: $off-black;
     list-style-type: none;
-    margin: 0;
     max-height: 200px;
     overflow-y: auto;
-    padding-left: 12px;
+    padding-left: $medium-padding;
     position: absolute;
 
     .best-match {
@@ -29,7 +28,7 @@
 // mobile view
 @media (min-width: 0) {
   .filter-options-list {
-    margin: 0 10px !important;
+    margin: 0 $medium-margin;
     width: calc(92% - 3px);
   }
 }
@@ -37,6 +36,7 @@
 // desktop view
 @media (min-width: 850px) {
   .filter-options-list {
+    margin: 0;
     width: 320px;
   }
 }

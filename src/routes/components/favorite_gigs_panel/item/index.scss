@@ -3,8 +3,8 @@
 .favorite-gig-item {
   background-color: $off-white;
   border-radius: 15px;
-  padding: 15px;
-  margin: 10px 0;
+  padding: $large-padding;
+  margin: $medium-margin 0;
 
   .favorite-gig-item-row {
     align-items: center;
@@ -13,11 +13,11 @@
 
     &:nth-child(2),
     &:nth-child(3) {
-      padding-left: 7px;
+      padding-left: $small-padding;
     }
 
     &:nth-child(3) {
-      padding-bottom: 10px;
+      padding-bottom: $medium-padding;
     }
 
     .vertical-line {
@@ -29,7 +29,7 @@
       background-color: transparent !important;
       border: none;
       color: $off-black !important;
-      padding: 2px;
+      padding: $extra-small-padding;
     }
   }
 
@@ -37,7 +37,7 @@
     justify-content: center;
 
     .apply-now-button {
-      padding: 5px 15px;
+      padding: $small-padding $large-padding;
     }
   }
 }
