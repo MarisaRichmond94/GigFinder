@@ -113,13 +113,13 @@ const Review = (props: ReviewProps): ReactElement => {
               {reviewFeedbackText}
             </div>
             <GigButton
-              classNames='review-feedback-button review-positive-feedback-button'
+              classNames='review-feedback-button icon-button primary-green'
               id={`review-positive-feedback-button-${id}`}
               onClick={() => console.log('approve')}
               textBlock={<FiThumbsUp />}
             />
             <GigButton
-              classNames='review-feedback-button review-negative-feedback-button'
+              classNames='review-feedback-button icon-button primary-red'
               id={`review-negative-feedback-button-${id}`}
               onClick={() => console.log('disapprove')}
               textBlock={<FiThumbsDown />}

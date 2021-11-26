@@ -9,7 +9,7 @@ const SubmitButton = (): ReactElement => {
 
   return (
     <div className='search-form-item' id='search-form-submit'>
-      <button className='primary-blue-gig-button header-text' onClick={onSearchFormSubmit}>
+      <button className='primary-blue dark-background header-text' onClick={onSearchFormSubmit}>
         Find My Dream Gig
       </button>
     </div>

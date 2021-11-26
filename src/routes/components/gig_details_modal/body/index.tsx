@@ -18,13 +18,13 @@ const Body = (props: BodyProps): ReactElement => {
     <div id='gig-details-modal-body'>
       <div id='body-panel-selector-container'>
         <GigButton
-          classNames={`${isDetailPanel ? 'active ' : ''}text-gig-button off-black sub-header-text`}
+          classNames={`${isDetailPanel ? 'active ' : ''}underline-text off-black sub-header-text`}
           id='gig-info-selector'
           onClick={() => setIsDetailPanel(true)}
           text='Gig Info'
         />
         <GigButton
-          classNames={`${!isDetailPanel ? 'active ' : ''}text-gig-button off-black sub-header-text`}
+          classNames={`${!isDetailPanel ? 'active ' : ''}underline-text off-black sub-header-text`}
           id='review-panel-selector'
           onClick={() => setIsDetailPanel(false)}
           text='Reviews'

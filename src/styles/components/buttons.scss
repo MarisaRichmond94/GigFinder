@@ -1,115 +1,154 @@
-button {
+button,
+.btn {
+  border: none;
+  border-radius: 8px;
   box-shadow: none !important;
   font-family: $paragraph-font-family;
+  padding: $medium-padding $extra-large-padding;
 }
 
-.primary-blue-gig-button {
-  background-color: $primary-blue;
-  border: none;
-  border-radius: 8px;
-  color: $white;
-  padding: $medium-padding $extra-large-padding;
+.icon-button {
+  background-color: transparent !important;
+  padding: $small-padding $medium-padding;
 
-  &:hover {
-    background-color: $secondary-blue;
+  &.grey {
+    color: $grey;
+
+    &:hover {
+      color: $light-grey;
+    }
   }
 
-  &:active,
-  &:focus {
+  &.off-black {
+    color: $off-black;
+
+    &.active {
+      border-radius: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &.primary-red {
+    color: $primary-red;
+
+    &:hover {
+      color: $secondary-red;
+    }
+  }
+
+  &.primary-green {
+    color: $primary-green;
+
+    &:hover {
+      color: $secondary-green;
+    }
+  }
+}
+
+.gig-button {
+  &.primary-blue {
     background-color: $primary-blue;
-  }
-}
 
-.medium-grey-gig-button {
-  background-color: $medium-grey;
-  border: none;
-  border-radius: 8px;
-  color: $white;
-  padding: $medium-padding $extra-large-padding;
+    &:hover {
+      background-color: $secondary-blue;
+      color: $off-white;
+    }
 
-  &:hover {
-    background-color: $dark-grey;
-  }
-}
-
-.secondary-blue-gig-button {
-  background-color: $secondary-blue;
-  border: none;
-  border-radius: 8px;
-  color: $white;
-  padding: $medium-padding $extra-large-padding;
-
-  &:hover {
-    background-color: $grey;
+    &:active,
+    &:focus {
+      background-color: $primary-blue;
+    }
   }
 
-  &:active,
-  &:focus {
+  &.secondary-blue {
     background-color: $secondary-blue;
+
+    &:hover {
+      background-color: $grey;
+      color: $off-white;
+    }
+
+    &:active,
+    &:focus {
+      background-color: $secondary-blue;
+    }
+
+    &:disabled {
+      background-color: $grey;
+    }
   }
 
-  &:disabled {
-    background-color: $grey;
+  &.medium-grey {
+    background-color: $medium-grey;
+
+    &:hover {
+      background-color: $dark-grey;
+      color: $off-white;
+    }
   }
-}
 
-.text-gig-button {
-  background-color: transparent !important;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-
-  &.active {
-    border-bottom: 2px solid;
+  &.light-background {
+    color: $off-black;
   }
-}
 
-.text-gig-button.off-white {
-  &.active {
-    border-color: $off-white;
+  &.dark-background {
+    color: $white;
   }
-}
 
-button.btn-primary.icon-button {
-  background-color: transparent !important;
-  border: none;
-  color: $off-black;
-  display: inline-block;
-
-  &.active {
+  &.underline-text {
+    background-color: transparent !important;
+    border-bottom: 3px solid transparent;
     border-radius: 0;
-    padding-bottom: 0;
+    padding: 0;
+
+    &:nth-child(1) {
+      margin-right: $medium-margin;
+    }
+
+    &.off-white {
+      &.active {
+        border-bottom: 3px solid $off-white;
+      }
+    }
+
+    &.off-black {
+      color: $off-black;
+
+      &:hover {
+        color: $dark-grey;
+      }
+
+      &.active {
+        border-bottom: 3px solid $primary-blue;
+      }
+    }
+
+    &.primary-blue {
+      &.active {
+        border-bottom: 3px solid $primary-blue;
+      }
+    }
   }
-}
 
-button.primary-blue {
-  color: $primary-blue;
+  &.text {
+    background-color: transparent !important;
+    border-radius: 0;
+    padding: 0;
 
-  &:hover {
-    color: $secondary-blue;
-  }
-}
+    &.primary-blue {
+      color: $primary-blue;
 
-button.off-white {
-  color: $off-white;
-
-  &:hover {
-    color: $secondary-blue;
-  }
-}
-
-button.off-black {
-  color: $off-black;
-
-  &:hover {
-    color: $dark-grey;
-  }
-
-  &.active {
-    border-bottom: 6px solid $primary-blue;
+      &:hover {
+        color: $secondary-blue;
+      }
+    }
   }
 }
 
 .red-icon {
   color: $primary-red;
+
+  &:hover {
+    color: $secondary-red;
+  }
 }

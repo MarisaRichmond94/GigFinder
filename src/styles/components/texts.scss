@@ -21,6 +21,11 @@
   font-size: $title-font-size;
 }
 
+.large-header-text {
+  @include prevent-highlight;
+  font-size: $large-header-font-size;
+}
+
 .header-text {
   @include prevent-highlight;
   font-size: $header-font-size;

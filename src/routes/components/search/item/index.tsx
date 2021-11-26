@@ -54,7 +54,7 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
       </div>
       <div className='button-row text-center'>
         <GigButton
-          classNames='primary-blue-gig-button sub-header-text'
+          classNames='primary-blue dark-background sub-header-text'
           id={`learn-more-button-${id}`}
           onClick={() => props.learnMoreAboutGig(id)}
           text='Learn More'

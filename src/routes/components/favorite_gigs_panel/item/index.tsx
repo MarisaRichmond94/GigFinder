@@ -38,7 +38,7 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
       </div>
       <div className='favorite-gig-item-row footer'>
         <GigButton
-          classNames='apply-now-button primary-blue-gig-button sub-header-text'
+          classNames='apply-now-button primary-blue dark-background sub-header-text'
           id={`favorite-gig-apply-now-button-${id}`}
           onClick={() => console.log('Apply Now')}
           text='Apply Now'

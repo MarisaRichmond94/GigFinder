@@ -3,19 +3,6 @@
 #mobile-panel-selector {
   display: flex;
   padding: 0 $medium-padding;
-
-  button.text-gig-button {
-    border-bottom: 3px solid transparent;
-
-    &:nth-child(1) {
-      margin-right: $medium-margin;
-    }
-
-    &.active {
-      border-bottom: 3px solid $primary-blue;
-      color: $off-black !important;
-    }
-  }
 }
 
 // mobile view

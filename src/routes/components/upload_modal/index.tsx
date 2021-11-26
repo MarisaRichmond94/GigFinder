@@ -56,13 +56,13 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
   const footerContent = (
     <div id='upload-footer-container'>
       <GigButton
-        classNames='medium-grey-gig-button sub-header-text upload-modal-button'
+        classNames='medium-grey dark-background sub-header-text upload-modal-button'
         id='upload-modal-cancel-button'
         onClick={cancel}
         text='Cancel'
       />
       <GigButton
-        classNames='secondary-blue-gig-button sub-header-text upload-modal-button'
+        classNames='secondary-blue dark-background sub-header-text upload-modal-button'
         id='upload-modal-upload-button'
         onClick={upload}
         text='Upload'

@@ -22,13 +22,13 @@ const Body = (): ReactElement => {
     <div id='auth-body-container'>
       <div id='auth-selector-container'>
         <GigButton
-          classNames={`${isUserAuth ? 'active ' : ''}text-gig-button off-white header-text`}
+          classNames={`${isUserAuth ? 'active ' : ''}underline-text off-white header-text`}
           id='applicant-selector-button'
           onClick={() => handleSignUpSelectorClick(true)}
           text="I'm an applicant"
         />
         <GigButton
-          classNames={`${!isUserAuth ? 'active ' : ''}text-gig-button off-white header-text`}
+          classNames={`${!isUserAuth ? 'active ' : ''}underline-text off-white header-text`}
           id='employer-selector-button'
           onClick={() => handleSignUpSelectorClick(false)}
           text="I'm an employer"

@@ -22,13 +22,13 @@ const Footer = (props: FooterProps): ReactElement => {
         <ActiveResume isDisplayHeader={false}/>
       </div>
       <GigButton
-        classNames='medium-grey-gig-button sub-header-text gig-details-modal-button'
+        classNames='medium-grey dark-background sub-header-text gig-details-modal-button'
         id='gig-details-modal-cancel-button'
         onClick={props.cancel}
         text='Cancel'
       />
       <GigButton
-        classNames='primary-blue-gig-button sub-header-text gig-details-modal-button'
+        classNames='primary-blue dark-background sub-header-text gig-details-modal-button'
         id='gig-details-modal-apply-button'
         isDisabled={!activeResumeId}
         onClick={() => props.apply(activeResumeId)}

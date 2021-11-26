@@ -2,8 +2,8 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import DemoWarning from 'components/demo_warning';
 import logo from 'assets/icons/logo.png';
+import DemoWarning from 'components/demo_warning';
 import { SearchProvider } from 'providers/search';
 import SubmitButton from 'routes/home/submit_button';
 import SwitchButton from 'routes/home/switch_button';

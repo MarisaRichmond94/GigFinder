@@ -48,7 +48,7 @@ const Header = (props: HeaderProps): ReactElement => {
             onClick={handleToggleFavoriteGig}
             textBlock={
               isFavorite
-                ? <BsHeartFill className='favorite-gig-button-icon red-icon' />
+                ? <BsHeartFill className='favorite-gig-button-icon primary-red icon-button' />
                 : <BsHeart className='favorite-gig-button-icon' />
             }
           />

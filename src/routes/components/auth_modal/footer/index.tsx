@@ -39,13 +39,13 @@ const Footer = (props: FooterProps): ReactElement => {
   return (
     <div id='auth-footer-container'>
       <GigButton
-        classNames='medium-grey-gig-button sub-header-text'
+        classNames='medium-grey dark-background sub-header-text'
         id='auth-modal-cancel-button'
         onClick={cancel}
         text='Cancel'
       />
       <GigButton
-        classNames='secondary-blue-gig-button sub-header-text'
+        classNames='secondary-blue dark-background sub-header-text'
         id='auth-modal-auth-button'
         isDisabled={!isSubmitEnabled}
         onClick={handleFormSubmit}

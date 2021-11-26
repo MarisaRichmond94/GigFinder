@@ -78,7 +78,7 @@ const Body = (props: BodyProps): ReactElement => {
       <h5 className='upload-instructions'>Drag files here</h5>
       <h5 className='upload-instructions'>or</h5>
       <GigButton
-        classNames='secondary-blue-gig-button'
+        classNames='secondary-blue dark-background'
         id='browse-files-button'
         text='Click To Browse'
         onClick={() => { }}

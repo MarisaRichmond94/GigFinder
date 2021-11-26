@@ -73,7 +73,7 @@ const Header = (): ReactElement => {
             )
             : (
               <GigButton
-                classNames='header-icon-button'
+                classNames='grey header icon-button large-header-text'
                 id='sign-up-button'
                 onClick={handleSignUpUser}
                 textBlock={<BsFillPersonPlusFill />}
@@ -83,14 +83,14 @@ const Header = (): ReactElement => {
         {
           isLoggedIn && !isMobile &&
           <GigButton
-            classNames='header-icon-button'
+            classNames='grey header icon-button large-header-text'
             id='upload-resume-icon-button'
             onClick={() => setIsUploadModalOpen(true)}
             textBlock={<GrCloudUpload />}
           />
         }
         <GigButton
-          classNames='header-icon-button'
+          classNames='grey header icon-button large-header-text'
           id='auth-button'
           onClick={isLoggedIn ? logout : handleLoginUser}
           textBlock={isLoggedIn ? <GrLogout /> : <GrLogin />}

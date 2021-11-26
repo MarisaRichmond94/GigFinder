@@ -14,7 +14,7 @@ const MobilePanelSelector = (props: MobilePanelSelectorProps): ReactElement => {
     <div id='mobile-panel-selector'>
       <GigButton
         classNames={
-          `${props.isShowingSearchResults ? 'active ' : ''}text-gig-button off-black header-text`
+          `${props.isShowingSearchResults ? 'active ' : ''}underline-text off-black header-text`
         }
         id='results-panel-selector-button'
         onClick={() => props.setIsShowingSearchResults(true)}
@@ -22,7 +22,7 @@ const MobilePanelSelector = (props: MobilePanelSelectorProps): ReactElement => {
       />
       <GigButton
         classNames={
-          `${!props.isShowingSearchResults ? 'active ' : ''}text-gig-button off-black header-text`
+          `${!props.isShowingSearchResults ? 'active ' : ''}underline-text off-black header-text`
         }
         id='favorites-panel-selector-button'
         onClick={() => props.setIsShowingSearchResults(false)}

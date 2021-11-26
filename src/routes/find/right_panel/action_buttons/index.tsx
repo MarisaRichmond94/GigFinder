@@ -30,13 +30,13 @@ const ActionButtons = (): ReactElement => {
         <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
         <div id='right-panel-action-buttons'>
           <GigButton
-            classNames='secondary-blue-gig-button sub-header-text'
+            classNames='secondary-blue dark-background sub-header-text'
             id='upload-resume-button'
             onClick={() => setIsUploadModalOpen(true)}
             text='Upload Resume'
           />
           <GigButton
-            classNames='secondary-blue-gig-button sub-header-text'
+            classNames='secondary-blue dark-background sub-header-text'
             id='sign-out-button'
             onClick={logout}
             text='Sign Out'
@@ -49,13 +49,13 @@ const ActionButtons = (): ReactElement => {
         <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
         <div id='right-panel-action-buttons'>
           <GigButton
-            classNames='secondary-blue-gig-button sub-header-text'
+            classNames='secondary-blue dark-background sub-header-text'
             id='create-account-button'
             onClick={handleSignUpUser}
             text='Create Account'
           />
           <GigButton
-            classNames='secondary-blue-gig-button sub-header-text'
+            classNames='secondary-blue dark-background sub-header-text'
             id='sign-in-button'
             onClick={handleLoginUser}
             text='Sign In'
