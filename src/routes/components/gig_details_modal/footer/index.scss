@@ -1,13 +1,35 @@
 @import 'global';
 
+#gig-details-modal-footer {
+  height: 57px;
+
+  #resume-application-message {
+    &.primary-red {
+      color: $primary-red;
+    }
+
+    &.transparent {
+      color: transparent !important;
+    }
+  }
+
+  #gig-details-modal-cancel-button,
+  #gig-details-modal-apply-button {
+    margin-bottom: $extra-large-margin;
+  }
+}
+
 @media (min-width: 0) and (max-width: 679px) {
   #gig-details-modal-footer {
     width: calc(92vw - 30px);
 
     #gig-details-modal-resume-selector-container {
+      #resume-application-message {
+        padding-bottom: $medium-padding;
+      }
+
       #active-resume-section {
         padding-top: 0;
-        padding-bottom: $medium-padding;
 
         #active-resume-header {
           display: none;
