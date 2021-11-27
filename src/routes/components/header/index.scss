@@ -69,12 +69,15 @@
 // desktop view
 @media (min-width: 850px) {
   #header {
-    #header-message {
-      padding: $medium-padding $extra-large-padding 0 0;
+    #sign-up-button,
+    #greeting {
+      @include hide-overflow-ellipsis;
+      max-width: calc(100vw - 700px);
+    }
 
-      #greeting {
-        display: inline-block;
-      }
+    #upload-resume-icon-button,
+    #auth-button {
+      display: none;
     }
 
     #header-title {

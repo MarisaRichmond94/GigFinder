@@ -56,6 +56,8 @@ const Header = (): ReactElement => {
     setIsSignUp(true);
   }
 
+  const greeting = generateHeaderMessage();
+
   return (
     <div id='header'>
       <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
@@ -68,8 +70,8 @@ const Header = (): ReactElement => {
         {
           isLoggedIn
             ? (
-              <div id='greeting'>
-                {generateHeaderMessage()}
+              <div id='greeting' title={greeting}>
+                {greeting}
               </div>
             )
             : (
