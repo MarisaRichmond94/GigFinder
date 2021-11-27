@@ -6,6 +6,7 @@ import { GoSearch } from 'react-icons/go';
 
 import CollapsableSection from 'components/collapsable_section';
 import { useViewport } from 'hooks/useViewport';
+import { useApp } from 'providers/app';
 import UserApplicationsPanel from 'routes/components/applications/panel';
 import FavoriteGigsPanel from 'routes/components/favorites/panel';
 import FilterPanel from 'routes/components/filter_panel';
@@ -15,7 +16,11 @@ import SearchResults from 'routes/components/search/results';
 import { PanelTypes } from 'types';
 
 const CenterPanel = (): ReactElement => {
+  // context variables and functions
+  const { unusableCenterPanelHeight, calculateTotalHeight } = useApp();
+  // local state variables and functions
   const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.results);
+  // hook variables
   const { width } = useViewport();
 
   useEffect(() => {
@@ -27,21 +32,31 @@ const CenterPanel = (): ReactElement => {
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {
       case PanelTypes.applications:
-        return <UserApplicationsPanel />;
+        return <UserApplicationsPanel unusableHeight={unusableCenterPanelHeight} />;
       case PanelTypes.favorites:
-        return <FavoriteGigsPanel />;
+        return <FavoriteGigsPanel unusableHeight={unusableCenterPanelHeight} />;
       case PanelTypes.results:
       default:
-        return <SearchResults />;
+        return <SearchResults unusableHeight={unusableCenterPanelHeight} />;
     }
   }
 
   return (
     <div id='center-panel'>
-      <CollapsableSection icon={<GoSearch />} sectionTitle='Search'>
+      <CollapsableSection
+        icon={<GoSearch />}
+        id='search-panel-section'
+        onToggleCallback={calculateTotalHeight}
+        sectionTitle='Search'
+      >
         <SearchPanel />
       </CollapsableSection>
-      <CollapsableSection icon={<FaFilter />} sectionTitle='Filter'>
+      <CollapsableSection
+        icon={<FaFilter />}
+        id='filter-panel-section'
+        onToggleCallback={calculateTotalHeight}
+        sectionTitle='Filter'
+      >
         <FilterPanel id='center-panel-filters' />
       </CollapsableSection>
       <PanelSelector

@@ -14,7 +14,11 @@ import SearchItem from 'routes/components/search/item';
 import settings from 'settings';
 import { Gig } from 'types';
 
-const SearchResults = (): ReactElement => {
+type SearchResultsProps = {
+  unusableHeight?: number,
+}
+
+const SearchResults = (props: SearchResultsProps): ReactElement => {
   // context variables and functions
   const { user } = useAuth();
   const { filteredResults, searchResults } = useSearch();
@@ -25,6 +29,10 @@ const SearchResults = (): ReactElement => {
   const [resultsCount, setResultsCount] = useState(0);
   // hook variables
   const prevSearchResults = usePrevious(searchResults);
+  // derived variables
+  const listStyling = props.unusableHeight
+    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    : {};
 
   useEffect(() => {
     if (!prevSearchResults && searchResults?.length) {
@@ -87,7 +95,7 @@ const SearchResults = (): ReactElement => {
   }
 
   return (
-    <div id='search-results'>
+    <div id='search-results' style={listStyling}>
       <AlertModal
         isOpen={isAlertModalOpen}
         message='You must create an account or sign in in order to use this feature.'

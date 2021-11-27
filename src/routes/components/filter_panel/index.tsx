@@ -5,6 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 
 import GigButton from 'components/gig_button';
 import SearchableGigInput from 'components/gig_input/searchable';
+import { useApp } from 'providers/app';
 import { useSearch } from 'providers/search';
 
 type FilterPanelProps = {
@@ -12,7 +13,18 @@ type FilterPanelProps = {
 }
 
 const FilterPanel = (props: FilterPanelProps): ReactElement => {
+  const { calculateTotalHeight } = useApp();
   const { filterOptions, searchFilters, deleteSearchFilter, onFilterSelect } = useSearch();
+
+  const handleFilterSelect = (filter: string): void => {
+    onFilterSelect(filter);
+    calculateTotalHeight();
+  }
+
+  const handleDeleteFilter = (filter: string): void => {
+    deleteSearchFilter(filter);
+    calculateTotalHeight();
+  }
 
   const populateFilters = (filters: string[]): ReactElement[] => {
     return filters.map((filter, index) => {
@@ -21,7 +33,7 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
           classNames='filter-button'
           id={`${filter}-filter-button`}
           key={`${filter}-filter-button`}
-          onClick={() => deleteSearchFilter(filter)}
+          onClick={() => handleDeleteFilter(filter)}
           textBlock={
             <div className='filter-item' key={`${filter.replace(' ', '-')}-${index}`}>
               {filter}&nbsp;&nbsp;
@@ -41,7 +53,7 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
           classNames='off-white-text-input'
           clearKey='Enter'
           id='filter-panel-text-input'
-          onOptionSelect={onFilterSelect}
+          onOptionSelect={handleFilterSelect}
           options={filterOptions}
           placeholder='Filter gigs by benefits...'
           selectedOptions={searchFilters}

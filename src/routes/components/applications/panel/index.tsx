@@ -12,7 +12,11 @@ import GigDetailsModal from 'routes/components/gig_details_modal';
 import settings from 'settings';
 import { Gig } from 'types';
 
-const UserApplicationsPanel = (): ReactElement => {
+type UserApplicationsPanelProps = {
+  unusableHeight?: number,
+}
+
+const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement => {
   // context variables and functions
   const { isLoggedIn } = useAuth();
   const { gigApplications, updateActiveGig } = useUser();
@@ -21,6 +25,10 @@ const UserApplicationsPanel = (): ReactElement => {
   const [isGigDetailsModalOpen, setIsGigDetailsModalOpen] = useState(false);
   // hook variables
   const prevGigApplications = usePrevious(gigApplications);
+  // derived variables
+  const listStyling = props.unusableHeight
+    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    : {};
 
   useEffect(() => {
     if (!prevGigApplications && gigApplications?.length) {
@@ -67,7 +75,7 @@ const UserApplicationsPanel = (): ReactElement => {
       {
         gigApplications?.length
           ? (
-            <div id='gig-applications-list'>
+            <div id='gig-applications-list' style={listStyling}>
               <InfiniteScroll
                 dataLength={resultsCount}
                 next={getMoreGigApplications}

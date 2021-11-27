@@ -2,6 +2,7 @@ import './index.scss';
 
 import { ReactElement, useState } from 'react';
 
+import { useApp } from 'providers/app';
 import { AuthFormProvider } from 'providers/auth_form';
 import UserApplicationsPanel from 'routes/components/applications/panel';
 import ActiveResume from 'routes/components/active_resume';
@@ -12,14 +13,17 @@ import Filters from 'routes/find/right_panel/filters';
 import { PanelTypes } from 'types';
 
 const RightPanel = (): ReactElement => {
+  // context variables and functions
+  const { unusableRightPanelHeight, calculateTotalHeight } = useApp();
+  // local state variables and functions
   const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.favorites);
 
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {
       case PanelTypes.applications:
-        return <UserApplicationsPanel />;
+        return <UserApplicationsPanel unusableHeight={unusableRightPanelHeight} />;
       case PanelTypes.favorites:
-        return <FavoriteGigsPanel />;
+        return <FavoriteGigsPanel unusableHeight={unusableRightPanelHeight} />;
     }
   }
 

@@ -11,11 +11,18 @@ import { useUser } from 'providers/user';
 import FavoriteGigItem from 'routes/components/favorites/item';
 import settings from 'settings';
 
-const FavoriteGigsPanel = (): ReactElement => {
+type FavoriteGigsPanelProps = {
+  unusableHeight?: number,
+}
+
+const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   const { isLoggedIn, user } = useAuth();
   const { activeResumeId, favoriteGigs, gigApplications, applyToGig } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
   const prevFavoriteGigs = usePrevious(favoriteGigs);
+  const listStyling = props.unusableHeight
+    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    : {};
 
   useEffect(() => {
     if (!prevFavoriteGigs && favoriteGigs?.length) {
@@ -61,7 +68,7 @@ const FavoriteGigsPanel = (): ReactElement => {
       {
         favoriteGigs?.length
           ? (
-            <div id='favorite-gigs-list'>
+            <div id='favorite-gigs-list' style={listStyling}>
               <InfiniteScroll
                 dataLength={resultsCount}
                 next={getMoreFavoriteGigs}

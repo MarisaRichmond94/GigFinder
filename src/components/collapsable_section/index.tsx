@@ -6,21 +6,28 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 type CollapsableSectionProps = {
   children: ReactElement,
   icon: ReactElement,
+  id: string,
+  onToggleCallback?: () => void,
   sectionTitle: string,
 }
 
 const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
   const [isVisible, setIsVisible] = useState(true);
 
+  const onToggle = (updatedIsVisible: boolean): void => {
+    setIsVisible(updatedIsVisible);
+    if (!!props.onToggleCallback) props.onToggleCallback();
+  }
+
   return (
-    <div className='collapsable-section'>
+    <div id={props.id} className='collapsable-section'>
       <div className='collapsable-section-header'>
         <div className='collapsable-section-title'>{props.icon} {props.sectionTitle}</div>
         <div>
           {
             isVisible
-              ? <IoIosArrowDown onClick={() => setIsVisible(false)}/>
-              : <IoIosArrowUp onClick={() => setIsVisible(true)}/>
+              ? <IoIosArrowDown onClick={() => onToggle(false)}/>
+              : <IoIosArrowUp onClick={() => onToggle(true)}/>
           }
         </div>
       </div>
