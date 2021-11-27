@@ -99,11 +99,8 @@ button,
     background-color: transparent !important;
     border-bottom: 3px solid transparent;
     border-radius: 0;
+    margin-right: $medium-margin;
     padding: 0;
-
-    &:nth-child(1) {
-      margin-right: $medium-margin;
-    }
 
     &.off-white {
       &.active {

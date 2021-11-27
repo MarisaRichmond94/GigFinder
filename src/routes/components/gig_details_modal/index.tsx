@@ -3,7 +3,7 @@ import './index.scss';
 import { ReactElement } from 'react';
 
 import GigModal from 'components/gig_modal';
-import { useSearch } from 'providers/search';
+import { useUser } from 'providers/user';
 import Body from 'routes/components/gig_details_modal/body';
 import Footer from 'routes/components/gig_details_modal/footer';
 import Header from 'routes/components/gig_details_modal/header';
@@ -15,13 +15,10 @@ type GigDetailsModalProps = {
 }
 
 const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
-  const { activeGig, updateActiveGig } = useSearch();
+  const { activeGig, updateActiveGig } = useUser();
   if (!activeGig) return null;
 
-  const apply = (activeResumeId: string): void => {
-    if (activeResumeId) {
-      console.log('You did it!');
-    }
+  const applyCallback = (activeResumeId: string): void => {
     updateActiveGig(undefined);
   }
 
@@ -35,7 +32,7 @@ const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
       <GigModal
         bodyContent={<Body gig={activeGig} />}
         headerContent={<Header gig={activeGig} />}
-        footerContent={<Footer gig={activeGig} apply={apply} cancel={cancel} />}
+        footerContent={<Footer gig={activeGig} applyCallback={applyCallback} cancel={cancel} />}
         id='gig-details-modal'
         isOpen={props.isOpen}
       />

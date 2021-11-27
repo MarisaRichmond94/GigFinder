@@ -4,3 +4,24 @@
   background-color: #083F89;
   padding: $large-padding;
 }
+
+#right-panel-selector {
+  border-bottom: 1px solid $off-white;
+  display: flex;
+  padding: 0 $medium-padding;
+}
+
+// mobile view
+@media (min-width: 0) {
+  #right-panel-selector {
+    display: none;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #right-panel-selector {
+    display: flex;
+    padding-top: $medium-padding;
+  }
+}

@@ -44,6 +44,19 @@ export interface Gig {
   views: number,
 }
 
+export interface GigApplication {
+  id: string,
+  userId: string,
+  gig: Gig,
+  status: GigApplicationStatus,
+}
+
+export enum GigApplicationStatus {
+  pending = 'pending',
+  accepted = 'accepted',
+  rejected = 'rejected',
+}
+
 export interface GigWithReviews {
   abbrev_state: string,
   benefits: string,
@@ -69,6 +82,12 @@ export interface Option {
   onClick?: () => void,
 }
 
+export enum PanelTypes {
+  results = 'results',
+  favorites = 'favorites',
+  applications = 'applications',
+}
+
 export interface SearchParameters {
   title: string,
   location: string,
@@ -85,6 +104,13 @@ export interface User {
   id: string,
   name: string,
   email: string,
+}
+
+export interface UserGigApplication {
+  id: string,
+  userId: string,
+  gigId: string,
+  status: GigApplicationStatus,
 }
 
 export interface UserResume {

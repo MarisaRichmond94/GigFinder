@@ -1,0 +1,49 @@
+@import 'global';
+
+.gig-application-item {
+  background-color: $off-white;
+  border-radius: 15px;
+  padding: $large-padding;
+  margin: $medium-margin 0;
+
+  .gig-application-item-row {
+    align-items: center;
+    display: flex;
+
+    .status-icon {
+      margin-left: auto;
+    }
+
+    .accepted {
+      color: $primary-green;
+    }
+
+    .rejected {
+      color: $primary-red;
+    }
+
+    &:nth-child(3) {
+      padding-bottom: $medium-padding;
+    }
+
+    .vertical-line {
+      border-right: 1px solid $dark-grey;
+      height: 20px;
+    }
+
+    .gig-application-menu-button {
+      background-color: transparent !important;
+      border: none;
+      color: $off-black !important;
+      padding: $extra-small-padding;
+    }
+  }
+
+  .footer {
+    justify-content: center;
+
+    .learn-more-button {
+      padding: $small-padding $large-padding;
+    }
+  }
+}

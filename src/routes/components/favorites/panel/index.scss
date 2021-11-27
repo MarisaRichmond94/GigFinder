@@ -1,0 +1,27 @@
+@import 'global';
+
+#favorite-gigs-panel {
+  padding: $medium-padding;
+
+  #favorite-gigs-list {
+    height: 52vh;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #no-favorite-gigs-message {
+    color: $off-black;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #favorite-gigs-panel {
+    #no-favorite-gigs-message {
+      color: $off-white;
+    }
+  }
+}

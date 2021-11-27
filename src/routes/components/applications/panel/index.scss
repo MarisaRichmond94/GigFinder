@@ -1,0 +1,27 @@
+@import 'global';
+
+#gig-applications-panel {
+  padding: $medium-padding;
+
+  #gig-applications-list {
+    height: 52vh;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #no-gig-applications-message {
+    color: $off-black;
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #gig-applications-panel {
+    #no-gig-applications-message {
+      color: $off-white;
+    }
+  }
+}

@@ -10,13 +10,22 @@ import { Gig } from 'types';
 
 type FooterProps = {
   gig?: Gig,
-  apply: (activeResumeId: string) => void,
+  applyCallback: () => void,
   cancel: () => void,
 }
 
 const Footer = (props: FooterProps): ReactElement => {
-  const { isLoggedIn } = useAuth();
-  const { activeResumeId } = useUser();
+  // context variables and functions
+  const { isLoggedIn, user } = useAuth();
+  const { activeGig, activeResumeId, gigApplications, applyToGig } = useUser();
+  // derived variables
+  const matchingGigApplication = gigApplications.find(gigApp => gigApp.gig.id === activeGig.id);
+  const isApplyDisabled = !activeResumeId || matchingGigApplication;
+
+  const apply = (): void => {
+    applyToGig(user.id, props.gig.id);
+    props.applyCallback();
+  }
 
   return (
     <div id='gig-details-modal-footer'>
@@ -36,19 +45,32 @@ const Footer = (props: FooterProps): ReactElement => {
           Select a resume to apply to this gig
         </div>
       </div>
-      <GigButton
-        classNames='medium-grey dark-background sub-header-text gig-details-modal-button'
-        id='gig-details-modal-cancel-button'
-        onClick={props.cancel}
-        text='Cancel'
-      />
-      <GigButton
-        classNames='primary-blue dark-background sub-header-text gig-details-modal-button'
-        id='gig-details-modal-apply-button'
-        isDisabled={!activeResumeId}
-        onClick={() => props.apply(activeResumeId)}
-        text='Apply'
-      />
+      <div id='gig-details-modal-button-container'>
+        <div id='action-buttons'>
+          <GigButton
+            classNames='medium-grey dark-background sub-header-text gig-details-modal-button'
+            id='gig-details-modal-cancel-button'
+            onClick={props.cancel}
+            text='Cancel'
+          />
+          <GigButton
+            classNames='primary-blue dark-background sub-header-text gig-details-modal-button'
+            id='gig-details-modal-apply-button'
+            isDisabled={isApplyDisabled}
+            onClick={apply}
+            text='Apply'
+          />
+        </div>
+        <div
+          id='gig-application-message'
+          className={
+            `paragraph-text text-center
+            ${isLoggedIn && matchingGigApplication ? ' primary-red' : ' transparent'}`
+          }
+        >
+          Gig application already submitted
+        </div>
+      </div>
     </div>
   );
 }

@@ -6,21 +6,35 @@ import { GoSearch } from 'react-icons/go';
 
 import CollapsableSection from 'components/collapsable_section';
 import { useViewport } from 'hooks/useViewport';
-import FavoriteGigsPanel from 'routes/components/favorite_gigs_panel';
+import UserApplicationsPanel from 'routes/components/applications/panel';
+import FavoriteGigsPanel from 'routes/components/favorites/panel';
 import FilterPanel from 'routes/components/filter_panel';
-import MobilePanelSelector from 'routes/find/center_panel/mobile_panel_selector';
+import PanelSelector from 'routes/components/panel_selector';
 import SearchPanel from 'routes/components/search/panel';
 import SearchResults from 'routes/components/search/results';
+import { PanelTypes } from 'types';
 
 const CenterPanel = (): ReactElement => {
-  const [isShowingSearchResults, setIsShowingSearchResults] = useState(true);
+  const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.results);
   const { width } = useViewport();
 
   useEffect(() => {
-    if (!isShowingSearchResults && width >= 850) {
-      setIsShowingSearchResults(true);
+    if (activePanel !== PanelTypes.results && width >= 850) {
+      setActivePanel(PanelTypes.results);
     }
-  }, [isShowingSearchResults, width]);
+  }, [setActivePanel, width]);
+
+  const getActivePanel = (): ReactElement => {
+    switch (activePanel) {
+      case PanelTypes.applications:
+        return <UserApplicationsPanel />;
+      case PanelTypes.favorites:
+        return <FavoriteGigsPanel />;
+      case PanelTypes.results:
+      default:
+        return <SearchResults />;
+    }
+  }
 
   return (
     <div id='center-panel'>
@@ -30,11 +44,13 @@ const CenterPanel = (): ReactElement => {
       <CollapsableSection icon={<FaFilter />} sectionTitle='Filter'>
         <FilterPanel id='center-panel-filters' />
       </CollapsableSection>
-      <MobilePanelSelector
-        isShowingSearchResults={isShowingSearchResults}
-        setIsShowingSearchResults={setIsShowingSearchResults}
+      <PanelSelector
+        activePanel={activePanel}
+        id='center-panel-selector'
+        panels={Object.keys(PanelTypes)}
+        setActivePanel={setActivePanel}
       />
-      {isShowingSearchResults ? <SearchResults /> : <FavoriteGigsPanel />}
+      {getActivePanel()}
     </div>
   );
 }

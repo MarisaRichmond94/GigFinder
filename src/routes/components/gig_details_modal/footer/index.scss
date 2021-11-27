@@ -3,7 +3,8 @@
 #gig-details-modal-footer {
   height: 57px;
 
-  #resume-application-message {
+  #resume-application-message,
+  #gig-application-message {
     &.primary-red {
       color: $primary-red;
     }
@@ -13,9 +14,10 @@
     }
   }
 
-  #gig-details-modal-cancel-button,
-  #gig-details-modal-apply-button {
-    margin-bottom: $extra-large-margin;
+  #action-buttons {
+    button {
+      padding: 7px $extra-large-padding;
+    }
   }
 }
 
@@ -38,6 +40,12 @@
         .gig-dropdown {
           width: 85vw;
         }
+      }
+    }
+
+    #gig-details-modal-button-container {
+      #gig-application-message {
+        padding-bottom: $medium-padding;
       }
     }
 

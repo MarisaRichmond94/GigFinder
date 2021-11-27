@@ -23,7 +23,7 @@ const Header = (): ReactElement => {
   const { employer, isLoggedIn, user, logout } = useAuth();
   const userId = user?.id;
   const { setIsSignUp } = useAuthForm();
-  const { getFavoriteGigs, getUserResumes } = useUser();
+  const { getFavoriteGigs, getGigApplications, getUserResumes } = useUser();
   // local state variables and functions
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -32,6 +32,7 @@ const Header = (): ReactElement => {
     if (userId) {
       getFavoriteGigs(userId);
       getUserResumes(userId);
+      getGigApplications(userId);
     }
   }, [getFavoriteGigs, getUserResumes, userId]);
 

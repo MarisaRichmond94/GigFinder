@@ -17,8 +17,8 @@ import { Gig } from 'types';
 const SearchResults = (): ReactElement => {
   // context variables and functions
   const { user } = useAuth();
-  const { filteredResults, searchResults, updateActiveGig } = useSearch();
-  const { favoriteGigs, toggleFavoriteGig } = useUser();
+  const { filteredResults, searchResults } = useSearch();
+  const { favoriteGigs, toggleFavoriteGig, updateActiveGig } = useUser();
   // local variables and functions
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isGigDetailsModalOpen, setIsGigDetailsModalOpen] = useState(false);
