@@ -29,7 +29,6 @@ const SearchProvider = (props: object) => {
     () => debounce(250, false, (searchParameters: SearchParameters): void => {
       // update search parameters in the url
       const searchParams = new URLSearchParams();
-      searchParameters['filters'] = searchFilters ? searchFilters.join(',') : '';
       for (const [key, value] of Object.entries(searchParameters)) {
         if (value !== '') searchParams.set(key, value);
       }
@@ -65,6 +64,7 @@ const SearchProvider = (props: object) => {
 
   const searchGigs = useCallback((): void => {
     setSearchResults(undefined);
+    setFilteredResults(undefined);
     setTimeout(() => {
       const url = buildSearchUrl(gigTypes);
       fetch(url)
@@ -77,7 +77,7 @@ const SearchProvider = (props: object) => {
           setSearchResults(results);
         });
     }, 2000);
-  }, [gigTypes, searchFilters]);
+  }, [gigTypes, searchFilters, filterSearchResults, setFilteredResults, setSearchResults]);
 
   const onSearchFormSubmit = useCallback((): void => {
     history.push({
@@ -97,8 +97,12 @@ const SearchProvider = (props: object) => {
     if (filter) {
       const updatedFilters = deleteFilterFromUrl(filter, search, history);
       setSearchFilters(updatedFilters);
-      const filteredResults = filterSearchResults(searchResults, updatedFilters);
-      setFilteredResults(filteredResults);
+      if (updatedFilters.length) {
+        const filteredResults = filterSearchResults(searchResults, updatedFilters);
+        setFilteredResults(filteredResults);
+      } else {
+        setFilteredResults(undefined);
+      }
     }
   }, [history, search, searchResults]);
 

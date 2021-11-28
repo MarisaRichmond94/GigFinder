@@ -92,6 +92,7 @@ export interface SearchParameters {
   title: string,
   location: string,
   type: string,
+  filters: string,
 }
 
 export interface UploadFile {

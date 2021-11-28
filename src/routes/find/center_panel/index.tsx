@@ -7,6 +7,7 @@ import { GoSearch } from 'react-icons/go';
 import CollapsableSection from 'components/collapsable_section';
 import { useViewport } from 'hooks/useViewport';
 import { useApp } from 'providers/app';
+import { useSearch } from 'providers/search';
 import UserApplicationsPanel from 'routes/components/applications/panel';
 import FavoriteGigsPanel from 'routes/components/favorites/panel';
 import FilterPanel from 'routes/components/filter_panel';
@@ -18,6 +19,7 @@ import { PanelTypes } from 'types';
 const CenterPanel = (): ReactElement => {
   // context variables and functions
   const { unusableCenterPanelHeight, calculateTotalHeight } = useApp();
+  const { filteredResults, searchResults } = useSearch();
   // local state variables and functions
   const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.results);
   // hook variables
@@ -47,7 +49,7 @@ const CenterPanel = (): ReactElement => {
         icon={<GoSearch />}
         id='search-panel-section'
         onToggleCallback={calculateTotalHeight}
-        sectionTitle='Search'
+        sectionTitle={searchResults?.length ? `Search (${searchResults.length})` : 'Search'}
       >
         <SearchPanel />
       </CollapsableSection>
@@ -55,7 +57,7 @@ const CenterPanel = (): ReactElement => {
         icon={<FaFilter />}
         id='filter-panel-section'
         onToggleCallback={calculateTotalHeight}
-        sectionTitle='Filter'
+        sectionTitle={filteredResults?.length ? `Filter (${filteredResults.length})` : 'Filter'}
       >
         <FilterPanel id='center-panel-filters' />
       </CollapsableSection>

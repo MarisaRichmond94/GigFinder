@@ -12,7 +12,7 @@ import settings from 'settings';
 import { Option } from 'types';
 
 const SearchPanel = (): ReactElement => {
-  const { debounceUpdateSearch, gigTypes } = useSearch();
+  const { debounceUpdateSearch, gigTypes, searchFilters } = useSearch();
   const { pathname, search } = useLocation();
   const query = useQuery(search);
   const { width } = useViewport();
@@ -28,6 +28,7 @@ const SearchPanel = (): ReactElement => {
       title: title,
       location: location,
       type: type?.displayName || '',
+      filters: searchFilters ? searchFilters.join(',') : '',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, location, type])
