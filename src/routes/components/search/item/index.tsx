@@ -17,7 +17,7 @@ type SearchItemProps = {
 }
 
 const SearchItem = (props: SearchItemProps): ReactElement => {
-  const { id, company, city, state, rating, created_at, requirements, title } = props.item;
+  const { id, employer, city, state, rating, createdAt, requirements, title } = props.item;
 
   const populateJobRequirements = (id: string, requirements: string): ReactElement => {
     const bulletpoints = requirements.split('.');
@@ -36,7 +36,7 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
   return (
     <div className='search-item'>
       <SearchItemHeader
-        company={company}
+        employer={employer}
         handleToggleFavoriteGig={props.handleToggleFavoriteGig}
         id={id}
         isFavorite={props.isFavorite}
@@ -50,7 +50,7 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
         {populateJobRequirements(id, requirements)}
       </div>
       <div className='posted-row sub-header-text'>
-        Posted {calculateDurationSincePosted(created_at)} ago
+        Posted {calculateDurationSincePosted(createdAt)} ago
       </div>
       <div className='button-row text-center'>
         <GigButton

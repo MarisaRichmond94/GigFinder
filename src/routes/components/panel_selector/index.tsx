@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
-import GigButton from 'components/gig_button';
 import SelectorButton from 'routes/components/panel_selector/selector_button';
+import { PanelTypes } from 'types';
 
 interface PanelSelectorProps {
   activePanel: PanelTypes,

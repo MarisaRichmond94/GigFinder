@@ -5,7 +5,7 @@
   margin: 0 $large-margin;
 
   .gig-item-job-title,
-  .gig-item-company,
+  .gig-item-employer,
   .gig-item-rating {
     @include hide-overflow-ellipsis;
   }

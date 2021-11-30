@@ -14,7 +14,7 @@ type FavoriteGigItemProps = {
 }
 
 const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
-  const { id, city, company, rating, state, title } = props.item;
+  const { id, city, employer, rating, state, title } = props.item;
 
   return (
     <div className='favorite-gig-item'>
@@ -28,7 +28,7 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
         {title}
       </div>
       <div className='favorite-gig-item-row sub-header-text'>
-        {company}
+        {employer}
         &nbsp;&nbsp;<div className='vertical-line' />&nbsp;&nbsp;
         <BsStarFill className='favorite-gig-item-star' />&nbsp;
         {rating}

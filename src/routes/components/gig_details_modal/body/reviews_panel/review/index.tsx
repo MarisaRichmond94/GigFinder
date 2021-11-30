@@ -5,24 +5,23 @@ import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
 
 import GigButton from 'components/gig_button';
-import settings from 'settings';
-import { CompanyReview } from 'types';
+import { EmployerReview } from 'types';
 
 type ReviewProps = {
-  review: CompanyReview,
+  review: EmployerReview,
 }
 
 const Review = (props: ReviewProps): ReactElement => {
-  const { id, rating, headline, title, is_current_employee } = props.review;
-  const { city, abbrev_state, date_posted, summary } = props.review;
+  const { id, rating, headline, title, isCurrentEmployee } = props.review;
+  const { city, abbrevState, datePosted, summary } = props.review;
 
   const [isReviewed, setIsReviewed] = useState(false);
 
-  const getStars = (): ReactElement[] => {
+  const getStars = (): ReactElement => {
     const reviewRating = rating % 1 === 0 ? `${rating}.0` : rating;
     const stars = [];
     const [wholeStars, isHalfStar] = reviewRating.toString().split('.');
-    while (stars.length < wholeStars) {
+    while (stars.length < parseInt(wholeStars)) {
       stars.push(<BsStarFill className='rating-star' key={`star-${stars.length + 1}`} />);
     }
     if (isHalfStar !== '0') {
@@ -36,20 +35,22 @@ const Review = (props: ReviewProps): ReactElement => {
   }
 
   const getDatePosted = (): string => {
-    const dateParts = date_posted.split(/[- :]/);
+    const dateParts = datePosted.split(/[- :]/);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    // @ts-ignore
     const postedDate = new Date(...dateParts);
+    // @ts-ignore
     return postedDate.toLocaleDateString("en-US", options);
   }
 
-  const employeeTitle = `${title}${is_current_employee ? ' (Current Employee)' : ''}`;
-  const location = `${city}, ${abbrev_state}`;
-  const datePosted = getDatePosted();
+  const employeeTitle = `${title}${isCurrentEmployee ? ' (Current Employee)' : ''}`;
+  const location = `${city}, ${abbrevState}`;
+  const postedDate = getDatePosted();
   const reviewFeedbackText = 'Was this review helpful?';
 
   return (
     <>
-      <div className='company-review-container'>
+      <div className='employer-review-container'>
         <div className='rating-container'>
           <div className='rating'>{rating}</div>
           {getStars()}
@@ -58,7 +59,7 @@ const Review = (props: ReviewProps): ReactElement => {
           <div className='review-text bold sub-header-text' title={headline}>{headline}</div>
           <div className='review-text sub-header-text' title={employeeTitle}>{employeeTitle}</div>
           <div className='review-text sub-header-text' title={location}>{location}</div>
-          <div className='review-text sub-header-text' title={datePosted}>{datePosted}</div>
+          <div className='review-text sub-header-text' title={postedDate}>{postedDate}</div>
           <div className='summary sub-header-text'>{summary}</div>
           {
             isReviewed

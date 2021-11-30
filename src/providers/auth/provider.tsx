@@ -2,10 +2,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import colleges from 'mock/colleges.json';
+import degrees from 'mock/degrees.json';
 import AuthContext from 'providers/auth/context';
 import settings from 'settings';
 import { Employer, User } from 'types';
 import generateUUID from 'utils/generateGUID';
+import getRandomValueFromList from 'utils/getRandomValueFromList';
 
 const AuthProvider = (props: object) => {
   const history = useHistory();
@@ -70,7 +73,19 @@ const AuthProvider = (props: object) => {
   const signUpUser = (name: string, email: string): void => {
     axios.post(
       `${settings.BASE_SERVER_URL}/users`,
-      { id: generateUUID(), name, email },
+      {
+        id: generateUUID(),
+        name,
+        email,
+        phone: (
+          `(${Math.floor(100 + Math.random() * 9000)}) -
+           ${Math.floor(100 + Math.random() * 9000)} -
+           ${Math.floor(1000 + Math.random() * 9000)}`
+        ),
+        address: `${Math.floor(10000 + Math.random() * 9000)} Fake St., Malibu, CA, 90210`,
+        degree: getRandomValueFromList(degrees),
+        college: getRandomValueFromList(colleges),
+      },
     ).then(response => {
       if (response?.data?.length) {
         setUser(response.data?.[0]);

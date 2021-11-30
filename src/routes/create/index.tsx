@@ -15,7 +15,7 @@ const CreatePage = (): ReactElement => {
     if (user) {
       history.replace(settings.FIND_ROUTE);
     }
-  }, [user]);
+  }, [history, user]);
 
   return (
     <UserProvider>

@@ -5,10 +5,10 @@ import { ReactElement, useState } from 'react';
 import GigButton from 'components/gig_button';
 import DetailPanel from 'routes/components/gig_details_modal/body/details_panel';
 import ReviewPanel from 'routes/components/gig_details_modal/body/reviews_panel';
-import { GigWithReviews } from 'types';
+import { Gig } from 'types';
 
 type BodyProps = {
-  gig: GigWithReviews,
+  gig: Gig,
 }
 
 const Body = (props: BodyProps): ReactElement => {
@@ -33,7 +33,7 @@ const Body = (props: BodyProps): ReactElement => {
       {
         isDetailPanel
           ? <DetailPanel gig={props.gig} />
-          : <ReviewPanel companyReviews={props.gig.company_reviews} />
+          : <ReviewPanel employerReviews={props.gig.employerReviews} />
       }
     </div>
   );

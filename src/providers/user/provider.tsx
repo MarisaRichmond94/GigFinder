@@ -1,16 +1,22 @@
 import axios from 'axios';
+import { loremIpsum } from "lorem-ipsum";
 import { useCallback, useEffect, useState } from 'react';
 
+import employers from 'mock/employers.json';
+import titles from 'mock/titles.json';
 import UserContext from 'providers/user/context';
 import settings from 'settings';
-import { Gig, GigApplicationStatus, UserGigApplication, UserResume } from 'types';
+import {
+  EmployerReview, Gig, GigApplicationStatus, PopulatedUserGigApplication, User, UserResume,
+} from 'types';
 import generateUUID from 'utils/generateGUID';
+import getRandomValueFromList from 'utils/getRandomValueFromList';
 
 const UserProvider = (props: object) => {
-  const [activeGig, setActiveGig] = useState<GigWithReviews | undefined>();
+  const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [activeResumeId, setActiveResumeId] = useState<string | undefined>(undefined);
   const [favoriteGigs, setFavoriteGigs] = useState<Gig[]>([]);
-  const [gigApplications, setGigApplications] = useState<UserGigApplication[]>([]);
+  const [gigApplications, setGigApplications] = useState<PopulatedUserGigApplication[]>([]);
   const [userResumes, setUserResumes] = useState<UserResume[] | undefined>();
 
   useEffect(() => {
@@ -19,15 +25,23 @@ const UserProvider = (props: object) => {
     // eslint-disable-next-line
   }, []);
 
-  const getGigById = useCallback(async (gigId: string): Promise<Gig[]> => {
+  const getGigById = useCallback(async (gigId: string): Promise<Gig | undefined> => {
     const response = await axios.get(`${settings.BASE_SERVER_URL}/gigs?id=${gigId}`);
     if (response?.data?.length) {
       return response.data[0];
     }
-    return [];
+    return undefined;
+  }, []);
+
+  const getUserById = useCallback(async (userId: string): Promise<User | undefined> => {
+    const response = await axios.get(`${settings.BASE_SERVER_URL}/users?id=${userId}`);
+    if (response?.data?.length) {
+      return response.data[0];
+    }
+    return undefined;
   }, [])
 
-  const getFavoriteGigs = useCallback(async (userId: string): void => {
+  const getFavoriteGigs = useCallback(async (userId: string) => {
     const response = await axios.get(`${settings.BASE_SERVER_URL}/userGigs?userId=${userId}`);
     let userGigs = await Promise.all<Gig>(
       response.data.map(userGig => getGigById(userGig.gigId))
@@ -41,12 +55,12 @@ const UserProvider = (props: object) => {
     setFavoriteGigs(userGigs);
   }, [getGigById]);
 
-  const getUserResumes = useCallback(async (userId: string): void => {
+  const getUserResumes = useCallback(async (userId: string) => {
     const response = await axios.get(`${settings.BASE_SERVER_URL}/userResumes?userId=${userId}`);
     setUserResumes(response.data);
   }, []);
 
-  const getGigApplications = useCallback(async (userId: string): void => {
+  const getGigApplications = useCallback(async (userId: string) => {
     const response = await axios.get(
       `${settings.BASE_SERVER_URL}/userGigApplications?userId=${userId}`
     );
@@ -61,7 +75,7 @@ const UserProvider = (props: object) => {
     setGigApplications(userGigApplications);
   }, [getGigById]);
 
-  const toggleFavoriteGig = useCallback(async (userId: string, gigId: string): void => {
+  const toggleFavoriteGig = useCallback(async (userId: string, gigId: string) => {
     const response = await axios.get(
       `${settings.BASE_SERVER_URL}/userGigs?userId=${userId}&gigId=${gigId}`
     );
@@ -75,18 +89,41 @@ const UserProvider = (props: object) => {
     }
   }, [favoriteGigs, setFavoriteGigs]);
 
-  const applyToGig = useCallback(async (userId: string, gigId: string): void => {
+  const generateRandomExperience = () => {
+    const highlights = loremIpsum({
+      count: 3,
+      format: 'plain',
+      random: Math.random,
+      sentenceLowerBound: 3,
+      sentenceUpperBound: 5,
+      units: 'sentences',
+    });
+
+    return {
+      title: getRandomValueFromList(titles),
+      employer: getRandomValueFromList(employers),
+      highlights,
+    }
+  }
+
+  const applyToGig = useCallback(async (userId: string, gigId: string) => {
     if (activeResumeId) {
+      const gig = await getGigById(gigId);
+      const user = await getUserById(userId);
       const response = await axios.post(
         `${settings.BASE_SERVER_URL}/userGigApplications`,
         {
           id: generateUUID(),
-          userId,
+          employer: gig.employer,
           gigId,
+          candidate: user,
+          currentPosition: generateRandomExperience(),
+          previousPosition: generateRandomExperience(),
+          feedback: settings.INITIAL_FEEDBACK,
           status: GigApplicationStatus.pending,
         },
       );
-      const gig = await getGigById(response.data.gigId);
+      console.log(response.data)
       const populatedGigApplication = { ...response.data, gig };
       delete populatedGigApplication.gigId;
       setGigApplications(
@@ -95,14 +132,14 @@ const UserProvider = (props: object) => {
           : [populatedGigApplication],
       );
     }
-  }, [activeResumeId, favoriteGigs, gigApplications, setGigApplications]);
+  }, [activeResumeId, getGigById, getUserById, gigApplications, setGigApplications]);
 
   const uploadUserResume = useCallback(async(userResume: UserResume): Promise<UserResume> => {
     const response = await axios.post(`${settings.BASE_SERVER_URL}/userResumes`, userResume);
     return response?.data;
   }, []);
 
-  const uploadUserResumes = useCallback(async(userResumes: UserResume[]): void => {
+  const uploadUserResumes = useCallback(async(userResumes: UserResume[]) => {
     const newUserResumes = await Promise.all<UserResume>(
       userResumes.map(userResume => uploadUserResume(userResume))
     );
@@ -116,22 +153,22 @@ const UserProvider = (props: object) => {
     }
   }, [userResumes]);
 
-  const getCompanyReviews = useCallback(async(company: string): CompanyReview[] => {
+  const getEmployerReviews = useCallback(async(employer: string): Promise<EmployerReview[]> => {
     const response = await axios.get(
-      `${settings.BASE_SERVER_URL}/companyReviews?company=${company}`
+      `${settings.BASE_SERVER_URL}/employerReviews?employer=${employer}`
     );
     return response.data;
   }, []);
 
-  const updateActiveGig = useCallback(async(gig: Gig | undefined): void => {
+  const updateActiveGig = useCallback(async(gig: Gig | undefined) => {
     if (!gig) {
       setActiveGig(undefined);
       return;
     }
     const gigCopy = { ...gig };
-    gigCopy.company_reviews = await getCompanyReviews(gig.company);
+    gigCopy.employerReviews = await getEmployerReviews(gig.employer);
     setActiveGig(gigCopy);
-  }, []);
+  }, [getEmployerReviews]);
 
   const value = {
     activeGig,

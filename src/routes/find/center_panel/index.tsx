@@ -29,7 +29,7 @@ const CenterPanel = (): ReactElement => {
     if (activePanel !== PanelTypes.results && width >= 850) {
       setActivePanel(PanelTypes.results);
     }
-  }, [setActivePanel, width]);
+  }, [activePanel, setActivePanel, width]);
 
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {

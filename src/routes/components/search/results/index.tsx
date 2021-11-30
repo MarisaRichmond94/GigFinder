@@ -5,6 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import { useApp } from 'providers/app';
 import { useAuth } from 'providers/auth';
 import { useSearch } from 'providers/search';
 import { useUser } from 'providers/user';
@@ -12,7 +13,6 @@ import AlertModal from 'routes/components/alert_modal';
 import GigDetailsModal from 'routes/components/gig_details_modal';
 import SearchItem from 'routes/components/search/item';
 import settings from 'settings';
-import { Gig } from 'types';
 
 type SearchResultsProps = {
   unusableHeight?: number,
@@ -20,6 +20,7 @@ type SearchResultsProps = {
 
 const SearchResults = (props: SearchResultsProps): ReactElement => {
   // context variables and functions
+  const { calculateTotalHeight } = useApp();
   const { user } = useAuth();
   const { filteredResults, searchResults } = useSearch();
   const { favoriteGigs, toggleFavoriteGig, updateActiveGig } = useUser();
@@ -33,6 +34,13 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
+
+  useEffect(() => {
+    setTimeout(() => {
+      calculateTotalHeight();
+    }, 500);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (!prevSearchResults && searchResults?.length) {

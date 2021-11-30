@@ -18,7 +18,7 @@ const FindPage = (): ReactElement => {
     if (employer) {
       history.replace(settings.CREATE_ROUTE);
     }
-  }, [employer]);
+  }, [employer, history]);
 
   return (
     <UserProvider>

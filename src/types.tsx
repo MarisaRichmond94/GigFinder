@@ -7,32 +7,34 @@ export enum AuthFieldType {
   all = 'all',
 }
 
-export interface CompanyReview {
-  id: string,
-  company: string,
-  rating: number,
-  headline: string,
-  title: string,
-  is_current_employee: boolean,
-  city: string,
-  state: string,
-  abbrev_state: string,
-  date_posted: string,
-  summary: string,
-}
-
 export interface Employer {
   id: string,
   name: string,
   email: string,
 }
 
-export interface Gig {
-  abbrev_state: string,
-  benefits: string,
+export interface EmployerReview {
+  id: string,
+  employer: string,
+  rating: number,
+  headline: string,
+  title: string,
+  isCurrentEmployee: boolean,
   city: string,
-  company: string,
-  created_at: string,
+  state: string,
+  abbrevState: string,
+  datePosted: string,
+  summary: string,
+}
+
+export interface Gig {
+  abbrevState: string,
+  benefits: string[],
+  city: string,
+  createdAt: string,
+  employer: string,
+  employerReviews?: EmployerReview[],
+  favoriteGigId?: string,
   description: string,
   id: string,
   rating: number,
@@ -42,37 +44,12 @@ export interface Gig {
   title: string,
   type: string,
   views: number,
-}
-
-export interface GigApplication {
-  id: string,
-  userId: string,
-  gig: Gig,
-  status: GigApplicationStatus,
 }
 
 export enum GigApplicationStatus {
   pending = 'pending',
   accepted = 'accepted',
   rejected = 'rejected',
-}
-
-export interface GigWithReviews {
-  abbrev_state: string,
-  benefits: string,
-  city: string,
-  company: string,
-  company_reviews: CompanyReview[],
-  created_at: string,
-  description: string,
-  id: string,
-  rating: number,
-  requirements: string,
-  salary: string,
-  state: string,
-  title: string,
-  type: string,
-  views: number,
 }
 
 export interface Option {
@@ -86,6 +63,13 @@ export enum PanelTypes {
   results = 'results',
   favorites = 'favorites',
   applications = 'applications',
+}
+
+export interface PopulatedUserGigApplication {
+  id: string,
+  gig: Gig,
+  userId: string,
+  status: GigApplicationStatus,
 }
 
 export interface SearchParameters {
@@ -105,13 +89,10 @@ export interface User {
   id: string,
   name: string,
   email: string,
-}
-
-export interface UserGigApplication {
-  id: string,
-  userId: string,
-  gigId: string,
-  status: GigApplicationStatus,
+  phone: string,
+  address: string,
+  degree: string,
+  college: string,
 }
 
 export interface UserResume {

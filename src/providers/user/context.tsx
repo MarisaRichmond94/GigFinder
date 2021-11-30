@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 
-import { Gig, GigApplication, GigWithReviews, UserResume } from 'types';
+import { Gig, PopulatedUserGigApplication, UserResume } from 'types';
 
 interface UserContextType {
-  activeGig?: GigWithReviews,
+  activeGig?: Gig,
   activeResumeId?: string,
   favoriteGigs: Gig[],
-  gigApplications: GigApplication[],
+  gigApplications: PopulatedUserGigApplication[],
   userResumes?: UserResume[],
   applyToGig: (userId: string, gigId: string) => void,
   getFavoriteGigs: (userId: string) => void,

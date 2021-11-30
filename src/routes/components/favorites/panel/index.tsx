@@ -1,7 +1,6 @@
 import './index.scss';
 
 import { ReactElement, useEffect, useState } from 'react';
-import { BsHeartFill } from 'react-icons/bs';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import GigLoader from 'components/gig_loader';
@@ -42,7 +41,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
           apply={apply}
           key={`favorite-gig-item-${favoriteGig.id}`}
           isApplyDisabled={
-            !activeResumeId || gigApplications.find(gigApp => gigApp.gig.id === favoriteGig.id)
+            !(!activeResumeId || gigApplications.find(gigApp => gigApp.gig.id === favoriteGig.id))
           }
           item={favoriteGig}
         />

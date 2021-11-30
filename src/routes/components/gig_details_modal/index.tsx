@@ -7,7 +7,6 @@ import { useUser } from 'providers/user';
 import Body from 'routes/components/gig_details_modal/body';
 import Footer from 'routes/components/gig_details_modal/footer';
 import Header from 'routes/components/gig_details_modal/header';
-import { Gig } from 'types';
 
 type GigDetailsModalProps = {
   isOpen: boolean,
@@ -18,7 +17,7 @@ const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
   const { activeGig, updateActiveGig } = useUser();
   if (!activeGig) return null;
 
-  const applyCallback = (activeResumeId: string): void => {
+  const applyCallback = (): void => {
     updateActiveGig(undefined);
   }
 

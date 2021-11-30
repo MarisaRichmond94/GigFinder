@@ -18,7 +18,7 @@ const Header = (props: HeaderProps): ReactElement => {
   const { favoriteGigs, toggleFavoriteGig } = useUser();
   // destructured prop variables
   if (!props.gig) return null;
-  const { id, city, company, rating, state, title } = props.gig;
+  const { id, city, employer, rating, state, title } = props.gig;
   // derived variables
   const isFavorite = !!favoriteGigs?.find(gig => gig.id === id);
 
@@ -34,8 +34,8 @@ const Header = (props: HeaderProps): ReactElement => {
           {title}
         </div>
         &nbsp;<div id='vertical-line' />&nbsp;
-        <div id='gig-details-company' className='header-text' title={company}>
-          {company}
+        <div id='gig-details-employer' className='header-text' title={employer}>
+          {employer}
         </div>
         &nbsp;<BsStarFill id='gig-details-star-icon' />&nbsp;
         <div className='header-text'>

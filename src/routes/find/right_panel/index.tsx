@@ -14,7 +14,7 @@ import { PanelTypes } from 'types';
 
 const RightPanel = (): ReactElement => {
   // context variables and functions
-  const { unusableRightPanelHeight, calculateTotalHeight } = useApp();
+  const { unusableRightPanelHeight } = useApp();
   // local state variables and functions
   const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.favorites);
 

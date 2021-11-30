@@ -19,7 +19,7 @@ const EmailInput = (): ReactElement => {
           classNames='auth-modal-input'
           formValue={email}
           id='auth-email-input'
-          placeholder={isUserAuth ? 'Email Address' : 'Company Email Address'}
+          placeholder={isUserAuth ? 'Email Address' : 'Employer Email Address'}
           setFormValue={updatedEmail => updateInput(settings.AUTH_FIELD_TYPES.email, updatedEmail)}
           validateFormValue={
             updatedEmail => validateInput(settings.AUTH_FIELD_TYPES.email, updatedEmail)

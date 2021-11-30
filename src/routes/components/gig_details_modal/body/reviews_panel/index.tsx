@@ -4,38 +4,38 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import GigLoader from 'components/gig_loader';
 import Review from 'routes/components/gig_details_modal/body/reviews_panel/review';
 import settings from 'settings';
-import { CompanyReview } from 'types';
+import { EmployerReview } from 'types';
 
 type ReviewPanelProps = {
-  companyReviews: CompanyReview[],
+  employerReviews: EmployerReview[],
 }
 
 const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
   const [resultsCount, setResultsCount] = useState(0);
 
   useEffect(() => {
-    if (props.companyReviews?.length) {
+    if (props.employerReviews?.length) {
       setResultsCount(
-        props.companyReviews.length >= settings.MIN_RESULTS_PER_LOAD
+        props.employerReviews.length >= settings.MIN_RESULTS_PER_LOAD
           ? settings.MIN_RESULTS_PER_LOAD
-          : props.companyReviews.length
+          : props.employerReviews.length
       );
     }
     // eslint-disable-next-line
-  }, [props.companyReviews]);
+  }, [props.employerReviews]);
 
-  const buildCompanyReviews = (): ReactElement[] => {
-    return props.companyReviews.map(
-      companyReview => <Review review={companyReview} key={`review-${companyReview.id}`}/>
+  const buildEmployerReviews = (): ReactElement[] => {
+    return props.employerReviews.map(
+      employerReview => <Review review={employerReview} key={`review-${employerReview.id}`}/>
     );
   }
 
-  const getMoreCompanyReviews = (): void => {
+  const getMoreEmployerReviews = (): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
-      nextResultsCount <= props.companyReviews.length
+      nextResultsCount <= props.employerReviews.length
         ? nextResultsCount
-        : props.companyReviews.length
+        : props.employerReviews.length
     );
   };
 
@@ -43,12 +43,12 @@ const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
     <div className='gig-modal-body-panel' id='gig-details-modal-review-panel'>
       <InfiniteScroll
         dataLength={resultsCount}
-        next={getMoreCompanyReviews}
-        hasMore={resultsCount !== props.companyReviews.length}
+        next={getMoreEmployerReviews}
+        hasMore={resultsCount !== props.employerReviews.length}
         loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
         scrollableTarget='gig-details-modal-review-panel'
       >
-        {buildCompanyReviews()}
+        {buildEmployerReviews()}
       </InfiniteScroll>
     </div>
   );

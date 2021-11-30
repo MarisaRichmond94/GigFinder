@@ -2,14 +2,14 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import { GigWithReviews } from 'types';
+import { Gig } from 'types';
 
 type DetailPanelProps = {
-  gig: GigWithReviews,
+  gig: Gig,
 }
 
 const DetailPanel = (props: DetailPanelProps): ReactElement => {
-  const { id, benefits, description, requirements, salary, type } = props.gig;
+  const { benefits, description, requirements, salary, type } = props.gig;
 
   const getSalary = (): string => {
     const [dollars, cents] = salary.split('.');
@@ -37,7 +37,7 @@ const DetailPanel = (props: DetailPanelProps): ReactElement => {
     return (
       <ul id='requirements-list'>
         {requirements.split('.').map((requirement, index) => {
-          if (requirement === '') return;
+          if (requirement !== '') return undefined;
           return (
             <li className='sub-header-text' key={`requirement-${index}`}>{requirement}</li>
           )

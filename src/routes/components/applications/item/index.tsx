@@ -4,16 +4,16 @@ import { ReactElement } from 'react';
 import { BsClockHistory, BsPersonCheck, BsPersonDash, BsStarFill } from 'react-icons/bs';
 
 import GigButton from 'components/gig_button';
-import { Gig, GigApplication, GigApplicationStatus } from 'types';
+import { Gig, GigApplicationStatus, PopulatedUserGigApplication } from 'types';
 
 type GigApplicationItemProps = {
-  item: GigApplication,
+  item: PopulatedUserGigApplication,
   learnMoreAboutGig: (gig: Gig) => void,
 }
 
 const GigApplicationItem = (props: GigApplicationItemProps): ReactElement => {
   const { id, gig, status } = props.item;
-  const { city, company, rating, state, title } = gig;
+  const { city, employer, rating, state, title } = gig;
 
   const getStatusIcon = (): ReactElement => {
     switch (status) {
@@ -34,7 +34,7 @@ const GigApplicationItem = (props: GigApplicationItemProps): ReactElement => {
         {getStatusIcon()}
       </div>
       <div className='gig-application-item-row sub-header-text'>
-        {company}
+        {employer}
         &nbsp;&nbsp;<div className='vertical-line' />&nbsp;&nbsp;
         <BsStarFill className='gig-application-item-star' />&nbsp;
         {rating}

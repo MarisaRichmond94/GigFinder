@@ -20,7 +20,7 @@ const Footer = (props: FooterProps): ReactElement => {
   const { activeGig, activeResumeId, gigApplications, applyToGig } = useUser();
   // derived variables
   const matchingGigApplication = gigApplications.find(gigApp => gigApp.gig.id === activeGig.id);
-  const isApplyDisabled = !activeResumeId || matchingGigApplication;
+  const isApplyDisabled = !!(!activeResumeId || matchingGigApplication);
 
   const apply = (): void => {
     applyToGig(user.id, props.gig.id);

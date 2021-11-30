@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
@@ -12,7 +11,7 @@ import {
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
-import { CompanyReview, Gig, GigWithReviews, Option, SearchParameters } from 'types';
+import { Gig, Option, SearchParameters } from 'types';
 
 const SearchProvider = (props: object) => {
   const history = useHistory();
@@ -57,7 +56,7 @@ const SearchProvider = (props: object) => {
   }, []);
 
   const getFilterOptions = useCallback((): void => {
-    fetch(`${settings.BASE_SERVER_URL}/filters`)
+    fetch(`${settings.BASE_SERVER_URL}/benefits`)
       .then(response => response.json())
       .then(filters => setFilterOptions(filters));
   }, []);
@@ -77,7 +76,7 @@ const SearchProvider = (props: object) => {
           setSearchResults(results);
         });
     }, 2000);
-  }, [gigTypes, searchFilters, filterSearchResults, setFilteredResults, setSearchResults]);
+  }, [gigTypes, searchFilters, setFilteredResults, setSearchResults]);
 
   const onSearchFormSubmit = useCallback((): void => {
     history.push({

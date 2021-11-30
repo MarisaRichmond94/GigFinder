@@ -19,7 +19,7 @@ const NameInput = (): ReactElement => {
           classNames='auth-modal-input'
           formValue={name}
           id='auth-name-input'
-          placeholder={isUserAuth ? 'First and Last Name' : 'Company Name'}
+          placeholder={isUserAuth ? 'First and Last Name' : 'Employer Name'}
           setFormValue={updatedName => updateInput(settings.AUTH_FIELD_TYPES.name, updatedName)}
           validateFormValue={
             updatedName => validateInput(settings.AUTH_FIELD_TYPES.name, updatedName)

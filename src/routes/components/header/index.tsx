@@ -34,7 +34,7 @@ const Header = (): ReactElement => {
       getUserResumes(userId);
       getGigApplications(userId);
     }
-  }, [getFavoriteGigs, getUserResumes, userId]);
+  }, [getFavoriteGigs, getGigApplications, getUserResumes, userId]);
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {
