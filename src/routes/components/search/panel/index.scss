@@ -28,7 +28,7 @@
   }
 }
 
-.search-panel-item.desktop {
+.search-panel-item {
   &:last-child {
     padding-top: $small-padding;
   }
@@ -50,6 +50,7 @@
 // desktop view
 @media (min-width: 850px) {
   #find-search-panel {
+    align-items: baseline;
     display: flex;
     flex-direction: row;
     margin: $medium-margin;

@@ -40,7 +40,7 @@ const Header = (): ReactElement => {
     switch (pathname) {
       case settings.CREATE_ROUTE:
         return employer.name;
-      case settings.SEARCH_ROUTE:
+      case settings.FIND_ROUTE:
       default:
         return `Welcome back, ${user.name}!`;
     }
@@ -66,20 +66,19 @@ const Header = (): ReactElement => {
       </div>
       <div className='sub-header-text' id='header-message'>
         {
-          isLoggedIn
-            ? (
-              <div id='greeting' title={generateHeaderMessage()}>
-                {generateHeaderMessage()}
-              </div>
-            )
-            : (
-              <GigButton
-                classNames='grey header icon-button large-header-text'
-                id='sign-up-button'
-                onClick={handleSignUpUser}
-                textBlock={<BsFillPersonPlusFill />}
-              />
-            )
+          isLoggedIn &&
+          <div id='greeting' title={generateHeaderMessage()}>
+            {generateHeaderMessage()}
+          </div>
+        }
+        {
+          !isLoggedIn && isMobile &&
+          <GigButton
+            classNames='grey header icon-button large-header-text'
+            id='sign-up-button'
+            onClick={handleSignUpUser}
+            textBlock={<BsFillPersonPlusFill />}
+          />
         }
         {
           isLoggedIn && !isMobile &&

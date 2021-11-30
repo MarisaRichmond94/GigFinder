@@ -21,7 +21,7 @@ const PasswordInput = (): ReactElement => {
           classNames='auth-modal-input'
           formValue={password}
           id='auth-password-input'
-          placeholder='Password'
+          placeholder='10 minimum password, including 1 capital, 1 lowercase, a #, and a symbol'
           setFormValue={
             updatedPassword => updateInput(settings.AUTH_FIELD_TYPES.password, updatedPassword)
           }

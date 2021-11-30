@@ -8,7 +8,7 @@ import { AuthFieldType } from 'types';
 const AuthFormProvider = (props: object) => {
   const { pathname } = useLocation();
 
-  const [isUserAuth, setIsApplicationSignUp] = useState(pathname === settings.SEARCH_ROUTE);
+  const [isUserAuth, setIsApplicationSignUp] = useState(pathname === settings.FIND_ROUTE);
   const [isSignUp, setIsSignUp] = useState(false);
   const [name, setName] = useState<string | undefined>();
   const [isValidName, setIsValidName] = useState(false);

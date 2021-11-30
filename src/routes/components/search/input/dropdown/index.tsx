@@ -18,7 +18,7 @@ const SearchDropdownInput = (props: SearchDropdownInputProps): ReactElement => {
 
   const getClassNames = (): string => {
     let classNames = props.selectedOption?.displayName ? '' : 'placeholder-text';
-    classNames += pathname === settings.SEARCH_ROUTE
+    classNames += pathname === settings.FIND_ROUTE
       ? ' off-white-gig-dropdown'
       : ' white-gig-dropdown';
     return classNames;

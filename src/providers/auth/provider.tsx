@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import AuthContext from 'providers/auth/context';
 import settings from 'settings';
@@ -9,6 +9,7 @@ import generateUUID from 'utils/generateGUID';
 
 const AuthProvider = (props: object) => {
   const history = useHistory();
+  const { pathname } = useLocation();
   const [user, setUser] = useState<User | undefined>();
   const [employer, setEmployer] = useState<Employer | undefined>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,6 +38,18 @@ const AuthProvider = (props: object) => {
     }
   }, []);
 
+  useEffect(() => {
+    const employerId = window.localStorage.getItem('employerId');
+    if (employerId) {
+      axios.get(`${settings.BASE_SERVER_URL}/employers/${employerId}`).then(response => {
+        if (response?.data) {
+          setEmployer(response.data);
+          setIsLoggedIn(true);
+        }
+      });
+    }
+  }, []);
+
   const signUpEmployer = (name: string, email: string): void => {
     axios.post(
       `${settings.BASE_SERVER_URL}/employers`,
@@ -46,6 +59,10 @@ const AuthProvider = (props: object) => {
         setEmployer(response.data?.[0]);
         setIsLoggedIn(true);
         window.localStorage.setItem("employerId", response.data?.[0].id);
+
+        if (pathname === settings.FIND_ROUTE) {
+          history.replace(settings.CREATE_ROUTE);
+        }
       }
     });
   }
@@ -70,6 +87,10 @@ const AuthProvider = (props: object) => {
           setEmployer(response.data?.[0]);
           setIsLoggedIn(true);
           window.localStorage.setItem("employerId", response.data?.[0].id);
+
+          if (pathname === settings.FIND_ROUTE) {
+            history.replace(settings.CREATE_ROUTE);
+          }
         }
       });
   }

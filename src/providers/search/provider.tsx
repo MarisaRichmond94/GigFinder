@@ -35,7 +35,7 @@ const SearchProvider = (props: object) => {
       history.replace({ search: searchParams.toString() });
 
       // search gigs and update search results if on the find page
-      if (pathname === settings.SEARCH_ROUTE) {
+      if (pathname === settings.FIND_ROUTE) {
         searchGigs();
       }
     }),
@@ -43,7 +43,7 @@ const SearchProvider = (props: object) => {
 
   useEffect(() => {
     getGigTypes();
-    if (pathname === settings.SEARCH_ROUTE) {
+    if (pathname === settings.FIND_ROUTE) {
       searchGigs();
       getFilterOptions();
     }
@@ -81,7 +81,7 @@ const SearchProvider = (props: object) => {
 
   const onSearchFormSubmit = useCallback((): void => {
     history.push({
-      pathname: settings.SEARCH_ROUTE,
+      pathname: settings.FIND_ROUTE,
       search,
     });
   }, [history, search]);
