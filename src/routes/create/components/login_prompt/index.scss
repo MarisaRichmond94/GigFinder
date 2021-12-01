@@ -1,0 +1,144 @@
+@import 'global';
+
+#create-login-prompt {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15vh;
+
+  .logo-container {
+    align-items: center;
+    border-bottom: 2px solid $secondary-blue;
+    display: flex;
+    margin-bottom: $large-margin;
+    padding: $medium-padding;
+
+    .gig-search-title {
+      color: $primary-blue;
+    }
+  }
+
+  .login-prompt-header {
+    color: $primary-blue;
+    margin: 0 auto;
+    text-align: center;
+    width: 65vw;
+  }
+
+  #login-prompt-sub-header {
+    color: $off-black;
+    margin: 0 auto;
+    text-align: center;
+    width: 35vw;
+  }
+
+  .auth-buttons {
+    margin-top: $large-margin;
+
+    :nth-child(2) {
+      margin-right: $large-margin;
+    }
+
+    button {
+      height: 50px;
+    }
+  }
+
+  .gig-modal {
+    .gig-modal-content {
+      left: 5vw;
+      top: 20vh;
+      width: 90vw;
+    }
+  }
+}
+
+// small mobile view
+@media (min-width: 0) {
+  #create-login-prompt {
+    .logo-container {
+      .gig-search-icon {
+        height: 4vh;
+      }
+
+      .gig-search-title {
+        font-size: 2.5rem;
+        margin-left: $large-margin;
+      }
+    }
+
+    .login-prompt-header {
+      font-size: 1.5rem;
+    }
+
+    #login-prompt-sub-header {
+      font-size: 1rem;
+    }
+  }
+
+  .auth-buttons {
+    button {
+      min-width: 25vw;
+    }
+  }
+}
+
+// mobile view
+@media (min-width: 450px) {
+  #create-login-prompt {
+    .logo-container {
+      .gig-search-icon {
+        height: 6vh;
+      }
+
+      .gig-search-title {
+        font-size: 4rem;
+        margin-left: $large-margin;
+      }
+    }
+
+    .login-prompt-header {
+      font-size: 2rem;
+    }
+
+    #login-prompt-sub-header {
+      font-size: 1rem;
+    }
+
+    .auth-buttons {
+      button {
+        min-width: 20vw;
+      }
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #create-login-prompt {
+    .logo-container {
+      .gig-search-icon {
+        height: 10vh;
+      }
+
+      .gig-search-title {
+        font-size: 6rem;
+        margin-left: $large-margin;
+      }
+    }
+
+    .login-prompt-header {
+      font-size: 3.5rem;
+    }
+
+    #login-prompt-sub-header {
+      font-size: 1.5rem;
+    }
+
+    .auth-buttons {
+      button {
+        min-width: 10vw;
+      }
+    }
+  }
+}
