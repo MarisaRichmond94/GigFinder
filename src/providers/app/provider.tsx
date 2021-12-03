@@ -12,7 +12,7 @@ const MOBILE_CENTER_PANEL_IDS = [
   'header',
   'search-panel-section',
   'filter-panel-section',
-  'center-panel-selector',
+  'find-center-panel-selector',
 ];
 const CENTER_PANEL_BUFFER = 20;
 const DESKTOP_RIGHT_PANEL_IDS = [

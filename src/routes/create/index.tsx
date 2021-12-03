@@ -1,34 +1,46 @@
 import './index.scss';
 
 import { ReactElement, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { useAuth } from 'providers/auth';
 import { AuthFormProvider } from 'providers/auth_form';
-import { UserProvider } from 'providers/user';
+import { useEmployer } from 'providers/employer';
 import Header from 'routes/components/header';
+import CenterPanel from 'routes/create/center_panel';
 import LoginPrompt from 'routes/create/components/login_prompt';
-import settings from 'settings';
+import RightPanel from 'routes/create/right_panel';
 
 const CreatePage = (): ReactElement => {
-  const history = useHistory();
-  const { user, isLoggedIn } = useAuth();
+  // context variables and functions
+  const { employer, isLoggedIn } = useAuth();
+  const { getGigs } = useEmployer();
+  // derived variables
+  const employerName = employer?.name;
 
   useEffect(() => {
-    if (user) {
-      history.replace(settings.FIND_ROUTE);
+    if (employerName) {
+      getGigs(employerName);
     }
-  }, [history, user]);
+  }, [employerName, getGigs]);
+
+  const UnauthenticatedView = (
+    <div id='create-page-login'>
+      <LoginPrompt />
+    </div>
+  );
+
+  const AuthenticatedView = (
+    <div id='page-container'>
+      <Header />
+      <CenterPanel />
+      <RightPanel />
+    </div>
+  );
 
   return (
-    <UserProvider>
-      <AuthFormProvider>
-      <div id={isLoggedIn ? 'create-page' : 'create-page-login'}>
-        {isLoggedIn && <Header />}
-        {isLoggedIn ? <div id='replace-me-later'></div> : <LoginPrompt />}
-      </div>
-      </AuthFormProvider>
-    </UserProvider>
+    <AuthFormProvider>
+      {isLoggedIn ? AuthenticatedView : UnauthenticatedView}
+    </AuthFormProvider>
   )
 }
 

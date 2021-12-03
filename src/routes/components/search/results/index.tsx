@@ -36,9 +36,7 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
     : {};
 
   useEffect(() => {
-    setTimeout(() => {
-      calculateTotalHeight();
-    }, 500);
+    setTimeout(() => { calculateTotalHeight(); }, 500);
     // eslint-disable-next-line
   }, []);
 

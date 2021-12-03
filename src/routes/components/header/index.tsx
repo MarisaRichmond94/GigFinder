@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useHistory, useLocation } from 'react-router-dom';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
@@ -10,7 +10,6 @@ import logo from 'assets/icons/logo.png';
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
-import { useUser } from 'providers/user';
 import AuthModal from 'routes/components/auth_modal';
 import UploadModal from 'routes/components/upload_modal';
 import settings from 'settings';
@@ -21,20 +20,10 @@ const Header = (): ReactElement => {
   const { pathname } = useLocation();
   // context variables and functions
   const { employer, isLoggedIn, user, logout } = useAuth();
-  const userId = user?.id;
   const { setIsSignUp } = useAuthForm();
-  const { getFavoriteGigs, getGigApplications, getUserResumes } = useUser();
   // local state variables and functions
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (userId) {
-      getFavoriteGigs(userId);
-      getUserResumes(userId);
-      getGigApplications(userId);
-    }
-  }, [getFavoriteGigs, getGigApplications, getUserResumes, userId]);
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {
@@ -46,20 +35,25 @@ const Header = (): ReactElement => {
     }
   }
 
-  const handleLoginUser = (): void => {
+  const handleLogin = (): void => {
     setIsAuthModalOpen(true);
     setIsSignUp(false);
   }
 
-  const handleSignUpUser = (): void => {
+  const handleSignUp = (): void => {
     setIsAuthModalOpen(true);
     setIsSignUp(true);
   }
 
   return (
     <div id='header'>
-      <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
-      <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
+      {
+        pathname === settings.FIND_ROUTE &&
+        <>
+          <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
+          <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
+        </>
+      }
       <div id='header-title' onClick={() => history.push('/')}>
         <img alt='logo' id='header-title-icon' src={logo} />
         <div className='bold title-text' id='header-title-text'>Gig Search</div>
@@ -76,7 +70,7 @@ const Header = (): ReactElement => {
           <GigButton
             classNames='grey header icon-button large-header-text'
             id='sign-up-button'
-            onClick={handleSignUpUser}
+            onClick={handleSignUp}
             textBlock={<BsFillPersonPlusFill />}
           />
         }
@@ -92,7 +86,7 @@ const Header = (): ReactElement => {
         <GigButton
           classNames='grey header icon-button large-header-text'
           id='auth-button'
-          onClick={isLoggedIn ? logout : handleLoginUser}
+          onClick={isLoggedIn ? logout : handleLogin}
           textBlock={isLoggedIn ? <GrLogout /> : <GrLogin />}
         />
       </div>

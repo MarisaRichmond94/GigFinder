@@ -7,6 +7,13 @@ export enum AuthFieldType {
   all = 'all',
 }
 
+export enum CreatePanelTypes {
+  gigs = 'gigs',
+  candidates = 'candidates',
+  post = 'post',
+  templates = 'templates',
+}
+
 export interface Employer {
   id: string,
   name: string,
@@ -25,6 +32,12 @@ export interface EmployerReview {
   abbrevState: string,
   datePosted: string,
   summary: string,
+}
+
+export enum FindPanelTypes {
+  results = 'results',
+  favorites = 'favorites',
+  applications = 'applications',
 }
 
 export interface Gig {
@@ -57,12 +70,6 @@ export interface Option {
   icon?: ReactElement,
   id?: string,
   onClick?: () => void,
-}
-
-export enum PanelTypes {
-  results = 'results',
-  favorites = 'favorites',
-  applications = 'applications',
 }
 
 export interface PopulatedUserGigApplication {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { loremIpsum } from "lorem-ipsum";
 import { useCallback, useEffect, useState } from 'react';
 
+import { getGigById } from 'api/gigs';
 import employers from 'mock/employers.json';
 import titles from 'mock/titles.json';
 import UserContext from 'providers/user/context';
@@ -25,14 +26,6 @@ const UserProvider = (props: object) => {
     // eslint-disable-next-line
   }, []);
 
-  const getGigById = useCallback(async (gigId: string): Promise<Gig | undefined> => {
-    const response = await axios.get(`${settings.BASE_SERVER_URL}/gigs?id=${gigId}`);
-    if (response?.data?.length) {
-      return response.data[0];
-    }
-    return undefined;
-  }, []);
-
   const getUserById = useCallback(async (userId: string): Promise<User | undefined> => {
     const response = await axios.get(`${settings.BASE_SERVER_URL}/users?id=${userId}`);
     if (response?.data?.length) {
@@ -53,7 +46,7 @@ const UserProvider = (props: object) => {
       return userGig;
     })
     setFavoriteGigs(userGigs);
-  }, [getGigById]);
+  }, []);
 
   const getUserResumes = useCallback(async (userId: string) => {
     const response = await axios.get(`${settings.BASE_SERVER_URL}/userResumes?userId=${userId}`);
@@ -73,7 +66,7 @@ const UserProvider = (props: object) => {
       return userGigApplication;
     })
     setGigApplications(userGigApplications);
-  }, [getGigById]);
+  }, []);
 
   const toggleFavoriteGig = useCallback(async (userId: string, gigId: string) => {
     const response = await axios.get(
@@ -132,7 +125,7 @@ const UserProvider = (props: object) => {
           : [populatedGigApplication],
       );
     }
-  }, [activeResumeId, getGigById, getUserById, gigApplications, setGigApplications]);
+  }, [activeResumeId, getUserById, gigApplications, setGigApplications]);
 
   const uploadUserResume = useCallback(async(userResume: UserResume): Promise<UserResume> => {
     const response = await axios.post(`${settings.BASE_SERVER_URL}/userResumes`, userResume);

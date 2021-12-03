@@ -1,10 +1,10 @@
 @import 'global';
 
-#center-panel {
+#find-center-panel {
   margin: 0 3%;
 }
 
-#center-panel-selector {
+#find-center-panel-selector {
   border-bottom: 1px solid $light-grey;
   display: flex;
   padding: 0 $medium-padding;
@@ -12,7 +12,7 @@
 
 // mobile view
 @media (min-width: 0) {
-  #center-panel-selector {
+  #find-center-panel-selector {
     display: flex;
     padding-top: $medium-padding;
   }
@@ -20,7 +20,7 @@
 
 // desktop view
 @media (min-width: 850px) {
-  #center-panel-selector {
+  #find-center-panel-selector {
     display: none;
   }
 }

@@ -1,14 +1,14 @@
 import { ReactElement } from 'react';
 
 import SelectorButton from 'routes/components/panel_selector/selector_button';
-import { PanelTypes } from 'types';
 
 interface PanelSelectorProps {
-  activePanel: PanelTypes,
+  activePanel: any,
   buttonClasses?: string,
+  hiddenPanels?: any[],
   id: string,
   panels: string[],
-  setActivePanel: (activePanel: PanelTypes) => void,
+  setActivePanel: (activePanel: any) => void,
 }
 
 const PanelSelector = (props: PanelSelectorProps): ReactElement => {
@@ -17,13 +17,17 @@ const PanelSelector = (props: PanelSelectorProps): ReactElement => {
       {
         props.panels.map(panel => {
           return (
-            <SelectorButton
-              buttonClasses={props.buttonClasses}
-              isActive={props.activePanel === panel}
-              key={`panel-selector-${panel}`}
-              panelType={panel.charAt(0).toUpperCase() + panel.slice(1)}
-              setActivePanel={props.setActivePanel}
-            />
+            !props.hiddenPanels || !props.hiddenPanels.includes(panel)
+              ? (
+                <SelectorButton
+                  buttonClasses={props.buttonClasses}
+                  isActive={props.activePanel === panel}
+                  key={`panel-selector-${panel}`}
+                  panelType={panel.charAt(0).toUpperCase() + panel.slice(1)}
+                  setActivePanel={props.setActivePanel}
+                />
+              )
+            : null
           )
         })
       }

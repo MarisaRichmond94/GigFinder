@@ -14,37 +14,37 @@ import FilterPanel from 'routes/components/filter_panel';
 import PanelSelector from 'routes/components/panel_selector';
 import SearchPanel from 'routes/components/search/panel';
 import SearchResults from 'routes/components/search/results';
-import { PanelTypes } from 'types';
+import { FindPanelTypes } from 'types';
 
 const CenterPanel = (): ReactElement => {
   // context variables and functions
   const { unusableCenterPanelHeight, calculateTotalHeight } = useApp();
   const { filteredResults, searchResults } = useSearch();
   // local state variables and functions
-  const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.results);
+  const [activePanel, setActivePanel] = useState<FindPanelTypes>(FindPanelTypes.results);
   // hook variables
   const { width } = useViewport();
 
   useEffect(() => {
-    if (activePanel !== PanelTypes.results && width >= 850) {
-      setActivePanel(PanelTypes.results);
+    if (activePanel !== FindPanelTypes.results && width >= 850) {
+      setActivePanel(FindPanelTypes.results);
     }
   }, [activePanel, setActivePanel, width]);
 
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {
-      case PanelTypes.applications:
+      case FindPanelTypes.applications:
         return <UserApplicationsPanel unusableHeight={unusableCenterPanelHeight} />;
-      case PanelTypes.favorites:
+      case FindPanelTypes.favorites:
         return <FavoriteGigsPanel unusableHeight={unusableCenterPanelHeight} />;
-      case PanelTypes.results:
+      case FindPanelTypes.results:
       default:
         return <SearchResults unusableHeight={unusableCenterPanelHeight} />;
     }
   }
 
   return (
-    <div id='center-panel'>
+    <div id='find-center-panel'>
       <CollapsableSection
         icon={<GoSearch />}
         id='search-panel-section'
@@ -63,8 +63,8 @@ const CenterPanel = (): ReactElement => {
       </CollapsableSection>
       <PanelSelector
         activePanel={activePanel}
-        id='center-panel-selector'
-        panels={Object.keys(PanelTypes)}
+        id='find-center-panel-selector'
+        panels={Object.keys(FindPanelTypes)}
         setActivePanel={setActivePanel}
       />
       {getActivePanel()}

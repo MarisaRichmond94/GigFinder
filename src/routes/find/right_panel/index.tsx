@@ -10,19 +10,19 @@ import FavoriteGigsPanel from 'routes/components/favorites/panel';
 import PanelSelector from 'routes/components/panel_selector';
 import ActionButtons from 'routes/find/right_panel/action_buttons';
 import Filters from 'routes/find/right_panel/filters';
-import { PanelTypes } from 'types';
+import { FindPanelTypes } from 'types';
 
 const RightPanel = (): ReactElement => {
   // context variables and functions
   const { unusableRightPanelHeight } = useApp();
   // local state variables and functions
-  const [activePanel, setActivePanel] = useState<PanelTypes>(PanelTypes.favorites);
+  const [activePanel, setActivePanel] = useState<FindPanelTypes>(FindPanelTypes.favorites);
 
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {
-      case PanelTypes.applications:
+      case FindPanelTypes.applications:
         return <UserApplicationsPanel unusableHeight={unusableRightPanelHeight} />;
-      case PanelTypes.favorites:
+      case FindPanelTypes.favorites:
         return <FavoriteGigsPanel unusableHeight={unusableRightPanelHeight} />;
     }
   }
@@ -38,7 +38,7 @@ const RightPanel = (): ReactElement => {
         activePanel={activePanel}
         buttonClasses='underline-text off-white header-text'
         id='right-panel-selector'
-        panels={Object.keys(PanelTypes).slice(1)}
+        panels={Object.keys(FindPanelTypes).slice(1)}
         setActivePanel={setActivePanel}
       />
       {getActivePanel()}

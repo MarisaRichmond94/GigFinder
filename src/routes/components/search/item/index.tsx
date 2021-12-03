@@ -3,6 +3,7 @@ import './index.scss';
 import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';
+import { populateJobRequirements } from 'libs/gigs';
 import SearchItemHeader from 'routes/components/search/item/header';
 import { Gig } from 'types';
 import {
@@ -18,20 +19,6 @@ type SearchItemProps = {
 
 const SearchItem = (props: SearchItemProps): ReactElement => {
   const { id, employer, city, state, rating, createdAt, requirements, title } = props.item;
-
-  const populateJobRequirements = (id: string, requirements: string): ReactElement => {
-    const bulletpoints = requirements.split('.');
-    bulletpoints.pop();
-    return (
-      <ul className='job-requirements-list'>
-        {
-          bulletpoints.map(
-            (bulletpoint, index) => <li key={`${id}-requirement-${index}`}>{bulletpoint}</li>
-          )
-        }
-      </ul>
-    );
-  }
 
   return (
     <div className='search-item'>

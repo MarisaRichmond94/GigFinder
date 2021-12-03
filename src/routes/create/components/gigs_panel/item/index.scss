@@ -1,0 +1,25 @@
+@import 'global';
+
+.gig-item {
+  border-bottom: 1px solid $light-grey;
+  padding: $large-padding 0;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .header-row {
+    align-items: center;
+    display: flex;
+    margin: 0 $large-margin;
+
+    :last-child {
+      margin-left: auto;
+    }
+  }
+
+  .body-row {
+    margin: 0 $large-margin;
+  }
+}
