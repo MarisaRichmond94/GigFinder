@@ -7,7 +7,7 @@ import DemoWarning from 'components/demo_warning';
 import { SearchProvider } from 'providers/search';
 import SubmitButton from 'routes/home/submit_button';
 import SwitchButton from 'routes/home/switch_button';
-import SearchPanel from 'routes/components/search/panel';
+import SearchPanel from 'routes/find/components/search/panel';
 
 const HomePage = (): ReactElement => {
   return (

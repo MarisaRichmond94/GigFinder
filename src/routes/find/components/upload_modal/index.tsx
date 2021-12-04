@@ -6,7 +6,7 @@ import GigModal from 'components/gig_modal';
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
-import Body from 'routes/components/upload_modal/body';
+import Body from 'routes/find/components/upload_modal/body';
 import { UploadFile } from 'types';
 
 type UploadModalProps = {
