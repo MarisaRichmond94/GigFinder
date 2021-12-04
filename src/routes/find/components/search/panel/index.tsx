@@ -6,8 +6,8 @@ import { useLocation } from 'react-router-dom';
 import { useViewport } from 'hooks/useViewport';
 import useQuery from 'hooks/useQuery';
 import { useSearch } from 'providers/search';
-import SearchTextInput from 'routes/components/search/input/text';
-import SearchDropdownInput from 'routes/components/search/input/dropdown';
+import SearchTextInput from 'routes/find/components/search/input/text';
+import SearchDropdownInput from 'routes/find/components/search/input/dropdown';
 import settings from 'settings';
 import { Option } from 'types';
 

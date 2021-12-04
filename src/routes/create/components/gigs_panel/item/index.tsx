@@ -7,7 +7,9 @@ import { GiCampfire, GiExitDoor } from 'react-icons/gi';
 import GigButton from 'components/gig_button';
 import { getFormattedViews, populateJobRequirements } from 'libs/gigs';
 import { useEmployer } from 'providers/employer';
-import { calculateDurationSincePosted } from 'utils/calculateDurationSincePosted';
+import {
+  calculateDurationSincePosted
+} from 'routes/find/components/search/utils/calculateDurationSincePosted';
 import { Gig } from 'types';
 
 type GigItemProps = {
