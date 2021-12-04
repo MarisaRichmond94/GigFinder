@@ -5,7 +5,7 @@ import { ReactElement } from 'react';
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
-import ActiveResume from 'routes/find/components/active_resume';
+import ActiveResume from 'routes/components/active_resume';
 import { Gig } from 'types';
 
 type FooterProps = {

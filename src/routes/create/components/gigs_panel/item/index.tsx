@@ -9,7 +9,7 @@ import { getFormattedViews, populateJobRequirements } from 'libs/gigs';
 import { useEmployer } from 'providers/employer';
 import {
   calculateDurationSincePosted
-} from 'routes/find/components/search/utils/calculateDurationSincePosted';
+} from 'routes/components/search/utils/calculateDurationSincePosted';
 import { Gig } from 'types';
 
 type GigItemProps = {

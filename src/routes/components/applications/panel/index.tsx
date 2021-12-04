@@ -7,8 +7,8 @@ import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
-import GigApplicationItem from 'routes/find/components/applications/item';
-import GigDetailsModal from 'routes/find/components/gig_details_modal';
+import GigApplicationItem from 'routes/components/applications/item';
+import GigDetailsModal from 'routes/components/gig_details_modal';
 import settings from 'settings';
 import { Gig } from 'types';
 

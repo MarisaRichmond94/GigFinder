@@ -3,8 +3,8 @@ import './index.scss';
 import { ReactElement, useState } from 'react';
 
 import GigButton from 'components/gig_button';
-import DetailPanel from 'routes/find/components/gig_details_modal/body/details_panel';
-import ReviewPanel from 'routes/find/components/gig_details_modal/body/reviews_panel';
+import DetailPanel from 'routes/components/gig_details_modal/body/details_panel';
+import ReviewPanel from 'routes/components/gig_details_modal/body/reviews_panel';
 import { Gig } from 'types';
 
 type BodyProps = {

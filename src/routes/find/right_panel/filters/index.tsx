@@ -3,7 +3,7 @@ import './index.scss';
 import { ReactElement } from 'react';
 import { FaFilter } from 'react-icons/fa';
 
-import FilterPanel from 'routes/find/components/filter_panel';
+import FilterPanel from 'routes/components/filter_panel';
 
 const Filters = (): ReactElement => {
   return (

@@ -4,9 +4,9 @@ import { ReactElement } from 'react';
 
 import GigModal from 'components/gig_modal';
 import { useUser } from 'providers/user';
-import Body from 'routes/find/components/gig_details_modal/body';
-import Footer from 'routes/find/components/gig_details_modal/footer';
-import Header from 'routes/find/components/gig_details_modal/header';
+import Body from 'routes/components/gig_details_modal/body';
+import Footer from 'routes/components/gig_details_modal/footer';
+import Header from 'routes/components/gig_details_modal/header';
 
 type GigDetailsModalProps = {
   isOpen: boolean,

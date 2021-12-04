@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import GigLoader from 'components/gig_loader';
-import Review from 'routes/find/components/gig_details_modal/body/reviews_panel/review';
+import Review from 'routes/components/gig_details_modal/body/reviews_panel/review';
 import settings from 'settings';
 import { EmployerReview } from 'types';
 
