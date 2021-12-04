@@ -8,12 +8,12 @@ import CollapsableSection from 'components/collapsable_section';
 import { useViewport } from 'hooks/useViewport';
 import { useApp } from 'providers/app';
 import { useSearch } from 'providers/search';
-import UserApplicationsPanel from 'routes/components/applications/panel';
-import FavoriteGigsPanel from 'routes/components/favorites/panel';
-import FilterPanel from 'routes/components/filter_panel';
 import PanelSelector from 'routes/components/panel_selector';
-import SearchPanel from 'routes/components/search/panel';
-import SearchResults from 'routes/components/search/results';
+import UserApplicationsPanel from 'routes/find/components/applications/panel';
+import FavoriteGigsPanel from 'routes/find/components/favorites/panel';
+import FilterPanel from 'routes/find/components/filter_panel';
+import SearchPanel from 'routes/find/components/search/panel';
+import SearchResults from 'routes/find/components/search/results';
 import { FindPanelTypes } from 'types';
 
 const CenterPanel = (): ReactElement => {

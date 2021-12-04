@@ -4,10 +4,10 @@ import { ReactElement, useState } from 'react';
 
 import { useApp } from 'providers/app';
 import { AuthFormProvider } from 'providers/auth_form';
-import UserApplicationsPanel from 'routes/components/applications/panel';
-import ActiveResume from 'routes/components/active_resume';
-import FavoriteGigsPanel from 'routes/components/favorites/panel';
+import UserApplicationsPanel from 'routes/find/components/applications/panel';
 import PanelSelector from 'routes/components/panel_selector';
+import ActiveResume from 'routes/find/components/active_resume';
+import FavoriteGigsPanel from 'routes/find/components/favorites/panel';
 import ActionButtons from 'routes/find/right_panel/action_buttons';
 import Filters from 'routes/find/right_panel/filters';
 import { FindPanelTypes } from 'types';

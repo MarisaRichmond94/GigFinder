@@ -4,7 +4,7 @@ import { ReactElement, SyntheticEvent, useState } from 'react';
 import { BiArrowToBottom } from 'react-icons/bi';
 
 import GigButton from 'components/gig_button';
-import FileList from 'routes/components/upload_modal/body/files_list';
+import FileList from 'routes/find/components/upload_modal/body/files_list';
 import { UploadFile } from 'types';
 import generateUUID from 'utils/generateGUID';
 

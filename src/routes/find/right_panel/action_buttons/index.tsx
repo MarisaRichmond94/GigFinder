@@ -6,7 +6,7 @@ import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
 import AuthModal from 'routes/components/auth_modal';
-import UploadModal from 'routes/components/upload_modal';
+import UploadModal from 'routes/find/components/upload_modal';
 
 const ActionButtons = (): ReactElement => {
   const { isLoggedIn, logout } = useAuth();
