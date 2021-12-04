@@ -9,9 +9,9 @@ import { useApp } from 'providers/app';
 import { useAuth } from 'providers/auth';
 import { useSearch } from 'providers/search';
 import { useUser } from 'providers/user';
+import SearchItem from 'routes/components/search/item';
 import AlertModal from 'routes/find/components/alert_modal';
 import GigDetailsModal from 'routes/find/components/gig_details_modal';
-import SearchItem from 'routes/find/components/search/item';
 import settings from 'settings';
 
 type SearchResultsProps = {
