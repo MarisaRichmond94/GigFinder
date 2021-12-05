@@ -1,0 +1,26 @@
+@import 'global';
+
+#gig-details-modal {
+  .gig-modal-content {
+    background-color: $white;
+    border-radius: 15px;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  .gig-modal {
+    .gig-modal-content {
+      top: 3vh;
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  .gig-modal {
+    .gig-modal-content {
+      top: 10vh;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
 
+import { getGigTypes } from 'api/gig_types';
 import SearchFormContext from 'providers/search/context';
 import { buildSearchUrl } from 'providers/search/utils/buildSearchUrl';
 import {
@@ -41,18 +42,17 @@ const SearchProvider = (props: object) => {
   );
 
   useEffect(() => {
-    getGigTypes();
+    async function populateGigTypes() {
+      const gigTypesResponse = await getGigTypes();
+      setGigTypes(gigTypesResponse);
+    };
+
+    populateGigTypes();
     if (pathname === settings.FIND_ROUTE) {
       searchGigs();
       getFilterOptions();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getGigTypes = useCallback((): void => {
-    fetch(`${settings.BASE_SERVER_URL}/types`)
-      .then(response => response.json())
-      .then(types => setGigTypes(types));
   }, []);
 
   const getFilterOptions = useCallback((): void => {

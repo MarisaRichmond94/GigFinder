@@ -7,6 +7,8 @@ import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import { useAuth } from 'providers/auth';
 import { useEmployer } from 'providers/employer';
+import { GigFormProvider } from 'providers/gig_form';
+import GigDetailsModal from 'routes/create/components/gig_details_modal';
 import GigItem from 'routes/create/components/gigs_panel/item';
 import settings from 'settings';
 
@@ -30,6 +32,14 @@ const GigsPanel = (): ReactElement => {
     };
   }, [gigs, prevGigs]);
 
+  const viewGigDetails = (gigId: string): void => {
+    const matchingGig = gigs?.find(gig => gig.id === gigId);
+    if (matchingGig) {
+      setActiveGig(matchingGig);
+      setIsGigDetailsModalOpen(true);
+    }
+  }
+
   const buildGigsList = (): ReactElement[] => {
     const visibleGigs = gigs.slice(0, resultsCount + 1);
     return visibleGigs?.map(
@@ -48,14 +58,6 @@ const GigsPanel = (): ReactElement => {
     setResultsCount(nextResultsCount <= gigs.length ? nextResultsCount : gigs.length);
   };
 
-  const viewGigDetails = (gigId: string): void => {
-    const matchingGig = gigs?.find(gig => gig.id === gigId);
-    if (matchingGig) {
-      setActiveGig(matchingGig);
-      setIsGigDetailsModalOpen(true);
-    }
-  }
-
   if (gigs === undefined) {
     return (
       <div id='gigs-panel'>
@@ -66,6 +68,9 @@ const GigsPanel = (): ReactElement => {
 
   return (
     <div id='gigs-panel'>
+      <GigFormProvider>
+        <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
+      </GigFormProvider>
       {
         gigs.length
           ? (

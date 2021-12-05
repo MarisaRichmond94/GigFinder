@@ -1,0 +1,94 @@
+@import 'global';
+
+#gig-details-modal-footer {
+  height: 57px;
+
+  #resume-application-message,
+  #gig-application-message {
+    &.primary-red {
+      color: $primary-red;
+    }
+
+    &.transparent {
+      color: transparent !important;
+    }
+  }
+
+  #action-buttons {
+    margin-left: auto;
+
+    button {
+      padding: 7px $extra-large-padding;
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 679px) {
+  #gig-details-modal-footer {
+    width: calc(92vw - 30px);
+
+    #gig-details-modal-resume-selector-container {
+      #resume-application-message {
+        padding-bottom: $medium-padding;
+      }
+
+      #active-resume-section {
+        padding-top: 0;
+
+        #active-resume-header {
+          display: none;
+        }
+
+        .gig-dropdown {
+          width: 85vw;
+        }
+      }
+    }
+
+    #gig-details-modal-button-container {
+      #gig-application-message {
+        padding-bottom: $medium-padding;
+      }
+    }
+
+    #gig-details-modal-cancel-button {
+      margin-right: $large-margin;
+    }
+
+    .gig-details-modal-button {
+      width: calc((100% - 15px) / 2);
+    }
+  }
+}
+
+@media (min-width: 680px) {
+  #gig-details-modal-footer {
+    align-items: center;
+    display: flex;
+    width: 100%;
+
+    #gig-details-modal-resume-selector-container {
+      margin-right: auto;
+
+      #active-resume-section {
+        padding-top: 0;
+
+        #active-resume-header {
+          display: none;
+        }
+
+        .gig-dropdown {
+          width: 250px;
+        }
+      }
+    }
+
+    #gig-details-modal-cancel-button {
+      margin-right: $large-margin;
+    }
+
+    .gig-details-modal-button {
+      width: 150px;
+    }
+  }
+}

@@ -3,11 +3,11 @@ import { FiUserCheck, FiUserX } from 'react-icons/fi';
 
 import GigTextInput from 'components/gig_input/text';
 import { useAuthForm } from 'providers/auth_form';
-import settings from 'settings';
+import { AuthFieldType } from 'types';
 
 const NameInput = (): ReactElement => {
   const { name, isUserAuth, getIsValidInput, updateInput, validateInput } = useAuthForm();
-  const isValidName = getIsValidInput(settings.AUTH_FIELD_TYPES.name);
+  const isValidName = getIsValidInput(AuthFieldType.name);
 
   return (
     <div className='auth-modal-input-container'>
@@ -20,9 +20,9 @@ const NameInput = (): ReactElement => {
           formValue={name}
           id='auth-name-input'
           placeholder={isUserAuth ? 'First and Last Name' : 'Employer Name'}
-          setFormValue={updatedName => updateInput(settings.AUTH_FIELD_TYPES.name, updatedName)}
+          setFormValue={updatedName => updateInput(AuthFieldType.name, updatedName)}
           validateFormValue={
-            updatedName => validateInput(settings.AUTH_FIELD_TYPES.name, updatedName)
+            updatedName => validateInput(AuthFieldType.name, updatedName)
           }
         />
       </div>

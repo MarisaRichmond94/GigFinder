@@ -28,13 +28,13 @@ const AuthFormProvider = (props: object) => {
 
   const getIsValidInput = (type: AuthFieldType): boolean => {
     switch (type) {
-      case settings.AUTH_FIELD_TYPES.email:
+      case AuthFieldType.email:
         return isValidEmail;
-      case settings.AUTH_FIELD_TYPES.name:
+      case AuthFieldType.name:
         return isValidName;
-      case settings.AUTH_FIELD_TYPES.password:
+      case AuthFieldType.password:
         return isValidPassword;
-      case settings.AUTH_FIELD_TYPES.all:
+      case AuthFieldType.all:
         return isSignUp
           ? isValidName && isValidEmail && isValidPassword
           : isValidEmail && isValidPassword;
@@ -45,13 +45,13 @@ const AuthFormProvider = (props: object) => {
 
   const updateInput = (type: string, value: string): void => {
     switch (type) {
-      case settings.AUTH_FIELD_TYPES.email:
+      case AuthFieldType.email:
         setEmail(value);
         break;
-      case settings.AUTH_FIELD_TYPES.name:
+      case AuthFieldType.name:
         setName(value);
         break;
-      case settings.AUTH_FIELD_TYPES.password:
+      case AuthFieldType.password:
         setPassword(value);
         break;
       default:
@@ -61,13 +61,13 @@ const AuthFormProvider = (props: object) => {
 
   const validateInput = (type: string, value: string): void => {
     switch (type) {
-      case settings.AUTH_FIELD_TYPES.email:
+      case AuthFieldType.email:
         validateEmail(value);
         break;
-      case settings.AUTH_FIELD_TYPES.name:
+      case AuthFieldType.name:
         validateName(value);
         break;
-      case settings.AUTH_FIELD_TYPES.password:
+      case AuthFieldType.password:
         validatePassword(value);
         break;
       default:

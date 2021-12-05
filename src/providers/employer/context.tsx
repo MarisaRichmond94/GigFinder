@@ -8,6 +8,7 @@ interface EmployerContextType {
   closeGig: (gigId: string) => void,
   getGigs: (employer: string) => void,
   setActiveGig: (gig: Gig) => void,
+  updateGig: (gig: Gig) => void,
 }
 
 const EmployerContext = createContext<undefined | EmployerContextType>(undefined);

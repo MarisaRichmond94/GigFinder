@@ -65,6 +65,19 @@ export enum GigApplicationStatus {
   rejected = 'rejected',
 }
 
+export enum GigFormFieldType {
+  all = 'all',
+  benefits = 'benefits',
+  description = 'description',
+  requirements = 'requirements',
+  salary = 'salary',
+  type = 'type',
+}
+
+export interface GigType {
+  displayName: string,
+}
+
 export interface Option {
   displayName: string,
   icon?: ReactElement,

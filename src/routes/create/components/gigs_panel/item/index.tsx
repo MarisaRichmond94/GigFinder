@@ -5,9 +5,12 @@ import { FaRegSnowflake } from 'react-icons/fa';
 import { GiCampfire, GiExitDoor } from 'react-icons/gi';
 
 import GigButton from 'components/gig_button';
-import { getFormattedViews, populateJobRequirements } from 'libs/gigs';
+import {
+  calculateDurationSincePosted,
+  getFormattedViews,
+  populateJobRequirements,
+} from 'libs/gigs';
 import { useEmployer } from 'providers/employer';
-import { calculateDurationSincePosted } from 'utils/calculateDurationSincePosted';
 import { Gig } from 'types';
 
 type GigItemProps = {

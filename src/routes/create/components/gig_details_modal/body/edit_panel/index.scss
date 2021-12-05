@@ -1,0 +1,31 @@
+@import 'global';
+
+#gig-details-modal-details-panel {
+  .detail-row-flex-container {
+    align-items: center;
+    display: flex;
+    margin-bottom: $medium-margin;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    div {
+      &:nth-child(1) {
+        margin-right: $medium-margin;
+      }
+    }
+  }
+
+  .gig-details-input {
+    background-color: $off-white;
+  }
+
+  #requirements-list {
+    margin-bottom: 0;
+  }
+
+  .details {
+    padding-left: $large-padding;
+  }
+}

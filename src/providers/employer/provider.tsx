@@ -20,12 +20,18 @@ const EmployerProvider = (props: object) => {
     }
   }, [gigs]);
 
+  const updateGig = useCallback((gig: Gig): void => {
+    const existingGigIndex = gigs.findIndex(g => g.id === gig.id);
+    setGigs(gigs.splice(existingGigIndex, 1, gig));
+  }, [gigs]);
+
   const value = {
     activeGig,
     gigs,
     closeGig,
     getGigs,
     setActiveGig,
+    updateGig,
   };
 
   return <EmployerContext.Provider value={value} {...props} />;

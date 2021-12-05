@@ -3,10 +3,9 @@ import './index.scss';
 import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';
-import { populateJobRequirements } from 'libs/gigs';
+import { calculateDurationSincePosted, populateJobRequirements } from 'libs/gigs';
 import SearchItemHeader from 'routes/components/search/item/header';
 import { Gig } from 'types';
-import { calculateDurationSincePosted } from 'utils/calculateDurationSincePosted';
 
 type SearchItemProps = {
   handleToggleFavoriteGig: () => void,

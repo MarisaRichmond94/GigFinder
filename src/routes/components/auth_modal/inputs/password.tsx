@@ -4,12 +4,12 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import GigTextInput from 'components/gig_input/text';
 import { useAuthForm } from 'providers/auth_form';
-import settings from 'settings';
+import { AuthFieldType } from 'types';
 
 const PasswordInput = (): ReactElement => {
   const { password, getIsValidInput, updateInput, validateInput } = useAuthForm();
   const [isHidden, setIsHidden] = useState(true);
-  const isValidPassword = getIsValidInput(settings.AUTH_FIELD_TYPES.password);
+  const isValidPassword = getIsValidInput(AuthFieldType.password);
 
   return (
     <div className='auth-modal-input-container'>
@@ -23,11 +23,11 @@ const PasswordInput = (): ReactElement => {
           id='auth-password-input'
           placeholder='10 minimum password, including 1 capital, 1 lowercase, a #, and a symbol'
           setFormValue={
-            updatedPassword => updateInput(settings.AUTH_FIELD_TYPES.password, updatedPassword)
+            updatedPassword => updateInput(AuthFieldType.password, updatedPassword)
           }
-          type={(isHidden) ? settings.AUTH_FIELD_TYPES.password : 'text'}
+          type={(isHidden) ? AuthFieldType.password : 'text'}
           validateFormValue={
-            updatedPassword => validateInput(settings.AUTH_FIELD_TYPES.password, updatedPassword)
+            updatedPassword => validateInput(AuthFieldType.password, updatedPassword)
           }
         />
       </div>
