@@ -3,6 +3,7 @@ import './index.scss';
 import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';
+import { useGigForm } from 'providers/gig_form';
 
 type FooterProps = {
   cancel: () => void,
@@ -11,6 +12,8 @@ type FooterProps = {
 }
 
 const Footer = (props: FooterProps): ReactElement => {
+  const { isValidSalary } = useGigForm();
+
   return (
     <div id='gig-details-modal-footer'>
       <div id='action-buttons'>
@@ -23,6 +26,7 @@ const Footer = (props: FooterProps): ReactElement => {
         <GigButton
           classNames='primary-blue dark-background sub-header-text gig-details-modal-button'
           id='gig-details-modal-apply-button'
+          isDisabled={props.isInEditMode && !isValidSalary}
           onClick={props.toggleIsInEditMode}
           text={props.isInEditMode ? 'Update Details' : 'Edit Details'}
         />

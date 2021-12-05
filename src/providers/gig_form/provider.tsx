@@ -47,7 +47,7 @@ const GigFormProvider = (props: object) => {
       description,
       requirements,
       salary,
-      type,
+      type: type.displayName,
     };
 
     if (JSON.stringify(updatedGig) !== JSON.stringify(gig)) {

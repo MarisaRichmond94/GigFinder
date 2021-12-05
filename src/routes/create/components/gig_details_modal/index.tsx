@@ -28,6 +28,7 @@ const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
     if (!currIsInEditMode) {
       const updatedGig = submitForm(activeGig);
       updateGig(updatedGig);
+      setActiveGig(updatedGig);
     }
     setIsInEditMode(currIsInEditMode);
   }

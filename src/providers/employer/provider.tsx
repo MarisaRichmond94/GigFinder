@@ -22,7 +22,8 @@ const EmployerProvider = (props: object) => {
 
   const updateGig = useCallback((gig: Gig): void => {
     const existingGigIndex = gigs.findIndex(g => g.id === gig.id);
-    setGigs(gigs.splice(existingGigIndex, 1, gig));
+    gigs.splice(existingGigIndex, 1, gig)
+    setGigs(gigs);
   }, [gigs]);
 
   const value = {
