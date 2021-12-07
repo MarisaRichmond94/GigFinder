@@ -20,6 +20,10 @@ const EmployerProvider = (props: object) => {
     }
   }, [gigs]);
 
+  const addGig = useCallback((newGig: Gig): void => {
+    setGigs([newGig, ...gigs]);
+  }, [gigs]);
+
   const updateGig = useCallback((gig: Gig): void => {
     const existingGigIndex = gigs.findIndex(g => g.id === gig.id);
     gigs.splice(existingGigIndex, 1, gig)
@@ -29,6 +33,7 @@ const EmployerProvider = (props: object) => {
   const value = {
     activeGig,
     gigs,
+    addGig,
     closeGig,
     getGigs,
     setActiveGig,

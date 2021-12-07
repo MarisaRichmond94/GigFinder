@@ -2,13 +2,12 @@ import './index.scss';
 
 import { ReactElement, useEffect } from 'react';
 
-import { getRequirements } from 'libs/gigs';
 import { useGigForm } from 'providers/gig_form';
-import BenefitsInput from 'routes/create/components/gig_details_modal/body/benefits';
-import DescriptionInput from 'routes/create/components/gig_details_modal/body/description';
-import RequirementsInput from 'routes/create/components/gig_details_modal/body/requirements';
-import SalaryInput from 'routes/create/components/gig_details_modal/body/salary';
-import TypeInput from 'routes/create/components/gig_details_modal/body/type';
+import BenefitsInput from 'routes/create/components/inputs/benefits';
+import DescriptionInput from 'routes/create/components/inputs/description';
+import RequirementsInput from 'routes/create/components/inputs/requirements';
+import SalaryInput from 'routes/create/components/inputs/salary';
+import TypeInput from 'routes/create/components/inputs/type';
 import { Gig } from 'types';
 
 type EditPanelProps = {

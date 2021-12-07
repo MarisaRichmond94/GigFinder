@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
 
-import { getGigTypes } from 'api/gig_types';
+import { getTypes } from 'api/types';
 import SearchFormContext from 'providers/search/context';
 import { buildSearchUrl } from 'providers/search/utils/buildSearchUrl';
 import {
@@ -43,7 +43,7 @@ const SearchProvider = (props: object) => {
 
   useEffect(() => {
     async function populateGigTypes() {
-      const gigTypesResponse = await getGigTypes();
+      const gigTypesResponse = await getTypes();
       setGigTypes(gigTypesResponse);
     };
 

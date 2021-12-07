@@ -116,7 +116,6 @@ const UserProvider = (props: object) => {
           status: GigApplicationStatus.pending,
         },
       );
-      console.log(response.data)
       const populatedGigApplication = { ...response.data, gig };
       delete populatedGigApplication.gigId;
       setGigApplications(

@@ -5,6 +5,7 @@
 
   input {
     margin-bottom: 0;
+    width: 100%;
   }
 
   .focused {
@@ -16,10 +17,13 @@
     border-radius: 0 0 5px 5px;
     color: $off-black;
     list-style-type: none;
+    margin: 0;
     max-height: 200px;
     overflow-y: auto;
     padding-left: $medium-padding;
     position: absolute;
+    width: 100%;
+    z-index: 100;
 
     .best-match {
       font-weight: bold;

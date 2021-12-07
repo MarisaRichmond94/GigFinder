@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 import GigButton from 'components/gig_button';
-import SearchableGigInput from 'components/gig_input/searchable';
+import UncontrolledSearchableGigInputProps from 'components/gig_input/searchable/uncontrolled';
 import { useApp } from 'providers/app';
 import { useSearch } from 'providers/search';
 
@@ -49,7 +49,7 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
     <div id={props.id}>
       {
         filterOptions &&
-        <SearchableGigInput
+        <UncontrolledSearchableGigInputProps
           classNames='off-white-text-input'
           clearKey='Enter'
           id='filter-panel-text-input'

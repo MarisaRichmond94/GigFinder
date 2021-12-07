@@ -69,8 +69,10 @@ export enum GigFormFieldType {
   all = 'all',
   benefits = 'benefits',
   description = 'description',
+  location = 'location',
   requirements = 'requirements',
   salary = 'salary',
+  title = 'title',
   type = 'type',
 }
 

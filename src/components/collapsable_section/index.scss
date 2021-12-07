@@ -2,29 +2,30 @@
 
 .collapsable-section {
   .collapsable-section-header {
+    align-items: center;
+    display: flex;
     margin: $medium-margin;
 
-    .collapsable-section-title {
-      width: calc(100% - 27px);
+    div {
+      display: inline-block;
+
+      &:last-child {
+        margin-left: auto;
+      }
     }
   }
 
   .collapsable-section-divider {
     margin: auto;
   }
-}
 
-// mobile view
-@media (min-width: 0) {
-  .collapsable-section-header {
-    display: flex;
-  }
-}
+  &.off-white {
+    .collapsable-section-header {
+      color: $off-white;
+    }
 
-// desktop view
-@media (min-width: 850px) {
-  .collapsable-section-header,
-  .collapsable-section-divider {
-    display: none;
+    .collapsable-section-divider {
+      color: $off-white;
+    }
   }
 }

@@ -1,0 +1,35 @@
+import './index.scss';
+
+import { ReactElement } from 'react';
+
+import GigDropdown from 'components/gig_input/dropdown';
+import { useGigForm } from 'providers/gig_form';
+import { GigFormFieldType, GigType } from 'types';
+
+type TypeInputProps = {
+  gigId?: string,
+}
+
+const TypeInput = (props: TypeInputProps): ReactElement => {
+  const { type, typeOptions, updateInput } = useGigForm();
+
+  return (
+    <div className='detail-row-flex-container'>
+      <div id='job-type-details' className='bold sub-header-text gig-detail-title'>
+        Job Type
+      </div>
+      <GigDropdown
+        classNames='sub-header-text gig-details-input off-white-gig-dropdown gig-type-dropdown'
+        id={`gig-type-dropdown${props.gigId ? `-${props.gigId}` : ''}`}
+        onOptionSelect={
+          (selectedGigType: GigType) => updateInput(GigFormFieldType.type, selectedGigType)
+        }
+        options={typeOptions}
+        placeholder='full-time, part-time, etc.'
+        selectedOption={type}
+      />
+    </div>
+  );
+};
+
+export default TypeInput;

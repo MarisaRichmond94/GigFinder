@@ -7,4 +7,10 @@
   #employer-sign-out-button {
     width: 100%;
   }
+
+  #gig-creation-section {
+    .collapsable-section-header {
+      font-size: $header-font-size;
+    }
+  }
 }

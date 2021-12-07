@@ -5,6 +5,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 type CollapsableSectionProps = {
   children: ReactElement,
+  classNames?: string,
   icon: ReactElement,
   id: string,
   onToggleCallback?: () => void,
@@ -20,7 +21,10 @@ const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
   }
 
   return (
-    <div id={props.id} className='collapsable-section'>
+    <div
+      id={props.id}
+      className={`collapsable-section${props.classNames ? ` ${props.classNames}` : ''}`}
+    >
       <div className='collapsable-section-header'>
         <div className='collapsable-section-title'>{props.icon} {props.sectionTitle}</div>
         <div>

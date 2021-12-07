@@ -16,11 +16,24 @@
     display: flex;
     padding-top: $medium-padding;
   }
+
+  #find-page {
+    .collapsable-section-header {
+      display: flex;
+    }
+  }
 }
 
 // desktop view
 @media (min-width: 850px) {
   #find-center-panel-selector {
     display: none;
+  }
+
+  #find-page {
+    .collapsable-section-header,
+    .collapsable-section-divider {
+      display: none;
+    }
   }
 }

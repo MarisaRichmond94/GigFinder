@@ -30,7 +30,7 @@ const CreatePage = (): ReactElement => {
   );
 
   const AuthenticatedView = (
-    <div id='page-container'>
+    <div className='page-container' id='create-page'>
       <Header />
       <CenterPanel />
       <RightPanel />

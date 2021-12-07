@@ -1,0 +1,65 @@
+@import 'global';
+
+#gig-creation-panel {
+  margin-top: $medium-margin;
+
+  .gig-type-dropdown {
+    border-radius: 10px;
+  }
+
+  .detail-row-flex-container {
+    width: 100%;
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      margin-bottom: $medium-margin;
+    }
+
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(7),
+    &:nth-child(8) {
+      margin-bottom: $large-margin;
+    }
+  }
+
+  .detail-row-container {
+    margin-bottom: $small-margin;
+
+    &:nth-child(6) {
+      margin-bottom: 0;
+    }
+  }
+
+  #benefits-list {
+    button {
+      background-color: $secondary-blue;
+      margin: 0 $medium-margin $large-margin 0;
+    }
+  }
+
+  .gig-detail-title {
+    display: none;
+  }
+
+  .gig-details-input {
+    background-color: $off-white;
+  }
+
+  .searchable-gig-input {
+    input {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  #gig-creation-button-container {
+    button {
+      width: calc(50% - (15px / 2));
+
+      &:nth-child(1) {
+        margin-right: $large-margin;
+      }
+    }
+  }
+}

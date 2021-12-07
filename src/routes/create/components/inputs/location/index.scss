@@ -1,0 +1,29 @@
+@import 'global';
+
+#gig-details-modal-details-panel {
+  #benefits-list {
+    margin-bottom: 0;
+
+    button {
+      background-color: $primary-blue;
+      margin-right: $medium-margin;
+    }
+  }
+
+  #benefits-details {
+    line-height: 37px;
+  }
+
+  .searchable-gig-input {
+    width: 100%;
+
+    .gig-details-benefits-input {
+      margin: 0;
+      width: 100%;
+    }
+
+    ul {
+      width: 100%;
+    }
+  }
+}

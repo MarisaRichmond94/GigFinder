@@ -25,7 +25,7 @@ const FindPage = (): ReactElement => {
 
   return (
     <SearchProvider>
-      <div id='page-container'>
+      <div className='page-container' id='find-page'>
         <AuthFormProvider>
           <Header />
         </AuthFormProvider>
