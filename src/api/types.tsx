@@ -1,15 +1,10 @@
-import axios from 'axios';
+import BaseApi from 'api/base';
 
-import settings from 'settings';
-import { GigType } from 'types';
-
-const getTypes = async (): Promise<GigType[]> => {
-  const response = await axios.get(`${settings.BASE_SERVER_URL}/types`);
-  if (response?.data) {
-    return response.data;
+class Types extends BaseApi {
+  constructor() {
+    super('types');
   }
-};
+}
 
-export {
-  getTypes,
-};
+const TypesApi = new Types();
+export default TypesApi;

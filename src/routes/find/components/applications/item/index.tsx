@@ -4,10 +4,10 @@ import { ReactElement } from 'react';
 import { BsClockHistory, BsPersonCheck, BsPersonDash, BsStarFill } from 'react-icons/bs';
 
 import GigButton from 'components/gig_button';
-import { Gig, GigApplicationStatus, PopulatedUserGigApplication } from 'types';
+import { Gig, ApplicationStatus, PopulatedApplication } from 'types';
 
 type GigApplicationItemProps = {
-  item: PopulatedUserGigApplication,
+  item: PopulatedApplication,
   learnMoreAboutGig: (gig: Gig) => void,
 }
 
@@ -17,11 +17,11 @@ const GigApplicationItem = (props: GigApplicationItemProps): ReactElement => {
 
   const getStatusIcon = (): ReactElement => {
     switch (status) {
-      case GigApplicationStatus.accepted:
+      case ApplicationStatus.accepted:
         return <BsPersonCheck className={`status-icon ${status}`} />;
-      case GigApplicationStatus.rejected:
+      case ApplicationStatus.rejected:
         return <BsPersonDash className={`status-icon ${status}`} />;
-      case GigApplicationStatus.pending:
+      case ApplicationStatus.pending:
       default:
         return <BsClockHistory className={`status-icon ${status}`} />;
     }

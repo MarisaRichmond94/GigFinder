@@ -1,7 +1,8 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import EmployersApi from 'api/employers';
+import UsersApi from 'api/users';
 import colleges from 'mock/colleges.json';
 import degrees from 'mock/degrees.json';
 import AuthContext from 'providers/auth/context';
@@ -18,107 +19,87 @@ const AuthProvider = (props: object) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    async function getUserById(userId: string) {
+      const userResponse = await UsersApi.getById(userId);
+      setUser(userResponse);
+      setIsLoggedIn(true);
+    }
+
     const userId = window.localStorage.getItem('userId');
-    if (userId) {
-      axios.get(`${settings.BASE_SERVER_URL}/users/${userId}`).then(response => {
-        if (response?.data) {
-          setUser(response.data);
-          setIsLoggedIn(true);
-        }
-      });
-    }
+    if (userId) getUserById(userId);
   }, []);
 
   useEffect(() => {
-    const employerId = window.localStorage.getItem('employerId');
-    if (employerId) {
-      axios.get(`${settings.BASE_SERVER_URL}/employers/${employerId}`).then(response => {
-        if (response?.data) {
-          setEmployer(response.data);
-          setIsLoggedIn(true);
-        }
-      });
+    async function getEmployerById(employerId: string) {
+      const employerResponse = await EmployersApi.getById(employerId);
+      setUser(employerResponse);
+      setIsLoggedIn(true);
     }
+
+    const employerId = window.localStorage.getItem('employerId');
+    if (employerId) getEmployerById(employerId)
   }, []);
 
-  useEffect(() => {
-    const employerId = window.localStorage.getItem('employerId');
-    if (employerId) {
-      axios.get(`${settings.BASE_SERVER_URL}/employers/${employerId}`).then(response => {
-        if (response?.data) {
-          setEmployer(response.data);
-          setIsLoggedIn(true);
-        }
-      });
+  const signUpEmployer = async (name: string, email: string) => {
+    const signedUpEmployer = await EmployersApi.post({ id: generateUUID(), name, email });
+    setEmployer(signedUpEmployer);
+    setIsLoggedIn(true);
+    window.localStorage.setItem("employerId", signedUpEmployer.id);
+
+    if (pathname === settings.FIND_ROUTE) {
+      history.replace(settings.CREATE_ROUTE);
     }
-  }, []);
+  }
 
-  const signUpEmployer = (name: string, email: string): void => {
-    axios.post(
-      `${settings.BASE_SERVER_URL}/employers`,
-      { id: generateUUID(), name, email },
-    ).then(response => {
-      if (response?.data?.length) {
-        setEmployer(response.data?.[0]);
-        setIsLoggedIn(true);
-        window.localStorage.setItem("employerId", response.data?.[0].id);
+  const signUpUser = async (name: string, email: string) => {
+    const newUser = {
+      id: generateUUID(),
+      name,
+      email,
+      phone: (
+        `(${Math.floor(100 + Math.random() * 9000)}) -
+          ${Math.floor(100 + Math.random() * 9000)} -
+          ${Math.floor(1000 + Math.random() * 9000)}`
+      ),
+      address: `${Math.floor(10000 + Math.random() * 9000)} Fake St., Malibu, CA, 90210`,
+      degree: getRandomValueFromList(degrees),
+      college: getRandomValueFromList(colleges),
+    };
 
-        if (pathname === settings.FIND_ROUTE) {
-          history.replace(settings.CREATE_ROUTE);
-        }
+    const signedUpUser = await UsersApi.post(newUser);
+    setUser(signedUpUser);
+    setIsLoggedIn(true);
+    window.localStorage.setItem("userId", signedUpUser.id);
+
+    if (pathname === settings.CREATE_ROUTE) {
+      history.replace(settings.FIND_ROUTE);
+    }
+  }
+
+  const loginEmployer = async (email: string) => {
+    const loggedInEmployer = await EmployersApi.get({ email });
+    if (loggedInEmployer.length) {
+      setEmployer(loggedInEmployer[0]);
+      setIsLoggedIn(true);
+      window.localStorage.setItem("employerId", loggedInEmployer[0].id);
+
+      if (pathname === settings.FIND_ROUTE) {
+        history.replace(settings.CREATE_ROUTE);
       }
-    });
+    }
   }
 
-  const signUpUser = (name: string, email: string): void => {
-    axios.post(
-      `${settings.BASE_SERVER_URL}/users`,
-      {
-        id: generateUUID(),
-        name,
-        email,
-        phone: (
-          `(${Math.floor(100 + Math.random() * 9000)}) -
-           ${Math.floor(100 + Math.random() * 9000)} -
-           ${Math.floor(1000 + Math.random() * 9000)}`
-        ),
-        address: `${Math.floor(10000 + Math.random() * 9000)} Fake St., Malibu, CA, 90210`,
-        degree: getRandomValueFromList(degrees),
-        college: getRandomValueFromList(colleges),
-      },
-    ).then(response => {
-      if (response?.data?.length) {
-        setUser(response.data?.[0]);
-        setIsLoggedIn(true);
-        window.localStorage.setItem("userId", response.data?.[0].id);
-      }
-    });
-  }
+  const loginUser = async (email: string) => {
+    const loggedInUser = await UsersApi.get({ email });
+    if (loggedInUser?.length) {
+      setUser(loggedInUser[0]);
+      setIsLoggedIn(true);
+      window.localStorage.setItem("userId", loggedInUser[0].id);
+    }
 
-  const loginEmployer = (email: string): void => {
-    axios.get(`${settings.BASE_SERVER_URL}/employers?email=${email}`)
-      .then(response => {
-        if (response?.data?.length) {
-          setEmployer(response.data?.[0]);
-          setIsLoggedIn(true);
-          window.localStorage.setItem("employerId", response.data?.[0].id);
-
-          if (pathname === settings.FIND_ROUTE) {
-            history.replace(settings.CREATE_ROUTE);
-          }
-        }
-      });
-  }
-
-  const loginUser = (email: string): void => {
-    axios.get(`${settings.BASE_SERVER_URL}/users?email=${email}`)
-      .then(response => {
-        if (response?.data?.length) {
-          setUser(response.data?.[0]);
-          setIsLoggedIn(true);
-          window.localStorage.setItem("userId", response.data?.[0].id);
-        }
-      });
+    if (pathname === settings.CREATE_ROUTE) {
+      history.replace(settings.FIND_ROUTE);
+    }
   }
 
   const logout = (): void => {

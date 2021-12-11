@@ -17,9 +17,9 @@ type FooterProps = {
 const Footer = (props: FooterProps): ReactElement => {
   // context variables and functions
   const { isLoggedIn, user } = useAuth();
-  const { activeGig, activeResumeId, gigApplications, applyToGig } = useUser();
+  const { activeGig, activeResumeId, applications, applyToGig } = useUser();
   // derived variables
-  const matchingGigApplication = gigApplications.find(gigApp => gigApp.gig.id === activeGig.id);
+  const matchingGigApplication = applications.find(gigApp => gigApp.gig.id === activeGig.id);
   const isApplyDisabled = !!(!activeResumeId || matchingGigApplication);
 
   const apply = (): void => {

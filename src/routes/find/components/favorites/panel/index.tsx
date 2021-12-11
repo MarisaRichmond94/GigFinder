@@ -16,7 +16,7 @@ type FavoriteGigsPanelProps = {
 
 const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   const { isLoggedIn, user } = useAuth();
-  const { activeResumeId, favoriteGigs, gigApplications, applyToGig } = useUser();
+  const { activeResumeId, favoriteGigs, applications, applyToGig } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
   const prevFavoriteGigs = usePrevious(favoriteGigs);
   const listStyling = props.unusableHeight
@@ -41,7 +41,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
           apply={apply}
           key={`favorite-gig-item-${favoriteGig.id}`}
           isApplyDisabled={
-            !(!activeResumeId || gigApplications.find(gigApp => gigApp.gig.id === favoriteGig.id))
+            !(!activeResumeId || applications.find(gigApp => gigApp.gig.id === favoriteGig.id))
           }
           item={favoriteGig}
         />

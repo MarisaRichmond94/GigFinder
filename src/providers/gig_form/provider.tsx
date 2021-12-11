@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getBenefits } from 'api/benefits';
-import { getLocations } from 'api/locations';
-import { createGig, updateGig } from 'api/gigs';
-import { getTypes } from 'api/types';
-import { getTitles } from 'api/titles';
+import BenefitsApi from 'api/benefits';
+import GigsApi from 'api/gigs';
+import LocationsApi from 'api/locations';
+import TypesApi from 'api/types';
+import TitlesApi from 'api/titles';
 import GigFormContext from 'providers/gig_form/context';
 import { Gig, GigFormFieldType, GigType } from 'types';
 import generateUUID from 'utils/generateGUID';
@@ -29,16 +29,16 @@ const GigFormProvider = (props: object) => {
   useEffect(() => {
     async function populateFormOptions() {
       // benefits
-      const benefitOptionsResponse = await getBenefits();
+      const benefitOptionsResponse = await BenefitsApi.get();
       setBenefitOptions(benefitOptionsResponse);
       // locations
-      const locationOptionsResponse = await getLocations();
+      const locationOptionsResponse = await LocationsApi.get();
       setLocationOptions(locationOptionsResponse);
       // titles
-      const titleOptionsResponse = await getTitles();
+      const titleOptionsResponse = await TitlesApi.get();
       setTitleOptions(titleOptionsResponse);
       // types
-      const typeOptionsResponse = await getTypes();
+      const typeOptionsResponse = await TypesApi.get();
       setTypeOptions(typeOptionsResponse);
     }
 
@@ -68,7 +68,7 @@ const GigFormProvider = (props: object) => {
 
       if (JSON.stringify(updatedGig) !== JSON.stringify(gig)) {
         // @ts-ignore
-        updateGig(updatedGig);
+        GigsApi.update(updatedGig.id, updatedGig);
       }
 
       // @ts-ignore
@@ -92,7 +92,7 @@ const GigFormProvider = (props: object) => {
         salary,
       };
       // @ts-ignore
-      createGig(newGig);
+      GigsApi.post(newGig);
       // @ts-ignore
       return newGig;
     }

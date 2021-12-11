@@ -1,14 +1,11 @@
-import axios from 'axios';
+import BaseApi from 'api/base';
 
-import settings from 'settings';
-
-const getTitles = async (): Promise<string[]> => {
-  const response = await axios.get(`${settings.BASE_SERVER_URL}/titles`);
-  if (response?.data) {
-    return response.data;
+class Titles extends BaseApi {
+  constructor() {
+    super('titles');
   }
-};
+}
 
-export {
-  getTitles,
-};
+const TitlesApi = new Titles();
+export default TitlesApi;
+

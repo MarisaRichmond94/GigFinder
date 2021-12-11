@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
 
-import { getTypes } from 'api/types';
+import BenefitsApi from 'api/benefits';
+import TypesApi from 'api/types';
 import SearchFormContext from 'providers/search/context';
 import { buildSearchUrl } from 'providers/search/utils/buildSearchUrl';
 import {
@@ -43,22 +44,21 @@ const SearchProvider = (props: object) => {
 
   useEffect(() => {
     async function populateGigTypes() {
-      const gigTypesResponse = await getTypes();
+      const gigTypesResponse = await TypesApi.get();
       setGigTypes(gigTypesResponse);
     };
+
+    async function initializeFindRoute() {
+      const benefitsResponse = await BenefitsApi.get();
+      setFilterOptions(benefitsResponse);
+    }
 
     populateGigTypes();
     if (pathname === settings.FIND_ROUTE) {
       searchGigs();
-      getFilterOptions();
+      initializeFindRoute();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getFilterOptions = useCallback((): void => {
-    fetch(`${settings.BASE_SERVER_URL}/benefits`)
-      .then(response => response.json())
-      .then(filters => setFilterOptions(filters));
   }, []);
 
   const searchGigs = useCallback((): void => {

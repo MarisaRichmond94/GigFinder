@@ -1,15 +1,18 @@
-import axios from 'axios';
 import { loremIpsum } from "lorem-ipsum";
 import { useCallback, useEffect, useState } from 'react';
 
-import { getGigById } from 'api/gigs';
-import { getResumesByUserId } from 'api/resumes';
+import ApplicationsApi from 'api/applications';
+import EmployerReviewsApi from 'api/employer_reviews';
+import GigsApi from 'api/gigs';
+import ResumesApi from 'api/resumes';
+import UserGigsApi from 'api/user_gigs';
+import UsersApi from 'api/users';
 import employers from 'mock/employers.json';
 import titles from 'mock/titles.json';
 import UserContext from 'providers/user/context';
 import settings from 'settings';
 import {
-  EmployerReview, Gig, GigApplicationStatus, PopulatedUserGigApplication, Resume, User,
+  EmployerReview, Gig, ApplicationStatus, PopulatedApplication, Resume, User,
 } from 'types';
 import generateUUID from 'utils/generateGUID';
 import getRandomValueFromList from 'utils/getRandomValueFromList';
@@ -18,7 +21,7 @@ const UserProvider = (props: object) => {
   const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [activeResumeId, setActiveResumeId] = useState<string | undefined>(undefined);
   const [favoriteGigs, setFavoriteGigs] = useState<Gig[]>([]);
-  const [gigApplications, setGigApplications] = useState<PopulatedUserGigApplication[]>([]);
+  const [applications, setApplications] = useState<PopulatedApplication[]>([]);
   const [resumes, setResumes] = useState<Resume[] | undefined>();
 
   useEffect(() => {
@@ -28,62 +31,54 @@ const UserProvider = (props: object) => {
   }, []);
 
   const getUserById = useCallback(async (userId: string): Promise<User | undefined> => {
-    const response = await axios.get(`${settings.BASE_SERVER_URL}/users?id=${userId}`);
-    if (response?.data?.length) {
-      return response.data[0];
+    const userById = await UsersApi.getById(userId);
+    if (userById?.length) {
+      return userById[0];
     }
     return undefined;
   }, [])
 
   const getFavoriteGigs = useCallback(async (userId: string) => {
-    const response = await axios.get(`${settings.BASE_SERVER_URL}/userGigs?userId=${userId}`);
+    const allUserGigs = await UserGigsApi.get({ userId });
     let userGigs = await Promise.all<Gig>(
-      response.data.map(userGig => getGigById(userGig.gigId))
+      allUserGigs.map(userGig => GigsApi.getById(userGig.gigId))
     );
     userGigs = userGigs.map(userGig => {
-      userGig.favoriteGigId = response.data.find(
+      userGig.favoriteGigId = allUserGigs.find(
         favoriteGig => favoriteGig.gigId === userGig.id,
       ).id;
       return userGig;
-    })
+    });
     setFavoriteGigs(userGigs);
   }, []);
 
   const getResumes = useCallback(async (userId: string) => {
-    const resumesByUserId = await getResumesByUserId(userId);
+    const resumesByUserId = await ResumesApi.get({ userId });
     setResumes(resumesByUserId);
   }, []);
 
-  const getGigApplications = useCallback(async (userId: string) => {
-    const response = await axios.get(
-      `${settings.BASE_SERVER_URL}/userGigApplications?userId=${userId}`
-    );
+  const getApplications = useCallback(async (userId: string) => {
+    const allUserApplications = await ApplicationsApi.get({ userId });
     const gigs = await Promise.all<Gig>(
-      response.data.map(userGigApplication => getGigById(userGigApplication.gigId))
+      allUserApplications.map(userGigApplication => GigsApi.getById(userGigApplication.gigId))
     );
-    const userGigApplications = response.data.map(userGigApplication => {
+    const userApplications = allUserApplications.map(userGigApplication => {
       userGigApplication.gig = gigs.find(gig => gig.id === userGigApplication.gigId);
       delete userGigApplication.gigId;
       return userGigApplication;
     })
-    setGigApplications(userGigApplications);
+    setApplications(userApplications);
   }, []);
 
   const toggleFavoriteGig = useCallback(async (userId: string, gigId: string) => {
-    const response = await axios.get(
-      `${settings.BASE_SERVER_URL}/userGigs?userId=${userId}&gigId=${gigId}`
-    );
-    if (response?.data?.length) {
-      await axios.delete(`${settings.BASE_SERVER_URL}/userGigs/${response.data[0].id}`);
+    const userGigsResponse = await UserGigsApi.get({ userId, gigId });
+    if (userGigsResponse.length) {
+      await UserGigsApi.deleteById(userGigsResponse[0].id);
       setFavoriteGigs(favoriteGigs?.filter(favoriteGig => favoriteGig.id !== gigId));
     } else {
-      await axios.post(
-        `${settings.BASE_SERVER_URL}/userGigs`, { id: generateUUID(), userId, gigId }
-      );
-      const favoritedGig = await axios.get(
-        `${settings.BASE_SERVER_URL}/gigs?id=${gigId}`
-      );
-      setFavoriteGigs([...favoriteGigs, favoritedGig.data[0]]);
+      await UserGigsApi.post({ id: generateUUID(), userId, gigId });
+      const favoritedGig = await GigsApi.getById(gigId);
+      setFavoriteGigs([...favoriteGigs, favoritedGig]);
     }
   }, [favoriteGigs, setFavoriteGigs]);
 
@@ -106,34 +101,32 @@ const UserProvider = (props: object) => {
 
   const applyToGig = useCallback(async (userId: string, gigId: string) => {
     if (activeResumeId) {
-      const gig = await getGigById(gigId);
+      const gig = await GigsApi.getById(gigId);
       const user = await getUserById(userId);
-      const response = await axios.post(
-        `${settings.BASE_SERVER_URL}/userGigApplications`,
-        {
-          id: generateUUID(),
-          employer: gig.employer,
-          gigId,
-          candidate: user,
-          currentPosition: generateRandomExperience(),
-          previousPosition: generateRandomExperience(),
-          feedback: settings.INITIAL_FEEDBACK,
-          status: GigApplicationStatus.pending,
-        },
-      );
-      const populatedGigApplication = { ...response.data, gig };
+      const newApplication = {
+        id: generateUUID(),
+        employer: gig.employer,
+        gigId,
+        candidate: user,
+        currentPosition: generateRandomExperience(),
+        previousPosition: generateRandomExperience(),
+        feedback: settings.INITIAL_FEEDBACK,
+        status: ApplicationStatus.pending,
+      }
+      const newApplicationResponse = await ApplicationsApi.post(newApplication);
+      const populatedGigApplication = { ...newApplicationResponse, gig };
       delete populatedGigApplication.gigId;
-      setGigApplications(
-        gigApplications.length
-          ? [...gigApplications, populatedGigApplication]
+      setApplications(
+        applications.length
+          ? [...applications, populatedGigApplication]
           : [populatedGigApplication],
       );
     }
-  }, [activeResumeId, getUserById, gigApplications, setGigApplications]);
+  }, [activeResumeId, applications, getUserById, setApplications]);
 
   const uploadResume = useCallback(async(resume: Resume): Promise<Resume> => {
-    const response = await axios.post(`${settings.BASE_SERVER_URL}/resumes`, resume);
-    return response?.data;
+    const response = await ResumesApi.post(resume);
+    return response;
   }, []);
 
   const uploadResumes = useCallback(async(newResumes: Resume[]) => {
@@ -149,10 +142,8 @@ const UserProvider = (props: object) => {
   }, [resumes]);
 
   const getEmployerReviews = useCallback(async(employer: string): Promise<EmployerReview[]> => {
-    const response = await axios.get(
-      `${settings.BASE_SERVER_URL}/employerReviews?employer=${employer}`
-    );
-    return response.data;
+    const employerReviews = await EmployerReviewsApi.get({ employer });
+    return employerReviews;
   }, []);
 
   const updateActiveGig = useCallback(async(gig: Gig | undefined) => {
@@ -168,12 +159,12 @@ const UserProvider = (props: object) => {
   const value = {
     activeGig,
     activeResumeId,
+    applications,
     favoriteGigs,
-    gigApplications,
     resumes,
     applyToGig,
+    getApplications,
     getFavoriteGigs,
-    getGigApplications,
     getResumes,
     toggleFavoriteGig,
     updateActiveGig,

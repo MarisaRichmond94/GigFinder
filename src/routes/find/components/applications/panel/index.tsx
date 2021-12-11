@@ -19,30 +19,30 @@ type UserApplicationsPanelProps = {
 const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement => {
   // context variables and functions
   const { isLoggedIn } = useAuth();
-  const { gigApplications, updateActiveGig } = useUser();
+  const { applications, updateActiveGig } = useUser();
   // local variables and functions
   const [resultsCount, setResultsCount] = useState(0);
   const [isGigDetailsModalOpen, setIsGigDetailsModalOpen] = useState(false);
   // hook variables
-  const prevGigApplications = usePrevious(gigApplications);
+  const prevApplications = usePrevious(applications);
   // derived variables
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
 
   useEffect(() => {
-    if (!prevGigApplications && gigApplications?.length) {
+    if (!prevApplications && applications?.length) {
       setResultsCount(
-        gigApplications.length >= settings.MIN_RESULTS_PER_LOAD
+        applications.length >= settings.MIN_RESULTS_PER_LOAD
           ? settings.MIN_RESULTS_PER_LOAD
-          : gigApplications.length
+          : applications.length
       );
     }
     // eslint-disable-next-line
-  }, [gigApplications, prevGigApplications]);
+  }, [applications, prevApplications]);
 
-  const buildGigApplications = (): ReactElement[] => {
-    return gigApplications.map(gigApplication => {
+  const buildApplications = (): ReactElement[] => {
+    return applications.map(gigApplication => {
       return (
         <GigApplicationItem
           key={`gig-application-item-${gigApplication.id}`}
@@ -53,12 +53,12 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
     });
   }
 
-  const getMoreGigApplications = (): void => {
+  const getMoreApplications = (): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
-      nextResultsCount <= gigApplications.length
+      nextResultsCount <= applications.length
         ? nextResultsCount
-        : gigApplications.length
+        : applications.length
     );
   };
 
@@ -73,17 +73,17 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
     <div id='gig-applications-panel'>
       <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
       {
-        gigApplications?.length
+        applications?.length
           ? (
             <div id='gig-applications-list' style={listStyling}>
               <InfiniteScroll
                 dataLength={resultsCount}
-                next={getMoreGigApplications}
-                hasMore={resultsCount !== gigApplications.length}
+                next={getMoreApplications}
+                hasMore={resultsCount !== applications.length}
                 loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
                 scrollableTarget='gig-applications-list'
               >
-                {buildGigApplications()}
+                {buildApplications()}
               </InfiniteScroll>
             </div>
           )
@@ -91,7 +91,7 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
             <div className='sub-header-text' id='no-gig-applications-message'>
               {
                 isLoggedIn
-                  ? 'You have no active gig applications'
+                  ? 'You have no active applications'
                   : 'Log in or create an account to easily apply to gigs in seconds'
               }
             </div>

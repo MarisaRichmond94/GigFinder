@@ -1,12 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { deleteGigById, getGigsByEmployer } from 'api/gigs';
-import {
-  createMessageTemplate,
-  deleteMessageTemplate,
-  getMessageTemplatesByEmployerId,
-  updateMessageTemplate,
-} from 'api/messageTemplates';
+import GigsApi from 'api/gigs';
+import MessageTemplatesApi from 'api/message_templates';
 import EmployerContext from 'providers/employer/context';
 import { Gig } from 'types';
 
@@ -24,13 +19,13 @@ const EmployerProvider = (props: object) => {
 
   // gig functionality
   const getGigs = useCallback(async (employer: string) => {
-    const employerGigs = await getGigsByEmployer(employer);
+    const employerGigs = await GigsApi.get({ employer });
     setGigs(employerGigs);
   }, []);
 
   const closeGig = useCallback(async(gigId: string) => {
     if (gigId) {
-      await deleteGigById(gigId);
+      await GigsApi.deleteById(gigId);
       setGigs(gigs?.filter(gig => gig.id !== gigId));
     }
   }, [gigs]);

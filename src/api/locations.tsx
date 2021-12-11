@@ -1,14 +1,11 @@
-import axios from 'axios';
+import BaseApi from 'api/base';
 
-import settings from 'settings';
-
-const getLocations = async (): Promise<string[]> => {
-  const response = await axios.get(`${settings.BASE_SERVER_URL}/locations`);
-  if (response?.data) {
-    return response.data;
+class Locations extends BaseApi {
+  constructor() {
+    super('locations');
   }
-};
+}
 
-export {
-  getLocations,
-};
+const LocationsApi = new Locations();
+export default LocationsApi;
+

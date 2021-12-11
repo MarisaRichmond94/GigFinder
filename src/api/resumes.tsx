@@ -1,23 +1,11 @@
-import axios from 'axios';
+import BaseApi from 'api/base';
 
-import settings from 'settings';
-import { Resume } from 'types';
-
-const createResume = async (resume: Resume): Promise<Resume[]> => {
-  const response = await axios.post(`${settings.BASE_SERVER_URL}/resumes`, resume);
-  if (response?.data) {
-    return response.data;
+class Resumes extends BaseApi {
+  constructor() {
+    super('resumes');
   }
-};
+}
 
-const getResumesByUserId = async (userId: string): Promise<Resume[]> => {
-  const response = await axios.get(`${settings.BASE_SERVER_URL}/resumes?userId=${userId}`);
-  if (response?.data) {
-    return response.data;
-  }
-};
+const ResumesApi = new Resumes();
+export default ResumesApi;
 
-export {
-  createResume,
-  getResumesByUserId,
-};

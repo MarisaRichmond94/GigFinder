@@ -11,7 +11,7 @@ import RightPanel from 'routes/find/right_panel';
 const FindPage = (): ReactElement => {
   // context variables and functions
   const { user } = useAuth();
-  const { getFavoriteGigs, getGigApplications, getResumes } = useUser();
+  const { getFavoriteGigs, getApplications, getResumes } = useUser();
   // derived variables
   const userId = user?.id;
 
@@ -19,9 +19,9 @@ const FindPage = (): ReactElement => {
     if (userId) {
       getFavoriteGigs(userId);
       getResumes(userId);
-      getGigApplications(userId);
+      getApplications(userId);
     }
-  }, [getFavoriteGigs, getGigApplications, getResumes, userId]);
+  }, [getFavoriteGigs, getApplications, getResumes, userId]);
 
   return (
     <SearchProvider>

@@ -1,5 +1,11 @@
 import { ReactElement } from 'react';
 
+export enum ApplicationStatus {
+  pending = 'pending',
+  accepted = 'accepted',
+  rejected = 'rejected',
+}
+
 export enum AuthFieldType {
   name = 'name',
   email = 'email',
@@ -59,12 +65,6 @@ export interface Gig {
   views: number,
 }
 
-export enum GigApplicationStatus {
-  pending = 'pending',
-  accepted = 'accepted',
-  rejected = 'rejected',
-}
-
 export enum GigFormFieldType {
   all = 'all',
   benefits = 'benefits',
@@ -94,11 +94,11 @@ export interface Option {
   onClick?: () => void,
 }
 
-export interface PopulatedUserGigApplication {
+export interface PopulatedApplication {
   id: string,
   gig: Gig,
   userId: string,
-  status: GigApplicationStatus,
+  status: ApplicationStatus,
 }
 
 export interface Resume {
