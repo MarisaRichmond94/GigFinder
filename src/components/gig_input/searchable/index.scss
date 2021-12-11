@@ -3,6 +3,10 @@
 .searchable-gig-input {
   position: relative;
 
+  .off-white {
+    background-color: $off-white;
+  }
+
   input {
     margin-bottom: 0;
     width: 100%;

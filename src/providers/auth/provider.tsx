@@ -8,7 +8,7 @@ import degrees from 'mock/degrees.json';
 import AuthContext from 'providers/auth/context';
 import settings from 'settings';
 import { Employer, User } from 'types';
-import generateUUID from 'utils/generateGUID';
+import generateGUID from 'utils/generateGUID';
 import getRandomValueFromList from 'utils/getRandomValueFromList';
 
 const AuthProvider = (props: object) => {
@@ -32,7 +32,7 @@ const AuthProvider = (props: object) => {
   useEffect(() => {
     async function getEmployerById(employerId: string) {
       const employerResponse = await EmployersApi.getById(employerId);
-      setUser(employerResponse);
+      setEmployer(employerResponse);
       setIsLoggedIn(true);
     }
 
@@ -41,10 +41,10 @@ const AuthProvider = (props: object) => {
   }, []);
 
   const signUpEmployer = async (name: string, email: string) => {
-    const signedUpEmployer = await EmployersApi.post({ id: generateUUID(), name, email });
+    const signedUpEmployer = await EmployersApi.post({ id: generateGUID(), name, email });
     setEmployer(signedUpEmployer);
     setIsLoggedIn(true);
-    window.localStorage.setItem("employerId", signedUpEmployer.id);
+    window.localStorage.setItem('employerId', signedUpEmployer.id);
 
     if (pathname === settings.FIND_ROUTE) {
       history.replace(settings.CREATE_ROUTE);
@@ -53,7 +53,7 @@ const AuthProvider = (props: object) => {
 
   const signUpUser = async (name: string, email: string) => {
     const newUser = {
-      id: generateUUID(),
+      id: generateGUID(),
       name,
       email,
       phone: (
@@ -69,7 +69,7 @@ const AuthProvider = (props: object) => {
     const signedUpUser = await UsersApi.post(newUser);
     setUser(signedUpUser);
     setIsLoggedIn(true);
-    window.localStorage.setItem("userId", signedUpUser.id);
+    window.localStorage.setItem('userId', signedUpUser.id);
 
     if (pathname === settings.CREATE_ROUTE) {
       history.replace(settings.FIND_ROUTE);
@@ -81,7 +81,7 @@ const AuthProvider = (props: object) => {
     if (loggedInEmployer.length) {
       setEmployer(loggedInEmployer[0]);
       setIsLoggedIn(true);
-      window.localStorage.setItem("employerId", loggedInEmployer[0].id);
+      window.localStorage.setItem('employerId', loggedInEmployer[0].id);
 
       if (pathname === settings.FIND_ROUTE) {
         history.replace(settings.CREATE_ROUTE);
@@ -94,7 +94,7 @@ const AuthProvider = (props: object) => {
     if (loggedInUser?.length) {
       setUser(loggedInUser[0]);
       setIsLoggedIn(true);
-      window.localStorage.setItem("userId", loggedInUser[0].id);
+      window.localStorage.setItem('userId', loggedInUser[0].id);
     }
 
     if (pathname === settings.CREATE_ROUTE) {

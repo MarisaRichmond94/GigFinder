@@ -1,4 +1,4 @@
-import { loremIpsum } from "lorem-ipsum";
+import { loremIpsum } from 'lorem-ipsum';
 import { useCallback, useEffect, useState } from 'react';
 
 import ApplicationsApi from 'api/applications';
@@ -14,7 +14,7 @@ import settings from 'settings';
 import {
   EmployerReview, Gig, ApplicationStatus, PopulatedApplication, Resume, User,
 } from 'types';
-import generateUUID from 'utils/generateGUID';
+import generateGUID from 'utils/generateGUID';
 import getRandomValueFromList from 'utils/getRandomValueFromList';
 
 const UserProvider = (props: object) => {
@@ -76,7 +76,7 @@ const UserProvider = (props: object) => {
       await UserGigsApi.deleteById(userGigsResponse[0].id);
       setFavoriteGigs(favoriteGigs?.filter(favoriteGig => favoriteGig.id !== gigId));
     } else {
-      await UserGigsApi.post({ id: generateUUID(), userId, gigId });
+      await UserGigsApi.post({ id: generateGUID(), userId, gigId });
       const favoritedGig = await GigsApi.getById(gigId);
       setFavoriteGigs([...favoriteGigs, favoritedGig]);
     }
@@ -104,7 +104,7 @@ const UserProvider = (props: object) => {
       const gig = await GigsApi.getById(gigId);
       const user = await getUserById(userId);
       const newApplication = {
-        id: generateUUID(),
+        id: generateGUID(),
         employer: gig.employer,
         gigId,
         candidate: user,

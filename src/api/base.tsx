@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import settings from 'settings';
-import { keysToCamel, keysToSnake } from 'utils/convertCasing';
+import { keysToCamel } from 'utils/convertCasing';
 
 class BaseApi {
   route;
@@ -83,7 +83,6 @@ class BaseApi {
   }
 
   buildQueryString = query => {
-    // query = keysToSnake(query);
     const queryString = Object.keys(query).reduce((accumulation, key) => {
       return accumulation + `${key}=${encodeURIComponent(query[key])}&`;
     }, '');

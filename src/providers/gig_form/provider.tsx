@@ -7,7 +7,7 @@ import TypesApi from 'api/types';
 import TitlesApi from 'api/titles';
 import GigFormContext from 'providers/gig_form/context';
 import { Gig, GigFormFieldType, GigType } from 'types';
-import generateUUID from 'utils/generateGUID';
+import generateGUID from 'utils/generateGUID';
 
 const GigFormProvider = (props: object) => {
   // general state
@@ -76,7 +76,7 @@ const GigFormProvider = (props: object) => {
     } else {
       // create new gig
       const newGig = {
-        id: generateUUID(),
+        id: generateGUID(),
         employer,
         city: location,
         state: 'California',

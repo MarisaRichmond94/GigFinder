@@ -1,4 +1,4 @@
-import UserProvider from "providers/user/provider";
+import UserProvider from 'providers/user/provider';
 import useUser from 'providers/user/use';
 
 export {

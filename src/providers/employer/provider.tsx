@@ -3,13 +3,13 @@ import { useCallback, useEffect, useState } from 'react';
 import GigsApi from 'api/gigs';
 import MessageTemplatesApi from 'api/message_templates';
 import EmployerContext from 'providers/employer/context';
-import { Gig } from 'types';
+import { Gig, MessageTemplate } from 'types';
 
 const EmployerProvider = (props: object) => {
   const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [activeMessageTemplateId, setActiveMessageTemplateId] = useState<string | undefined>();
   const [gigs, setGigs] = useState<Gig[] | undefined>();
-  const [messageTemplates, setMessageTemplates] = useState();
+  const [messageTemplates, setMessageTemplates] = useState<MessageTemplate[] | undefined>();
 
   useEffect(() => {
     const localActiveMessageTemplateId = window.localStorage.getItem('activeMessageTemplateId');
@@ -41,30 +41,60 @@ const EmployerProvider = (props: object) => {
   }, [gigs]);
 
   // message template CRUD functionality
-  const createMessageTemplate = useCallback((employerId: string) => {
+  const createMessageTemplate = useCallback(async (messageTemplate: MessageTemplate) => {
+    const newMessageTemplate = await MessageTemplatesApi.post(messageTemplate);
+    setMessageTemplates([...messageTemplates, newMessageTemplate]);
+  }, [messageTemplates]);
 
+  const getMessageTemplates = useCallback(async (employerId: string) => {
+    const employerMessageTemplates = await MessageTemplatesApi.get({ employerId });
+    setMessageTemplates(employerMessageTemplates);
   }, []);
 
-  const getMessageTemplates = useCallback((employerId: string) => {
+  const updateMessageTemplate = useCallback(
+    async (messageTemplateId: string, updatedMessageTemplate: MessageTemplate) => {
+      const updatedTemplate = await MessageTemplatesApi.update(
+        messageTemplateId,
+        updatedMessageTemplate,
+      );
+      if (updatedTemplate) {
+        const existingTemplateIndex = messageTemplates.findIndex(t => t.id === updatedTemplate.id);
+        const messageTemplatesCopy = [...messageTemplates];
+        messageTemplatesCopy.splice(existingTemplateIndex, 1, updatedTemplate)
+        setMessageTemplates(messageTemplatesCopy);
+      }
+    }, [messageTemplates],
+  );
 
-  }, []);
+  const deleteMessageTemplate = useCallback(async (messageTemplateId: string) => {
+    if (messageTemplateId) {
+      await MessageTemplatesApi.deleteById(messageTemplateId);
+      setMessageTemplates(messageTemplates.filter(t => t.id !== messageTemplateId));
+    }
+  }, [messageTemplates]);
 
-  const updateMessageTemplate = useCallback((employerId: string) => {
-
-  }, []);
-
-  const deleteMessageTemplate = useCallback((employerId: string) => {
-
-  }, []);
+  const updateActiveMessageTemplateId = useCallback(async (messageTemplateId: string) => {
+    if (messageTemplateId !== activeMessageTemplateId) {
+      setActiveMessageTemplateId(messageTemplateId);
+      window.localStorage.setItem('activeMessageTemplateId', messageTemplateId);
+    }
+  }, [activeMessageTemplateId]);
 
   const value = {
     activeGig,
+    activeMessageTemplateId,
     gigs,
+    messageTemplates,
     addGig,
     closeGig,
+    createMessageTemplate,
+    deleteMessageTemplate,
     getGigs,
+    getMessageTemplates,
     setActiveGig,
     updateGig,
+    updateMessageTemplate,
+    updateActiveMessageTemplateId,
   };
 
   return <EmployerContext.Provider value={value} {...props} />;

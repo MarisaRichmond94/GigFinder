@@ -1,0 +1,22 @@
+@import 'global';
+
+#active-message-template-section {
+  &.mobile-view {
+    color: $off-black;
+    padding: $medium-padding 0;
+  }
+
+  &.desktop-view {
+    color: $off-white;
+    padding: $extra-large-padding + 5px 0;
+  }
+
+  #active-message-template-header {
+    align-items: center;
+    display: inline-flex;
+  }
+
+  #active-message-template-dropdown {
+    background-color: $off-white;
+  }
+}

@@ -40,7 +40,7 @@ const Review = (props: ReviewProps): ReactElement => {
     // @ts-ignore
     const postedDate = new Date(...dateParts);
     // @ts-ignore
-    return postedDate.toLocaleDateString("en-US", options);
+    return postedDate.toLocaleDateString('en-US', options);
   }
 
   const employeeTitle = `${title}${isCurrentEmployee ? ' (Current Employee)' : ''}`;

@@ -6,7 +6,7 @@ import { BiArrowToBottom } from 'react-icons/bi';
 import GigButton from 'components/gig_button';
 import FileList from 'routes/find/components/upload_modal/body/files_list';
 import { UploadFile } from 'types';
-import generateUUID from 'utils/generateGUID';
+import generateGUID from 'utils/generateGUID';
 
 interface BodyProps {
   isUploadInProgress: boolean,
@@ -33,7 +33,7 @@ const Body = (props: BodyProps): ReactElement => {
         // @ts-ignore
         .filter(file => getIsAllowedDocumentType(file.type))
         // @ts-ignore
-        .map(file => { return { id: generateUUID(), name: file.name, status: undefined } });
+        .map(file => { return { id: generateGUID(), name: file.name, status: undefined } });
       props.setUploadFiles(props.uploadFiles ? [...props.uploadFiles, ...files] : files);
     }
   }

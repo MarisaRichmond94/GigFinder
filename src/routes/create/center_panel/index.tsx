@@ -6,6 +6,7 @@ import { useViewport } from 'hooks/useViewport';
 import PanelSelector from 'routes/components/panel_selector';
 import GigCreationPanel from 'routes/create/components/gig_creation_panel';
 import GigsPanel from 'routes/create/components/gigs_panel';
+import MessageTemplatePanel from 'routes/create/components/message_template_panel';
 import { CreatePanelTypes } from 'types';
 
 const CenterPanel = (): ReactElement => {
@@ -28,6 +29,7 @@ const CenterPanel = (): ReactElement => {
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {
       case CreatePanelTypes.templates:
+        return <MessageTemplatePanel />;
       case CreatePanelTypes.post:
         return <GigCreationPanel />;
       case CreatePanelTypes.candidates:
