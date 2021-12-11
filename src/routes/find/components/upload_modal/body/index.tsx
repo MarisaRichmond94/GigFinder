@@ -34,7 +34,7 @@ const Body = (props: BodyProps): ReactElement => {
         .filter(file => getIsAllowedDocumentType(file.type))
         // @ts-ignore
         .map(file => { return { id: generateUUID(), name: file.name, status: undefined } });
-      props.setUploadFiles([...props.uploadFiles, ...files]);
+      props.setUploadFiles(props.uploadFiles ? [...props.uploadFiles, ...files] : files);
     }
   }
 
@@ -99,7 +99,7 @@ const Body = (props: BodyProps): ReactElement => {
         {
           isDraggingOver
             ? dragOverDisplay
-            : props.uploadFiles.length
+            : !!props.uploadFiles.length
               ? (
                 <FileList
                   isUploadInProgress={props.isUploadInProgress}

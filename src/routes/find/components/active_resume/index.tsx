@@ -14,10 +14,10 @@ interface ActiveResumeProps {
 const ActiveResume = (props: ActiveResumeProps): ReactElement => {
   // context variables and functions
   const { isLoggedIn } = useAuth();
-  const { activeResumeId, userResumes, updateActiveResume } = useUser();
+  const { activeResumeId, resumes, updateActiveResume } = useUser();
   // derived variables
-  const doesUserHaveResumes = !!userResumes?.length;
-  const activeUserResume = userResumes?.find(userResume => userResume.id === activeResumeId);
+  const doesUserHaveResumes = !!resumes?.length;
+  const activeResume = resumes?.find(resume => resume.id === activeResumeId);
   const isDisplayHeader = props.isDisplayHeader || true;
 
   return (
@@ -37,16 +37,16 @@ const ActiveResume = (props: ActiveResumeProps): ReactElement => {
               id='active-resume-dropdown'
               isDisabled={!doesUserHaveResumes}
               options={
-                userResumes?.map(userResume => {
+                resumes?.map(resume => {
                   return {
-                    id: userResume.id,
-                    displayName: userResume.name,
-                    onClick: () => updateActiveResume(userResume.id),
+                    id: resume.id,
+                    displayName: resume.name,
+                    onClick: () => updateActiveResume(resume.id),
                   };
                 }) || []
               }
               placeholder={doesUserHaveResumes ? 'Select A Resume' : 'No Resumes'}
-              selectedOption={activeUserResume ? { displayName: activeUserResume.name } : undefined}
+              selectedOption={activeResume ? { displayName: activeResume.name } : undefined}
             />
           )
           : (

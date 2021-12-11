@@ -80,6 +80,13 @@ export interface GigType {
   displayName: string,
 }
 
+export interface MessageTemplate {
+  id: string,
+  employerId: string,
+  name: string,
+  template: string,
+}
+
 export interface Option {
   displayName: string,
   icon?: ReactElement,
@@ -92,6 +99,12 @@ export interface PopulatedUserGigApplication {
   gig: Gig,
   userId: string,
   status: GigApplicationStatus,
+}
+
+export interface Resume {
+  id: string,
+  name: string,
+  userId: string,
 }
 
 export interface SearchParameters {
@@ -115,10 +128,4 @@ export interface User {
   address: string,
   degree: string,
   college: string,
-}
-
-export interface UserResume {
-  id: string,
-  name: string,
-  userId: string,
 }

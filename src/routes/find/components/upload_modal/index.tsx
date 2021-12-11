@@ -16,7 +16,7 @@ type UploadModalProps = {
 
 const UploadModal = (props: UploadModalProps): ReactElement => {
   const { user } = useAuth();
-  const { uploadUserResumes } = useUser();
+  const { uploadResumes } = useUser();
   const [isUploadInProgress, setIsUploadInProgress] = useState(false);
   const [uploadFiles, setUploadFiles] = useState<UploadFile[]>([]);
 
@@ -29,10 +29,10 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
   const upload = async() => {
     if (!isUploadInProgress) {
       setIsUploadInProgress(true);
-      let userResumes = [];
+      let resumes = [];
       for (let index = 0; index < uploadFiles.length; index++) {
         const updatedUploadFile = uploadFiles[index];
-        userResumes.push({
+        resumes.push({
           id: updatedUploadFile.id,
           name: updatedUploadFile.name,
           userId: user.id,
@@ -42,7 +42,7 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
         uploadFilesCopy.splice(index, 1, updatedUploadFile);
         setUploadFiles(uploadFilesCopy);
       }
-      uploadUserResumes(userResumes);
+      uploadResumes(resumes);
       setUploadFiles([]);
       props.setIsOpen(false);
     }

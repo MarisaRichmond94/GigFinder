@@ -3,12 +3,13 @@ import { loremIpsum } from "lorem-ipsum";
 import { useCallback, useEffect, useState } from 'react';
 
 import { getGigById } from 'api/gigs';
+import { getResumesByUserId } from 'api/resumes';
 import employers from 'mock/employers.json';
 import titles from 'mock/titles.json';
 import UserContext from 'providers/user/context';
 import settings from 'settings';
 import {
-  EmployerReview, Gig, GigApplicationStatus, PopulatedUserGigApplication, User, UserResume,
+  EmployerReview, Gig, GigApplicationStatus, PopulatedUserGigApplication, Resume, User,
 } from 'types';
 import generateUUID from 'utils/generateGUID';
 import getRandomValueFromList from 'utils/getRandomValueFromList';
@@ -18,7 +19,7 @@ const UserProvider = (props: object) => {
   const [activeResumeId, setActiveResumeId] = useState<string | undefined>(undefined);
   const [favoriteGigs, setFavoriteGigs] = useState<Gig[]>([]);
   const [gigApplications, setGigApplications] = useState<PopulatedUserGigApplication[]>([]);
-  const [userResumes, setUserResumes] = useState<UserResume[] | undefined>();
+  const [resumes, setResumes] = useState<Resume[] | undefined>();
 
   useEffect(() => {
     const localActiveResumeId = window.localStorage.getItem('activeResumeId');
@@ -48,9 +49,9 @@ const UserProvider = (props: object) => {
     setFavoriteGigs(userGigs);
   }, []);
 
-  const getUserResumes = useCallback(async (userId: string) => {
-    const response = await axios.get(`${settings.BASE_SERVER_URL}/userResumes?userId=${userId}`);
-    setUserResumes(response.data);
+  const getResumes = useCallback(async (userId: string) => {
+    const resumesByUserId = await getResumesByUserId(userId);
+    setResumes(resumesByUserId);
   }, []);
 
   const getGigApplications = useCallback(async (userId: string) => {
@@ -76,8 +77,12 @@ const UserProvider = (props: object) => {
       await axios.delete(`${settings.BASE_SERVER_URL}/userGigs/${response.data[0].id}`);
       setFavoriteGigs(favoriteGigs?.filter(favoriteGig => favoriteGig.id !== gigId));
     } else {
-      await axios.post(`${settings.BASE_SERVER_URL}/userGigs`, { id: generateUUID(), userId, gigId });
-      const favoritedGig = await axios.get(`${settings.BASE_SERVER_URL}/gigs?id=${gigId}`);
+      await axios.post(
+        `${settings.BASE_SERVER_URL}/userGigs`, { id: generateUUID(), userId, gigId }
+      );
+      const favoritedGig = await axios.get(
+        `${settings.BASE_SERVER_URL}/gigs?id=${gigId}`
+      );
       setFavoriteGigs([...favoriteGigs, favoritedGig.data[0]]);
     }
   }, [favoriteGigs, setFavoriteGigs]);
@@ -126,24 +131,22 @@ const UserProvider = (props: object) => {
     }
   }, [activeResumeId, getUserById, gigApplications, setGigApplications]);
 
-  const uploadUserResume = useCallback(async(userResume: UserResume): Promise<UserResume> => {
-    const response = await axios.post(`${settings.BASE_SERVER_URL}/userResumes`, userResume);
+  const uploadResume = useCallback(async(resume: Resume): Promise<Resume> => {
+    const response = await axios.post(`${settings.BASE_SERVER_URL}/resumes`, resume);
     return response?.data;
   }, []);
 
-  const uploadUserResumes = useCallback(async(userResumes: UserResume[]) => {
-    const newUserResumes = await Promise.all<UserResume>(
-      userResumes.map(userResume => uploadUserResume(userResume))
-    );
-    setUserResumes(userResumes?.length ? [...userResumes, ...newUserResumes] : newUserResumes);
-  }, [uploadUserResume]);
+  const uploadResumes = useCallback(async(newResumes: Resume[]) => {
+    await Promise.all<Resume>(newResumes.map(newResume => uploadResume(newResume)));
+    setResumes(resumes?.length ? [...resumes, ...newResumes] : newResumes);
+  }, [resumes, uploadResume]);
 
-  const updateActiveResume = useCallback((userResumeId: string): void => {
-    if (userResumes?.find(userResume => userResume.id === userResumeId)) {
-      setActiveResumeId(userResumeId);
-      window.localStorage.setItem('activeResumeId', userResumeId);
+  const updateActiveResume = useCallback((resumeId: string): void => {
+    if (resumes?.find(resume => resume.id === resumeId)) {
+      setActiveResumeId(resumeId);
+      window.localStorage.setItem('activeResumeId', resumeId);
     }
-  }, [userResumes]);
+  }, [resumes]);
 
   const getEmployerReviews = useCallback(async(employer: string): Promise<EmployerReview[]> => {
     const response = await axios.get(
@@ -167,15 +170,15 @@ const UserProvider = (props: object) => {
     activeResumeId,
     favoriteGigs,
     gigApplications,
-    userResumes,
+    resumes,
     applyToGig,
     getFavoriteGigs,
     getGigApplications,
-    getUserResumes,
+    getResumes,
     toggleFavoriteGig,
     updateActiveGig,
     updateActiveResume,
-    uploadUserResumes,
+    uploadResumes,
   };
 
   return <UserContext.Provider value={value} {...props} />;
