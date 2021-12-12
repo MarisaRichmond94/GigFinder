@@ -22,7 +22,7 @@ const Header = (props: HeaderProps): ReactElement => {
         <div id='gig-details-title' className='bold header-text' title={title}>
           {title}
         </div>
-        &nbsp;<div id='vertical-line' />&nbsp;
+        &nbsp;<div className='vertical-line grey' />&nbsp;
         {views > 5000 ? <GiCampfire /> : <FaRegSnowflake />}&nbsp;
         <div className='gig-item-views sub-header-text' title={getFormattedViews(views)}>
           {getFormattedViews(views)}

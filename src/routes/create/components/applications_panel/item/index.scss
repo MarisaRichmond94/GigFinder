@@ -1,0 +1,40 @@
+@import 'global';
+
+.application-container {
+  align-items: center;
+  display: flex;
+  margin-bottom: $medium-margin;
+
+  input {
+    margin-right: $medium-margin;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.application {
+  background-color: $off-white;
+  border-radius: 5px;
+  padding: $medium-padding $extra-large-padding;
+  width: calc(100% - 26px);
+
+  .application-footer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .primary-green {
+    color: $primary-green;
+  }
+
+  .primary-red {
+    color: $primary-red;
+  }
+
+  svg {
+    font-size: $header-font-size;
+  }
+}

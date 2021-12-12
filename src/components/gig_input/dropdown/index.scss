@@ -6,7 +6,7 @@
 
   button {
     align-items: center;
-    background-color: white !important;
+    background-color: $white !important;
     border: none;
     border-radius: 5px;
     box-shadow: none !important;
@@ -23,6 +23,16 @@
 
     .placeholder-text {
       color: #767676 !important;
+    }
+  }
+
+  &.off-white {
+    button {
+      background-color: $off-white !important;
+    }
+
+    .gig-dropdown-menu {
+      background-color: $off-white;
     }
   }
 

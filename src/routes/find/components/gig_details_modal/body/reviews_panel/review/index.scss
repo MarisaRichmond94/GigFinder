@@ -53,12 +53,12 @@
     .review-divider {
       color: $grey;
       width: 100%;
+
+      &:last-child {
+        display: none;
+      }
     }
   }
-}
-
-hr:last-child {
-  display: none;
 }
 
 // mobile view

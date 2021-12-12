@@ -35,7 +35,7 @@ const GigApplicationItem = (props: GigApplicationItemProps): ReactElement => {
       </div>
       <div className='gig-application-item-row sub-header-text'>
         {employer}
-        &nbsp;&nbsp;<div className='vertical-line' />&nbsp;&nbsp;
+        &nbsp;&nbsp;<div className='vertical-line dark-grey' />&nbsp;&nbsp;
         <BsStarFill className='gig-application-item-star' />&nbsp;
         {rating}
       </div>

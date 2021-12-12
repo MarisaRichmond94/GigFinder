@@ -27,6 +27,23 @@
   display: none;
 }
 
+.vertical-line {
+  border-right: 1px solid;
+  height: 20px;
+
+  &.light-grey {
+    border-color: $light-grey;
+  }
+
+  &.grey {
+    border-color: $grey;
+  }
+
+  &.dark-grey {
+    border-color: $dark-grey;
+  }
+}
+
 // mobile view
 @media (min-width: $min-mobile-width) {
   .page-container {

@@ -1,0 +1,15 @@
+@import 'global';
+
+#application-actions-container {
+  display: flex;
+  justify-content: right;
+
+  button {
+    margin-right: $medium-margin;
+    width: 150px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

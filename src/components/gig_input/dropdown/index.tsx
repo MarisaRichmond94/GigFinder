@@ -66,7 +66,10 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
   const activeInputText = props.selectedOption?.displayName || props.placeholder;
 
   return (
-    <Dropdown className={`gig-dropdown${props.classNames ? ` ${props.classNames}` : ''}`}>
+    <Dropdown
+      id={props.id}
+      className={`gig-dropdown${props.classNames ? ` ${props.classNames}` : ''}`}
+    >
       <Dropdown.Toggle className='sub-header-text' disabled={props.isDisabled || false}>
         <div className='gig-dropdown-content-wrapper'>
           <div className='gig-dropdown-text' title={activeInputText}>

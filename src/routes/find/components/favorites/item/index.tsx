@@ -29,7 +29,7 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
       </div>
       <div className='favorite-gig-item-row sub-header-text'>
         {employer}
-        &nbsp;&nbsp;<div className='vertical-line' />&nbsp;&nbsp;
+        &nbsp;&nbsp;<div className='vertical-line dark-grey' />&nbsp;&nbsp;
         <BsStarFill className='favorite-gig-item-star' />&nbsp;
         {rating}
       </div>

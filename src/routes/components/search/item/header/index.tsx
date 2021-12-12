@@ -22,7 +22,7 @@ const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
       <div className='gig-item-job-title bold header-text' title={title}>
         {title}
       </div>
-      &nbsp;&nbsp;<div className='vertical-line' />&nbsp;&nbsp;
+      &nbsp;&nbsp;<div className='vertical-line light-grey' />&nbsp;&nbsp;
       <div className='gig-item-employer sub-header-text' title={employer}>
         {employer}
       </div>&nbsp;&nbsp;

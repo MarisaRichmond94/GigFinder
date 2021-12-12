@@ -1,7 +1,7 @@
 @import 'global';
 
 #gig-creation-panel {
-  margin-top: $medium-margin;
+  margin: $medium-margin 0;
   overflow-y: auto;
 
   .gig-type-dropdown {

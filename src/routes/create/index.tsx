@@ -13,17 +13,18 @@ import RightPanel from 'routes/create/right_panel';
 const CreatePage = (): ReactElement => {
   // context variables and functions
   const { employer, isLoggedIn } = useAuth();
-  const { getGigs, getMessageTemplates } = useEmployer();
+  const { getApplicationsByEmployer, getGigs, getMessageTemplates } = useEmployer();
   // derived variables
   const employerId = employer?.id;
   const employerName = employer?.name;
 
   useEffect(() => {
     if (employerId && employerName) {
+      getApplicationsByEmployer(employerName);
       getGigs(employerName);
       getMessageTemplates(employerId);
     }
-  }, [employerId, employerName, getGigs, getMessageTemplates]);
+  }, [employerId, employerName, getApplicationsByEmployer, getGigs, getMessageTemplates]);
 
   const UnauthenticatedView = (
     <div id='create-page-login'>

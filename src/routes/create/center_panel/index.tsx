@@ -4,6 +4,7 @@ import { ReactElement, useEffect, useState } from 'react';
 
 import { useViewport } from 'hooks/useViewport';
 import PanelSelector from 'routes/components/panel_selector';
+import ApplicationsPanel from 'routes/create/components/applications_panel';
 import GigCreationPanel from 'routes/create/components/gig_creation_panel';
 import GigsPanel from 'routes/create/components/gigs_panel';
 import MessageTemplatePanel from 'routes/create/components/message_template_panel';
@@ -33,6 +34,7 @@ const CenterPanel = (): ReactElement => {
       case CreatePanelTypes.post:
         return <GigCreationPanel />;
       case CreatePanelTypes.candidates:
+        return <ApplicationsPanel />;
       case CreatePanelTypes.gigs:
       default:
         return <GigsPanel />;

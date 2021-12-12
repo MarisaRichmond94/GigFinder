@@ -33,7 +33,7 @@ const Header = (props: HeaderProps): ReactElement => {
         <div id='gig-details-title' className='bold header-text' title={title}>
           {title}
         </div>
-        &nbsp;<div id='vertical-line' />&nbsp;
+        &nbsp;<div className='vertical-line grey' />&nbsp;
         <div id='gig-details-employer' className='header-text' title={employer}>
           {employer}
         </div>

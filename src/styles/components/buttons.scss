@@ -87,6 +87,34 @@ button,
     }
   }
 
+  &.primary-red {
+    background-color: $primary-red;
+
+    &:hover {
+      background-color: $secondary-red;
+      color: $off-white;
+    }
+
+    &:active,
+    &:focus {
+      background-color: $grey;
+    }
+  }
+
+  &.primary-green {
+    background-color: $primary-green;
+
+    &:hover {
+      background-color: $secondary-green;
+      color: $off-white;
+    }
+
+    &:active,
+    &:focus {
+      background-color: $grey;
+    }
+  }
+
   &.light-background {
     color: $off-black;
   }

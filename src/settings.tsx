@@ -46,7 +46,7 @@ const settings = {
         MOBILE: []
       },
       RIGHT: {
-        BUFFER: 85,
+        BUFFER: 95,
         DESKTOP: [
           'employer-sign-out-button',
           'active-message-template-section',

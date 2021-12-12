@@ -1,5 +1,17 @@
 import { ReactElement } from 'react';
 
+export interface Application {
+  id: string,
+  employer: string,
+  gigId: string,
+  candidate: Candidate,
+  currentPosition: Position,
+  previousPosition: Position,
+  feedback: Feedback,
+  background: Background,
+  status: ApplicationStatus,
+}
+
 export enum ApplicationStatus {
   pending = 'pending',
   accepted = 'accepted',
@@ -11,6 +23,22 @@ export enum AuthFieldType {
   email = 'email',
   password = 'password',
   all = 'all',
+}
+
+export interface Background {
+  passedBackgroundCheck: boolean,
+  hasReleventCredentials: boolean,
+  meetsMinimumRequirements: boolean,
+}
+
+export interface Candidate {
+  id: string,
+  name: string,
+  email: string,
+  phone: string,
+  address: string,
+  degree: string,
+  college: string,
 }
 
 export enum CreatePanelTypes {
@@ -45,6 +73,15 @@ export interface EmployerReview {
   abbrevState: string,
   datePosted: string,
   summary: string,
+}
+
+export interface Feedback {
+  mood?: number,
+  positiveTraits?: string[],
+  negativeTraits?: string[],
+  technicalFit?: number,
+  culturalFit?: number,
+  additionalNotes?: string,
 }
 
 export enum FindPanelTypes {
@@ -95,6 +132,12 @@ export interface PopulatedApplication {
   gig: Gig,
   userId: string,
   status: ApplicationStatus,
+}
+
+export interface Position {
+  title: string,
+  employer: string,
+  highlights: string,
 }
 
 export interface Resume {

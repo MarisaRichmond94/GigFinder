@@ -1,15 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import ApplicationsApi from 'api/applications';
 import GigsApi from 'api/gigs';
 import MessageTemplatesApi from 'api/message_templates';
 import EmployerContext from 'providers/employer/context';
-import { Gig, MessageTemplate } from 'types';
+import { Application, ApplicationStatus, Gig, MessageTemplate } from 'types';
 
 const EmployerProvider = (props: object) => {
+  const [activeApplication, setActiveApplication] = useState<Application | undefined>();
   const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [activeMessageTemplateId, setActiveMessageTemplateId] = useState<string | undefined>();
+  const [applications, setApplications] = useState<Application[] | undefined>();
+  const [filteredApplications, setFilteredApplications] = useState<Application[] | undefined>();
   const [gigs, setGigs] = useState<Gig[] | undefined>();
   const [messageTemplates, setMessageTemplates] = useState<MessageTemplate[] | undefined>();
+  const [selectedApplicationIds, setSelectedApplicationIds] = useState([]);
 
   useEffect(() => {
     const localActiveMessageTemplateId = window.localStorage.getItem('activeMessageTemplateId');
@@ -17,7 +22,17 @@ const EmployerProvider = (props: object) => {
     // eslint-disable-next-line
   }, []);
 
-  // gig functionality
+  useEffect(() => {
+    if (activeGig) {
+      setFilteredApplications(
+        applications?.filter(
+          app => app.gigId === activeGig.id && app.status !== ApplicationStatus.rejected,
+        )
+      );
+    }
+  }, [activeGig, applications]);
+
+  // gig CRUD functionality
   const getGigs = useCallback(async (employer: string) => {
     const employerGigs = await GigsApi.get({ employer });
     setGigs(employerGigs);
@@ -80,18 +95,69 @@ const EmployerProvider = (props: object) => {
     }
   }, [activeMessageTemplateId]);
 
+  // candidate CRUD functionality
+  const getApplicationsByEmployer = useCallback(async (employer: string) => {
+    if (employer) {
+      const applicationsByEmployer = await ApplicationsApi.get({ employer });
+      setApplications(
+        applicationsByEmployer?.filter(app => app.status !== ApplicationStatus.rejected),
+      );
+    }
+  }, []);
+
+  const toggleSelectedApplicationId = useCallback((applicationId: string): void => {
+    selectedApplicationIds?.find(x => x === applicationId)
+      ? setSelectedApplicationIds(selectedApplicationIds.filter(x => x !== applicationId))
+      : setSelectedApplicationIds([...selectedApplicationIds, applicationId]);
+  }, [selectedApplicationIds]);
+
+  const updateApplicationStatuses = useCallback(async (status: ApplicationStatus) => {
+    for (let index = 0; index < selectedApplicationIds.length; index++) {
+      const applicationId = selectedApplicationIds[index];
+      const applicationIndex = applications.findIndex(x => x.id === applicationId);
+      const application = applications[applicationIndex];
+      const updatedApplication = await ApplicationsApi.update(
+        applicationId,
+        {...application, status },
+      );
+      if (updatedApplication) {
+        applications.splice(applicationIndex, 1, updatedApplication);
+        setApplications(applications);
+        const filteredApplicationIndex = filteredApplications.length
+          ? filteredApplications.findIndex(x => x.id === applicationId)
+          : -1;
+        if (filteredApplicationIndex) {
+          filteredApplications.splice(filteredApplicationIndex, 1, updatedApplication);
+          setFilteredApplications(filteredApplications);
+        }
+      }
+    }
+  }, [applications, filteredApplications, selectedApplicationIds]);
+
+  const clearSelectedApplicationIds = useCallback(() => {
+    setSelectedApplicationIds([]);
+  }, []);
+
   const value = {
     activeGig,
     activeMessageTemplateId,
+    applications,
+    filteredApplications,
     gigs,
     messageTemplates,
+    selectedApplicationIds,
     addGig,
+    clearSelectedApplicationIds,
     closeGig,
     createMessageTemplate,
     deleteMessageTemplate,
+    getApplicationsByEmployer,
     getGigs,
     getMessageTemplates,
+    setActiveApplication,
     setActiveGig,
+    toggleSelectedApplicationId,
+    updateApplicationStatuses,
     updateGig,
     updateMessageTemplate,
     updateActiveMessageTemplateId,

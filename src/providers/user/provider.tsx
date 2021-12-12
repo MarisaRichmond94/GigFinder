@@ -99,6 +99,14 @@ const UserProvider = (props: object) => {
     }
   }
 
+  const generateRandomBackground = () => {
+    return {
+      passedBackgroundCheck: Math.random() < 0.5 ? true : false,
+      hasReleventCredentials: Math.random() < 0.5 ? true : false,
+      meetsMinimumRequirements: Math.random() < 0.5 ? true : false,
+    }
+  }
+
   const applyToGig = useCallback(async (userId: string, gigId: string) => {
     if (activeResumeId) {
       const gig = await GigsApi.getById(gigId);
@@ -111,6 +119,7 @@ const UserProvider = (props: object) => {
         currentPosition: generateRandomExperience(),
         previousPosition: generateRandomExperience(),
         feedback: settings.INITIAL_FEEDBACK,
+        background: generateRandomBackground(),
         status: ApplicationStatus.pending,
       }
       const newApplicationResponse = await ApplicationsApi.post(newApplication);

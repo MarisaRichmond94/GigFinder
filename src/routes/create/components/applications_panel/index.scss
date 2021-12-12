@@ -1,0 +1,23 @@
+@import 'global';
+
+#applications-panel {
+  #applications-panel-gig-filter {
+    margin-top: $medium-margin;
+
+    .gig-dropdown-menu {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+  }
+
+  .applications-panel-divider {
+    color: $grey;
+    margin: $medium-margin 0;
+    width: 100%;
+  }
+
+  #applications-list {
+    height: calc(100vh - 270px);
+    overflow-y: auto;
+  }
+}
