@@ -4,16 +4,16 @@ import { ReactElement } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { IoIosArrowDown } from 'react-icons/io';
 
-import { Option } from 'types';
+import { DropdownOption } from 'types';
 
 type GigDropdownProps = {
   classNames?: string,
   id: string,
   isDisabled?: boolean,
-  onOptionSelect?: (option: Option) => void,
-  options?: Option[] | undefined,
+  onOptionSelect?: (option: DropdownOption) => void,
+  options?: DropdownOption[] | undefined,
   placeholder: string,
-  selectedOption: Option | undefined,
+  selectedOption: DropdownOption | undefined,
 }
 
 const GigDropdown = (props: GigDropdownProps): ReactElement => {
@@ -50,7 +50,7 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
     })
   }
 
-  const handleOptionSelect = (option: Option): void => {
+  const handleOptionSelect = (option: DropdownOption): void => {
     if (typeof option === 'object' && option?.onClick !== undefined) {
       option.onClick();
     } else if (props.onOptionSelect !== undefined) {

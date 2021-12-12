@@ -9,7 +9,7 @@ import { useSearch } from 'providers/search';
 import SearchTextInput from 'routes/components/search/input/text';
 import SearchDropdownInput from 'routes/components/search/input/dropdown';
 import settings from 'settings';
-import { Option } from 'types';
+import { DropdownOption } from 'types';
 
 const SearchPanel = (): ReactElement => {
   const {
@@ -25,15 +25,13 @@ const SearchPanel = (): ReactElement => {
 
   const [title, setTitle] = useState(query.get('title') || '');
   const [location, setLocation] = useState(query.get('location') || '');
-  const [type, setType] = useState<undefined | Option>(
-    typeOptions?.find(x => x.displayName === query.get('type')) || undefined
-  );
+  const [type, setType] = useState<undefined | string>(query.get('type') || '');
 
   useEffect(() => {
     debounceUpdateSearch({
-      title: title,
-      location: location,
-      type: type?.displayName || '',
+      title,
+      location,
+      type,
       filters: searchFilters ? searchFilters.join(',') : '',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,8 +49,8 @@ const SearchPanel = (): ReactElement => {
     }
   }
 
-  const updateSelectedOption = (option: Option): void => {
-    setType(typeOptions?.find(x => x.displayName === option.displayName) || undefined);
+  const updateSelectedOption = (option: DropdownOption): void => {
+    setType(typeOptions?.find(x => x === option.displayName) || undefined);
   }
 
   const getClassNames = (): string => {
@@ -86,9 +84,9 @@ const SearchPanel = (): ReactElement => {
       <div className={getClassNames()}>
         <SearchDropdownInput
           fieldName='type'
-          options={typeOptions}
+          options={typeOptions?.map(typeOption => { return { displayName: typeOption }; }) || []}
           placeholder='full-time, part-time, etc.'
-          selectedOption={type}
+          selectedOption={type ? { displayName: type } : undefined}
           updateInput={updateSelectedOption}
         />
       </div>

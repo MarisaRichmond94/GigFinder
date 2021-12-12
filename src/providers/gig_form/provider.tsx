@@ -6,7 +6,7 @@ import LocationsApi from 'api/locations';
 import TypesApi from 'api/types';
 import TitlesApi from 'api/titles';
 import GigFormContext from 'providers/gig_form/context';
-import { Gig, GigFormFieldType, GigType } from 'types';
+import { Gig, GigFormFieldType } from 'types';
 import generateGUID from 'utils/generateGUID';
 
 const GigFormProvider = (props: object) => {
@@ -14,7 +14,7 @@ const GigFormProvider = (props: object) => {
   const [benefitOptions, setBenefitOptions] = useState<string[] | undefined>();
   const [locationOptions, setLocationOptions] = useState<string[] | undefined>();
   const [titleOptions, setTitleOptions] = useState<string[] | undefined>();
-  const [typeOptions, setTypeOptions] = useState<GigType[] | undefined>();
+  const [typeOptions, setTypeOptions] = useState<string[] | undefined>();
   const [isInEditMode, setIsInEditMode] = useState(false);
   const [isValidSalary, setIsValidSalary] = useState(false);
   // gig field state
@@ -24,7 +24,7 @@ const GigFormProvider = (props: object) => {
   const [requirements, setRequirements] = useState<string | undefined>();
   const [salary, setSalary] = useState<string | undefined>();
   const [title, setTitle] = useState<string | undefined>();
-  const [type, setType] = useState<GigType | undefined>();
+  const [type, setType] = useState<string | undefined>();
 
   useEffect(() => {
     async function populateFormOptions() {
@@ -63,7 +63,7 @@ const GigFormProvider = (props: object) => {
         description,
         requirements,
         salary,
-        type: type.displayName,
+        type,
       };
 
       if (JSON.stringify(updatedGig) !== JSON.stringify(gig)) {
@@ -105,7 +105,7 @@ const GigFormProvider = (props: object) => {
       setDescription(originalGig.description);
       setRequirements(originalGig.requirements);
       setSalary(originalGig.salary);
-      setType(typeOptions?.find(jobType => jobType.displayName === originalGig.type));
+      setType(typeOptions?.find(jobType => jobType === originalGig.type));
       setIsValidSalary(true);
     } else {
       // clear all values to undefined/falsey (for creating new gig)
@@ -121,7 +121,7 @@ const GigFormProvider = (props: object) => {
     setIsInEditMode(!!originalGig);
   }, [typeOptions]);
 
-  const updateInput = useCallback((type: string, value: string | string[] | GigType): void => {
+  const updateInput = useCallback((type: string, value: string | string[]): void => {
     switch (type) {
       case GigFormFieldType.benefits:
         if (Array.isArray(value)) setBenefits(value);
@@ -142,7 +142,7 @@ const GigFormProvider = (props: object) => {
         if (typeof value === 'string') setTitle(value);
         break;
       case GigFormFieldType.type:
-        if (typeof value === 'object' && !Array.isArray(value)) setType(value);
+        if (typeof value === 'string') setType(value);
         break;
       default:
         // TODO - handle this

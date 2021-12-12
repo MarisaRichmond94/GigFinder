@@ -1,6 +1,6 @@
 import settings from 'settings';
 
-const buildSearchUrl = (gigTypes): string => {
+const buildSearchUrl = (typeOptions: string[]): string => {
   const query = new URLSearchParams(window.location.search);
   let url = `${settings.BASE_SERVER_URL}/gigs?`;
 
@@ -10,9 +10,9 @@ const buildSearchUrl = (gigTypes): string => {
   const location = query.get('location') || '';
   if (location && location !== '') url += `city_like=${location.trim()}&`;
 
-  const type = gigTypes?.find(x => x.displayName === query.get('type')) || undefined;
-  if (type && type.displayName !== settings.ANY_TYPE) {
-    url += `type=${type.displayName.toLowerCase()}&`;
+  const type = typeOptions?.find(x => x === query.get('type')) || undefined;
+  if (type && type !== settings.ANY_TYPE) {
+    url += `type=${type.toLowerCase()}&`;
   }
 
   return url.slice(0, -1);

@@ -15,7 +15,7 @@ import {
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
-import { Gig, GigType, SearchParameters } from 'types';
+import { Gig, SearchParameters } from 'types';
 
 const SearchProvider = (props: object) => {
   const history = useHistory();
@@ -25,7 +25,7 @@ const SearchProvider = (props: object) => {
   const [filteredResults, setFilteredResults] = useState<Gig[] | undefined>();
   const [locationOptions, setLocationOptions] = useState<string[] | undefined>();
   const [titleOptions, setTitleOptions] = useState<string[] | undefined>();
-  const [typeOptions, setTypeOptions] = useState<GigType[] | undefined>();
+  const [typeOptions, setTypeOptions] = useState<string[] | undefined>();
   const [searchFilters, setSearchFilters] = useState<string[]>(getSearchFilters(search));
   const [searchResults, setSearchResults] = useState<Gig[] | undefined>(undefined);
 
@@ -55,8 +55,8 @@ const SearchProvider = (props: object) => {
       const titleOptionsResponse = await TitlesApi.get();
       setTitleOptions(titleOptionsResponse);
       // types
-      const gigTypesResponse = await TypesApi.get();
-      setTypeOptions(gigTypesResponse);
+      const typeOptionsResponse = await TypesApi.get();
+      setTypeOptions(typeOptionsResponse);
     };
 
     async function initializeFindRoute() {

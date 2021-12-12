@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 
 import GigDropdown from 'components/gig_input/dropdown';
 import { useGigForm } from 'providers/gig_form';
-import { GigFormFieldType, GigType } from 'types';
+import { DropdownOption, GigFormFieldType } from 'types';
 
 type TypeInputProps = {
   gigId?: string,
@@ -22,11 +22,13 @@ const TypeInput = (props: TypeInputProps): ReactElement => {
         classNames='sub-header-text gig-details-input off-white-gig-dropdown gig-type-dropdown'
         id={`gig-type-dropdown${props.gigId ? `-${props.gigId}` : ''}`}
         onOptionSelect={
-          (selectedGigType: GigType) => updateInput(GigFormFieldType.type, selectedGigType)
+          (selectedType: DropdownOption) => updateInput(
+            GigFormFieldType.type, selectedType.displayName
+          )
         }
-        options={typeOptions}
+        options={typeOptions?.map(typeOption => { return { displayName: typeOption }; }) || []}
         placeholder='full-time, part-time, etc.'
-        selectedOption={type}
+        selectedOption={type ? { displayName: type } : undefined}
       />
     </div>
   );

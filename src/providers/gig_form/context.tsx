@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { Gig, GigFormFieldType, GigType } from 'types';
+import { Gig, GigFormFieldType } from 'types';
 
 interface GigFormContextType {
   benefitOptions: string[],
@@ -12,15 +12,15 @@ interface GigFormContextType {
   salary?: string,
   title?: string,
   titleOptions?: string[],
-  type?: GigType,
-  typeOptions?: GigType[],
+  type?: string,
+  typeOptions?: string[],
   isValidSalary: boolean,
   addBenefit: (benefit: string) => void,
   deleteBenefit: (benefit: string) => void,
   getIsValidInput: (type: GigFormFieldType) => boolean,
   resetForm: (originalGig?: Gig) => void,
   submitForm: (gig?: Gig, employer?: string) => Gig,
-  updateInput: (type: GigFormFieldType, value: string | string[] | GigType) => void,
+  updateInput: (type: GigFormFieldType, value: string | string[]) => void,
   validateSalary: (salary: string) => void,
 }
 

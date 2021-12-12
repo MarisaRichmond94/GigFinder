@@ -20,6 +20,13 @@ export enum CreatePanelTypes {
   templates = 'templates',
 }
 
+export interface DropdownOption {
+  displayName: string,
+  icon?: ReactElement,
+  id?: string,
+  onClick?: () => void,
+}
+
 export interface Employer {
   id: string,
   name: string,
@@ -76,22 +83,11 @@ export enum GigFormFieldType {
   type = 'type',
 }
 
-export interface GigType {
-  displayName: string,
-}
-
 export interface MessageTemplate {
   id: string,
   employerId: string,
   name: string,
   template: string,
-}
-
-export interface Option {
-  displayName: string,
-  icon?: ReactElement,
-  id?: string,
-  onClick?: () => void,
 }
 
 export interface PopulatedApplication {
