@@ -12,7 +12,13 @@ import settings from 'settings';
 import { Option } from 'types';
 
 const SearchPanel = (): ReactElement => {
-  const { debounceUpdateSearch, gigTypes, searchFilters } = useSearch();
+  const {
+    debounceUpdateSearch,
+    locationOptions,
+    searchFilters,
+    titleOptions,
+    typeOptions,
+  } = useSearch();
   const { pathname, search } = useLocation();
   const query = useQuery(search);
   const { width } = useViewport();
@@ -20,7 +26,7 @@ const SearchPanel = (): ReactElement => {
   const [title, setTitle] = useState(query.get('title') || '');
   const [location, setLocation] = useState(query.get('location') || '');
   const [type, setType] = useState<undefined | Option>(
-    gigTypes?.find(x => x.displayName === query.get('type')) || undefined
+    typeOptions?.find(x => x.displayName === query.get('type')) || undefined
   );
 
   useEffect(() => {
@@ -46,20 +52,22 @@ const SearchPanel = (): ReactElement => {
   }
 
   const updateSelectedOption = (option: Option): void => {
-    setType(gigTypes?.find(x => x.displayName === option.displayName) || undefined);
+    setType(typeOptions?.find(x => x.displayName === option.displayName) || undefined);
   }
 
   const getClassNames = (): string => {
     const pageType = width >= settings.MIN_DESKTOP_WIDTH ? 'desktop': 'mobile';
-    return `${pageType} search-panel-item search-panel-input ${pathname.replace('/', '')}`
+    const route = pathname === settings.FIND_ROUTE ? 'find' : 'home';
+    return `${pageType} search-panel-item search-panel-input ${route}`;
   }
 
   return (
-    <div id={`${pathname.replace('/', '')}${pathname !== '/' ? '-' : ''}search-panel`}>
+    <div id={`${pathname === settings.FIND_ROUTE ? 'find-' : 'home-'}search-panel`}>
       <div className={getClassNames()}>
         <SearchTextInput
           fieldName='title'
           id='search-text-title-input'
+          options={titleOptions}
           placeholder='tech job title (e.g. "Software Engineer")'
           updateSearchText={updateSearchText}
           value={title}
@@ -69,6 +77,7 @@ const SearchPanel = (): ReactElement => {
         <SearchTextInput
           fieldName='location'
           id='search-text-location-input'
+          options={locationOptions}
           placeholder='city in California (e.g. "Los Angeles")'
           updateSearchText={updateSearchText}
           value={location}
@@ -77,7 +86,7 @@ const SearchPanel = (): ReactElement => {
       <div className={getClassNames()}>
         <SearchDropdownInput
           fieldName='type'
-          options={gigTypes}
+          options={typeOptions}
           placeholder='full-time, part-time, etc.'
           selectedOption={type}
           updateInput={updateSelectedOption}

@@ -3,7 +3,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
 
 import BenefitsApi from 'api/benefits';
+import LocationsApi from 'api/locations';
 import TypesApi from 'api/types';
+import TitlesApi from 'api/titles';
 import SearchFormContext from 'providers/search/context';
 import { buildSearchUrl } from 'providers/search/utils/buildSearchUrl';
 import {
@@ -13,7 +15,7 @@ import {
   getSearchFilters,
 } from 'providers/search/utils/filters';
 import settings from 'settings';
-import { Gig, Option, SearchParameters } from 'types';
+import { Gig, GigType, SearchParameters } from 'types';
 
 const SearchProvider = (props: object) => {
   const history = useHistory();
@@ -21,7 +23,9 @@ const SearchProvider = (props: object) => {
 
   const [filterOptions, setFilterOptions] = useState<string[] | undefined>();
   const [filteredResults, setFilteredResults] = useState<Gig[] | undefined>();
-  const [gigTypes, setGigTypes] = useState<Option[] | undefined>();
+  const [locationOptions, setLocationOptions] = useState<string[] | undefined>();
+  const [titleOptions, setTitleOptions] = useState<string[] | undefined>();
+  const [typeOptions, setTypeOptions] = useState<GigType[] | undefined>();
   const [searchFilters, setSearchFilters] = useState<string[]>(getSearchFilters(search));
   const [searchResults, setSearchResults] = useState<Gig[] | undefined>(undefined);
 
@@ -43,9 +47,16 @@ const SearchProvider = (props: object) => {
   );
 
   useEffect(() => {
-    async function populateGigTypes() {
+    async function populateFormOptions() {
+      // locations
+      const locationOptionsResponse = await LocationsApi.get();
+      setLocationOptions(locationOptionsResponse);
+      // titles
+      const titleOptionsResponse = await TitlesApi.get();
+      setTitleOptions(titleOptionsResponse);
+      // types
       const gigTypesResponse = await TypesApi.get();
-      setGigTypes(gigTypesResponse);
+      setTypeOptions(gigTypesResponse);
     };
 
     async function initializeFindRoute() {
@@ -53,7 +64,7 @@ const SearchProvider = (props: object) => {
       setFilterOptions(benefitsResponse);
     }
 
-    populateGigTypes();
+    populateFormOptions();
     if (pathname === settings.FIND_ROUTE) {
       searchGigs();
       initializeFindRoute();
@@ -65,7 +76,7 @@ const SearchProvider = (props: object) => {
     setSearchResults(undefined);
     setFilteredResults(undefined);
     setTimeout(() => {
-      const url = buildSearchUrl(gigTypes);
+      const url = buildSearchUrl(typeOptions);
       fetch(url)
         .then(response => response.json())
         .then(results => {
@@ -76,7 +87,7 @@ const SearchProvider = (props: object) => {
           setSearchResults(results);
         });
     }, 2000);
-  }, [gigTypes, searchFilters, setFilteredResults, setSearchResults]);
+  }, [searchFilters, typeOptions, setFilteredResults, setSearchResults]);
 
   const onSearchFormSubmit = useCallback((): void => {
     history.push({
@@ -108,9 +119,11 @@ const SearchProvider = (props: object) => {
   const value = {
     filterOptions,
     filteredResults,
-    gigTypes,
+    locationOptions,
     searchFilters,
     searchResults,
+    titleOptions,
+    typeOptions,
     debounceUpdateSearch,
     deleteSearchFilter,
     onFilterSelect,

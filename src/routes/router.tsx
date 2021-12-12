@@ -12,10 +12,22 @@ import settings from 'settings';
 const GigRouter = (): ReactElement => {
   return (
     <Switch>
-      <Route exact path={settings.HOME_ROUTE} component={HomePage} />
+      <Route exact path={settings.HOME_ROUTE} component={HomeRoute} />
       <Route path={settings.CREATE_ROUTE} component={CreateRoute} />
       <Route path={settings.FIND_ROUTE} component={FindRoute} />
     </Switch>
+  );
+}
+
+const HomeRoute = (): ReactElement => {
+  useEffect(() => {
+    const localUserId = window.localStorage.getItem('userId');
+    const localEmployerId = window.localStorage.getItem('employerId');
+    if (localUserId || localEmployerId) window.localStorage.clear();
+  }, []);
+
+  return (
+    <HomePage />
   );
 }
 

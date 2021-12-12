@@ -1,6 +1,6 @@
 @import 'global';
 
-#search-panel {
+#home-search-panel {
   width: 90%;
 
   .search-panel-input {
@@ -12,6 +12,18 @@
     .gig-dropdown > .gig-dropdown-menu {
       margin: 0 10%;
       width: 80%;
+    }
+  }
+
+  .searchable-gig-input {
+    input,
+    ul {
+      background-color: $white;
+      width: 80%;
+    }
+
+    ul {
+      left: 10%;
     }
   }
 }

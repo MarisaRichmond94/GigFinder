@@ -1,10 +1,11 @@
 import { ReactElement } from 'react';
 
-import GigTextInput from 'components/gig_input/text';
+import ControlledSearchableGigInput from 'components/gig_input/searchable/controlled';
 
 type SearchTextInputProps = {
   fieldName: string,
   id: string,
+  options: string[],
   placeholder: string,
   updateSearchText: (key: string, value: string) => void,
   value: string,
@@ -12,12 +13,14 @@ type SearchTextInputProps = {
 
 const SearchTextInput = (props: SearchTextInputProps): ReactElement => {
   return (
-    <GigTextInput
+    <ControlledSearchableGigInput
       classNames='search-form-input'
       formValue={props.value}
       id={props.id}
+      options={props.options}
       placeholder={props.placeholder}
-      setFormValue={(value: string) => props.updateSearchText(props.fieldName, value)}
+      onChange={(value: string) => props.updateSearchText(props.fieldName, value)}
+      onOptionSelect={(value: string) => props.updateSearchText(props.fieldName, value)}
     />
   )
 }

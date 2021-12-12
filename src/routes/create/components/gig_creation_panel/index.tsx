@@ -23,7 +23,6 @@ const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
-  console.log({listStyling})
 
   return (
     <GigFormProvider>

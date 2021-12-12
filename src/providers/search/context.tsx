@@ -1,13 +1,15 @@
 import { createContext } from 'react';
 
-import { Gig, Option, SearchParameters } from 'types';
+import { Gig, GigType, SearchParameters } from 'types';
 
 interface SearchContextType {
   filterOptions?: string[],
   filteredResults?: Gig[],
-  gigTypes?: Option[],
+  locationOptions?: string[],
   searchFilters: string[],
   searchResults?: Gig[],
+  titleOptions?: string[],
+  typeOptions?: GigType[],
   debounceUpdateSearch: (searchParameters: SearchParameters) => void,
   deleteSearchFilter: (filter: string) => void,
   onFilterSelect: (filter: string) => void,
