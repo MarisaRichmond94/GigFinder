@@ -2,6 +2,7 @@
 
 #gig-creation-panel {
   margin-top: $medium-margin;
+  overflow-y: auto;
 
   .gig-type-dropdown {
     border-radius: 10px;

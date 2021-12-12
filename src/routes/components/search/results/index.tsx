@@ -16,7 +16,7 @@ import settings from 'settings';
 
 type SearchResultsProps = {
   unusableHeight?: number,
-}
+};
 
 const SearchResults = (props: SearchResultsProps): ReactElement => {
   // context variables and functions

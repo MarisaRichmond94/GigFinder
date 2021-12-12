@@ -1,58 +1,62 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { usePrevious } from 'hooks/usePrevious';
 import { useViewport } from 'hooks/useViewport';
 import AppContext from 'providers/app/context';
-
-const DESKTOP_CENTER_PANEL_IDS = [
-  'header',
-  'search-panel-section'
-];
-const MOBILE_CENTER_PANEL_IDS = [
-  'header',
-  'search-panel-section',
-  'filter-panel-section',
-  'find-center-panel-selector',
-];
-const CENTER_PANEL_BUFFER = 20;
-const DESKTOP_RIGHT_PANEL_IDS = [
-  'action-button-wrapper',
-  'active-resume-section',
-  'search-filters-section',
-  'right-panel-selector',
-];
-const RIGHT_PANEL_BUFFER = 25;
+import settings from 'settings';
 
 const AppProvider = (props: object) => {
+  // hook variables
+  const { pathname } = useLocation();
   const { width } = useViewport();
+  const prevPathname = usePrevious(pathname);
   const prevWidth = usePrevious(width);
+  // local state variables and functions
+  const [routePanelIds, setRoutePanelIds] = useState(
+    pathname === settings.FIND_ROUTE
+      ? settings.PANEL_IDS.FIND_ROUTE
+      : settings.PANEL_IDS.CREATE_ROUTE
+  );
   const [unusableCenterPanelHeight, setUnusableCenterPanelHeight] = useState(0);
   const [unusableRightPanelHeight, setUnusableRightPanelHeight] = useState(0);
+
+  useEffect(() => {
+    if (prevPathname && pathname !== prevPathname) {
+      setRoutePanelIds(
+        pathname === settings.FIND_ROUTE
+          ? settings.PANEL_IDS.FIND_ROUTE
+          : settings.PANEL_IDS.CREATE_ROUTE
+      );
+    }
+  }, [pathname, prevPathname]);
 
   const calculateTotalHeight = useCallback((): void => {
     setTimeout(() => {
       const isCalculatingMobile = width <= 850;
       const centerPanelIds = isCalculatingMobile
-        ? MOBILE_CENTER_PANEL_IDS
-        : DESKTOP_CENTER_PANEL_IDS;
+        ? routePanelIds.CENTER.MOBILE
+        : routePanelIds.CENTER.DESKTOP;
 
-      let totalCenterPanelHeight = 0;
-      for (let index = 0; index < centerPanelIds.length; index++) {
-        const element = document.getElementById(centerPanelIds[index]);
-        totalCenterPanelHeight += (element?.offsetHeight || 0);
+      if (centerPanelIds.length) {
+        let totalCenterPanelHeight = 0;
+        for (let index = 0; index < centerPanelIds.length; index++) {
+          const element = document.getElementById(centerPanelIds[index]);
+          totalCenterPanelHeight += (element?.offsetHeight || 0);
+        }
+        setUnusableCenterPanelHeight(totalCenterPanelHeight + routePanelIds.CENTER.BUFFER);
       }
-      setUnusableCenterPanelHeight(totalCenterPanelHeight + CENTER_PANEL_BUFFER);
 
-      if (!isCalculatingMobile) {
+      if (!isCalculatingMobile && routePanelIds.RIGHT.DESKTOP?.length) {
         let totalRightPanelHeight = 0;
-        for (let index = 0; index < DESKTOP_RIGHT_PANEL_IDS.length; index++) {
-          const element = document.getElementById(DESKTOP_RIGHT_PANEL_IDS[index]);
+        for (let index = 0; index < routePanelIds.RIGHT.DESKTOP.length; index++) {
+          const element = document.getElementById(routePanelIds.RIGHT.DESKTOP[index]);
           totalRightPanelHeight += (element?.offsetHeight || 0);
         }
-        setUnusableRightPanelHeight(totalRightPanelHeight + RIGHT_PANEL_BUFFER);
+        setUnusableRightPanelHeight(totalRightPanelHeight + routePanelIds.RIGHT.BUFFER);
       }
     }, 200);
-  }, [width]);
+  }, [routePanelIds, width]);
 
   useEffect(() => {
     // @ts-ignore

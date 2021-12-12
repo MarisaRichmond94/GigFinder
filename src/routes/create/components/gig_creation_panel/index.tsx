@@ -15,10 +15,19 @@ import TitleInput from 'routes/create/components/inputs/title';
 import TypeInput from 'routes/create/components/inputs/type';
 import { GigFormFieldType } from 'types';
 
-const GigCreationPanel = (): ReactElement => {
+type GigCreationPanelProps = {
+  unusableHeight?: number,
+};
+
+const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
+  const listStyling = props.unusableHeight
+    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    : {};
+  console.log({listStyling})
+
   return (
     <GigFormProvider>
-      <div id='gig-creation-panel'>
+      <div id='gig-creation-panel' style={listStyling}>
         <TitleInput />
         <TypeInput />
         <LocationInput />

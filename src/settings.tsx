@@ -2,6 +2,7 @@ const settings = {
   ANY_TYPE: 'Any',
   BASE_SERVER_URL: 'http://localhost:8080',
   CREATE_ROUTE: '/create',
+  FIND_ROUTE: '/find',
   HOME_ROUTE: '/',
   INITIAL_FEEDBACK: {
     mood: null,
@@ -13,7 +14,47 @@ const settings = {
   },
   MIN_DESKTOP_WIDTH: 850,
   MIN_RESULTS_PER_LOAD: 25,
-  FIND_ROUTE: '/find',
+  PANEL_IDS: {
+    FIND_ROUTE: {
+      CENTER: {
+        BUFFER: 35,
+        DESKTOP: [
+          'header',
+          'search-panel-section'
+        ],
+        MOBILE: [
+          'header',
+          'search-panel-section',
+          'filter-panel-section',
+          'find-center-panel-selector',
+        ]
+      },
+      RIGHT: {
+        BUFFER: 25,
+        DESKTOP: [
+          'action-button-wrapper',
+          'active-resume-section',
+          'search-filters-section',
+          'right-panel-selector',
+        ],
+      },
+    },
+    CREATE_ROUTE: {
+      CENTER: {
+        BUFFER: 20,
+        DESKTOP: [],
+        MOBILE: []
+      },
+      RIGHT: {
+        BUFFER: 85,
+        DESKTOP: [
+          'employer-sign-out-button',
+          'active-message-template-section',
+          'message-template-section',
+        ],
+      },
+    },
+  }
 }
 
 export default settings;
