@@ -4,6 +4,8 @@ import { ReactElement, useEffect } from 'react';
 
 import GigDropdown from 'components/gig_input/dropdown';
 import GigLoader from 'components/gig_loader';
+import { usePrevious } from 'hooks/usePrevious';
+import { useApplications } from 'providers/applications';
 import { useEmployer } from 'providers/employer';
 import Actions from 'routes/create/components/applications_panel/actions';
 import ApplicationsList from 'routes/create/components/applications_panel/list';
@@ -11,7 +13,9 @@ import ApplicationsList from 'routes/create/components/applications_panel/list';
 const ApplicationsPanel = (): ReactElement => {
   // context provider variables and functions
   const { activeGig, gigs, setActiveGig } = useEmployer();
-  const { applications, filteredApplications } = useEmployer();
+  const { applications, filteredApplications, filterApplicationsByGigId } = useApplications();
+  // hook variables
+  const prevActiveGigId = usePrevious(activeGig?.id);
   // derived variables
   const displayApplications = activeGig ? filteredApplications : applications;
 
@@ -19,6 +23,12 @@ const ApplicationsPanel = (): ReactElement => {
     setActiveGig(undefined);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (activeGig && activeGig.id !== prevActiveGigId) {
+      filterApplicationsByGigId(activeGig.id);
+    }
+  }, [activeGig, prevActiveGigId, filterApplicationsByGigId]);
 
   if (displayApplications === undefined) {
     return (

@@ -49,7 +49,6 @@ const settings = {
         BUFFER: 95,
         DESKTOP: [
           'employer-sign-out-button',
-          'active-message-template-section',
           'message-template-section',
         ],
       },

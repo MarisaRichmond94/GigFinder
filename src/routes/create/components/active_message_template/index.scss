@@ -1,14 +1,12 @@
 @import 'global';
 
 #active-message-template-section {
-  &.mobile-view {
-    color: $off-black;
-    padding: $medium-padding 0;
-  }
+  border-radius: 5px;
+  color: $off-black;
 
-  &.desktop-view {
-    color: $off-white;
-    padding: $extra-large-padding + 5px 0;
+  button {
+    margin: 0;
+    width: 100%;
   }
 
   #active-message-template-header {
@@ -19,5 +17,20 @@
   #active-message-template-dropdown {
     background-color: $off-white;
     border-radius: 15px;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #active-message-template-section {
+    width: 100%;
+  }
+}
+
+// desktop view
+@media (min-width: 1085px) {
+  #active-message-template-section {
+    margin: 0 $medium-margin;
+    width: calc(100% - 490px);
   }
 }

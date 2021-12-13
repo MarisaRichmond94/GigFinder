@@ -1,15 +1,42 @@
 @import 'global';
 
 #application-actions-container {
-  display: flex;
-  justify-content: right;
-
-  button {
+  .gig-button {
     margin-right: $medium-margin;
-    width: 150px;
 
     &:last-child {
       margin-right: 0;
+    }
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #application-actions-container {
+    #active-message-template-section {
+      margin-bottom: $medium-margin;
+      width: 100%;
+    }
+
+    .gig-button {
+      width: calc(33% - 5px);
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 1085px) {
+  #application-actions-container {
+    align-items: center;
+    display: flex;
+
+    #active-message-template-section {
+      margin: 0 $medium-margin 0 0;
+      width: calc(100% - 480px);
+    }
+
+    .gig-button {
+      width: 150px;
     }
   }
 }

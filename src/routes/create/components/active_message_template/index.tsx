@@ -1,42 +1,25 @@
 import './index.scss';
 
 import { ReactElement } from 'react';
-import { FaFileAlt } from 'react-icons/fa';
 
 import GigDropdown from 'components/gig_input/dropdown';
-import { useEmployer } from 'providers/employer';
+import { useMessageTemplates } from 'providers/message_templates';
 
-interface ActiveMessageTemplateProps {
-  isDisplayHeader?: boolean,
-  isMobileView?: boolean,
-}
-
-const ActiveMessageTemplate = (props: ActiveMessageTemplateProps): ReactElement => {
+const ActiveMessageTemplate = (): ReactElement => {
   // context variables and functions
   const {
     activeMessageTemplateId,
     messageTemplates,
     updateActiveMessageTemplateId,
-  } = useEmployer();
+  } = useMessageTemplates();
   // derived variables
   const doesEmployerHaveMessageTemplates = !!messageTemplates?.length;
   const activeMessageTemplate = messageTemplates?.find(
     template => template.id === activeMessageTemplateId,
   );
-  const isDisplayHeader = props.isDisplayHeader || true;
 
   return (
-    <div
-      id='active-message-template-section'
-      className={props.isMobileView ? 'mobile-view' : 'desktop-view'}
-    >
-      {
-        isDisplayHeader &&
-        <div id='active-message-template-header' className='header-text'>
-          <FaFileAlt id='active-message-template-header-icon' />&nbsp;
-          Active Message Template
-        </div>
-      }
+    <div id='active-message-template-section'>
       <GigDropdown
         classNames='off-white-gig-dropdown'
         id='active-message-template-dropdown'

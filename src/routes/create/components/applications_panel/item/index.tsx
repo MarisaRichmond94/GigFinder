@@ -4,7 +4,6 @@ import { ReactElement } from 'react';
 import { BsCheckSquare, BsSquare } from 'react-icons/bs';
 
 import GigButton from 'components/gig_button';
-import { useEmployer } from 'providers/employer';
 import Body from 'routes/create/components/applications_panel/item/body';
 import Header from 'routes/create/components/applications_panel/item/header';
 import { Application } from 'types';
@@ -13,10 +12,10 @@ type ApplicationItemProps = {
   item: Application,
   isSelected: boolean,
   toggleApplicationSelect: (applicationId: string) => void,
+  viewApplicationDetails: (application: Application) => void,
 };
 
 const ApplicationItem = (props: ApplicationItemProps): ReactElement => {
-  const { setActiveApplication } = useEmployer();
   const { id } = props.item;
 
   return (
@@ -36,7 +35,7 @@ const ApplicationItem = (props: ApplicationItemProps): ReactElement => {
           <GigButton
             classNames='primary-blue'
             id={`application-details-button-${id}`}
-            onClick={() => setActiveApplication(props.item)}
+            onClick={() => props.viewApplicationDetails(props.item)}
             text='View Details'
           />
         </div>

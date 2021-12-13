@@ -8,7 +8,7 @@ import CollapsableSection from 'components/collapsable_section';
 import GigButton from 'components/gig_button';
 import { useApp } from 'providers/app';
 import { useAuth } from 'providers/auth';
-import ActiveMessageTemplate from 'routes/create/components/active_message_template';
+import { MessageTemplatesProvider } from 'providers/message_templates';
 import GigCreationPanel from 'routes/create/components/gig_creation_panel';
 import MessageTemplatePanel from 'routes/create/components/message_template_panel';
 
@@ -33,7 +33,6 @@ const RightPanel = (): ReactElement => {
           text='Sign Out'
         />
       }
-      <ActiveMessageTemplate />
       <CollapsableSection
         classNames='off-white'
         icon={<FaPenNib />}
@@ -41,7 +40,9 @@ const RightPanel = (): ReactElement => {
         onToggleCallback={calculateTotalHeight}
         sectionTitle='Message Templates'
       >
-        <MessageTemplatePanel />
+        <MessageTemplatesProvider>
+          <MessageTemplatePanel />
+        </MessageTemplatesProvider>
       </CollapsableSection>
       <CollapsableSection
         classNames='off-white'

@@ -17,7 +17,21 @@
   }
 
   #applications-list {
-    height: calc(100vh - 270px);
     overflow-y: auto;
   }
 }
+
+// mobile view
+@media (min-width: 0) {
+  #applications-list {
+    height: calc(100vh - 305px);
+  }
+}
+
+// desktop view
+@media (min-width: 1085px) {
+  #applications-list {
+    height: calc(100vh - 270px);
+  }
+}
+

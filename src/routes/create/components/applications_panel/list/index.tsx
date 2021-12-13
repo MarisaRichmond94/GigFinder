@@ -3,8 +3,10 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import { useApplications } from 'providers/applications';
 import { useAuth } from 'providers/auth';
 import { useEmployer } from 'providers/employer';
+import ApplicationModal from 'routes/create/components/application_modal';
 import ApplicationItem from 'routes/create/components/applications_panel/item';
 import settings from 'settings';
 import { Application } from 'types';
@@ -16,7 +18,12 @@ type ApplicationsListProps = {
 const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
   // context provider variables and functions
   const { employer } = useAuth();
-  const { selectedApplicationIds, toggleSelectedApplicationId } = useEmployer();
+  const {
+    selectedApplicationIds,
+    setActiveApplication,
+    toggleApplicationIsSelected,
+  } = useApplications();
+  const { activeGig } = useEmployer();
   // local variables and functions
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
   const [resultsCount, setResultsCount] = useState(0);
@@ -41,7 +48,8 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
           key={`application-item-${application.id}`}
           item={application}
           isSelected={!!selectedApplicationIds.find(x => x === application.id)}
-          toggleApplicationSelect={toggleSelectedApplicationId}
+          toggleApplicationSelect={toggleApplicationIsSelected}
+          viewApplicationDetails={viewApplicationDetails}
         />
       )
     );
@@ -56,6 +64,11 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
     );
   };
 
+  const viewApplicationDetails = (application: Application): void => {
+    setActiveApplication(application);
+    setIsApplicationModalOpen(true);
+  };
+
   if (props.applications === undefined) {
     return (
       <div id='applications-panel'>
@@ -66,6 +79,7 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
 
   return (
     <div id='applications-list'>
+      <ApplicationModal isOpen={isApplicationModalOpen} setIsOpen={setIsApplicationModalOpen} />
       {
         props.applications.length
           ? (
@@ -81,7 +95,11 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
           )
           : (
             <div id='no-applications' className='header-text'>
-              {employer.name} has no active applications
+              {
+                !!activeGig
+                  ? `There are no open applications for the ${activeGig.title} role`
+                  : `${employer.name} has no active applications`
+              }
             </div>
           )
       }

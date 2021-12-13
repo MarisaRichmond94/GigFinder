@@ -1,0 +1,20 @@
+@import 'global';
+
+#application-modal-header {
+  align-items: flex-start;
+  display: flex;
+  width: 100%;
+
+  #status-header-details {
+    margin-left: auto;
+
+    div {
+      align-items: center;
+      display: flex;
+
+      &:first-child {
+        margin-right: $small-margin;
+      }
+    }
+  }
+}

@@ -7,8 +7,7 @@ import ControlledSearchableGigInput from 'components/gig_input/searchable/contro
 import GigTextAreaInput from 'components/gig_input/text_area';
 import { useViewport } from 'hooks/useViewport';
 import { useAuth } from 'providers/auth';
-import { useEmployer } from 'providers/employer';
-import ActiveMessageTemplate from 'routes/create/components/active_message_template';
+import { useMessageTemplates } from 'providers/message_templates';
 import { MessageTemplate } from 'types';
 import generateGUID from 'utils/generateGUID';
 
@@ -20,7 +19,7 @@ const MessageTemplatePanel = (): ReactElement => {
     createMessageTemplate,
     deleteMessageTemplate,
     updateMessageTemplate,
-  } = useEmployer();
+  } = useMessageTemplates();
   // hook variables
   const { width } = useViewport();
   // local state variables and functions
@@ -84,7 +83,6 @@ const MessageTemplatePanel = (): ReactElement => {
 
   return (
     <div id='message-template-panel'>
-      {isMobileView && <ActiveMessageTemplate isMobileView />}
       <ControlledSearchableGigInput
         classNames='off-white'
         formValue={name}
