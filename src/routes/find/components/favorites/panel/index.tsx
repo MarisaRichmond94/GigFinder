@@ -41,7 +41,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
           apply={apply}
           key={`favorite-gig-item-${favoriteGig.id}`}
           isApplyDisabled={
-            !(!activeResumeId || applications.find(gigApp => gigApp.gig.id === favoriteGig.id))
+            !!(!activeResumeId || applications.find(gigApp => gigApp.gig.id === favoriteGig.id))
           }
           item={favoriteGig}
         />
