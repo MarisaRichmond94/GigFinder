@@ -9,7 +9,7 @@ import ActiveMessageTemplate from 'routes/create/components/active_message_templ
 import { ApplicationStatus } from 'types';
 
 type FooterProps = {
-  cancel: () => void,
+  close: () => void,
 }
 
 const Footer = (props: FooterProps): ReactElement => {
@@ -17,26 +17,31 @@ const Footer = (props: FooterProps): ReactElement => {
   const { activeApplication, updateApplicationStatuses } = useApplications();
   const { activeMessageTemplateId } = useMessageTemplates();
 
+  const updateStatus = (status: ApplicationStatus) => {
+    updateApplicationStatuses(status, activeApplication.id);
+    props.close();
+  }
+
   return (
     <div id='application-modal-footer'>
       <ActiveMessageTemplate />
       <GigButton
         classNames='medium-grey dark-background sub-header-text application-modal-button'
         id='application-modal-cancel-button'
-        onClick={props.cancel}
-        text='Cancel'
+        onClick={props.close}
+        text='Close'
       />
       <GigButton
         classNames='primary-green'
         id='contact-applicants-button'
         isDisabled={!activeMessageTemplateId}
-        onClick={() => updateApplicationStatuses(ApplicationStatus.accepted, activeApplication.id)}
+        onClick={() => updateStatus(ApplicationStatus.accepted)}
         text='Contact'
       />
       <GigButton
         classNames='primary-red'
         id='reject-applicants-button'
-        onClick={() => updateApplicationStatuses(ApplicationStatus.rejected, activeApplication.id)}
+        onClick={() => updateStatus(ApplicationStatus.rejected)}
         text='Reject'
       />
     </div>

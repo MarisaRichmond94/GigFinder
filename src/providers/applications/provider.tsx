@@ -2,13 +2,17 @@ import { useCallback, useEffect, useState } from 'react';
 
 import ApplicationsApi from 'api/applications';
 import EmployersApi from 'api/employers';
+import TraitsApi from 'api/traits';
 import ApplicationsContext from 'providers/applications/context';
-import { Application, ApplicationStatus } from 'types';
+import { Application, ApplicationStatus, Feedback } from 'types';
+import replaceExistingItemInList from 'utils/replaceExistingItemInList';
 
 const ApplicationsProvider = (props: object) => {
   const [activeApplication, setActiveApplication] = useState<Application | undefined>();
   const [applications, setApplications] = useState<Application[] | undefined>();
   const [filteredApplications, setFilteredApplications] = useState<Application[] | undefined>();
+  const [negativeTraits, setNegativeTraits] = useState<string[] | undefined>();
+  const [positiveTraits, setPositiveTraits] = useState<string[] | undefined>();
   const [selectedApplicationIds, setSelectedApplicationIds] = useState([]);
 
   useEffect(() => {
@@ -21,6 +25,12 @@ const ApplicationsProvider = (props: object) => {
           const appsByEmployer = await ApplicationsApi.get({ employer });
           setApplications(appsByEmployer?.filter(x => x.status !== ApplicationStatus.rejected));
         }
+      }
+
+      const traits = await TraitsApi.get();
+      if (traits) {
+        setNegativeTraits(traits.negative);
+        setPositiveTraits(traits.positive);
       }
     }
 
@@ -51,29 +61,40 @@ const ApplicationsProvider = (props: object) => {
         {...application, status },
       );
       if (updatedApplication) {
-        applications.splice(applicationIndex, 1, updatedApplication);
-        setApplications(applications);
-        const filteredApplicationIndex = filteredApplications.length
-          ? filteredApplications.findIndex(x => x.id === applicationId)
-          : -1;
-        if (filteredApplicationIndex) {
-          filteredApplications.splice(filteredApplicationIndex, 1, updatedApplication);
-          setFilteredApplications(filteredApplications);
+        if (activeApplication && activeApplication.id === updatedApplication.id) {
+          setActiveApplication(updatedApplication);
+        }
+        if (status === ApplicationStatus.rejected) {
+          setApplications(applications.filter(x => x.id !== updatedApplication.id));
+          if (filteredApplications) {
+            setFilteredApplications(
+              filteredApplications.filter(x => x.id !== updatedApplication.id),
+            );
+          }
+        } else {
+          replaceExistingItemInList(updatedApplication, applications, setApplications);
+          replaceExistingItemInList(
+            updatedApplication,
+            filteredApplications,
+            setFilteredApplications,
+          );
         }
       }
     },
-    [applications, filteredApplications],
+    [activeApplication, applications, filteredApplications],
   );
 
   const updateApplicationStatuses = useCallback(
     async (status: ApplicationStatus, applicationId?: string) => {
       if (applicationId) {
         await updateApplicationStatus(status, applicationId);
+      } else {
+        for (let index = 0; index < selectedApplicationIds.length; index++) {
+          const applicationId = selectedApplicationIds[index];
+          await updateApplicationStatus(status, applicationId);
+        }
       }
-      for (let index = 0; index < selectedApplicationIds.length; index++) {
-        const applicationId = selectedApplicationIds[index];
-        await updateApplicationStatus(status, applicationId);
-      }
+      setSelectedApplicationIds([]);
     },
     [selectedApplicationIds, updateApplicationStatus],
   );
@@ -82,15 +103,36 @@ const ApplicationsProvider = (props: object) => {
     setSelectedApplicationIds([]);
   }, []);
 
+  const updateApplicationFeedback = useCallback(async (feedback: Feedback) => {
+    if (activeApplication) {
+      const updatedApplication = await ApplicationsApi.update(
+        activeApplication.id,
+        {...activeApplication, feedback },
+      );
+      if (updatedApplication) {
+        setActiveApplication(updatedApplication);
+        replaceExistingItemInList(updatedApplication, applications, setApplications);
+        replaceExistingItemInList(
+          updatedApplication,
+          filteredApplications,
+          setFilteredApplications,
+        );
+      }
+    }
+  }, [activeApplication, applications, filteredApplications]);
+
   const value = {
     activeApplication,
     applications,
     filteredApplications,
+    negativeTraits,
+    positiveTraits,
     selectedApplicationIds,
     clearSelectedApplicationIds,
     filterApplicationsByGigId,
     setActiveApplication,
     toggleApplicationIsSelected,
+    updateApplicationFeedback,
     updateApplicationStatuses,
   };
 

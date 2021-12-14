@@ -24,7 +24,7 @@ const ApplicationModal = (props: ApplicationModalProps): ReactElement => {
       <GigModal
         bodyContent={<Body application={activeApplication} />}
         headerContent={<Header application={activeApplication} />}
-        footerContent={<Footer cancel={() => props.setIsOpen(false)} />}
+        footerContent={<Footer close={() => props.setIsOpen(false)} />}
         id='application-modal'
         isOpen={props.isOpen}
       />

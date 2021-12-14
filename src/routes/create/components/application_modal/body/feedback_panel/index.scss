@@ -1,5 +1,95 @@
 @import 'global';
 
 #application-modal-body {
+  .application-feedback-flex-container,
+  .application-feedback-container {
+    margin-bottom: $medium-margin;
 
+    &:first-child,
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .application-feedback-flex-container {
+    align-items: center;
+    display: flex;
+
+    div {
+      &:first-child {
+        margin-right: $small-margin;
+      }
+    }
+
+    #mood-rating-container {
+      margin-bottom: $small-margin;
+
+      .rating-icon {
+        font-size: $header-font-size;
+        margin-right: $small-margin;
+
+        &.active { font-size: 1.4rem; }
+        &:hover { font-size: 1.4rem; }
+      }
+
+      .terrible-rating { color: $mood-red; }
+      .bad-rating { color: $mood-orange; }
+      .meh-rating { color: $mood-yellow; }
+      .good-rating { color: $mood-yellow-green; }
+      .excellent-rating { color: $primary-green; }
+    }
+  }
+
+  .searchable-gig-input {
+    line-height: 100%;
+
+    ul {
+      max-height: 125px;
+    }
+  }
+
+  #positive-traits-input-container {
+    .searchable-gig-input {
+      width: calc(100% - 108px);
+    }
+  }
+
+  #positive-traits-container {
+    margin-left: 108px;
+  }
+
+  #negative-traits-input-container {
+    .searchable-gig-input {
+      width: calc(100% - 117px);
+    }
+  }
+
+  #negative-traits-container {
+    margin-left: 117px;
+  }
+
+  .traits-container {
+    margin-bottom: $medium-margin;
+
+    button {
+      background-color: $primary-blue;
+      padding: $small-padding $large-padding;
+      margin-right: $small-margin;
+    }
+  }
+
+  .star-rating-container {
+    margin-top: -10px;
+
+    .rating-star {
+      background-color: transparent;
+      color: $off-white;
+      font-size: $header-font-size;
+      padding: 0;
+
+      &.filled {
+        color: $mood-yellow;
+      }
+    }
+  }
 }
