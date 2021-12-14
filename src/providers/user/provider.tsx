@@ -115,6 +115,7 @@ const UserProvider = (props: object) => {
         id: generateGUID(),
         employer: gig.employer,
         gigId,
+        userId,
         candidate: user,
         currentPosition: generateRandomExperience(),
         previousPosition: generateRandomExperience(),

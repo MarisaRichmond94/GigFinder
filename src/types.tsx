@@ -4,6 +4,7 @@ export interface Application {
   id: string,
   employer: string,
   gigId: string,
+  userId: string,
   candidate: Candidate,
   currentPosition: Position,
   previousPosition: Position,
