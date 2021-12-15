@@ -10,11 +10,16 @@
   padding: 0 $medium-padding;
 }
 
+#filter-panel-section {
+  .collapsable-section-divider {
+    margin-bottom: $medium-margin;
+  }
+}
+
 // mobile view
 @media (min-width: 0) {
   #find-center-panel-selector {
     display: flex;
-    padding-top: $medium-padding;
   }
 
   #find-page {

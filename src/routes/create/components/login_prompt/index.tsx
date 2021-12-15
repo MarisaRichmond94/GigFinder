@@ -3,6 +3,7 @@ import './index.scss';
 import { ReactElement, useState } from 'react';
 
 import logo from 'assets/icons/logo.png';
+import DemoWarning from 'components/demo_warning';
 import GigButton from 'components/gig_button';
 import { useAuthForm } from 'providers/auth_form';
 import AuthModal from 'routes/components/auth_modal';
@@ -23,6 +24,7 @@ const LoginPrompt = (): ReactElement => {
 
   return (
     <div id='create-login-prompt'>
+      <DemoWarning />
       <div className='logo-container'>
         <img alt='logo' className='gig-search-icon' src={logo} />
         <div className='bold title-text gig-search-title'>Gig Search</div>

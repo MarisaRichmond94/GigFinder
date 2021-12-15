@@ -5,5 +5,41 @@
     background-color: $primary-blue;
     border-radius: 15px;
     color: $off-white;
+    max-width: 1200px;
+  }
+}
+
+// mobile view
+@media (min-width: 0) {
+  #auth-modal {
+    .gig-modal-content {
+      left: 5vw;
+      top: 8vh;
+      width: 90vw;
+    }
+  }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #auth-modal {
+    .gig-modal-content {
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin-left: 2vw;
+      width: calc(96vw - 350px);
+    }
+  }
+
+  #auth-modal {
+    &.max-content-width {
+      .gig-modal-content {
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-right: calc(46vw - 350px);
+      }
+    }
   }
 }

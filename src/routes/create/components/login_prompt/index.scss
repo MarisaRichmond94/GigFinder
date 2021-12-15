@@ -4,13 +4,18 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 15vh;
+
+  #demo-warning {
+    .icon {
+      color: $primary-blue;
+    }
+  }
 
   .logo-container {
     align-items: center;
     border-bottom: 2px solid $secondary-blue;
     display: flex;
-    margin-bottom: $large-margin;
+    margin: 12vh 0 $large-margin 0;
     padding: $medium-padding;
 
     .gig-search-title {

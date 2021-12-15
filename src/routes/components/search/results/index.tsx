@@ -3,6 +3,7 @@ import './index.scss';
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import noResultsIcon from 'assets/icons/empty_gig_results.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import { useApp } from 'providers/app';
@@ -124,7 +125,12 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
           )
           : (
             <div id='no-search-results' className='header-text'>
-              No gigs found matching this search
+              <div id='no-results-svg-container'>
+                <img alt='empty-results-icon' src={noResultsIcon} />
+              </div>
+              <div className='header-text'>
+                No gigs found matching this search
+              </div>
             </div>
           )
       }

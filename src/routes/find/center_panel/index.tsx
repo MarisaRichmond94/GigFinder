@@ -1,6 +1,7 @@
 import './index.scss'
 
 import { ReactElement, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FaFilter } from 'react-icons/fa';
 import { GoSearch } from 'react-icons/go';
 
@@ -24,6 +25,7 @@ const CenterPanel = (): ReactElement => {
   const [activePanel, setActivePanel] = useState<FindPanelTypes>(FindPanelTypes.results);
   // hook variables
   const { width } = useViewport();
+  const { search } = useLocation();
 
   useEffect(() => {
     if (activePanel !== FindPanelTypes.results && width >= 850) {
@@ -57,7 +59,11 @@ const CenterPanel = (): ReactElement => {
         icon={<FaFilter />}
         id='filter-panel-section'
         onToggleCallback={calculateTotalHeight}
-        sectionTitle={filteredResults?.length ? `Filter (${filteredResults.length})` : 'Filter'}
+        sectionTitle={
+          search.includes('filters') && filteredResults
+            ? `Filter (${filteredResults.length})`
+            : 'Filter'
+        }
       >
         <FilterPanel id='center-panel-filters' />
       </CollapsableSection>

@@ -8,12 +8,13 @@ type GigModalProps = {
   headerContent?: any,
   id: string,
   isOpen: boolean,
+  contentRef?: any,
 }
 
 const GigModal = (props: GigModalProps): ReactElement => {
   return (
     <div className={`gig-modal ${props.isOpen ? 'visible' : 'hidden'}`} id={props.id}>
-      <div className='gig-modal-content'>
+      <div className='gig-modal-content' ref={props.contentRef}>
         {
           props.headerContent &&
           <div className='gig-modal-header'>

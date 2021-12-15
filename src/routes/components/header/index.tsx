@@ -8,6 +8,7 @@ import { GrLogin, GrLogout, GrCloudUpload } from 'react-icons/gr';
 
 import logo from 'assets/icons/logo.png';
 import GigButton from 'components/gig_button';
+import { useViewport } from 'hooks/useViewport';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
 import AuthModal from 'routes/components/auth_modal';
@@ -18,6 +19,7 @@ const Header = (): ReactElement => {
   // hook variables
   const history = useHistory();
   const { pathname } = useLocation();
+  const { width } = useViewport();
   // context variables and functions
   const { employer, isLoggedIn, user, logout } = useAuth();
   const { setIsSignUp } = useAuthForm();
@@ -66,7 +68,7 @@ const Header = (): ReactElement => {
           </div>
         }
         {
-          !isLoggedIn && isMobile &&
+          !isLoggedIn && width < settings.MIN_DESKTOP_WIDTH &&
           <GigButton
             classNames='grey header icon-button large-header-text'
             id='sign-up-button'
@@ -75,7 +77,7 @@ const Header = (): ReactElement => {
           />
         }
         {
-          isLoggedIn && !isMobile &&
+          isLoggedIn && !isMobile && width < settings.MIN_DESKTOP_WIDTH &&
           <GigButton
             classNames='grey header icon-button large-header-text'
             id='upload-resume-icon-button'
