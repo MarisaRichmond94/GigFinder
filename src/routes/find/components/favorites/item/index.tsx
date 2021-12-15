@@ -2,7 +2,7 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 import { BsStarFill } from 'react-icons/bs';
-import { IoEllipsisVerticalSharp } from 'react-icons/io5';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 import GigButton from 'components/gig_button';
 import { Gig } from 'types';
@@ -11,6 +11,7 @@ type FavoriteGigItemProps = {
   apply: (gigId: string) => void,
   isApplyDisabled: boolean,
   item: Gig,
+  unfavoriteGig: (gigId: string) => void,
 }
 
 const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
@@ -19,13 +20,13 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
   return (
     <div className='favorite-gig-item'>
       <div className='thick header-text favorite-gig-item-row header'>
-        <GigButton
-          classNames='favorite-gig-menu-button'
-          id={`favorite-gig-menu-button-${id}`}
-          onClick={() => console.log('Open Menu')}
-          textBlock={<IoEllipsisVerticalSharp />}
-        />
         {title}
+        <GigButton
+          classNames='remove-favorite-gig-button'
+          id={`favorite-gig-menu-button-${id}`}
+          onClick={() => props.unfavoriteGig(id)}
+          textBlock={<AiOutlineDelete />}
+        />
       </div>
       <div className='favorite-gig-item-row sub-header-text'>
         {employer}

@@ -19,10 +19,11 @@
       padding-bottom: $medium-padding;
     }
 
-    .favorite-gig-menu-button {
+    .remove-favorite-gig-button {
       background-color: transparent !important;
       border: none;
       color: $off-black !important;
+      margin-left: auto;
       padding: $extra-small-padding;
     }
   }
