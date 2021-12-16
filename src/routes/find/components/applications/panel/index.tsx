@@ -3,8 +3,10 @@ import './index.scss';
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import noResultsIcon from 'assets/icons/applications.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
 import GigApplicationItem from 'routes/find/components/applications/item';
@@ -13,6 +15,7 @@ import settings from 'settings';
 import { Gig } from 'types';
 
 type UserApplicationsPanelProps = {
+  isCenterPanel?: boolean,
   unusableHeight?: number,
 }
 
@@ -87,15 +90,17 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
               </InfiniteScroll>
             </div>
           )
-          : (
-            <div className='sub-header-text' id='no-gig-applications-message'>
-              {
-                isLoggedIn
-                  ? 'You have no active applications'
-                  : 'Log in or create an account to easily apply to gigs in seconds'
-              }
-            </div>
-          )
+          : isLoggedIn
+            ? buildNoPanelContent(
+              'You have no active applications',
+              noResultsIcon,
+              props.isCenterPanel,
+            )
+            : buildNoPanelContent(
+              'Log in or create an account to easily apply to gigs in seconds',
+              noResultsIcon,
+              props.isCenterPanel,
+            )
       }
     </div>
   );

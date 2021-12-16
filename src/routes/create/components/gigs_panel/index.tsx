@@ -3,8 +3,10 @@ import './index.scss';
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import noResultsIcon from 'assets/icons/gigs.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
 import { useEmployer } from 'providers/employer';
 import { GigFormProvider } from 'providers/gig_form';
@@ -84,10 +86,10 @@ const GigsPanel = (): ReactElement => {
               {buildGigsList()}
             </InfiniteScroll>
           )
-          : (
-            <div id='no-gigs' className='header-text'>
-              {employer.name} has no active gigs
-            </div>
+          : buildNoPanelContent(
+            `${employer.name} has no active gigs`,
+            noResultsIcon,
+            true,
           )
       }
     </div>

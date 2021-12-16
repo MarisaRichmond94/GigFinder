@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import ApplicationsApi from 'api/applications';
-import EmployersApi from 'api/employers';
 import TraitsApi from 'api/traits';
 import ApplicationsContext from 'providers/applications/context';
 import { Application, ApplicationStatus, Feedback } from 'types';
@@ -16,17 +15,7 @@ const ApplicationsProvider = (props: object) => {
   const [selectedApplicationIds, setSelectedApplicationIds] = useState([]);
 
   useEffect(() => {
-    async function initializeApplications() {
-      const employerId = window.localStorage.getItem('employerId');
-      if (employerId) {
-        let employer = await EmployersApi.getById(employerId);
-        if (employer) {
-          employer = employer.name;
-          const appsByEmployer = await ApplicationsApi.get({ employer });
-          setApplications(appsByEmployer?.filter(x => x.status !== ApplicationStatus.rejected));
-        }
-      }
-
+    async function initializeTraits() {
       const traits = await TraitsApi.get();
       if (traits) {
         setNegativeTraits(traits.negative);
@@ -34,8 +23,13 @@ const ApplicationsProvider = (props: object) => {
       }
     }
 
-    initializeApplications();
+    initializeTraits();
     // eslint-disable-next-line
+  }, []);
+
+  const initializeApplications = useCallback(async (employer: string) => {
+    const appsByEmployer = await ApplicationsApi.get({ employer });
+    setApplications(appsByEmployer?.filter(x => x.status !== ApplicationStatus.rejected));
   }, []);
 
   const filterApplicationsByGigId = useCallback((gigId: string): void => {
@@ -130,6 +124,7 @@ const ApplicationsProvider = (props: object) => {
     selectedApplicationIds,
     clearSelectedApplicationIds,
     filterApplicationsByGigId,
+    initializeApplications,
     setActiveApplication,
     toggleApplicationIsSelected,
     updateApplicationFeedback,

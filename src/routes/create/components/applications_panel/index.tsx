@@ -6,20 +6,24 @@ import GigDropdown from 'components/gig_input/dropdown';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import { useApplications } from 'providers/applications';
+import { useAuth } from 'providers/auth';
 import { useEmployer } from 'providers/employer';
 import Actions from 'routes/create/components/applications_panel/actions';
 import ApplicationsList from 'routes/create/components/applications_panel/list';
 
 const ApplicationsPanel = (): ReactElement => {
   // context provider variables and functions
+  const { employer } = useAuth();
+  const { applications, filteredApplications } = useApplications();
+  const { filterApplicationsByGigId, initializeApplications } = useApplications();
   const { activeGig, gigs, setActiveGig } = useEmployer();
-  const { applications, filteredApplications, filterApplicationsByGigId } = useApplications();
   // hook variables
   const prevActiveGigId = usePrevious(activeGig?.id);
   // derived variables
   const displayApplications = activeGig ? filteredApplications : applications;
 
   useEffect(() => {
+    initializeApplications(employer.name);
     setActiveGig(undefined);
     // eslint-disable-next-line
   }, []);

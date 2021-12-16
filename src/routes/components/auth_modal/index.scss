@@ -5,8 +5,16 @@
     background-color: $primary-blue;
     border-radius: 15px;
     color: $off-white;
-    max-width: 1200px;
+    max-width: 1000px;
   }
+}
+
+.gig-modal-content.max-content-width {
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-right: calc(42vw - 350px);
+  width: calc(96vw - 350px);
 }
 
 // mobile view
@@ -24,21 +32,18 @@
 @media (min-width: 850px) {
   #auth-modal {
     .gig-modal-content {
+      left: 2vw;
+      top: 10vh;
+      width: calc(96vw - 350px);
+    }
+
+    .max-content-width {
       left: 0;
       right: 0;
       margin: auto;
-      margin-left: 2vw;
-      width: calc(96vw - 350px);
-    }
-  }
 
-  #auth-modal {
-    &.max-content-width {
-      .gig-modal-content {
-        left: 0;
-        right: 0;
-        margin: auto;
-        margin-right: calc(46vw - 350px);
+      &.find {
+        margin-right: calc(52vw - 350px);
       }
     }
   }

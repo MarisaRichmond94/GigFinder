@@ -44,6 +44,27 @@
   }
 }
 
+.no-contents-message {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+
+  img {
+    height: 20vh;
+    margin-bottom: $medium-margin;
+  }
+
+  &.right-panel {
+    color: $off-white;
+    margin-top: $extra-large-margin;
+
+    img {
+      height: 10vh;
+    }
+  }
+}
+
 // mobile view
 @media (min-width: $min-mobile-width) {
   .page-container {

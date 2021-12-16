@@ -1,15 +1,18 @@
 import './index.scss';
 
 import { ReactElement } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import GigButton from 'components/gig_button';
 import { useAuthForm } from 'providers/auth_form';
 import EmailInput from 'routes/components/auth_modal/inputs/email';
 import NameInput from 'routes/components/auth_modal/inputs/name';
 import PasswordInput from 'routes/components/auth_modal/inputs/password';
+import settings from 'settings';
 
 const Body = (): ReactElement => {
   const { isUserAuth, isSignUp, resetForm, setIsApplicationSignUp } = useAuthForm();
+  const { pathname } = useLocation();
 
   const handleSignUpSelectorClick = (updatedisUserAuth: boolean): void => {
     if (updatedisUserAuth !== isUserAuth) {
@@ -19,7 +22,7 @@ const Body = (): ReactElement => {
   }
 
   return (
-    <div id='auth-body-container'>
+    <div id='auth-body-container' className={pathname === settings.FIND_ROUTE ? 'find' : 'create'}>
       <div id='auth-selector-container'>
         <GigButton
           classNames={`${isUserAuth ? 'active ' : ''}underline-text off-white header-text`}

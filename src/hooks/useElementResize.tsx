@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 
 function useElementResize(ref) {
   const [width, setWidth] = useState(0);
+
   useLayoutEffect(() => {
     function updateWidth() {
       setWidth(ref.current.clientWidth);
@@ -11,7 +12,7 @@ function useElementResize(ref) {
     return () => window.removeEventListener('resize', updateWidth);
   }, [ref]);
 
-  return width;
+  return { width, setWidth };
 };
 
 export default useElementResize;

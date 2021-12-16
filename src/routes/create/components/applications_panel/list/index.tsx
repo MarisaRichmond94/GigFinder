@@ -1,8 +1,10 @@
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import noResultsIcon from 'assets/icons/candidates.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import buildNoPanelContent from 'libs/no_panel_content';
 import { useApplications } from 'providers/applications';
 import { useAuth } from 'providers/auth';
 import { useEmployer } from 'providers/employer';
@@ -93,14 +95,12 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
               {buildApplicationsList()}
             </InfiniteScroll>
           )
-          : (
-            <div id='no-applications' className='header-text'>
-              {
-                !!activeGig
-                  ? `There are no open applications for the ${activeGig.title} role`
-                  : `${employer.name} has no active applications`
-              }
-            </div>
+          : buildNoPanelContent(
+            !!activeGig
+              ? `There are no open applications for the ${activeGig.title} role`
+              : `${employer.name} has no active applications`,
+            noResultsIcon,
+            true,
           )
       }
     </div>

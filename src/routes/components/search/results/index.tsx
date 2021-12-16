@@ -3,9 +3,10 @@ import './index.scss';
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import noResultsIcon from 'assets/icons/empty_gig_results.svg';
+import noResultsIcon from 'assets/icons/results.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import buildNoPanelContent from 'libs/no_panel_content';
 import { useApp } from 'providers/app';
 import { useAuth } from 'providers/auth';
 import { useSearch } from 'providers/search';
@@ -16,6 +17,7 @@ import GigDetailsModal from 'routes/find/components/gig_details_modal';
 import settings from 'settings';
 
 type SearchResultsProps = {
+  isCenterPanel?: boolean,
   unusableHeight?: number,
 };
 
@@ -123,15 +125,10 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
               {buildSearchResults()}
             </InfiniteScroll>
           )
-          : (
-            <div id='no-search-results' className='header-text'>
-              <div id='no-results-svg-container'>
-                <img alt='empty-results-icon' src={noResultsIcon} />
-              </div>
-              <div className='header-text'>
-                No gigs found matching this search
-              </div>
-            </div>
+          : buildNoPanelContent(
+            'No gigs found matching this search',
+            noResultsIcon,
+            props.isCenterPanel,
           )
       }
     </div>

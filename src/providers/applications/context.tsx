@@ -11,6 +11,7 @@ interface ApplicationsContextType {
   selectedApplicationIds: string[],
   clearSelectedApplicationIds: () => void,
   filterApplicationsByGigId: (gigId: string) => void,
+  initializeApplications: (employer: string) => void,
   setActiveApplication: (application: Application | undefined) => void,
   toggleApplicationIsSelected: (applicationId: string) => void,
   updateApplicationFeedback: (feedback: Feedback) => void,

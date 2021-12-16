@@ -3,14 +3,17 @@ import './index.scss';
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import noResultsIcon from 'assets/icons/favorites.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
+import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
 import FavoriteGigItem from 'routes/find/components/favorites/item';
 import settings from 'settings';
 
 type FavoriteGigsPanelProps = {
+  isCenterPanel?: boolean,
   unusableHeight?: number,
 }
 
@@ -65,7 +68,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
 
   const unfavoriteGig = (gigId: string): void => {
     toggleFavoriteGig(user.id, gigId);
-  }
+  };
 
   return (
     <div id='favorite-gigs-panel'>
@@ -84,21 +87,19 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
               </InfiniteScroll>
             </div>
           )
-          : (
-            <div className='sub-header-text' id='no-favorite-gigs-message'>
-              {
-                isLoggedIn
-                  ? (
-                    `No favorite gigs to display. Consider adding to gigs to your favorites to
-                    make your application process faster and easier`
-                  )
-                  : (
-                    `Create an account or sign in to add favorite gigs and make the application
-                    process faster and easier`
-                  )
-              }
-            </div>
-          )
+          : isLoggedIn
+            ? buildNoPanelContent(
+              `No favorite gigs to display. Consider adding to gigs to your favorites to
+              make your application process faster and easier`,
+              noResultsIcon,
+              props.isCenterPanel,
+            )
+            : buildNoPanelContent(
+              `Create an account or sign in to add favorite gigs and make the application
+              process faster and easier`,
+              noResultsIcon,
+              props.isCenterPanel,
+            )
       }
     </div>
   );

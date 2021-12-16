@@ -34,7 +34,6 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
       updateApplicationFeedback({ ...currentFeedback, additionalNotes: updatedAdditionalNotes });
     }),
   );
-  console.log({technicalFit, culturalFit})
 
   const updateMood = (updatedMood: number): void => {
     if (updatedMood !== mood) {

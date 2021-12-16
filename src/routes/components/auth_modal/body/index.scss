@@ -35,7 +35,20 @@
       color: $grey;
       margin-top: 4px;
       position: absolute;
+    }
+  }
+}
+
+#auth-body-container {
+  &.find {
+    #password-hide-button {
       right: 30px;
+    }
+  }
+
+  &.create {
+    #password-hide-button {
+      right: 60px;
     }
   }
 }
