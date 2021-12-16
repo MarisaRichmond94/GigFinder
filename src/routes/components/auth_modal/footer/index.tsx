@@ -12,7 +12,7 @@ type FooterProps = {
 }
 
 const Footer = (props: FooterProps): ReactElement => {
-  const { email, isSignUp, isUserAuth, name, getIsValidInput } = useAuthForm();
+  const { email, isSignUp, isUserAuth, name, getIsValidInput, resetForm } = useAuthForm();
   const { loginEmployer, loginUser, signUpEmployer, signUpUser } = useAuth();
   const isSubmitEnabled = isSignUp
     ? (
@@ -25,7 +25,10 @@ const Footer = (props: FooterProps): ReactElement => {
       getIsValidInput(AuthFieldType.password)
     );
 
-  const cancel = (): void => props.setIsOpen(false);
+  const cancel = (): void => {
+    props.setIsOpen(false);
+    resetForm();
+  };
 
   const handleFormSubmit = (): void => {
     if (isSignUp) {
@@ -34,6 +37,7 @@ const Footer = (props: FooterProps): ReactElement => {
       isUserAuth ? loginUser(email) : loginEmployer(email);
     }
     props.setIsOpen(false);
+    resetForm();
   }
 
   return (
