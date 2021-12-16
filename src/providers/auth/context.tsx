@@ -5,6 +5,7 @@ import { Employer, User } from 'types';
 interface AuthContextType {
   employer?: Employer,
   isLoggedIn: boolean,
+  isLoggingIn: boolean,
   user?: User,
   loginEmployer: (email: string) => void,
   loginUser: (email: string) => void,

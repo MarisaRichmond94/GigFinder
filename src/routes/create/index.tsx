@@ -2,6 +2,7 @@ import './index.scss';
 
 import { ReactElement, useEffect } from 'react';
 
+import GigLoader from 'components/gig_loader';
 import { useAuth } from 'providers/auth';
 import { AuthFormProvider } from 'providers/auth_form';
 import { useEmployer } from 'providers/employer';
@@ -12,7 +13,7 @@ import RightPanel from 'routes/create/right_panel';
 
 const CreatePage = (): ReactElement => {
   // context variables and functions
-  const { employer, isLoggedIn } = useAuth();
+  const { employer, isLoggedIn, isLoggingIn } = useAuth();
   const { getGigs } = useEmployer();
   // derived variables
   const employerId = employer?.id;
@@ -37,6 +38,15 @@ const CreatePage = (): ReactElement => {
       <RightPanel />
     </div>
   );
+
+  if (isLoggingIn) {
+    return (
+      <div id='authenticating-page'>
+        <GigLoader color='#5BA1C5' type='cylon'/>
+        <div className='thick header-text text-center' id='auth-text'>Authenticating...</div>
+      </div>
+    );
+  }
 
   return (
     <AuthFormProvider>

@@ -10,3 +10,11 @@
   overflow: hidden;
   width: 100%;
 }
+
+#authenticating-page {
+  margin-top: 20vh;
+
+  #auth-text {
+    margin-top: -70px;
+  }
+}

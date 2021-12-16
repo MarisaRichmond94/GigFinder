@@ -17,27 +17,30 @@ const AuthProvider = (props: object) => {
   const [user, setUser] = useState<User | undefined>();
   const [employer, setEmployer] = useState<Employer | undefined>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(true);
 
   useEffect(() => {
     async function getUserById(userId: string) {
       const userResponse = await UsersApi.getById(userId);
       setUser(userResponse);
       setIsLoggedIn(true);
+      setIsLoggingIn(false);
     }
 
-    const userId = window.localStorage.getItem('userId');
-    if (userId) getUserById(userId);
-  }, []);
-
-  useEffect(() => {
     async function getEmployerById(employerId: string) {
       const employerResponse = await EmployersApi.getById(employerId);
       setEmployer(employerResponse);
       setIsLoggedIn(true);
+      setIsLoggingIn(false);
     }
 
-    const employerId = window.localStorage.getItem('employerId');
-    if (employerId) getEmployerById(employerId)
+    setTimeout(() => {
+      const userId = window.localStorage.getItem('userId');
+      const employerId = window.localStorage.getItem('employerId');
+      if (userId) getUserById(userId);
+      else if (employerId) getEmployerById(employerId)
+      else setIsLoggingIn(false);
+    }, 1000);
   }, []);
 
   const signUpEmployer = async (name: string, email: string) => {
@@ -113,6 +116,7 @@ const AuthProvider = (props: object) => {
   const value = {
     employer,
     isLoggedIn,
+    isLoggingIn,
     user,
     loginEmployer,
     loginUser,
