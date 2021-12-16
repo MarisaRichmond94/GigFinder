@@ -34,7 +34,11 @@
     .gig-modal-content {
       left: 2vw;
       top: 10vh;
-      width: calc(96vw - 350px);
+      width: 96vw;
+
+      &.find {
+        width: calc(96vw - 350px);
+      }
     }
 
     .max-content-width {
