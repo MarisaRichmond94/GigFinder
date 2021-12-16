@@ -34,7 +34,9 @@ const MessageTemplatesProvider = (props: object) => {
 
   const createMessageTemplate = useCallback(async (messageTemplate: MessageTemplate) => {
     const newMessageTemplate = await MessageTemplatesApi.post(messageTemplate);
-    setMessageTemplates([...messageTemplates, newMessageTemplate]);
+    setMessageTemplates(
+      messageTemplates ? [...messageTemplates, newMessageTemplate] : [newMessageTemplate],
+    );
   }, [messageTemplates]);
 
   const updateMessageTemplate = useCallback(
