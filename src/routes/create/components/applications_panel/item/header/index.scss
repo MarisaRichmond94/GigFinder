@@ -1,8 +1,7 @@
 @import 'global';
 
 .application-header {
-  align-items: center;
-  display: flex;
+  @include centered-flex-box;
 
   div {
     margin-right: $small-margin;

@@ -4,8 +4,7 @@
   margin-bottom: $medium-margin;
 
   .application-detail-flex-container {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
 
     div {
       &:first-child {

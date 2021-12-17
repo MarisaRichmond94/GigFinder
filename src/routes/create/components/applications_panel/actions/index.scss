@@ -27,8 +27,7 @@
 // desktop view
 @media (min-width: 1085px) {
   #application-actions-container {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
 
     #active-message-template-section {
       margin: 0 $medium-margin 0 0;

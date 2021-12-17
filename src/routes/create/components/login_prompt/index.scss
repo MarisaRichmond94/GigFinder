@@ -1,8 +1,7 @@
 @import 'global';
 
 #create-login-prompt {
-  align-items: center;
-  display: flex;
+  @include centered-flex-box;
   flex-direction: column;
 
   #demo-warning {
@@ -12,9 +11,8 @@
   }
 
   .logo-container {
-    align-items: center;
+    @include centered-flex-box;
     border-bottom: 2px solid $secondary-blue;
-    display: flex;
     margin: 12vh 0 $large-margin 0;
     padding: $medium-padding;
 

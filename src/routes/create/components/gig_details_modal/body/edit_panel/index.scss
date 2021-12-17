@@ -2,8 +2,7 @@
 
 #gig-details-modal-details-panel {
   .detail-row-flex-container {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     margin-bottom: $medium-margin;
 
     &:last-child {

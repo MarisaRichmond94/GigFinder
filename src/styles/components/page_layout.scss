@@ -5,6 +5,11 @@
   display: inline-flex;
 }
 
+@mixin centered-flex-box {
+  align-items: center;
+  display: inline-flex;
+}
+
 @mixin hide-overflow-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -45,8 +50,7 @@
 }
 
 .no-contents-message {
-  align-items: center;
-  display: flex;
+  @include centered-flex-box;
   flex-direction: column;
   margin-top: 10vh;
 

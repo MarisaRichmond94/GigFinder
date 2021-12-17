@@ -12,8 +12,7 @@
   }
 
   .application-feedback-flex-container {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
 
     div {
       &:first-child {

@@ -2,8 +2,7 @@
 
 .collapsable-section {
   .collapsable-section-header {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     margin: $medium-margin;
 
     div {

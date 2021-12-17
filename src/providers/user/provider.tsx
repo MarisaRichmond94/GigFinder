@@ -16,10 +16,12 @@ import {
 } from 'types';
 import generateGUID from 'utils/generateGUID';
 import getRandomValueFromList from 'utils/getRandomValueFromList';
+import replaceExistingItemInList from 'utils/replaceExistingItemInList';
 
 const UserProvider = (props: object) => {
   const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [activeResumeId, setActiveResumeId] = useState<string | undefined>(undefined);
+  const [employerReviews, setEmployerReviews] = useState<EmployerReview[] | undefined>();
   const [favoriteGigs, setFavoriteGigs] = useState<Gig[]>([]);
   const [applications, setApplications] = useState<PopulatedApplication[]>([]);
   const [resumes, setResumes] = useState<Resume[] | undefined>();
@@ -151,31 +153,42 @@ const UserProvider = (props: object) => {
     }
   }, [resumes]);
 
-  const getEmployerReviews = useCallback(async(employer: string): Promise<EmployerReview[]> => {
-    const employerReviews = await EmployerReviewsApi.get({ employer });
-    return employerReviews;
+  const updateActiveGig = useCallback(async (gig: Gig) => {
+    if (gig) {
+      setActiveGig(gig);
+      const activeGigEmployerReviews = await EmployerReviewsApi.get({ employer: gig.employer });
+      setEmployerReviews(activeGigEmployerReviews);
+    }
   }, []);
 
-  const updateActiveGig = useCallback(async(gig: Gig | undefined) => {
-    if (!gig) {
-      setActiveGig(undefined);
-      return;
-    }
-    const gigCopy = { ...gig };
-    gigCopy.employerReviews = await getEmployerReviews(gig.employer);
-    setActiveGig(gigCopy);
-  }, [getEmployerReviews]);
+  const submitReviewFeedback = useCallback(
+    async (employerReview: EmployerReview, isPositive: boolean) => {
+      isPositive
+        ? employerReview.positiveFeedbackCounter += 1
+        : employerReview.negativeFeedbackCounter += 1;
+      const updatedEmployerReview = await EmployerReviewsApi.update(
+        employerReview.id,
+        employerReview,
+      );
+      if (updatedEmployerReview) {
+        replaceExistingItemInList(updatedEmployerReview, employerReviews, setEmployerReviews);
+      }
+    },
+    [employerReviews],
+  );
 
   const value = {
     activeGig,
     activeResumeId,
     applications,
+    employerReviews,
     favoriteGigs,
     resumes,
     applyToGig,
     getApplications,
     getFavoriteGigs,
     getResumes,
+    submitReviewFeedback,
     toggleFavoriteGig,
     updateActiveGig,
     updateActiveResume,

@@ -2,30 +2,27 @@ import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import GigLoader from 'components/gig_loader';
+import { useUser } from 'providers/user';
 import Review from 'routes/find/components/gig_details_modal/body/reviews_panel/review';
 import settings from 'settings';
-import { EmployerReview } from 'types';
 
-type ReviewPanelProps = {
-  employerReviews: EmployerReview[],
-}
-
-const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
+const ReviewPanel = (): ReactElement => {
+  const { employerReviews } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
 
   useEffect(() => {
-    if (props.employerReviews?.length) {
+    if (employerReviews?.length) {
       setResultsCount(
-        props.employerReviews.length >= settings.MIN_RESULTS_PER_LOAD
+        employerReviews.length >= settings.MIN_RESULTS_PER_LOAD
           ? settings.MIN_RESULTS_PER_LOAD
-          : props.employerReviews.length
+          : employerReviews.length
       );
     }
     // eslint-disable-next-line
-  }, [props.employerReviews]);
+  }, [employerReviews]);
 
   const buildEmployerReviews = (): ReactElement[] => {
-    return props.employerReviews.map(
+    return employerReviews.map(
       employerReview => <Review review={employerReview} key={`review-${employerReview.id}`}/>
     );
   }
@@ -33,9 +30,9 @@ const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
   const getMoreEmployerReviews = (): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
-      nextResultsCount <= props.employerReviews.length
+      nextResultsCount <= employerReviews.length
         ? nextResultsCount
-        : props.employerReviews.length
+        : employerReviews.length
     );
   };
 
@@ -44,7 +41,7 @@ const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
       <InfiniteScroll
         dataLength={resultsCount}
         next={getMoreEmployerReviews}
-        hasMore={resultsCount !== props.employerReviews.length}
+        hasMore={resultsCount !== employerReviews.length}
         loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
         scrollableTarget='gig-details-modal-review-panel'
       >

@@ -63,8 +63,7 @@
 
 @media (min-width: 680px) {
   #gig-details-modal-footer {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     width: 100%;
 
     #gig-details-modal-resume-selector-container {

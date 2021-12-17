@@ -33,7 +33,7 @@ const Body = (props: BodyProps): ReactElement => {
       {
         isDetailPanel
           ? <DetailPanel gig={props.gig} />
-          : <ReviewPanel employerReviews={props.gig.employerReviews} />
+          : <ReviewPanel />
       }
     </div>
   );

@@ -4,8 +4,7 @@
   width: 100%;
 
   #primary-header {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     margin-left: 0;
     width: 100%;
 

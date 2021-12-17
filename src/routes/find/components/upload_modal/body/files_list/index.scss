@@ -5,10 +5,9 @@
   padding: 1vw;
 
   .upload-file {
-    align-items: center;
+    @include centered-flex-box;
     border-bottom: 1px solid $grey;
     color: $off-black;
-    display: flex;
 
     .upload-file-name {
       margin-left: $small-margin;

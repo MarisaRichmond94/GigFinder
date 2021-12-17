@@ -9,8 +9,7 @@
     margin-left: auto;
 
     div {
-      align-items: center;
-      display: flex;
+      @include centered-flex-box;
 
       &:first-child {
         margin-right: $small-margin;

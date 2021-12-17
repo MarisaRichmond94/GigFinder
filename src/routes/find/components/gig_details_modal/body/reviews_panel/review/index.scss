@@ -32,19 +32,27 @@
       }
 
       .review-feedback-container {
-        align-items: center;
-        display: flex;
+        @include centered-flex-box;
         height: 30px;
-        margin-top: $medium-margin;
+
+        .review-feedback-counter {
+          @include centered-flex-box;
+
+          &:last-child {
+            margin-left: $small-margin;
+          }
+        }
 
         .review-feedback {
           color: $grey;
+          margin-right: $medium-margin;
         }
 
         .review-feedback-button {
           background-color: transparent !important;
           border: none;
           font-size: 1.25rem;
+          margin-bottom: $small-margin;
           padding: 0 $small-padding;
         }
       }

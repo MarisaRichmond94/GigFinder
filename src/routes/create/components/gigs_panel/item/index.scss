@@ -10,8 +10,7 @@
   }
 
   .header-row {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     margin: 0 $large-margin;
 
     :last-child {

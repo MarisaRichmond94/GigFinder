@@ -1,8 +1,7 @@
 @import 'global';
 
 .application-container {
-  align-items: center;
-  display: flex;
+  @include centered-flex-box;
   margin-bottom: $medium-margin;
 
   input {
@@ -21,8 +20,7 @@
   width: calc(100% - 26px);
 
   .application-footer {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     justify-content: center;
   }
 

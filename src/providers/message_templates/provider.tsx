@@ -4,6 +4,7 @@ import EmployersApi from 'api/employers';
 import MessageTemplatesApi from 'api/message_templates';
 import MessageTemplatesContext from 'providers/message_templates/context';
 import { MessageTemplate } from 'types';
+import replaceExistingItemInList from 'utils/replaceExistingItemInList';
 
 const MessageTemplatesProvider = (props: object) => {
   const [activeMessageTemplateId, setActiveMessageTemplateId] = useState<string | undefined>();
@@ -46,10 +47,7 @@ const MessageTemplatesProvider = (props: object) => {
         updatedMessageTemplate,
       );
       if (updatedTemplate) {
-        const existingTemplateIndex = messageTemplates.findIndex(t => t.id === updatedTemplate.id);
-        const messageTemplatesCopy = [...messageTemplates];
-        messageTemplatesCopy.splice(existingTemplateIndex, 1, updatedTemplate)
-        setMessageTemplates(messageTemplatesCopy);
+        replaceExistingItemInList(updatedTemplate, messageTemplates, setMessageTemplates);
       }
     }, [messageTemplates],
   );

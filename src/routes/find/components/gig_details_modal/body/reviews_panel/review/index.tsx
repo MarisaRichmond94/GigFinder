@@ -5,6 +5,7 @@ import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
 
 import GigButton from 'components/gig_button';
+import { useUser } from 'providers/user';
 import { EmployerReview } from 'types';
 
 type ReviewProps = {
@@ -12,10 +13,14 @@ type ReviewProps = {
 }
 
 const Review = (props: ReviewProps): ReactElement => {
+  // context provider variables and functions
+  const { submitReviewFeedback } = useUser();
+  // local state variables and functions
+  const [isReviewed, setIsReviewed] = useState(false);
+  // prop variables
   const { id, rating, headline, title, isCurrentEmployee } = props.review;
   const { city, abbrevState, datePosted, summary } = props.review;
-
-  const [isReviewed, setIsReviewed] = useState(false);
+  const { positiveFeedbackCounter, negativeFeedbackCounter } = props.review;
 
   const getStars = (): ReactElement => {
     const reviewRating = rating % 1 === 0 ? `${rating}.0` : rating;
@@ -43,6 +48,12 @@ const Review = (props: ReviewProps): ReactElement => {
     return postedDate.toLocaleDateString('en-US', options);
   }
 
+  const submitFeedback = (isPositive: boolean): void => {
+    setIsReviewed(true);
+    submitReviewFeedback(props.review, isPositive);
+    setTimeout(() => { setIsReviewed(false); }, 3000);
+  };
+
   const employeeTitle = `${title}${isCurrentEmployee ? ' (Current Employee)' : ''}`;
   const location = `${city}, ${abbrevState}`;
   const postedDate = getDatePosted();
@@ -61,36 +72,44 @@ const Review = (props: ReviewProps): ReactElement => {
           <div className='review-text sub-header-text' title={location}>{location}</div>
           <div className='review-text sub-header-text' title={postedDate}>{postedDate}</div>
           <div className='summary sub-header-text'>{summary}</div>
-          {
-            isReviewed
-              ? (
-                <div className='review-text sub-header-text review-feedback-container'>
-                  Thanks for your feedback!
-                </div>
-              )
-              : (
-                <div className='review-feedback-container'>
-                  <div
-                    className='review-text sub-header-text review-feedback'
-                    title={reviewFeedbackText}
-                  >
-                    {reviewFeedbackText}
+          <div className='review-feedback-container'>
+            <div
+              className='review-text sub-header-text review-feedback'
+              title={reviewFeedbackText}
+            >
+              {reviewFeedbackText}
+            </div>
+            {
+              isReviewed
+                ? (
+                  <div className='thick review-text sub-header-text review-feedback-container'>
+                    Thanks for your feedback!
                   </div>
-                  <GigButton
-                    classNames='review-feedback-button icon-button primary-green'
-                    id={`review-positive-feedback-button-${id}`}
-                    onClick={() => setIsReviewed(true)}
-                    textBlock={<FiThumbsUp />}
-                  />
-                  <GigButton
-                    classNames='review-feedback-button icon-button primary-red'
-                    id={`review-negative-feedback-button-${id}`}
-                    onClick={() => setIsReviewed(true)}
-                    textBlock={<FiThumbsDown />}
-                  />
-                </div>
-              )
-          }
+                )
+                : (
+                  <>
+                    <div className='sub-header-text review-feedback-counter'>
+                      <GigButton
+                        classNames='review-feedback-button icon-button primary-green'
+                        id={`review-positive-feedback-button-${id}`}
+                        onClick={() => submitFeedback(true)}
+                        textBlock={<FiThumbsUp />}
+                      />
+                      <div>{positiveFeedbackCounter}</div>
+                    </div>
+                    <div className='sub-header-text review-feedback-counter'>
+                      <GigButton
+                        classNames='review-feedback-button icon-button primary-red'
+                        id={`review-negative-feedback-button-${id}`}
+                        onClick={() => submitFeedback(false)}
+                        textBlock={<FiThumbsDown />}
+                      />
+                      <div>{negativeFeedbackCounter}</div>
+                    </div>
+                  </>
+                )
+            }
+          </div>
         </div>
       </div>
       <hr className='review-divider' />

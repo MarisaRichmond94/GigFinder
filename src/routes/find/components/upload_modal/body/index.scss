@@ -3,10 +3,9 @@
 #upload-body-container {
   #file-upload-drop-zone,
   #drop-zone-dragging-hover {
-    align-items: center;
+    @include centered-flex-box;
     border: 2px dashed $off-black;
     border-radius: 10px;
-    display: flex;
     justify-content: center;
     margin: 0 1vw;
     min-height: 35vh;
@@ -24,9 +23,8 @@
     background-color: $light-grey;
 
     #drag-over-display {
-      align-items: center;
+      @include centered-flex-box;
       color: $off-black;
-      display: flex;
       flex-direction: column;
 
       #drag-over-icon {

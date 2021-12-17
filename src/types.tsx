@@ -74,6 +74,8 @@ export interface EmployerReview {
   abbrevState: string,
   datePosted: string,
   summary: string,
+  positiveFeedbackCounter: number,
+  negativeFeedbackCounter: number,
 }
 
 export interface Feedback {
