@@ -18,19 +18,19 @@ type GigDropdownProps = {
 
 const GigDropdown = (props: GigDropdownProps): ReactElement => {
   const populateDropdownItems = () => {
-    if (!props.options || !props.options.length) {
+    const options = props.selectedOption
+      ? props.options.filter(option => option.displayName !== props.selectedOption?.displayName)
+      : props.options;
+
+    if (!options || !options.length) {
       return (
         <Dropdown.Item className='overflow-ellipsis gig-dropdown-item'>
           <span className='sub-header-text'>
-            {!props.options ? 'Loading...' : 'No options available'}
+            {!options ? 'Loading...' : 'No options available'}
           </span>
         </Dropdown.Item>
       )
     }
-
-    const options = props.selectedOption
-      ? props.options.filter(option => option.displayName !== props.selectedOption?.displayName)
-      : props.options;
 
     return options.map((option, index) => {
       const content = option.icon
