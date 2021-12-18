@@ -1,0 +1,24 @@
+@import 'global';
+
+.gig-modal-body-panel {
+  .filter-options-list {
+    max-height: 100px;
+  }
+}
+
+.review-form-flex-container {
+  @include centered-flex-box;
+}
+
+#review-form-title-input-container {
+  width: calc(100% - 355px);
+}
+
+#review-form-city-input-container {
+  margin-right: $medium-margin;
+  width: calc(100% - 110px);
+}
+
+#review-form-summary-input {
+  margin-top: $medium-margin;
+}

@@ -75,7 +75,7 @@ const ControlledSearchableGigInput = (props: ControlledSearchableGigInputProps):
   }
 
   return (
-    <div className='searchable-gig-input'>
+    <div className='searchable-gig-input' id={`${props.id}-container`}>
       <input
         autoComplete='none'
         className={`

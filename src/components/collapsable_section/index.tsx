@@ -8,12 +8,15 @@ type CollapsableSectionProps = {
   classNames?: string,
   icon: ReactElement,
   id: string,
-  onToggleCallback?: () => void,
+  isVisible?: boolean,
   sectionTitle: string,
+  onToggleCallback?: () => void,
 }
 
 const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(
+    typeof props.isVisible == 'boolean' ? props.isVisible : true,
+  );
 
   const onToggle = (updatedIsVisible: boolean): void => {
     setIsVisible(updatedIsVisible);

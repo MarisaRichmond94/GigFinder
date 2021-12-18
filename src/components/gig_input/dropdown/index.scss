@@ -2,6 +2,7 @@
 
 .gig-dropdown {
   @include centered-flex-box;
+  border-radius: 15px;
 
   button {
     @include centered-flex-box;

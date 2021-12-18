@@ -8,8 +8,8 @@ import GigButton from 'components/gig_button';
 import UncontrolledSearchableGigInput from 'components/gig_input/searchable/uncontrolled';
 import GigTextAreaInput from 'components/gig_input/text_area';
 import { useApplications } from 'providers/applications';
+import StarRating from 'routes/components/star_rating';
 import MoodRating from 'routes/create/components/application_modal/body/feedback_panel/mood_rating';
-import StarRating from 'routes/create/components/application_modal/body/feedback_panel/star_rating';
 import { Application, Feedback } from 'types';
 
 type FeedbackPanelProps = {
@@ -61,7 +61,7 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
 
   const populateTraits = (type: 'positive' | 'negative'): ReactElement[] => {
     const traits = type === 'positive' ? selectedPositiveTraits : selectedNegativeTraits;
-    return traits.map((trait, index) => {
+    return traits?.map((trait, index) => {
       return (
         <GigButton
           classNames='trait-button'
@@ -115,11 +115,17 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
       </div>
       <div className='application-feedback-flex-container'>
         <div className='bold paragraph-text'>Technical Fit:</div>
-        <StarRating rating={technicalFit} type='technical' updateRating={updateRating} />
+        <StarRating
+          rating={technicalFit}
+          updateRating={(rating: number) => updateRating('technical', rating)}
+        />
       </div>
       <div className='application-feedback-flex-container'>
         <div className='bold paragraph-text'>Cultural Fit:</div>
-        <StarRating rating={culturalFit} type='cultural' updateRating={updateRating} />
+        <StarRating
+          rating={culturalFit}
+          updateRating={(rating: number) => updateRating('cultural', rating)}
+        />
       </div>
       <div className='application-feedback-container'>
         <div className='bold paragraph-text'>Additional Notes:</div>

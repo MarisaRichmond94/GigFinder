@@ -65,6 +65,7 @@ export interface Employer {
 export interface EmployerReview {
   id: string,
   employer: string,
+  userId?: string,
   rating: number,
   headline: string,
   title: string,
@@ -147,6 +148,15 @@ export interface Resume {
   id: string,
   name: string,
   userId: string,
+}
+
+export enum ReviewFormFieldOptions {
+  city = 'city',
+  headline = 'headline',
+  isCurrentEmployee = 'isCurrentEmployee',
+  rating = 'rating',
+  summary = 'summary',
+  title = 'title',
 }
 
 export interface SearchParameters {

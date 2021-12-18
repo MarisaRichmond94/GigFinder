@@ -1,14 +1,21 @@
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import GigButton from 'components/gig_button';
 import GigLoader from 'components/gig_loader';
+import { useAuth } from 'providers/auth';
+import { useReviewForm } from 'providers/review_form';
 import { useUser } from 'providers/user';
 import Review from 'routes/find/components/gig_details_modal/body/reviews_panel/review';
+import ReviewForm from 'routes/find/components/gig_details_modal/body/reviews_panel/review_form';
 import settings from 'settings';
 
 const ReviewPanel = (): ReactElement => {
-  const { employerReviews } = useUser();
+  const { isLoggedIn, user } = useAuth();
+  const { userEmployerReviews, getIsValidInput, resetForm, submitReviewForm } = useReviewForm();
+  const { activeGig, employerReviews } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
+  const [isReviewForm, setIsReviewForm] = useState(false);
 
   useEffect(() => {
     if (employerReviews?.length) {
@@ -23,7 +30,8 @@ const ReviewPanel = (): ReactElement => {
 
   const buildEmployerReviews = (): ReactElement[] => {
     return employerReviews.map(
-      employerReview => <Review review={employerReview} key={`review-${employerReview.id}`}/>
+      employerReview =>
+        <Review review={employerReview} key={`review-${employerReview.id}`} userId={user.id}/>
     );
   }
 
@@ -36,19 +44,63 @@ const ReviewPanel = (): ReactElement => {
     );
   };
 
-  return (
-    <div className='gig-modal-body-panel' id='gig-details-modal-review-panel'>
-      <InfiniteScroll
-        dataLength={resultsCount}
-        next={getMoreEmployerReviews}
-        hasMore={resultsCount !== employerReviews.length}
-        loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
-        scrollableTarget='gig-details-modal-review-panel'
-      >
-        {buildEmployerReviews()}
-      </InfiniteScroll>
-    </div>
-  );
+  const submitReview = (): void => {
+    submitReviewForm(activeGig.employer);
+    setIsReviewForm(false);
+  }
+
+  const cancelReview = (): void => {
+    resetForm()
+    setIsReviewForm(false);
+  }
+
+  return isReviewForm
+    ? (
+      <>
+        <ReviewForm />
+        <div id='review-panel-actions-container'>
+          <GigButton
+            classNames='sub-header-text medium-grey'
+            id='write-a-review-button'
+            onClick={() => cancelReview()}
+            text='Cancel'
+          />
+          <GigButton
+            classNames='sub-header-text primary-blue'
+            id='write-a-review-button'
+            isDisabled={!getIsValidInput('all')}
+            onClick={() => submitReview()}
+            text='Submit Review'
+          />
+        </div>
+      </>
+    )
+    : (
+      <>
+        <div className='gig-modal-body-panel' id='gig-details-modal-review-panel'>
+          <InfiniteScroll
+            dataLength={resultsCount}
+            next={getMoreEmployerReviews}
+            hasMore={resultsCount !== employerReviews.length}
+            loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
+            scrollableTarget='gig-details-modal-review-panel'
+          >
+            {buildEmployerReviews()}
+          </InfiniteScroll>
+        </div>
+        {
+          isLoggedIn && !userEmployerReviews.find(x => x.employer === activeGig.employer) &&
+          <div id='review-panel-actions-container'>
+            <GigButton
+              classNames='sub-header-text primary-blue'
+              id='write-a-review-button'
+              onClick={() => setIsReviewForm(true)}
+              text='Write A Review'
+            />
+          </div>
+        }
+      </>
+    );
 }
 
 export default ReviewPanel;

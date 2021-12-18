@@ -35,15 +35,15 @@ const Footer = (props: FooterProps): ReactElement => {
             ? <ActiveResume isDisplayHeader={false}/>
             : 'Log in or create an account to apply to gigs'
         }
-        <div
-          id='resume-application-message'
-          className={
-            `paragraph-text text-center
-            ${isLoggedIn && !activeResumeId ? ' primary-red' : ' transparent'}`
-          }
-        >
-          Select a resume to apply to this gig
-        </div>
+        {
+          isLoggedIn && !activeResumeId &&
+          <div
+            id='resume-application-message'
+            className='paragraph-text text-center primary-red'
+          >
+            Select a resume to apply to this gig
+          </div>
+        }
       </div>
       <div id='gig-details-modal-button-container'>
         <div id='action-buttons'>
@@ -51,7 +51,7 @@ const Footer = (props: FooterProps): ReactElement => {
             classNames='medium-grey dark-background sub-header-text gig-details-modal-button'
             id='gig-details-modal-cancel-button'
             onClick={props.cancel}
-            text='Cancel'
+            text='Close'
           />
           <GigButton
             classNames='primary-blue dark-background sub-header-text gig-details-modal-button'
@@ -61,15 +61,15 @@ const Footer = (props: FooterProps): ReactElement => {
             text='Apply'
           />
         </div>
-        <div
-          id='gig-application-message'
-          className={
-            `paragraph-text text-center
-            ${isLoggedIn && matchingGigApplication ? ' primary-red' : ' transparent'}`
-          }
-        >
-          Gig application already submitted
-        </div>
+        {
+          matchingGigApplication &&
+          <div
+            id='gig-application-message'
+            className='paragraph-text text-center primary-red'
+          >
+            Gig application already submitted
+          </div>
+        }
       </div>
     </div>
   );

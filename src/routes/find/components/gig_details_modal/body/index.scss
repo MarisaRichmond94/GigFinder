@@ -9,8 +9,19 @@
   .gig-modal-body-panel {
     border: 1px solid $light-grey;
     margin: 0 $medium-margin;
-    max-height: 50vh;
+    max-height: 45vh;
     overflow-y: auto;
     padding: $medium-padding;
+  }
+
+  #review-panel-actions-container {
+    display: flex;
+    justify-content: center;
+
+    #write-a-review-button {
+      margin: $medium-margin $medium-margin 0 $medium-margin;
+      max-width: 500px;
+      width: 100%;
+    }
   }
 }

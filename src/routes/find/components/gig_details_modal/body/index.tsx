@@ -3,6 +3,7 @@ import './index.scss';
 import { ReactElement, useState } from 'react';
 
 import GigButton from 'components/gig_button';
+import { ReviewFormProvider } from 'providers/review_form';
 import DetailPanel from 'routes/find/components/gig_details_modal/body/details_panel';
 import ReviewPanel from 'routes/find/components/gig_details_modal/body/reviews_panel';
 import { Gig } from 'types';
@@ -33,7 +34,11 @@ const Body = (props: BodyProps): ReactElement => {
       {
         isDetailPanel
           ? <DetailPanel gig={props.gig} />
-          : <ReviewPanel />
+          : (
+            <ReviewFormProvider>
+              <ReviewPanel />
+            </ReviewFormProvider>
+          )
       }
     </div>
   );

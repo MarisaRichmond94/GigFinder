@@ -50,6 +50,7 @@ const CenterPanel = (): ReactElement => {
       <CollapsableSection
         icon={<GoSearch />}
         id='search-panel-section'
+        isVisible={false}
         onToggleCallback={calculateTotalHeight}
         sectionTitle={searchResults?.length ? `Search (${searchResults.length})` : 'Search'}
       >
@@ -58,6 +59,7 @@ const CenterPanel = (): ReactElement => {
       <CollapsableSection
         icon={<FaFilter />}
         id='filter-panel-section'
+        isVisible={false}
         onToggleCallback={calculateTotalHeight}
         sectionTitle={
           search.includes('filters') && filteredResults

@@ -1,0 +1,9 @@
+@import 'global';
+
+.gig-checkbox-container {
+  @include centered-flex-box;
+
+  &:first-child {
+    margin-right: $medium-margin;
+  }
+}

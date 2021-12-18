@@ -10,6 +10,7 @@ import { EmployerReview } from 'types';
 
 type ReviewProps = {
   review: EmployerReview,
+  userId?: string,
 }
 
 const Review = (props: ReviewProps): ReactElement => {
@@ -19,7 +20,7 @@ const Review = (props: ReviewProps): ReactElement => {
   const [isReviewed, setIsReviewed] = useState(false);
   // prop variables
   const { id, rating, headline, title, isCurrentEmployee } = props.review;
-  const { city, abbrevState, datePosted, summary } = props.review;
+  const { city, abbrevState, datePosted, summary, userId: reviewUserId } = props.review;
   const { positiveFeedbackCounter, negativeFeedbackCounter } = props.review;
 
   const getStars = (): ReactElement => {
@@ -72,44 +73,47 @@ const Review = (props: ReviewProps): ReactElement => {
           <div className='review-text sub-header-text' title={location}>{location}</div>
           <div className='review-text sub-header-text' title={postedDate}>{postedDate}</div>
           <div className='summary sub-header-text'>{summary}</div>
-          <div className='review-feedback-container'>
-            <div
-              className='review-text sub-header-text review-feedback'
-              title={reviewFeedbackText}
-            >
-              {reviewFeedbackText}
+          {
+            props.userId !== reviewUserId &&
+            <div className='review-feedback-container'>
+              <div
+                className='review-text sub-header-text review-feedback'
+                title={reviewFeedbackText}
+              >
+                {reviewFeedbackText}
+              </div>
+              {
+                isReviewed
+                  ? (
+                    <div className='thick review-text sub-header-text review-feedback-container'>
+                      Thanks for your feedback!
+                    </div>
+                  )
+                  : (
+                    <>
+                      <div className='sub-header-text review-feedback-counter'>
+                        <GigButton
+                          classNames='review-feedback-button icon-button primary-green'
+                          id={`review-positive-feedback-button-${id}`}
+                          onClick={() => submitFeedback(true)}
+                          textBlock={<FiThumbsUp />}
+                        />
+                        <div>{positiveFeedbackCounter}</div>
+                      </div>
+                      <div className='sub-header-text review-feedback-counter'>
+                        <GigButton
+                          classNames='review-feedback-button icon-button primary-red'
+                          id={`review-negative-feedback-button-${id}`}
+                          onClick={() => submitFeedback(false)}
+                          textBlock={<FiThumbsDown />}
+                        />
+                        <div>{negativeFeedbackCounter}</div>
+                      </div>
+                    </>
+                  )
+                }
             </div>
-            {
-              isReviewed
-                ? (
-                  <div className='thick review-text sub-header-text review-feedback-container'>
-                    Thanks for your feedback!
-                  </div>
-                )
-                : (
-                  <>
-                    <div className='sub-header-text review-feedback-counter'>
-                      <GigButton
-                        classNames='review-feedback-button icon-button primary-green'
-                        id={`review-positive-feedback-button-${id}`}
-                        onClick={() => submitFeedback(true)}
-                        textBlock={<FiThumbsUp />}
-                      />
-                      <div>{positiveFeedbackCounter}</div>
-                    </div>
-                    <div className='sub-header-text review-feedback-counter'>
-                      <GigButton
-                        classNames='review-feedback-button icon-button primary-red'
-                        id={`review-negative-feedback-button-${id}`}
-                        onClick={() => submitFeedback(false)}
-                        textBlock={<FiThumbsDown />}
-                      />
-                      <div>{negativeFeedbackCounter}</div>
-                    </div>
-                  </>
-                )
             }
-          </div>
         </div>
       </div>
       <hr className='review-divider' />

@@ -7,7 +7,7 @@
 
 @mixin centered-flex-box {
   align-items: center;
-  display: inline-flex;
+  display: flex;
 }
 
 @mixin hide-overflow-ellipsis {

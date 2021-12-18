@@ -2,8 +2,7 @@
 
 #gig-details-modal-review-panel {
   .employer-review-container {
-    align-items: center;
-    display: flex;
+    @include centered-flex-box;
     margin-bottom: $medium-margin;
     width: 100%;
 
@@ -61,12 +60,12 @@
     .review-divider {
       color: $grey;
       width: 100%;
-
-      &:last-child {
-        display: none;
-      }
     }
   }
+}
+
+hr:last-child {
+  display: none;
 }
 
 // mobile view
