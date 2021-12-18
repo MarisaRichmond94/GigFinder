@@ -12,7 +12,12 @@ import ActionButtons from 'routes/find/right_panel/action_buttons';
 import Filters from 'routes/find/right_panel/filters';
 import { FindPanelTypes } from 'types';
 
-const RightPanel = (): ReactElement => {
+type RightPanelProps = {
+  setIsAuthModalOpen?: (isAuthModalOpen: boolean) => void,
+  setIsUploadModalOpen: (isUploadModalOpen: boolean) => void,
+}
+
+const RightPanel = (props: RightPanelProps): ReactElement => {
   // context variables and functions
   const { unusableRightPanelHeight } = useApp();
   // local state variables and functions
@@ -30,7 +35,10 @@ const RightPanel = (): ReactElement => {
   return (
     <div id='right-panel'>
       <AuthFormProvider>
-        <ActionButtons />
+        <ActionButtons
+          setIsAuthModalOpen={props.setIsAuthModalOpen}
+          setIsUploadModalOpen={props.setIsUploadModalOpen}
+        />
       </AuthFormProvider>
       <ActiveResume />
       <Filters />

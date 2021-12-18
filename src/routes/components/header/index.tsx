@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useHistory, useLocation } from 'react-router-dom';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
@@ -11,11 +11,14 @@ import GigButton from 'components/gig_button';
 import { useViewport } from 'hooks/useViewport';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
-import AuthModal from 'routes/components/auth_modal';
-import UploadModal from 'routes/find/components/upload_modal';
 import settings from 'settings';
 
-const Header = (): ReactElement => {
+type HeaderProps = {
+  setIsAuthModalOpen?: (isAuthModalOpen: boolean) => void,
+  setIsUploadModalOpen?: (isUploadModalOpen: boolean) => void,
+};
+
+const Header = (props: HeaderProps): ReactElement => {
   // hook variables
   const history = useHistory();
   const { pathname } = useLocation();
@@ -24,8 +27,6 @@ const Header = (): ReactElement => {
   const { employer, isLoggedIn, user, logout } = useAuth();
   const { setIsSignUp } = useAuthForm();
   // local state variables and functions
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {
@@ -38,24 +39,17 @@ const Header = (): ReactElement => {
   }
 
   const handleLogin = (): void => {
-    setIsAuthModalOpen(true);
+    props.setIsAuthModalOpen(true);
     setIsSignUp(false);
   }
 
   const handleSignUp = (): void => {
-    setIsAuthModalOpen(true);
+    props.setIsAuthModalOpen(true);
     setIsSignUp(true);
   }
 
   return (
     <div id='header'>
-      {
-        pathname === settings.FIND_ROUTE &&
-        <>
-          <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
-          <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
-        </>
-      }
       <div id='header-title' onClick={() => history.push('/')}>
         <img alt='logo' id='header-title-icon' src={logo} />
         <div className='bold title-text' id='header-title-text'>Gig Search</div>
@@ -81,7 +75,7 @@ const Header = (): ReactElement => {
           <GigButton
             classNames='grey header icon-button large-header-text'
             id='upload-resume-icon-button'
-            onClick={() => setIsUploadModalOpen(true)}
+            onClick={() => props.setIsUploadModalOpen(true)}
             textBlock={<GrCloudUpload />}
           />
         }

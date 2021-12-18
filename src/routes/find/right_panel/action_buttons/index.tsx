@@ -1,38 +1,38 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
-import AuthModal from 'routes/components/auth_modal';
-import UploadModal from 'routes/find/components/upload_modal';
 
-const ActionButtons = (): ReactElement => {
+type ActionButtonsProps = {
+  setIsAuthModalOpen?: (isAuthModalOpen: boolean) => void,
+  setIsUploadModalOpen: (isUploadModalOpen: boolean) => void,
+}
+
+const ActionButtons = (props: ActionButtonsProps): ReactElement => {
   const { isLoggedIn, logout } = useAuth();
   const { setIsSignUp } = useAuthForm();
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   const handleLoginUser = (): void => {
-    setIsAuthModalOpen(true);
+    props.setIsAuthModalOpen(true);
     setIsSignUp(false);
   }
 
   const handleSignUpUser = (): void => {
-    setIsAuthModalOpen(true);
+    props.setIsAuthModalOpen(true);
     setIsSignUp(true);
   }
 
   return isLoggedIn
     ? (
       <div id='action-button-wrapper'>
-        <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
         <div id='right-panel-action-buttons'>
           <GigButton
             classNames='secondary-blue dark-background sub-header-text'
             id='upload-resume-button'
-            onClick={() => setIsUploadModalOpen(true)}
+            onClick={() => props.setIsUploadModalOpen(true)}
             text='Upload Resume'
           />
           <GigButton
@@ -46,7 +46,6 @@ const ActionButtons = (): ReactElement => {
     )
     : (
       <div id='action-button-wrapper'>
-        <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
         <div id='right-panel-action-buttons'>
           <GigButton
             classNames='secondary-blue dark-background sub-header-text'

@@ -22,8 +22,8 @@ const FileList = (props: FileListProps): ReactElement => {
     }
   };
 
-  const buildUploadFilesList = (uploadFiles): ReactElement[] => {
-    return uploadFiles.map((uploadFile, index) => {
+  const buildUploadFilesList = (): ReactElement[] => {
+    return props.uploadFiles.map((uploadFile, index) => {
       return (
         <div className='upload-file sub-header-text' key={`upload-file-${uploadFile.name}`}>
           {uploadFile.status ? <AiOutlineFileDone /> : <AiOutlineFileText />}
@@ -39,11 +39,11 @@ const FileList = (props: FileListProps): ReactElement => {
         </div>
       );
     })
-  }
+  };
 
   return (
     <div id='upload-files-list'>
-      {buildUploadFilesList(props.uploadFiles)}
+      {buildUploadFilesList()}
     </div>
   );
 };
