@@ -28,7 +28,7 @@ const Footer = (props: FooterProps): ReactElement => {
           id='gig-details-modal-apply-button'
           isDisabled={props.isInEditMode && !isValidSalary}
           onClick={props.toggleIsInEditMode}
-          text={props.isInEditMode ? 'Update Details' : 'Edit Details'}
+          text={props.isInEditMode ? 'Update' : 'Edit'}
         />
       </div>
     </div>

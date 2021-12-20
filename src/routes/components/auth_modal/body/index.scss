@@ -17,9 +17,11 @@
   }
 
   #auth-form-container {
+    padding: $large-padding $large-padding 0 $large-padding;
+
     .auth-modal-input-container {
       width: 96%;
-      margin: 8px 2%;
+      margin: $medium-margin 0;
     }
   }
 

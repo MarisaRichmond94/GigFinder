@@ -10,6 +10,7 @@ import EmployerReviewsApi from 'api/employer_reviews';
 
 const ReviewFormProvider = (props: object) => {
   const { user } = useAuth();
+  const userId = user?.id;
 
   const [city, setCity] = useState<string | undefined>();
   const [headline, setHeadline] = useState('');
@@ -38,12 +39,14 @@ const ReviewFormProvider = (props: object) => {
 
   useEffect(() => {
     async function populateUserEmployerReviews() {
-      const employerReviews = await EmployerReviewsApi.get({ userId: user.id });
+      const employerReviews = await EmployerReviewsApi.get({ userId });
       setUserEmployerReviews(employerReviews);
     }
 
-    populateUserEmployerReviews();
-  }, [user.id]);
+    if (userId) {
+      populateUserEmployerReviews();
+    }
+  }, [userId]);
 
   const updateField = useCallback(
     (key: ReviewFormFieldOptions, value: string | number | boolean): void => {
@@ -111,7 +114,7 @@ const ReviewFormProvider = (props: object) => {
     const employerReview = {
       id: generateGUID(),
       employer,
-      userId: user.id,
+      userId,
       rating,
       headline,
       title,
@@ -128,7 +131,7 @@ const ReviewFormProvider = (props: object) => {
     setUserEmployerReviews([...userEmployerReviews, employerReview]);
     resetForm();
   }, [
-    city, headline, isCurrentEmployee, rating, summary, title, userEmployerReviews, user.id,
+    city, headline, isCurrentEmployee, rating, summary, title, userEmployerReviews, userId,
     resetForm,
   ]);
 

@@ -21,7 +21,10 @@ const ActiveResume = (props: ActiveResumeProps): ReactElement => {
   const isDisplayHeader = props.isDisplayHeader || true;
 
   return (
-    <div id='active-resume-section'>
+    <div
+      id='active-resume-section'
+      className={props.isDisplayHeader ? 'with-header' : 'without-header'}
+    >
       {
         isDisplayHeader &&
         <div id='active-resume-header' className='thick header-text'>

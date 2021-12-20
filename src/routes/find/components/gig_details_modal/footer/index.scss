@@ -1,9 +1,11 @@
 @import 'global';
 
 #gig-details-modal-content {
-  .gig-modal-footer {
-    padding: $large-padding $large-padding 0 $large-padding;
-  };
+  &.find {
+    .gig-modal-footer {
+      padding: $large-padding $large-padding 0 $large-padding;
+    };
+  }
 }
 
 #gig-details-modal-footer {

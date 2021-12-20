@@ -21,6 +21,16 @@
   font-size: $title-font-size;
 }
 
+.sub-title-text {
+  @include prevent-highlight;
+  font-size: $sub-title-font-size;
+}
+
+.small-title-text {
+  @include prevent-highlight;
+  font-size: $small-title-font-size;
+}
+
 .large-header-text {
   @include prevent-highlight;
   font-size: $large-header-font-size;

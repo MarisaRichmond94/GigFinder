@@ -28,7 +28,7 @@ const Header = (props: HeaderProps): ReactElement => {
   }
 
   return (
-    <div id='gig-details-modal-header'>
+    <div id='gig-details-modal-header' className='find'>
       <div id='primary-header'>
         <div id='gig-details-title' className='bold header-text' title={title}>
           {title}

@@ -30,7 +30,7 @@ const AuthModal = (props: AuthModalProps): ReactElement => {
   }, [contentWidth, setContentWidth, props.isOpen]);
 
   const headerContent = (
-    <div id='auth-header-container'>
+    <div id='auth-header-container' className={isSignUp ? 'small-title-text' : 'sub-title-text'}>
       {isSignUp ? 'Create An Account' : 'Sign In'}
     </div>
   );

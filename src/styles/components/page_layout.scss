@@ -16,6 +16,10 @@
   white-space: nowrap;
 }
 
+.hide-overflow-ellipsis {
+  @include hide-overflow-ellipsis;
+}
+
 .page-container {
   box-sizing: border-box;
   display: grid;

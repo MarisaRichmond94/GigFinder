@@ -5,4 +5,26 @@
   height: 85vh;
   max-width: 96vw;
   overflow-y: auto;
+
+  .posted-row {
+    margin-bottom: $medium-margin;
+  }
+
+  .close-gig-button {
+    @include centered-flex-box;
+
+    .close-gig-button-text {
+      margin-right: $medium-margin;
+    }
+  }
+
+  .gig-item-views {
+    @include hide-overflow-ellipsis;
+  }
+}
+
+@media (min-width: 0) and (max-width: 455px) {
+  .close-gig-button-text {
+    display: none;
+  }
 }

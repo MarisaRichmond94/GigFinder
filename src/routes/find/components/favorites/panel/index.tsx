@@ -9,11 +9,13 @@ import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
 import { useUser } from 'providers/user';
+import ActiveResume from 'routes/find/components/active_resume';
 import FavoriteGigItem from 'routes/find/components/favorites/item';
 import settings from 'settings';
 
 type FavoriteGigsPanelProps = {
   isCenterPanel?: boolean,
+  showActiveResumeSelector?: boolean,
   unusableHeight?: number,
 }
 
@@ -25,6 +27,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
+  console.log(`favorites panel usable height: ${props.unusableHeight}`);
 
   useEffect(() => {
     if (!prevFavoriteGigs && favoriteGigs?.length) {
@@ -72,6 +75,13 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
 
   return (
     <div id='favorite-gigs-panel'>
+      {
+        isLoggedIn && props.showActiveResumeSelector &&
+        <>
+          <ActiveResume isDisplayHeader={false} />
+          <hr className='panel-divider' />
+        </>
+      }
       {
         favoriteGigs?.length
           ? (

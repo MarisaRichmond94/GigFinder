@@ -4,8 +4,7 @@
   padding-top: $large-padding;
 
   .filter-button {
-    margin-right: $medium-margin;
-    margin-bottom: $large-margin;
+    margin: 0 $medium-margin $medium-margin 0;
 
     :last-child {
       margin-right: 0;
@@ -17,7 +16,6 @@
   margin: $medium-margin;
 
   #search-filters {
-    margin: 0 $medium-margin;
     padding-top: $large-padding;
 
     .filter-button {

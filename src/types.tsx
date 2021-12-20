@@ -44,7 +44,7 @@ export interface Candidate {
 
 export enum CreatePanelTypes {
   gigs = 'gigs',
-  candidates = 'candidates',
+  apps = 'apps',
   post = 'post',
   templates = 'templates',
 }

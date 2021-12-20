@@ -37,6 +37,7 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
+  console.log(`search results panel usable height: ${props.unusableHeight}`);
 
   useEffect(() => {
     setTimeout(() => { calculateTotalHeight(); }, 500);

@@ -8,10 +8,6 @@
     margin-left: 0;
     width: 100%;
 
-    #gig-details-title {
-      font-size: 1.75rem;
-    }
-
     #gig-details-title,
     #gig-details-employer {
       @include hide-overflow-ellipsis;
@@ -27,6 +23,19 @@
       #favorite-gig-button {
         font-size: 1.25rem;
       }
+    }
+  }
+}
+
+// tablet view
+@media (min-width: 450px) {
+  #gig-details-modal-header.create {
+    #gig-details-title {
+      font-size: 1.75rem;
+    }
+
+    #sub-header {
+      font-size: 1.25rem;
     }
   }
 }

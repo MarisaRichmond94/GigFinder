@@ -17,30 +17,25 @@
   display: inline-flex;
   flex-direction: column;
   min-height: 30vh;
-  margin: 15vh 10vw;
-  padding: $extra-large-padding;
+  margin: 2vh 5vw;
+  padding: $medium-padding;
   row-gap: 10px;
-  width: 80vw;
+  width: 90vw;
 
   #search-form-tag-line,
   #search-form-switch-portal {
     color: $off-white;
     text-align: center;
   }
-
-  #search-form-switch-portal {
-    display: flex;
-  }
 }
 
 #search-form-name-and-logo {
-  align-items: center;
+  @include vertically-centered-inline-flex-box;
   color: $primary-blue;
-  display: inline-flex;
 
   img {
     margin-right: $medium-margin;
-    width: 4rem;
+    width: 3rem;
   }
 }
 
@@ -48,7 +43,14 @@
 @media (min-width: 750px) {
   #main-search-form-container {
     margin: 15vh 15vw;
+    padding: $extra-large-padding;
     width: 70vw;
+  }
+
+  #search-form-name-and-logo {
+    img {
+      width: 4rem;
+    }
   }
 }
 
@@ -56,6 +58,13 @@
 @media (min-width: 1600px) {
   #main-search-form-container {
     margin: 15vh 30vw;
+    padding: $extra-large-padding;
     width: 40vw;
+  }
+
+  #search-form-name-and-logo {
+    img {
+      width: 4rem;
+    }
   }
 }

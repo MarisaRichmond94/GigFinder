@@ -27,7 +27,7 @@ const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
   }
 
   return (
-    <div id='gig-details-modal'>
+    <div id='gig-details-modal' className='find'>
       <GigModal
         bodyContent={<Body gig={activeGig} />}
         headerContent={<Header gig={activeGig} />}

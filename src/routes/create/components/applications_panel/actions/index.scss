@@ -1,11 +1,15 @@
 @import 'global';
 
 #application-actions-container {
-  .gig-button {
-    margin-right: $medium-margin;
+  #application-actions-button-container {
+    @include centered-flex-box;
 
-    &:last-child {
-      margin-right: 0;
+    .gig-button {
+      margin-right: $medium-margin;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

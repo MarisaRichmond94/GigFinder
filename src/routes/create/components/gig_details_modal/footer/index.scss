@@ -33,6 +33,10 @@
       #active-resume-section {
         padding-top: 0;
 
+        #active-resume-dropdown {
+          margin-bottom: $medium-margin;
+        }
+
         #active-resume-header {
           display: none;
         }
@@ -44,6 +48,8 @@
     }
 
     #gig-details-modal-button-container {
+      width: 104%;
+
       #gig-application-message {
         padding-bottom: $medium-padding;
       }
@@ -54,7 +60,7 @@
     }
 
     #gig-details-modal-cancel-button {
-      margin-right: $large-margin;
+      margin-right: $medium-margin;
     }
 
     .gig-details-modal-button {

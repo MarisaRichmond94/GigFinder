@@ -53,13 +53,13 @@ const Body = (props: BodyProps): ReactElement => {
   const feedbackBody = (
     <>
       <div className='application-detail-flex-container'>
-        <div className='bold paragraph-text'>Positive Traits:</div>
+        <div className='bold paragraph-text baseline-aligned'>Positive:</div>
         <div className='paragraph-text'>
           {positiveTraits ? positiveTraits.join(', ') : 'N/A'}
         </div>
       </div>
       <div className='application-detail-flex-container'>
-        <div className='bold paragraph-text'>Negative Traits:</div>
+        <div className='bold paragraph-text baseline-aligned'>Negative:</div>
         <div className='paragraph-text'>
           {negativeTraits ? negativeTraits.join(', ') : 'N/A'}
         </div>

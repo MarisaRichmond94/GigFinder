@@ -38,7 +38,13 @@ const CenterPanel = (): ReactElement => {
       case FindPanelTypes.applications:
         return <UserApplicationsPanel isCenterPanel unusableHeight={unusableCenterPanelHeight} />;
       case FindPanelTypes.favorites:
-        return <FavoriteGigsPanel isCenterPanel unusableHeight={unusableCenterPanelHeight} />;
+        return (
+          <FavoriteGigsPanel
+            isCenterPanel
+            showActiveResumeSelector
+            unusableHeight={unusableCenterPanelHeight + 96}
+          />
+        );
       case FindPanelTypes.results:
       default:
         return <SearchResults isCenterPanel unusableHeight={unusableCenterPanelHeight} />;

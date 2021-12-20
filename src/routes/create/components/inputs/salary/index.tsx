@@ -1,3 +1,5 @@
+import './index.scss';
+
 import { ReactElement } from 'react';
 
 import GigTextInput from 'components/gig_input/text';
@@ -12,7 +14,7 @@ const SalaryInput = (props: SalaryInputProps): ReactElement => {
   const { salary, updateInput, validateSalary } = useGigForm();
 
   return (
-    <div className='detail-row-flex-container'>
+    <div className='detail-row-container'>
       <div id='salary-details' className='bold sub-header-text gig-detail-title'>
         Salary/Pay
       </div>

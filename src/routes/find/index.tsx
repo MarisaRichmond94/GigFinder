@@ -34,7 +34,10 @@ const FindPage = (): ReactElement => {
         <AuthModal isOpen={isAuthModalOpen} setIsOpen={setIsAuthModalOpen} />
         <UploadModal isOpen={isUploadModalOpen} setIsOpen={setIsUploadModalOpen} />
         <div className='page-container' id='find-page'>
-          <Header setIsUploadModalOpen={setIsUploadModalOpen} />
+          <Header
+            setIsAuthModalOpen={setIsAuthModalOpen}
+            setIsUploadModalOpen={setIsUploadModalOpen}
+          />
           <CenterPanel />
           <RightPanel
             setIsAuthModalOpen={setIsAuthModalOpen}

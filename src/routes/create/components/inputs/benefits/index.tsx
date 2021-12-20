@@ -24,7 +24,7 @@ const BenefitsInput = (props: BenefitsInputProps): ReactElement => {
           onClick={() => deleteBenefit(benefit)}
           textBlock={
             <div className='benefit-item' key={`${benefit.replace(' ', '-')}-${index}`}>
-              {benefit}&nbsp;&nbsp;
+              <div className='hide-overflow-ellipsis' title={benefit}>{benefit}</div>&nbsp;
               <FaTimes />
             </div>
           }
@@ -35,7 +35,7 @@ const BenefitsInput = (props: BenefitsInputProps): ReactElement => {
 
   return (
     <>
-      <div className='detail-row-flex-container'>
+      <div className='detail-row-container'>
         <div id='benefits-details' className='bold sub-header-text gig-detail-title'>
           Benefits
         </div>
@@ -54,7 +54,7 @@ const BenefitsInput = (props: BenefitsInputProps): ReactElement => {
       </div>
       {
         !!benefits?.length &&
-        <div className='detail-row-flex-container'>
+        <div className='detail-row-container'>
           <div id='benefits-list'>
             {populateBenefits(benefits)}
           </div>

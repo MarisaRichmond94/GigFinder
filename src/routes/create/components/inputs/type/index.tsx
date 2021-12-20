@@ -14,9 +14,9 @@ const TypeInput = (props: TypeInputProps): ReactElement => {
   const { type, typeOptions, updateInput } = useGigForm();
 
   return (
-    <div className='detail-row-flex-container'>
+    <div className='detail-row-container'>
       <div id='job-type-details' className='bold sub-header-text gig-detail-title'>
-        Job Type
+        Gig Type
       </div>
       <GigDropdown
         classNames='sub-header-text gig-details-input off-white-gig-dropdown gig-type-dropdown'

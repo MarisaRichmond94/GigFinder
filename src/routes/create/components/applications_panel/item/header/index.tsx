@@ -16,9 +16,9 @@ const Header = (props: HeaderProps): ReactElement => {
 
   return (
     <div className='application-header'>
-      <div className='applicant-name bold sub-header-text'>{name}</div>
+      <div className='applicant-name bold sub-header-text' title={name}>{name}</div>
       <div className='vertical-line grey' />
-      <div className='applicant-title sub-header-text'>{title}</div>
+      <div className='applicant-title sub-header-text' title={title}>{title}</div>
       <div className='application-status'>
         {
           status === ApplicationStatus.pending

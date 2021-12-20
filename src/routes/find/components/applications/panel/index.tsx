@@ -32,6 +32,7 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
+  console.log(`applications panel usable height: ${props.unusableHeight}`);
 
   useEffect(() => {
     if (!prevApplications && applications?.length) {

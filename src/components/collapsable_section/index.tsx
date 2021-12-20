@@ -28,7 +28,7 @@ const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
       id={props.id}
       className={`collapsable-section${props.classNames ? ` ${props.classNames}` : ''}`}
     >
-      <div className='collapsable-section-header'>
+      <div className='collapsable-section-header header-text'>
         <div className='collapsable-section-title'>{props.icon} {props.sectionTitle}</div>
         <div>
           {

@@ -9,27 +9,12 @@
   }
 
   .detail-row-flex-container {
+    margin-bottom: $medium-margin;
     width: 100%;
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      margin-bottom: $medium-margin;
-    }
-
-    &:nth-child(1),
-    &:nth-child(4),
-    &:nth-child(7),
-    &:nth-child(8) {
-      margin-bottom: $large-margin;
-    }
   }
 
   .detail-row-container {
-    margin-bottom: $small-margin;
-
-    &:nth-child(6) {
-      margin-bottom: 0;
-    }
+    margin-bottom: $medium-margin;
   }
 
   #benefits-list {
@@ -59,7 +44,7 @@
       width: calc(50% - (15px / 2));
 
       &:nth-child(1) {
-        margin-right: $large-margin;
+        margin-right: $medium-margin;
       }
     }
   }

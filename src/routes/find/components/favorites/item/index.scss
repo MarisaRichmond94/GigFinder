@@ -4,7 +4,11 @@
   background-color: $off-white;
   border-radius: 15px;
   padding: $large-padding;
-  margin: $medium-margin 0;
+  margin-bottom: $medium-margin;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   .favorite-gig-item-row {
     @include centered-flex-box;

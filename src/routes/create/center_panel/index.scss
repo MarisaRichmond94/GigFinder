@@ -9,3 +9,10 @@
   display: flex;
   padding: 0 $medium-padding;
 }
+
+// mobile view
+@media (min-width: 0) {
+  #create-center-panel {
+    width: calc(100vw - 6%);
+  }
+}

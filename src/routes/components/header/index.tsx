@@ -56,7 +56,7 @@ const Header = (props: HeaderProps): ReactElement => {
       </div>
       <div className='sub-header-text' id='header-message'>
         {
-          isLoggedIn &&
+          isLoggedIn && user?.name &&
           <div id='greeting' title={generateHeaderMessage()}>
             {generateHeaderMessage()}
           </div>

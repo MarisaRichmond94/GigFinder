@@ -35,7 +35,7 @@ const CenterPanel = (): ReactElement => {
         return <MessageTemplatePanel />;
       case CreatePanelTypes.post:
         return <GigCreationPanel />;
-      case CreatePanelTypes.candidates:
+      case CreatePanelTypes.apps:
         return <ApplicationsPanel />;
       case CreatePanelTypes.gigs:
       default:

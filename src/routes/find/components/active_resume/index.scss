@@ -2,7 +2,20 @@
 
 #active-resume-section {
   color: $off-white;
-  padding-top: $extra-large-padding + 5px;
+
+  &.with-header {
+    padding-top: $extra-large-padding + 5px;
+
+    #active-resume-header {
+      color: $off-white;
+    }
+  }
+
+  &.without-header {
+    #active-resume-header {
+      color: $off-black;
+    }
+  }
 
   #active-resume-header {
     align-items: center;

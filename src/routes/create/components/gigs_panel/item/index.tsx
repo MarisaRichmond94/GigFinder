@@ -28,8 +28,12 @@ const GigItem = (props: GigItemProps): ReactElement => {
         <div className='gig-item-job-title bold header-text' title={title}>
           {title}
         </div>
-        &nbsp;&nbsp;<div className='vertical-line' />&nbsp;&nbsp;
-        {views > 5000 ? <GiCampfire /> : <FaRegSnowflake />}&nbsp;
+        &nbsp;<div className='vertical-line' />&nbsp;
+        {
+          views > 5000
+            ? <GiCampfire className='small-title-text' />
+            : <FaRegSnowflake className='small-title-text'/>
+        }&nbsp;
         <div className='gig-item-views sub-header-text' title={getFormattedViews(views)}>
           {getFormattedViews(views)}
         </div>
@@ -38,8 +42,8 @@ const GigItem = (props: GigItemProps): ReactElement => {
           id={`close-gig-button-${id}`}
           onClick={() => closeGig(id)}
           textBlock={
-            <div className='close-gig-button'>
-              Close Gig&nbsp;&nbsp;
+            <div className='close-gig-button' title='Close Gig'>
+              <div className='close-gig-button-text'>Close Gig</div>
               <GiExitDoor className='large-header-text' />
             </div>
           }

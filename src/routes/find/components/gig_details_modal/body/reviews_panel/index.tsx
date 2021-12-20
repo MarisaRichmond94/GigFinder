@@ -12,6 +12,7 @@ import settings from 'settings';
 
 const ReviewPanel = (): ReactElement => {
   const { isLoggedIn, user } = useAuth();
+  const userId = user?.id;
   const { userEmployerReviews, getIsValidInput, resetForm, submitReviewForm } = useReviewForm();
   const { activeGig, employerReviews } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
@@ -31,7 +32,7 @@ const ReviewPanel = (): ReactElement => {
   const buildEmployerReviews = (): ReactElement[] => {
     return employerReviews.map(
       employerReview =>
-        <Review review={employerReview} key={`review-${employerReview.id}`} userId={user.id}/>
+        <Review review={employerReview} key={`review-${employerReview.id}`} userId={userId}/>
     );
   }
 

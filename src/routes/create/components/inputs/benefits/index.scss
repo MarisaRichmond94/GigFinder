@@ -4,6 +4,14 @@
   #benefits-list {
     margin-bottom: 0;
 
+    .benefit-item {
+      @include centered-flex-box;
+    }
+
+    .benefit-button {
+      max-width: 100%;
+    }
+
     button {
       background-color: $primary-blue;
       margin-right: $medium-margin;
@@ -24,6 +32,18 @@
 
     ul {
       width: 100%;
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 450px) {
+  #gig-details-modal-details-panel {
+    .benefit-button {
+      margin-bottom: $medium-margin;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }

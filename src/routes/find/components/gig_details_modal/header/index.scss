@@ -1,16 +1,12 @@
 @import 'global';
 
-#gig-details-modal-header {
+#gig-details-modal-header.find {
   width: 100%;
 
   #primary-header {
     @include centered-flex-box;
     margin-left: 0;
     width: 100%;
-
-    #gig-details-title {
-      font-size: 1.75rem;
-    }
 
     #gig-details-title,
     #gig-details-employer {
@@ -27,6 +23,19 @@
       #favorite-gig-button {
         font-size: 1.25rem;
       }
+    }
+  }
+}
+
+// tablet view
+@media (min-width: 450px) {
+  #gig-details-modal-header.find {
+    #gig-details-title {
+      font-size: 1.75rem;
+    }
+
+    #sub-header {
+      font-size: 1.25rem;
     }
   }
 }
