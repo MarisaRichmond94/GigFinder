@@ -64,7 +64,7 @@ const Header = (props: HeaderProps): ReactElement => {
         {
           !isLoggedIn && width < settings.MIN_DESKTOP_WIDTH &&
           <GigButton
-            classNames='grey header icon-button large-header-text'
+            classNames='off-black header icon-button large-header-text'
             id='sign-up-button'
             onClick={handleSignUp}
             textBlock={<BsFillPersonPlusFill />}

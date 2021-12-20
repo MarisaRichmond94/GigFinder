@@ -70,12 +70,6 @@
       font-size: 1rem;
     }
   }
-
-  .auth-buttons {
-    button {
-      min-width: 25vw;
-    }
-  }
 }
 
 // mobile view
@@ -98,12 +92,6 @@
 
     #login-prompt-sub-header {
       font-size: 1rem;
-    }
-
-    .auth-buttons {
-      button {
-        min-width: 20vw;
-      }
     }
   }
 }
@@ -128,12 +116,6 @@
 
     #login-prompt-sub-header {
       font-size: 1.5rem;
-    }
-
-    .auth-buttons {
-      button {
-        min-width: 10vw;
-      }
     }
   }
 }
