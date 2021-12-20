@@ -43,7 +43,7 @@ const Body = (): ReactElement => {
         <EmailInput />
         <PasswordInput />
       </div>
-      {authError && <div id='auth-form-error' className='thick paragraph-text'>{authError}</div>}
+      {authError && <div id='auth-form-error' className='thick sub-header-text'>{authError}</div>}
     </div>
   );
 }
