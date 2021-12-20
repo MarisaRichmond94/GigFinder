@@ -83,7 +83,7 @@ const AuthFormProvider = (props: object) => {
 
   const validatePassword = useCallback((password: string): void => {
     setIsValidPassword(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$/.test(password),
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test(password),
     );
   }, []);
 
