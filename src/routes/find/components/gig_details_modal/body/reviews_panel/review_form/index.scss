@@ -1,6 +1,8 @@
 @import 'global';
 
 .gig-modal-body-panel {
+  min-height: 260px;
+
   .filter-options-list {
     max-height: 100px;
   }

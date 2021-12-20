@@ -1,8 +1,10 @@
 import { ReactElement, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import noResultsIcon from 'assets/icons/reviews.svg';
 import GigButton from 'components/gig_button';
 import GigLoader from 'components/gig_loader';
+import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
 import { useReviewForm } from 'providers/review_form';
 import { useUser } from 'providers/user';
@@ -29,7 +31,15 @@ const ReviewPanel = (): ReactElement => {
     // eslint-disable-next-line
   }, [employerReviews]);
 
-  const buildEmployerReviews = (): ReactElement[] => {
+  const buildEmployerReviews = (): ReactElement | ReactElement[] => {
+    if (!employerReviews.length) {
+      return buildNoPanelContent(
+        'There are no reviews for this employer',
+        noResultsIcon,
+        true,
+      );
+    }
+
     return employerReviews.map(
       employerReview =>
         <Review review={employerReview} key={`review-${employerReview.id}`} userId={userId}/>
