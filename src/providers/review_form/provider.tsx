@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import LocationsApi from 'api/locations';
 import TitlesApi from 'api/titles';
 import { useAuth } from 'providers/auth';
+import { useUser } from 'providers/user';
 import ReviewFormContext from 'providers/review_form/context';
 import { ReviewFormFieldOptions } from 'types';
 import generateGUID from 'utils/generateGUID';
@@ -10,6 +11,7 @@ import EmployerReviewsApi from 'api/employer_reviews';
 
 const ReviewFormProvider = (props: object) => {
   const { user } = useAuth();
+  const { addReviewToEmployerReviews } = useUser();
   const userId = user?.id;
 
   const [city, setCity] = useState<string | undefined>();
@@ -122,7 +124,7 @@ const ReviewFormProvider = (props: object) => {
       city,
       state: 'California',
       abbrevState: 'CA',
-      datePosted: new Date(),
+      datePosted: new Date().toISOString(),
       summary,
       positiveFeedbackCounter: 0,
       negativeFeedbackCounter: 0,
@@ -130,9 +132,10 @@ const ReviewFormProvider = (props: object) => {
     await EmployerReviewsApi.post(employerReview);
     setUserEmployerReviews([...userEmployerReviews, employerReview]);
     resetForm();
+    addReviewToEmployerReviews(employerReview);
   }, [
     city, headline, isCurrentEmployee, rating, summary, title, userEmployerReviews, userId,
-    resetForm,
+    addReviewToEmployerReviews, resetForm,
   ]);
 
   const value = {

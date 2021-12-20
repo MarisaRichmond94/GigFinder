@@ -177,6 +177,15 @@ const UserProvider = (props: object) => {
     [employerReviews],
   );
 
+  const addReviewToEmployerReviews = useCallback((employerReview: EmployerReview): void => {
+    console.log({employerReview})
+    if (employerReview) {
+      setEmployerReviews(
+        employerReviews.length ? [...employerReviews, employerReview] : [employerReview],
+      );
+    }
+  }, [employerReviews]);
+
   const value = {
     activeGig,
     activeResumeId,
@@ -184,6 +193,7 @@ const UserProvider = (props: object) => {
     employerReviews,
     favoriteGigs,
     resumes,
+    addReviewToEmployerReviews,
     applyToGig,
     getApplications,
     getFavoriteGigs,

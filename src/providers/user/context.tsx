@@ -9,6 +9,7 @@ interface UserContextType {
   employerReviews?: EmployerReview[],
   favoriteGigs: Gig[],
   resumes?: Resume[],
+  addReviewToEmployerReviews: (employerReview: EmployerReview) => void,
   applyToGig: (userId: string, gigId: string) => void,
   getApplications: (userId: string) => void,
   getFavoriteGigs: (userId: string) => void,
