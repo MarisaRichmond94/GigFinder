@@ -3,7 +3,6 @@ import './index.scss';
 import { ReactElement, useState } from 'react';
 
 import { useApp } from 'providers/app';
-import { AuthFormProvider } from 'providers/auth_form';
 import UserApplicationsPanel from 'routes/find/components/applications/panel';
 import PanelSelector from 'routes/components/panel_selector';
 import ActiveResume from 'routes/find/components/active_resume';
@@ -34,13 +33,11 @@ const RightPanel = (props: RightPanelProps): ReactElement => {
 
   return (
     <div id='right-panel'>
-      <AuthFormProvider>
-        <ActionButtons
-          setIsAuthModalOpen={props.setIsAuthModalOpen}
-          setIsUploadModalOpen={props.setIsUploadModalOpen}
-        />
-      </AuthFormProvider>
-      <ActiveResume />
+      <ActionButtons
+        setIsAuthModalOpen={props.setIsAuthModalOpen}
+        setIsUploadModalOpen={props.setIsUploadModalOpen}
+      />
+      <ActiveResume isDisplayHeader />
       <Filters />
       <PanelSelector
         activePanel={activePanel}

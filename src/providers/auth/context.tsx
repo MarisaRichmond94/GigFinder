@@ -7,11 +7,11 @@ interface AuthContextType {
   isLoggedIn: boolean,
   isLoggingIn: boolean,
   user?: User,
-  loginEmployer: (email: string) => void,
-  loginUser: (email: string) => void,
+  loginEmployer: (callback?: () => void) => void,
+  loginUser: (callback?: () => void) => void,
   logout: () => void,
-  signUpEmployer: (name: string, email: string) => void,
-  signUpUser: (name: string, email: string) => void,
+  signUpEmployer: (callback?: () => void) => void,
+  signUpUser: (callback?: () => void) => void,
 }
 
 const AuthContext = createContext<undefined | AuthContextType>(undefined);

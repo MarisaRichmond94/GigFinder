@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import EmployersApi from 'api/employers';
@@ -6,12 +6,14 @@ import UsersApi from 'api/users';
 import colleges from 'mock/colleges.json';
 import degrees from 'mock/degrees.json';
 import AuthContext from 'providers/auth/context';
+import { useAuthForm } from 'providers/auth_form';
 import settings from 'settings';
 import { Employer, User } from 'types';
 import generateGUID from 'utils/generateGUID';
 import getRandomValueFromList from 'utils/getRandomValueFromList';
 
 const AuthProvider = (props: object) => {
+  const { name, email, setAuthError } = useAuthForm();
   const history = useHistory();
   const { pathname } = useLocation();
   const [user, setUser] = useState<User | undefined>();
@@ -43,18 +45,22 @@ const AuthProvider = (props: object) => {
     }, 1000);
   }, []);
 
-  const signUpEmployer = async (name: string, email: string) => {
+  const signUpEmployer = useCallback(async (callback?: () => void) => {
     const signedUpEmployer = await EmployersApi.post({ id: generateGUID(), name, email });
-    setEmployer(signedUpEmployer);
-    setIsLoggedIn(true);
-    window.localStorage.setItem('employerId', signedUpEmployer.id);
-
-    if (pathname === settings.FIND_ROUTE) {
-      history.replace(settings.CREATE_ROUTE);
+    if (signedUpEmployer) {
+      setEmployer(signedUpEmployer);
+      setIsLoggedIn(true);
+      window.localStorage.setItem('employerId', signedUpEmployer.id);
+      if (pathname === settings.FIND_ROUTE) {
+        history.replace(settings.CREATE_ROUTE);
+      }
+      callback();
+    } else {
+      setAuthError('Failed to sign up new employer; Please try again');
     }
-  }
+  }, [email, name, history, pathname, setAuthError]);
 
-  const signUpUser = async (name: string, email: string) => {
+  const signUpUser = useCallback(async (callback?: () => void) => {
     const newUser = {
       id: generateGUID(),
       name,
@@ -70,48 +76,56 @@ const AuthProvider = (props: object) => {
     };
 
     const signedUpUser = await UsersApi.post(newUser);
-    setUser(signedUpUser);
-    setIsLoggedIn(true);
-    window.localStorage.setItem('userId', signedUpUser.id);
-
-    if (pathname === settings.CREATE_ROUTE) {
-      history.replace(settings.FIND_ROUTE);
+    if (signedUpUser) {
+      setUser(signedUpUser);
+      setIsLoggedIn(true);
+      window.localStorage.setItem('userId', signedUpUser.id);
+      if (pathname === settings.CREATE_ROUTE) {
+        history.replace(settings.FIND_ROUTE);
+      }
+      callback();
+    } else {
+      setAuthError('Failed to sign up new user; Please try again');
     }
-  }
+  }, [email, name, history, pathname, setAuthError]);
 
-  const loginEmployer = async (email: string) => {
+  const loginEmployer = useCallback(async (callback?: () => void) => {
     const loggedInEmployer = await EmployersApi.get({ email });
     if (loggedInEmployer.length) {
       setEmployer(loggedInEmployer[0]);
       setIsLoggedIn(true);
       window.localStorage.setItem('employerId', loggedInEmployer[0].id);
-
       if (pathname === settings.FIND_ROUTE) {
         history.replace(settings.CREATE_ROUTE);
       }
+      callback();
+    } else {
+      setAuthError('Login failed. Incorrect email or password.');
     }
-  }
+  }, [email, history, pathname, setAuthError]);
 
-  const loginUser = async (email: string) => {
+  const loginUser = useCallback(async (callback?: () => void) => {
     const loggedInUser = await UsersApi.get({ email });
     if (loggedInUser?.length) {
       setUser(loggedInUser[0]);
       setIsLoggedIn(true);
       window.localStorage.setItem('userId', loggedInUser[0].id);
+      if (pathname === settings.CREATE_ROUTE) {
+        history.replace(settings.FIND_ROUTE);
+      }
+      callback();
+    } else {
+      setAuthError('Login failed. Incorrect email or password.');
     }
+  }, [email, history, pathname, setAuthError]);
 
-    if (pathname === settings.CREATE_ROUTE) {
-      history.replace(settings.FIND_ROUTE);
-    }
-  }
-
-  const logout = (): void => {
+  const logout = useCallback((): void => {
     setEmployer(undefined);
     setUser(undefined);
     setIsLoggedIn(false);
     history.replace('/');
     window.localStorage.clear();
-  }
+  }, [history]);
 
   const value = {
     employer,

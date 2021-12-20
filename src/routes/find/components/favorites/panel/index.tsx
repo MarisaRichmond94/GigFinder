@@ -27,7 +27,6 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   const listStyling = props.unusableHeight
     ? { height: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
-  console.log(`favorites panel usable height: ${props.unusableHeight}`);
 
   useEffect(() => {
     if (!prevFavoriteGigs && favoriteGigs?.length) {

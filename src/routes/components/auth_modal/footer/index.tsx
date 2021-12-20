@@ -12,7 +12,7 @@ type FooterProps = {
 }
 
 const Footer = (props: FooterProps): ReactElement => {
-  const { email, isSignUp, isUserAuth, name, getIsValidInput, resetForm } = useAuthForm();
+  const { isSignUp, isUserAuth, getIsValidInput, resetForm } = useAuthForm();
   const { loginEmployer, loginUser, signUpEmployer, signUpUser } = useAuth();
   const isSubmitEnabled = isSignUp
     ? (
@@ -25,19 +25,14 @@ const Footer = (props: FooterProps): ReactElement => {
       getIsValidInput(AuthFieldType.password)
     );
 
-  const cancel = (): void => {
+  const close = (): void => {
     props.setIsOpen(false);
     resetForm();
   };
 
   const handleFormSubmit = (): void => {
-    if (isSignUp) {
-      isUserAuth ? signUpUser(name, email) : signUpEmployer(name, email);
-    } else {
-      isUserAuth ? loginUser(email) : loginEmployer(email);
-    }
-    props.setIsOpen(false);
-    resetForm();
+    if (isSignUp) isUserAuth ? signUpUser(close) : signUpEmployer(close);
+    else isUserAuth ? loginUser(close) : loginEmployer(close);
   }
 
   return (
@@ -45,7 +40,7 @@ const Footer = (props: FooterProps): ReactElement => {
       <GigButton
         classNames='medium-grey dark-background sub-header-text'
         id='auth-modal-cancel-button'
-        onClick={cancel}
+        onClick={close}
         text='Cancel'
       />
       <GigButton

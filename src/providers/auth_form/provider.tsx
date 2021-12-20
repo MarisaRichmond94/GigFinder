@@ -16,6 +16,7 @@ const AuthFormProvider = (props: object) => {
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [password, setPassword] = useState<string | undefined>();
   const [isValidPassword, setIsValidPassword] = useState(false);
+  const [authError, setAuthError] = useState<string | undefined>();
 
   const resetForm = useCallback((): void => {
     setName(undefined);
@@ -24,6 +25,7 @@ const AuthFormProvider = (props: object) => {
     setIsValidName(false);
     setIsValidEmail(false);
     setIsValidPassword(false);
+    setAuthError(undefined);
   }, []);
 
   const getIsValidInput = useCallback((type: AuthFieldType): boolean => {
@@ -102,6 +104,7 @@ const AuthFormProvider = (props: object) => {
   }, [validateEmail, validateName, validatePassword]);
 
   const value = {
+    authError,
     email,
     isSignUp,
     isUserAuth,
@@ -109,6 +112,7 @@ const AuthFormProvider = (props: object) => {
     password,
     getIsValidInput,
     resetForm,
+    setAuthError,
     setIsApplicationSignUp,
     setIsSignUp,
     updateInput,

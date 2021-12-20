@@ -4,7 +4,6 @@ import { ReactElement, useEffect } from 'react';
 
 import GigLoader from 'components/gig_loader';
 import { useAuth } from 'providers/auth';
-import { AuthFormProvider } from 'providers/auth_form';
 import { useEmployer } from 'providers/employer';
 import Header from 'routes/components/header';
 import CenterPanel from 'routes/create/center_panel';
@@ -48,11 +47,7 @@ const CreatePage = (): ReactElement => {
     );
   }
 
-  return (
-    <AuthFormProvider>
-      {isLoggedIn ? AuthenticatedView : UnauthenticatedView}
-    </AuthFormProvider>
-  )
+  return isLoggedIn ? AuthenticatedView : UnauthenticatedView;
 }
 
 export default CreatePage;

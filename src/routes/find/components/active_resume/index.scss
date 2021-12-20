@@ -18,8 +18,7 @@
   }
 
   #active-resume-header {
-    align-items: center;
-    display: inline-flex;
+    @include vertically-centered-inline-flex-box;
   }
 
   #active-resume-dropdown {

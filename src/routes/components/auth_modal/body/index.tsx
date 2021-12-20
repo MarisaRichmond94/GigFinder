@@ -11,7 +11,7 @@ import PasswordInput from 'routes/components/auth_modal/inputs/password';
 import settings from 'settings';
 
 const Body = (): ReactElement => {
-  const { isUserAuth, isSignUp, resetForm, setIsApplicationSignUp } = useAuthForm();
+  const { authError, isUserAuth, isSignUp, resetForm, setIsApplicationSignUp } = useAuthForm();
   const { pathname } = useLocation();
 
   const handleSignUpSelectorClick = (updatedisUserAuth: boolean): void => {
@@ -43,6 +43,7 @@ const Body = (): ReactElement => {
         <EmailInput />
         <PasswordInput />
       </div>
+      {authError && <div id='auth-form-error' className='thick paragraph-text'>{authError}</div>}
     </div>
   );
 }

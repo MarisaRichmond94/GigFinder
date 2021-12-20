@@ -20,8 +20,8 @@
     padding: $large-padding $large-padding 0 $large-padding;
 
     .auth-modal-input-container {
-      width: 96%;
       margin: $medium-margin 0;
+      width: 100%;
     }
   }
 
@@ -38,6 +38,15 @@
       margin-top: 4px;
       position: absolute;
     }
+  }
+
+  #auth-modal-cancel-button {
+    margin-right: $large-margin;
+  }
+
+  #auth-form-error {
+    color: $primary-red;
+    text-align: center;
   }
 }
 
