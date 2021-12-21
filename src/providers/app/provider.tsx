@@ -21,22 +21,14 @@ const AppProvider = (props: object) => {
   const [unusableCenterPanelHeight, setUnusableCenterPanelHeight] = useState(0);
   const [unusableRightPanelHeight, setUnusableRightPanelHeight] = useState(0);
 
-  useEffect(() => {
-    if (prevPathname && pathname !== prevPathname) {
-      setRoutePanelIds(
-        pathname === settings.FIND_ROUTE
-          ? settings.PANEL_IDS.FIND_ROUTE
-          : settings.PANEL_IDS.CREATE_ROUTE
-      );
-    }
-  }, [pathname, prevPathname]);
+  const calculateTotalHeight = useCallback((panelIds?: any): void => {
+    const finalRoutePanelIds = panelIds || routePanelIds;
 
-  const calculateTotalHeight = useCallback((): void => {
     setTimeout(() => {
       const isCalculatingMobile = width <= 850;
       const centerPanelIds = isCalculatingMobile
-        ? routePanelIds.CENTER.MOBILE
-        : routePanelIds.CENTER.DESKTOP;
+        ? finalRoutePanelIds.CENTER.MOBILE
+        : finalRoutePanelIds.CENTER.DESKTOP;
 
       if (centerPanelIds.length) {
         let totalCenterPanelHeight = 0;
@@ -44,19 +36,29 @@ const AppProvider = (props: object) => {
           const element = document.getElementById(centerPanelIds[index]);
           totalCenterPanelHeight += (element?.offsetHeight || 0);
         }
-        setUnusableCenterPanelHeight(totalCenterPanelHeight + routePanelIds.CENTER.BUFFER);
+        setUnusableCenterPanelHeight(totalCenterPanelHeight + finalRoutePanelIds.CENTER.BUFFER);
       }
 
-      if (!isCalculatingMobile && routePanelIds.RIGHT.DESKTOP?.length) {
+      if (!isCalculatingMobile && finalRoutePanelIds.RIGHT.DESKTOP?.length) {
         let totalRightPanelHeight = 0;
-        for (let index = 0; index < routePanelIds.RIGHT.DESKTOP.length; index++) {
-          const element = document.getElementById(routePanelIds.RIGHT.DESKTOP[index]);
+        for (let index = 0; index < finalRoutePanelIds.RIGHT.DESKTOP.length; index++) {
+          const element = document.getElementById(finalRoutePanelIds.RIGHT.DESKTOP[index]);
           totalRightPanelHeight += (element?.offsetHeight || 0);
         }
-        setUnusableRightPanelHeight(totalRightPanelHeight + routePanelIds.RIGHT.BUFFER);
+        setUnusableRightPanelHeight(totalRightPanelHeight + finalRoutePanelIds.RIGHT.BUFFER);
       }
     }, 200);
   }, [routePanelIds, width]);
+
+  useEffect(() => {
+    if (prevPathname && pathname !== prevPathname) {
+      const updateRoutePanelIds = pathname === settings.FIND_ROUTE
+        ? settings.PANEL_IDS.FIND_ROUTE
+        : settings.PANEL_IDS.CREATE_ROUTE
+      setRoutePanelIds(updateRoutePanelIds);
+      calculateTotalHeight(updateRoutePanelIds);
+    }
+  }, [pathname, prevPathname, calculateTotalHeight]);
 
   useEffect(() => {
     // @ts-ignore
