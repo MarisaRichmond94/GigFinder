@@ -42,11 +42,11 @@
     "eslint": "^7.32.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start:server": "cd src/api && json-server --watch db.json --port 8080 --host 127.0.0.1",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "deploy": "npm run build && firebase deploy",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "start:server": "firebase serve --only=hosting,functions"
   },
   "eslintConfig": {
     "extends": "react-app"
