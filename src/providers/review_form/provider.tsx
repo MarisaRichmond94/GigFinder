@@ -51,7 +51,7 @@ const ReviewFormProvider = (props: object) => {
   }, [userId]);
 
   const updateField = useCallback(
-    (key: ReviewFormFieldOptions, value: string | number | boolean): void => {
+    (key: ReviewFormFieldOptions, value: string | number | boolean) => {
       switch (key) {
         case ReviewFormFieldOptions.city:
           if (typeof value === 'string' && locationOptions?.find(x => x === value)) setCity(value);
@@ -103,7 +103,7 @@ const ReviewFormProvider = (props: object) => {
     }
   }, [city, headline, rating, summary, title, locationOptions, titleOptions]);
 
-  const resetForm = useCallback((): void => {
+  const resetForm = useCallback(() => {
     setCity(undefined);
     setHeadline('');
     setIsCurrentEmployee(false);

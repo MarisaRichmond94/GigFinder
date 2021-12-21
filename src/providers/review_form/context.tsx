@@ -14,7 +14,7 @@ interface ReviewFormContextType {
   userEmployerReviews: EmployerReview[],
   getIsValidInput: (type: ReviewFormFieldOptions | 'all') => boolean,
   resetForm: () => void,
-  submitReviewForm: (employer: string) => EmployerReview,
+  submitReviewForm: (employer: string) => any,
   updateField: (key: ReviewFormFieldOptions, value: string | number | boolean) => void,
 }
 

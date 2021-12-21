@@ -74,7 +74,7 @@
 }
 
 // mobile view
-@media (min-width: $min-mobile-width) {
+@media (min-width: 0) {
   .page-container {
     grid-template-columns: [center-start] 1fr [center-end];
     grid-template-rows: [header-start] $header-height [header-end center-start] 1fr [center-end];
@@ -98,7 +98,7 @@
 }
 
 // desktop view
-@media (min-width: $min-desktop-width) {
+@media (min-width: 850px) {
   .page-container {
     grid-template-columns: [center-start] 1fr [center-end right-start] $right-sidebar-width [right-end];
     grid-template-rows: [header-start] $header-height [header-end center-start] 1fr [center-end];

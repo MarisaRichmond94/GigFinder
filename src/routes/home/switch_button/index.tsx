@@ -11,7 +11,7 @@ const SwitchButton = (): ReactElement => {
 
   return (
     <GigButton
-      classNames='header-text primary-blue text'
+      classNames='thick header-text primary-blue text'
       id='search-form-switch-button'
       onClick={() => history.push(settings.CREATE_ROUTE)}
       text='Switch'
