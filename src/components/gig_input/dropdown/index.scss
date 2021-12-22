@@ -6,7 +6,7 @@
 
   button {
     @include centered-flex-box;
-    background-color: $white !important;
+    background-color: $off-white !important;
     border: none;
     border-radius: 5px;
     box-shadow: none !important;
@@ -16,28 +16,24 @@
     text-align: left;
     width: 100%;
 
-    &::after {
-      display: none;
-    }
-
-    .placeholder-text {
-      color: #767676 !important;
-    }
-  }
-
-  &.off-white {
-    button {
-      background-color: $off-white !important;
-    }
-
-    .gig-dropdown-menu {
-      background-color: $off-white;
-    }
+    &::after { display: none; }
+    .placeholder-text { color: #767676 !important; }
   }
 
   .gig-dropdown-menu {
+    background-color: $off-white;
+    max-height: 150px;
+    overflow-y: auto;
     padding: $extra-small-padding 0;
     width: 100%;
+  }
+
+  &.white {
+    button { background-color: $white !important; }
+    .gig-dropdown-menu {
+      background-color: $white;
+      &:hover { background-color: $white; }
+    }
   }
 }
 
@@ -46,52 +42,29 @@
   color: $off-black;
   width: 100%;
 
-  &:hover {
-    background-color: $off-white;
-  }
-
-  &:active {
-    color: $off-black;
-    background-color: $light-grey !important;
-  }
-
+  &:hover,
+  &:active,
   &:focus {
-    color: $off-black;
-    background-color: $light-grey !important;
+    background-color: $secondary-blue !important;
+    color: $off-white;
   }
 }
 
-.gig-dropdown-content-wrapper {
+.gig-dropdown-button-content {
   align-content: center;
   display: inline-flex;
   height: 25px;
   width: 100%;
 
-  .gig-dropdown-text {
+  div {
     @include hide-overflow-ellipsis;
     max-width: 85%;
     padding: 0;
   }
 
-  .gig-dropdown-icon {
+  svg {
     color: $grey;
     font-size: 25px;
     margin-left: auto;
-  }
-}
-
-.gig-dropdown.off-white-gig-dropdown > button,
-.gig-dropdown.off-white-gig-dropdown > .gig-dropdown-menu {
-  background-color: $off-white !important;
-}
-
-.gig-dropdown.off-white-gig-dropdown > .gig-dropdown-menu {
-  .gig-dropdown-item {
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: $secondary-blue !important;
-      color: white;
-    }
   }
 }

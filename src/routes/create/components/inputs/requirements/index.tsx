@@ -19,7 +19,7 @@ const RequirementsInput = (props: RequirementsInputProps): ReactElement => {
         Requirements
       </div>
       <GigTextAreaInput
-        classNames='sub-header-text gig-details-input gig-requirements-textarea'
+        classNames='gig-details-input gig-requirements-textarea'
         formValue={requirements}
         id={`gig-requirements-${props.gigId ? `-${props.gigId}` : ''}`}
         placeholder='Period seperated list of gig requirements'

@@ -1,39 +1,24 @@
 @import 'global';
 
-#gig-details-modal-details-panel {
-  #benefits-list {
-    margin-bottom: 0;
+#benefits-list {
+  margin-bottom: 0;
 
-    .benefit-item {
-      @include centered-flex-box;
-    }
-
-    .benefit-button {
-      max-width: 100%;
-    }
-
-    button {
-      background-color: $primary-blue;
-      margin-right: $medium-margin;
-    }
+  .benefit-item {
+    @include centered-flex-box;
   }
 
-  #benefits-details {
-    line-height: 37px;
+  .benefit-button {
+    max-width: 100%;
   }
 
-  .searchable-gig-input {
-    width: 100%;
-
-    .gig-details-benefits-input {
-      margin: 0;
-      width: 100%;
-    }
-
-    ul {
-      width: 100%;
-    }
+  button {
+    background-color: $primary-blue;
+    margin-right: $medium-margin;
   }
+}
+
+#benefits-details {
+  line-height: 37px;
 }
 
 @media (min-width: 0) and (max-width: 450px) {

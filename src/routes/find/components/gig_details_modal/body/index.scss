@@ -3,12 +3,10 @@
 #gig-details-modal-body {
   #body-panel-selector-container {
     display: flex;
-    padding: 0 $medium-padding;
   }
 
   .gig-modal-body-panel {
     border: 1px solid $light-grey;
-    margin: 0 $medium-margin;
     max-height: 45vh;
     overflow-y: auto;
     padding: $medium-padding;

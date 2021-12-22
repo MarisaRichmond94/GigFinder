@@ -1,15 +1,7 @@
 @import 'global';
 
 #applications-panel {
-  #applications-panel-gig-filter {
-    margin-top: $medium-margin;
-    // width: calc(100vw - 20px);
-
-    .gig-dropdown-menu {
-      max-height: 150px;
-      overflow-y: auto;
-    }
-  }
+  #applications-panel-gig-filter { margin-top: $medium-margin; }
 
   .applications-panel-divider {
     color: $grey;
@@ -17,22 +9,16 @@
     width: 100%;
   }
 
-  #applications-list {
-    overflow-y: auto;
-  }
+  #applications-list { overflow-y: auto; }
 }
 
 // mobile view
 @media (min-width: 0) {
-  #applications-list {
-    height: calc(100vh - 305px);
-  }
+  #applications-list { height: calc(100vh - 305px); }
 }
 
 // desktop view
 @media (min-width: 1085px) {
-  #applications-list {
-    height: calc(100vh - 270px);
-  }
+  #applications-list { height: calc(100vh - 270px); }
 }
 

@@ -3,28 +3,22 @@
 .collapsable-section {
   .collapsable-section-header {
     @include centered-flex-box;
+    color: $off-black;
     margin: $medium-margin;
 
     div {
       display: inline-block;
-
-      &:last-child {
-        margin-left: auto;
-      }
+      &:last-child { margin-left: auto; }
     }
   }
 
   .collapsable-section-divider {
+    color: $off-black;
     margin: auto;
   }
 
   &.off-white {
-    .collapsable-section-header {
-      color: $off-white;
-    }
-
-    .collapsable-section-divider {
-      color: $off-white;
-    }
+    .collapsable-section-header { color: $off-white; }
+    .collapsable-section-divider { color: $off-white; }
   }
 }

@@ -3,7 +3,7 @@
 #application-modal-footer {
   width: 100%;
 
-  .gig-button {
+  button {
     margin-right: $medium-margin;
 
     &:last-child {
@@ -20,7 +20,7 @@
       width: 100%;
     }
 
-    .gig-button {
+    button {
       width: calc(33% - 5px);
     }
   }
@@ -36,7 +36,7 @@
       width: calc(100% - 480px);
     }
 
-    .gig-button {
+    button {
       width: 150px;
     }
   }

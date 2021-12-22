@@ -19,7 +19,7 @@ const TypeInput = (props: TypeInputProps): ReactElement => {
         Gig Type
       </div>
       <GigDropdown
-        classNames='sub-header-text gig-details-input off-white-gig-dropdown gig-type-dropdown'
+        classNames='sub-header-text gig-details-input gig-type-dropdown'
         id={`gig-type-dropdown${props.gigId ? `-${props.gigId}` : ''}`}
         onOptionSelect={
           (selectedType: DropdownOption) => updateInput(

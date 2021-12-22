@@ -8,13 +8,13 @@
   padding: $small-padding;
   width: 100vw;
 
-  .icon {
-    color: $dark-grey;
+  svg {
+    color: $primary-blue;
     font-size: 35px;
     margin-right: $small-margin;
   }
 
-  .header-text {
+  div {
     color: $primary-red;
     margin: 0;
   }

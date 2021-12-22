@@ -13,6 +13,7 @@ const settings = {
     additionalNotes: null,
   },
   MIN_DESKTOP_WIDTH: 850,
+  MIN_TABLET_WIDTH: 450,
   MIN_RESULTS_PER_LOAD: 25,
   PANEL_IDS: {
     FIND_ROUTE: {

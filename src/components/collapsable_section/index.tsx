@@ -20,14 +20,18 @@ const CollapsableSection = (props: CollapsableSectionProps): ReactElement => {
 
   const onToggle = (updatedIsVisible: boolean): void => {
     setIsVisible(updatedIsVisible);
-    if (!!props.onToggleCallback) props.onToggleCallback();
-  }
+    if (!!props.onToggleCallback) {
+      props.onToggleCallback();
+    };
+  };
+
+  const getClassNames = (): string => {
+    const classes = 'collapsable-section';
+    return props.classNames ? `${classes} ${props.classNames}` : classes;
+  };
 
   return (
-    <div
-      id={props.id}
-      className={`collapsable-section${props.classNames ? ` ${props.classNames}` : ''}`}
-    >
+    <div id={props.id} className={getClassNames()}>
       <div className='collapsable-section-header header-text'>
         <div className='collapsable-section-title'>{props.icon} {props.sectionTitle}</div>
         <div>

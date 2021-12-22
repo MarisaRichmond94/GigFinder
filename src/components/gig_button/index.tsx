@@ -3,14 +3,12 @@ import { Button } from 'react-bootstrap';
 
 type GigButtonProps = {
   classNames?: string,
-  icon?: string,
-  id: string,
+  id?: string,
   isDisabled?: boolean,
   onClick: (e: object) => void,
-  style?: object,
   text?: string,
   textBlock?: ReactElement,
-}
+};
 
 const GigButton = (props: GigButtonProps): ReactElement => {
   return (
@@ -19,12 +17,10 @@ const GigButton = (props: GigButtonProps): ReactElement => {
       disabled={props.isDisabled || false}
       id={props.id}
       onClick={props.onClick}
-      style={props.style || {}}
     >
-      {props.icon}
       {props.text || props.textBlock || ''}
     </Button>
   );
-}
+};
 
 export default GigButton;

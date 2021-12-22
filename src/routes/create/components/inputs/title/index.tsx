@@ -12,7 +12,7 @@ const TitleInput = (): ReactElement => {
   return (
     <div className='detail-row-flex-container'>
       <ControlledSearchableGigInput
-        classNames='off-white-text-input gig-details-title-input'
+        classNames='off-white'
         formValue={title || ''}
         id='gig-title-searchable-input'
         onChange={updatedTitle => updateInput(GigFormFieldType.title, updatedTitle)}

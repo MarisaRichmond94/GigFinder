@@ -1,5 +1,3 @@
-import '../index.scss';
-
 import { ReactElement, useRef, useState } from 'react';
 
 import { useOnClickOutside } from 'hooks/useOnClickOutside';
@@ -12,7 +10,7 @@ type ControlledSearchableGigInputProps = {
   placeholder: string,
   onChange: (updatedValue: string) => void,
   onOptionSelect: (option: string) => void,
-}
+};
 
 const ControlledSearchableGigInput = (props: ControlledSearchableGigInputProps): ReactElement => {
   const [filteredOptions, setFilteredOptions] = useState(
@@ -48,12 +46,12 @@ const ControlledSearchableGigInput = (props: ControlledSearchableGigInputProps):
         })}
       </ul>
     );
-  }
+  };
 
   const onOptionSelect = (option: string) => {
     props.onOptionSelect(option);
     setIsInputFocused(false);
-  }
+  };
 
   const onChange = (updatedValue: string): void => {
     if (!isInputFocused) setIsInputFocused(true);
@@ -65,23 +63,20 @@ const ControlledSearchableGigInput = (props: ControlledSearchableGigInputProps):
       )
     ) || [];
     setFilteredOptions(updatedFilteredOptions);
-  }
+  };
 
   const onKeyPress = (event: any): void => {
     if (event.key === 'Enter' && props.formValue !== '' && filteredOptions.length) {
       props.onOptionSelect(filteredOptions[0]);
       setIsInputFocused(false);
     }
-  }
+  };
 
   return (
-    <div className='searchable-gig-input' id={`${props.id}-container`}>
+    <div className={`searchable-gig-input ${props.classNames}`} id={props.id}>
       <input
         autoComplete='none'
-        className={`
-          gig-form-input sub-header-text
-          ${props.classNames}${isInputFocused ? ' focused' : ''}
-        `}
+        className={`gig-form-input sub-header-text${isInputFocused ? ' focused' : ''}`}
         id={props.id}
         name={Math.random().toString()}
         onChange={e => onChange(e.target.value)}
@@ -94,7 +89,7 @@ const ControlledSearchableGigInput = (props: ControlledSearchableGigInputProps):
       />
       {buildFilteredOptionsList()}
     </div>
-  )
-}
+  );
+};
 
 export default ControlledSearchableGigInput;

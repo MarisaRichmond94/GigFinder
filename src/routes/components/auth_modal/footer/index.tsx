@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';

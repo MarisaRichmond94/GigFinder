@@ -50,7 +50,7 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
       {
         filterOptions &&
         <UncontrolledSearchableGigInputProps
-          classNames='off-white-text-input'
+          classNames='off-white'
           clearKey='Enter'
           id='filter-panel-text-input'
           onOptionSelect={handleFilterSelect}

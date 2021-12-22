@@ -8,15 +8,18 @@ import { DropdownOption } from 'types';
 
 type GigDropdownProps = {
   classNames?: string,
-  id: string,
+  id?: string,
   isDisabled?: boolean,
   onOptionSelect?: (option: DropdownOption) => void,
   options?: DropdownOption[] | undefined,
   placeholder: string,
   selectedOption: DropdownOption | undefined,
-}
+};
 
 const GigDropdown = (props: GigDropdownProps): ReactElement => {
+  // derived variables
+  const activeInputText = props.selectedOption?.displayName || props.placeholder;
+
   const populateDropdownItems = () => {
     const options = props.selectedOption
       ? props.options.filter(option => option.displayName !== props.selectedOption?.displayName)
@@ -24,18 +27,15 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
 
     if (!options || !options.length) {
       return (
-        <Dropdown.Item className='overflow-ellipsis gig-dropdown-item'>
+        <Dropdown.Item className='gig-dropdown-item'>
           <span className='sub-header-text'>
             {!options ? 'Loading...' : 'No options available'}
           </span>
         </Dropdown.Item>
-      )
-    }
+      );
+    };
 
     return options.map((option, index) => {
-      const content = option.icon
-        ? <>{option.icon}&nbsp;&nbsp;{option.displayName}</>
-        : option.displayName;
       return (
         <Dropdown.Item
           className='gig-dropdown-item'
@@ -44,45 +44,35 @@ const GigDropdown = (props: GigDropdownProps): ReactElement => {
           onClick={() => handleOptionSelect(option)}
           title={option.displayName}
         >
-          {content}
+          {option.displayName}
         </Dropdown.Item>
-      )
-    })
-  }
+      );
+    });
+  };
 
   const handleOptionSelect = (option: DropdownOption): void => {
-    if (typeof option === 'object' && option?.onClick !== undefined) {
-      option.onClick();
-    } else if (props.onOptionSelect !== undefined) {
-      props.onOptionSelect(option);
-    } else {
-      throw new Error(
-        `An exception was found in gig_dropdown/handleOptionSelect. Missing onOptionSelect and
-        option.onClick`
-      )
-    }
-  }
+    if (typeof option === 'object' && option?.onClick !== undefined) option.onClick();
+    else if (props.onOptionSelect !== undefined) props.onOptionSelect(option);
+  };
 
-  const activeInputText = props.selectedOption?.displayName || props.placeholder;
+  const getClassNames = (): string => {
+    const defaultClasses = 'gig-dropdown';
+    return props.classNames ? `${defaultClasses} ${props.classNames}` : defaultClasses;
+  };
 
   return (
-    <Dropdown
-      id={props.id}
-      className={`gig-dropdown${props.classNames ? ` ${props.classNames}` : ''}`}
-    >
+    <Dropdown id={props.id} className={getClassNames()}>
       <Dropdown.Toggle className='sub-header-text' disabled={props.isDisabled || false}>
-        <div className='gig-dropdown-content-wrapper'>
-          <div className='gig-dropdown-text' title={activeInputText}>
-            {activeInputText}
-          </div>
-          <IoIosArrowDown className='gig-dropdown-icon' />
+        <div className='gig-dropdown-button-content'>
+          <div title={activeInputText}>{activeInputText}</div>
+          <IoIosArrowDown />
         </div>
       </Dropdown.Toggle>
       <Dropdown.Menu className='gig-dropdown-menu sub-header-text'>
         {populateDropdownItems()}
       </Dropdown.Menu>
     </Dropdown>
-  )
-}
+  );
+};
 
 export default GigDropdown;

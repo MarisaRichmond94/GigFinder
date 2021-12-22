@@ -44,8 +44,6 @@ const ReviewForm = (): ReactElement => {
           }
         />
         <GigCheckboxInput
-          classNames='sub-header-text'
-          id='review-form-is-current-employee-input'
           isActive={isCurrentEmployee}
           text='Are you actively employed with this company?'
           toggleIsActive={

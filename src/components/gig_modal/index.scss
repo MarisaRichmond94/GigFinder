@@ -10,8 +10,33 @@
   z-index: 2;
 
   .gig-modal-content {
-    border-radius: 5px;
+    border-radius: 15px;
     position: absolute;
+
+    &.set-max-width {
+      max-width: 1000px;
+
+      &.maxed-content-width {
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-right: calc(42vw - 350px);
+        width: calc(96vw - 350px);
+      }
+    }
+
+    &.white {
+      background-color: $white;
+    }
+
+    &.off-white {
+      background-color: $off-white;
+    }
+
+    &.primary-blue {
+      background-color: $primary-blue;
+      color: $off-white;
+    }
 
     .gig-modal-header {
       display: flex;
@@ -19,10 +44,23 @@
       padding: $large-padding;
     }
 
+    .gig-modal-body {
+      padding: 0 $large-padding;
+    }
+
     .gig-modal-footer {
       display: flex;
       justify-content: flex-end;
       padding: $large-padding;
+
+      button {
+        margin-right: $large-margin;
+        width: 150px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
   }
 }
@@ -43,8 +81,16 @@
   .gig-modal {
     .gig-modal-content {
       left: 2vw;
-      top: 25vh;
+      top: 10vh;
       width: calc(96vw - 350px);
+      &.no-right-panel { width: 96vw; }
+
+      &.maxed-content-width {
+        left: 0;
+        right: 0;
+        margin: auto;
+        &.right-panel { margin-right: calc(52vw - 350px); }
+      }
     }
   }
 }

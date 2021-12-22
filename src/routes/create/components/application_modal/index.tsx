@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement } from 'react';
 
 import GigModal from 'components/gig_modal';
@@ -23,6 +21,7 @@ const ApplicationModal = (props: ApplicationModalProps): ReactElement => {
     <div id='application-modal'>
       <GigModal
         bodyContent={<Body application={activeApplication} />}
+        classNames='white'
         headerContent={<Header application={activeApplication} />}
         footerContent={<Footer close={() => props.setIsOpen(false)} />}
         id='application-modal'

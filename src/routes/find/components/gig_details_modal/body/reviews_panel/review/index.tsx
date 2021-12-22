@@ -41,10 +41,10 @@ const Review = (props: ReviewProps): ReactElement => {
   }
 
   const getDatePosted = (): string => {
-    const dateParts = datePosted.split(/[- :]/);
+    const dateParts = datePosted.split('.');
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     // @ts-ignore
-    const postedDate = new Date(...dateParts);
+    const postedDate = new Date(dateParts[0]);
     // @ts-ignore
     return postedDate.toLocaleDateString('en-US', options);
   }

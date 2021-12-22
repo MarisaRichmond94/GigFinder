@@ -35,7 +35,7 @@ const SearchPanel = (): ReactElement => {
       filters: searchFilters ? searchFilters.join(',') : '',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, location, type])
+  }, [title, location, type]);
 
   const updateSearchText = (key: string, value: string): void => {
     switch (key) {
@@ -46,32 +46,24 @@ const SearchPanel = (): ReactElement => {
       default:
         setLocation(value);
         break;
-    }
-  }
+    };
+  };
 
   const updateSelectedOption = (option: DropdownOption): void => {
     setType(typeOptions?.find(x => x === option.displayName) || undefined);
-  }
+  };
 
   const getClassNames = (): string => {
     const pageType = width >= settings.MIN_DESKTOP_WIDTH ? 'desktop': 'mobile';
     const route = pathname === settings.FIND_ROUTE ? 'find' : 'home';
     return `${pageType} search-panel-item search-panel-input ${route}`;
-  }
-
-  const getDropdownClassNames = (selectedOption: DropdownOption): string => {
-    let classNames = selectedOption?.displayName ? '' : 'placeholder-text';
-    classNames += pathname === settings.FIND_ROUTE
-      ? ' off-white-gig-dropdown'
-      : ' white-gig-dropdown';
-    return classNames;
   };
 
   return (
     <div id={`${pathname === settings.FIND_ROUTE ? 'find-' : 'home-'}search-panel`}>
       <div className={getClassNames()}>
         <ControlledSearchableGigInput
-          classNames='search-form-input'
+          classNames={pathname === settings.FIND_ROUTE ? 'off-white' : 'white'}
           formValue={title}
           id='search-text-title-input'
           options={titleOptions}
@@ -82,7 +74,7 @@ const SearchPanel = (): ReactElement => {
       </div>
       <div className={getClassNames()}>
         <ControlledSearchableGigInput
-          classNames='search-form-input'
+          classNames={pathname === settings.FIND_ROUTE ? 'off-white' : 'white'}
           formValue={location}
           id='search-text-location-input'
           options={locationOptions}
@@ -93,7 +85,7 @@ const SearchPanel = (): ReactElement => {
       </div>
       <div className={getClassNames()}>
         <GigDropdown
-          classNames={getDropdownClassNames(type ? { displayName: type } : undefined)}
+          classNames={pathname === settings.FIND_ROUTE ? 'off-white' : 'white'}
           id='search-form-type-input'
           onOptionSelect={(selectedType: DropdownOption) => updateSelectedOption(selectedType)}
           options={typeOptions?.map(typeOption => { return { displayName: typeOption }; }) || []}
@@ -103,6 +95,6 @@ const SearchPanel = (): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default SearchPanel;

@@ -42,7 +42,7 @@ const BenefitsInput = (props: BenefitsInputProps): ReactElement => {
         {
           benefitOptions &&
           <UncontrolledSearchableGigInputProps
-            classNames='off-white-text-input gig-details-benefits-input'
+            classNames='off-white gig-details-benefits-input'
             clearKey='Enter'
             id={`gig-benefits-searchable-input${props.gigId ? `-${props.gigId}` : ''}`}
             onOptionSelect={benefit => addBenefit(benefit)}

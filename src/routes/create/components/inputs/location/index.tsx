@@ -12,7 +12,7 @@ const LocationInput = (): ReactElement => {
   return (
     <div className='detail-row-flex-container'>
       <ControlledSearchableGigInput
-        classNames='off-white-text-input gig-details-location-input'
+        classNames='off-white'
         formValue={location || ''}
         id='gig-location-searchable-input'
         onChange={updatedLocation => updateInput(GigFormFieldType.location, updatedLocation)}

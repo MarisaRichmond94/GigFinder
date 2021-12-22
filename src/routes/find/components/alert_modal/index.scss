@@ -1,43 +1,22 @@
 @import 'global';
 
 #alert-modal {
-  .gig-modal-content {
-    background-color: $off-white;
+  .gig-modal-header {
+    background-color: $primary-blue;
+    border-radius: 15px 15px 0 0;
 
-    .gig-modal-header {
-      background-color: $primary-blue;
-      display: flex;
-      padding: $medium-padding;
+    #alert-header-container {
+      @include centered-flex-box;
+      margin-right: auto;
 
-      #alert-header-container {
-        @include centered-flex-box;
-        margin-right: auto;
-
-        svg {
-          color: $off-white;
-          margin-right: 6px;
-        }
-
-        div {
-          color: $off-white;
-        }
+      svg {
+        color: $off-white;
+        margin-right: $medium-margin;
       }
-    }
 
-    .gig-modal-body {
-      padding: $large-padding;
-    }
-
-    .gig-modal-footer {
-      padding: $medium-padding;
-
-      #alert-acknowledge-button {
-        background-color: $primary-blue;
-
-        &:hover {
-          background-color: $secondary-blue;
-        }
-      }
+      div { color: $off-white; }
     }
   }
+
+  .gig-modal-body { padding: $large-padding; }
 }

@@ -12,11 +12,11 @@
   @include centered-flex-box;
 }
 
-#review-form-title-input-container {
+#review-form-title-input {
   width: calc(100% - 355px);
 }
 
-#review-form-city-input-container {
+#review-form-city-input {
   margin-right: $medium-margin;
   width: calc(100% - 110px);
 }

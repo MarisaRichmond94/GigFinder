@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement, useState } from 'react';
 
 import GigModal from 'components/gig_modal';
@@ -80,10 +78,12 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
             setUploadFiles={setUploadFiles}
           />
         }
+        classNames='primary-blue'
         headerContent={headerContent}
         footerContent={footerContent}
         id='upload-modal'
         isOpen={props.isOpen}
+        maxWidth={1000}
       />
     </div>
   );

@@ -4,12 +4,6 @@
   @include centered-flex-box;
   flex-direction: column;
 
-  #demo-warning {
-    .icon {
-      color: $primary-blue;
-    }
-  }
-
   .logo-container {
     @include centered-flex-box;
     border-bottom: 2px solid $secondary-blue;
@@ -38,14 +32,14 @@
   .auth-buttons {
     margin-top: $large-margin;
 
-    :nth-child(2) {
-      margin-right: $large-margin;
-    }
-
     button {
       height: 50px;
     }
   }
+}
+
+#create-account-button {
+  margin-right: $large-margin;
 }
 
 // small mobile view

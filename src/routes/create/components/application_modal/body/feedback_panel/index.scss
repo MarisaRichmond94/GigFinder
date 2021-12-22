@@ -39,28 +39,16 @@
     }
   }
 
-  .searchable-gig-input {
-    line-height: 100%;
-
-    ul {
-      max-height: 125px;
-    }
-  }
-
-  #positive-traits-input-container {
-    .searchable-gig-input {
-      width: calc(100% - 108px);
-    }
+  #positive-traits-searchable-dropdown {
+    width: calc(100% - 108px);
   }
 
   #positive-traits-container {
     margin-left: 108px;
   }
 
-  #negative-traits-input-container {
-    .searchable-gig-input {
-      width: calc(100% - 117px);
-    }
+  #negative-traits-searchable-dropdown {
+    width: calc(100% - 117px);
   }
 
   #negative-traits-container {

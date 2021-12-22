@@ -21,7 +21,6 @@ const ActiveMessageTemplate = (): ReactElement => {
   return (
     <div id='active-message-template-section'>
       <GigDropdown
-        classNames='off-white-gig-dropdown'
         id='active-message-template-dropdown'
         isDisabled={!doesEmployerHaveMessageTemplates}
         options={

@@ -31,7 +31,7 @@ const Body = (props: BodyProps): ReactElement => {
           text='Feedback'
         />
       </div>
-      <hr className='horizontal-divider' />
+      <hr />
       <div id='application-panel-container'>
         {
           isDetailsPanel

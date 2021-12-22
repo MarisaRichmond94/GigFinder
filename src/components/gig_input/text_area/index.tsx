@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement, useState } from 'react';
 
 type GigTextAreaInputProps = {
@@ -13,7 +11,7 @@ type GigTextAreaInputProps = {
   setFormValue?: (input: string) => void,
   type?: string,
   validateFormValue?: (input: string) => void
-}
+};
 
 const GigTextAreaInput = (props: GigTextAreaInputProps): ReactElement => {
   const [value, setValue] = useState<string>('');
@@ -21,14 +19,11 @@ const GigTextAreaInput = (props: GigTextAreaInputProps): ReactElement => {
   const onChange = (input: string): void => {
     if (props.setFormValue) {
       props.setFormValue(input);
-
-      if (props.validateFormValue) {
-        props.validateFormValue(input);
-      }
+      if (props.validateFormValue) props.validateFormValue(input);
     } else {
       setValue(input);
     }
-  }
+  };
 
   return (
     <textarea
@@ -42,7 +37,7 @@ const GigTextAreaInput = (props: GigTextAreaInputProps): ReactElement => {
       spellCheck='false'
       value={props.formValue || value}
     />
-  )
-}
+  );
+};
 
 export default GigTextAreaInput;

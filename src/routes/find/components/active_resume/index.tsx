@@ -36,7 +36,6 @@ const ActiveResume = (props: ActiveResumeProps): ReactElement => {
         isLoggedIn
           ? (
             <GigDropdown
-              classNames='off-white-gig-dropdown'
               id='active-resume-dropdown'
               isDisabled={!doesUserHaveResumes}
               options={

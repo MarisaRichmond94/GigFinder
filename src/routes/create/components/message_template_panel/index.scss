@@ -1,17 +1,15 @@
 @import 'global';
 
-#message-template-panel {
-  #message-template-panel-selector,
-  #message-template-panel-message {
-    margin-top: $large-margin;
-  }
+#message-template-panel-selector,
+#message-template-panel-message {
+  input { margin: $large-margin 0; }
+}
 
-  #message-template-actions {
-    text-align: right;
-    margin-top: $small-margin;
+#message-template-actions {
+  text-align: right;
+  margin-top: $small-margin;
 
-    #message-template-delete-button {
-      margin-right: $medium-margin;
-    }
+  #message-template-delete-button {
+    margin-right: $medium-margin;
   }
 }

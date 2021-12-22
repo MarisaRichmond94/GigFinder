@@ -45,7 +45,6 @@ const ApplicationsPanel = (): ReactElement => {
   return (
     <div id='applications-panel'>
       <GigDropdown
-        classNames='off-white'
         id='applications-panel-gig-filter'
         options={
           gigs?.map(gig => {

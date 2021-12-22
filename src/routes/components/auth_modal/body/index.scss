@@ -3,22 +3,16 @@
 .gig-modal-body {
   #auth-selector-container {
     display: flex;
-    padding: 0 $extra-large-padding;
-
-    #applicant-selector-button {
-      margin-right: $extra-large-margin + 5px;
-    }
+    button:first-child { margin-right: $extra-large-margin; }
   }
 
-  #auth-selector-divider {
-    color: white;
-    margin: 0 2%;
-    width: 96%;
+  hr {
+    color: $white;
+    margin: 0;
+    width: 100%;
   }
 
   #auth-form-container {
-    padding: 0 $large-padding;
-
     .auth-modal-input-container {
       margin: $medium-margin 0;
       width: 100%;
@@ -37,33 +31,14 @@
       color: $grey;
       margin-top: 4px;
       position: absolute;
+      right: 35px;
     }
-  }
-
-  #auth-modal-cancel-button {
-    margin-right: $large-margin;
   }
 
   #auth-form-error {
     color: $primary-red;
     text-align: center;
   }
-}
 
-#auth-body-container {
-  &.find {
-    #password-hide-button {
-      right: 30px;
-    }
-  }
-
-  &.create {
-    #password-hide-button {
-      right: 60px;
-    }
-  }
-}
-
-.valid-icon {
-  color: $primary-green;
+  .valid-icon { color: $primary-green; }
 }

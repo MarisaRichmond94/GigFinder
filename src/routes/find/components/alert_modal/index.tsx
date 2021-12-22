@@ -33,6 +33,7 @@ const AlertModal = (props: AlertModalProps): ReactElement => {
   const footerContent = (
     <div id='alert-footer-container'>
       <GigButton
+        classNames='primary-blue'
         id='alert-acknowledge-button'
         onClick={() => props.setIsOpen(false)}
         text='Got it!'
@@ -44,10 +45,12 @@ const AlertModal = (props: AlertModalProps): ReactElement => {
     <div id='alert-modal-container'>
       <GigModal
         bodyContent={bodyContent}
+        classNames='off-white'
         headerContent={headerContent}
         footerContent={footerContent}
         id='alert-modal'
         isOpen={props.isOpen}
+        maxWidth={1000}
       />
     </div>
   );

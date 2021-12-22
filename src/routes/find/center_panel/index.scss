@@ -6,14 +6,7 @@
 
 #find-center-panel-selector {
   border-bottom: 1px solid $light-grey;
-  display: flex;
   padding: 0 $medium-padding;
-}
-
-#filter-panel-section {
-  .collapsable-section-divider {
-    margin-bottom: $medium-margin;
-  }
 }
 
 // mobile view
@@ -21,24 +14,12 @@
   #find-center-panel-selector {
     display: flex;
   }
-
-  #find-page {
-    .collapsable-section-header {
-      display: flex;
-    }
-  }
 }
 
 // desktop view
 @media (min-width: 850px) {
-  #find-center-panel-selector {
+  #find-center-panel-selector,
+  #filter-panel-section {
     display: none;
-  }
-
-  #find-page {
-    .collapsable-section-header,
-    .collapsable-section-divider {
-      display: none;
-    }
   }
 }

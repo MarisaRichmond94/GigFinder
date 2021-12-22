@@ -1,5 +1,3 @@
-import '../index.scss';
-
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { debounce } from 'throttle-debounce';
 
@@ -13,7 +11,7 @@ type SearchableGigInputProps = {
   placeholder: string,
   selectedOptions: string[],
   onOptionSelect: (option: string) => void,
-}
+};
 
 const UncontrolledSearchableGigInput = (props: SearchableGigInputProps): ReactElement => {
   const [filteredOptions, setFilteredOptions] = useState(
@@ -47,6 +45,7 @@ const UncontrolledSearchableGigInput = (props: SearchableGigInputProps): ReactEl
   const buildFilteredOptionsList = (): any => {
     const classes = `filter-options-list sub-header-text ${isInputFocused ? 'visible' : 'hidden'}`;
     let isFirstMatch = true;
+
     return (
       <ul className={classes} ref={optionsRef}>
         {filteredOptions.map(option => {
@@ -65,17 +64,17 @@ const UncontrolledSearchableGigInput = (props: SearchableGigInputProps): ReactEl
         })}
       </ul>
     );
-  }
+  };
 
   const onOptionSelect = (option: string) => {
     props.onOptionSelect(option);
     setIsInputFocused(false);
-  }
+  };
 
   const onChange = (updatedValue: string): void => {
     setValue(updatedValue);
     debouncedUpdateFilteredOptions(updatedValue);
-  }
+  };
 
   const onKeyPress = (event: any): void => {
     if (event.key === 'Enter' && value !== '' && filteredOptions.length) {
@@ -85,17 +84,13 @@ const UncontrolledSearchableGigInput = (props: SearchableGigInputProps): ReactEl
     } else if (props.clearKey && event.key === props.clearKey) {
       setValue('');
     }
-  }
+  };
 
   return (
-    <div className='searchable-gig-input'>
+    <div className={`searchable-gig-input ${props.classNames}`} id={props.id}>
       <input
         autoComplete='none'
-        className={`
-          gig-form-input sub-header-text
-          ${props.classNames}${isInputFocused ? ' focused' : ''}
-        `}
-        id={props.id}
+        className={`gig-form-input sub-header-text${isInputFocused ? ' focused' : ''}`}
         name={Math.random().toString()}
         onChange={e => onChange(e.target.value)}
         onFocus={() => setIsInputFocused(true)}
@@ -108,6 +103,6 @@ const UncontrolledSearchableGigInput = (props: SearchableGigInputProps): ReactEl
       {buildFilteredOptionsList()}
     </div>
   );
-}
+};
 
 export default UncontrolledSearchableGigInput;

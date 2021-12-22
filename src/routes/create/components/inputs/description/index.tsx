@@ -19,7 +19,7 @@ const DescriptionInput = (props: DescriptionInputProps): ReactElement => {
         Description
       </div>
       <GigTextAreaInput
-        classNames='sub-header-text gig-details-input gig-description-textarea'
+        classNames='gig-details-input gig-description-textarea'
         formValue={description}
         id={`gig-description-${props.gigId ? `-${props.gigId}` : ''}`}
         placeholder='Detailed description of the gig'

@@ -38,14 +38,7 @@
 
       #active-resume-section {
         padding-top: 0;
-
-        #active-resume-header {
-          display: none;
-        }
-
-        .gig-dropdown {
-          width: 85vw;
-        }
+        #active-resume-dropdown { width: 85vw; }
       }
     }
 
@@ -80,14 +73,7 @@
       #active-resume-section {
         margin-bottom: $extra-large-margin;
         padding-top: 0;
-
-        #active-resume-header {
-          display: none;
-        }
-
-        .gig-dropdown {
-          width: 250px;
-        }
+        #active-resume-dropdown { width: 250px; }
       }
     }
 

@@ -19,7 +19,7 @@ const SalaryInput = (props: SalaryInputProps): ReactElement => {
         Salary/Pay
       </div>
       <GigTextInput
-        classNames='sub-header-text gig-details-input'
+        classNames='gig-details-input'
         formValue={salary}
         id={`gig-salary-${props.gigId ? `-${props.gigId}` : ''}`}
         placeholder='yearly base salary (excluding opportunity for bonus)'

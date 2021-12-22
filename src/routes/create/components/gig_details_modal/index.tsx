@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement, useState } from 'react';
 
 import GigModal from 'components/gig_modal';
@@ -48,6 +46,7 @@ const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
     <div id='gig-details-modal'>
       <GigModal
         bodyContent={<Body gig={activeGig} isInEditMode={isInEditMode} />}
+        classNames='white'
         headerContent={<Header gig={activeGig} />}
         footerContent={
           <Footer

@@ -8,19 +8,6 @@
     width: 100%;
   }
 
-  #gig-creation-section,
-  #message-template-section {
-    .collapsable-section-header {
-      font-size: $header-font-size;
-
-      .collapsable-section-title {
-        svg {
-          font-size: $large-header-font-size;
-        }
-      }
-    }
-  }
-
   #message-template-section {
     padding-bottom: $extra-large-padding + 5px;
   }

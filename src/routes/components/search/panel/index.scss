@@ -8,42 +8,30 @@
     padding-bottom: $medium-padding;
 
     input,
-    .gig-dropdown > button,
-    .gig-dropdown > .gig-dropdown-menu {
+    #search-form-type-input > button,
+    #search-form-type-input > div {
       margin: 0 10%;
       width: 80%;
     }
   }
 
-  .searchable-gig-input {
-    input,
-    ul {
-      background-color: $white;
-      width: 80%;
-    }
-
-    ul {
-      left: 10%;
-    }
+  #search-text-title-input,
+  #search-text-location-input {
+    input, ul { width: 80%; }
+    ul { left: 10%; }
   }
 }
 
 .find {
-  input {
-    background-color: $off-white !important;
-  }
+  input { background-color: $off-white !important; }
 }
 
 .search-panel-item.mobile {
-  &:not(:last-child) {
-    padding-bottom: $medium-padding;
-  }
+  &:not(:last-child) { padding-bottom: $medium-padding; }
 }
 
 .search-panel-item {
-  &:last-child {
-    padding-top: $small-padding;
-  }
+  &:last-child { padding-top: $small-padding; }
 }
 
 // mobile view
@@ -53,9 +41,7 @@
     flex-direction: column;
     margin: $medium-margin;
 
-    search-panel-item {
-      width: 100%;
-    }
+    search-panel-item { width: 100%; }
   }
 }
 
@@ -69,10 +55,7 @@
 
     div {
       width: 100%;
-
-      &:not(:last-child) {
-        padding-right: $medium-padding;
-      }
+      &:not(:last-child) { padding-right: $medium-padding; }
     }
   }
 }
