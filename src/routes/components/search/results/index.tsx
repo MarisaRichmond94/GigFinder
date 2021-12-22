@@ -9,12 +9,14 @@ import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
 import { useApp } from 'providers/app';
 import { useAuth } from 'providers/auth';
+import { useFavorites } from 'providers/favorites';
 import { useSearch } from 'providers/search';
 import { useUser } from 'providers/user';
 import SearchItem from 'routes/components/search/item';
 import AlertModal from 'routes/find/components/alert_modal';
 import GigDetailsModal from 'routes/find/components/gig_details_modal';
 import settings from 'settings';
+import { Gig } from 'types';
 
 type SearchResultsProps = {
   isCenterPanel?: boolean,
@@ -26,7 +28,8 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
   const { calculateTotalHeight } = useApp();
   const { user } = useAuth();
   const { results } = useSearch();
-  const { favoriteGigs, toggleFavoriteGig, updateActiveGig } = useUser();
+  const { favoriteGigs, toggleFavoriteGig } = useFavorites();
+  const { updateActiveGig } = useUser();
   // local variables and functions
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isGigDetailsModalOpen, setIsGigDetailsModalOpen] = useState(false);
@@ -53,12 +56,12 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
     }
   }, [results, prevResults]);
 
-  const handleToggleFavoriteGig = (gigId: string): void => {
+  const handleToggleFavoriteGig = (gig: Gig): void => {
     if (!user) {
       setIsAlertModalOpen(true);
       return;
     }
-    toggleFavoriteGig(user.id, gigId);
+    toggleFavoriteGig(user.id, gig);
   }
 
   const buildSearchResults = (): ReactElement[] => {
@@ -68,7 +71,7 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
       searchResult => (
         <SearchItem
           key={`search-item-${searchResult.id}`}
-          handleToggleFavoriteGig={() => handleToggleFavoriteGig(searchResult.id)}
+          handleToggleFavoriteGig={() => handleToggleFavoriteGig(searchResult)}
           item={searchResult}
           isFavorite={favoriteGigIds?.includes(searchResult.id) || false}
           learnMoreAboutGig={learnMoreAboutGig}

@@ -1,28 +1,28 @@
-import { loremIpsum } from 'lorem-ipsum';
 import { useCallback, useEffect, useState } from 'react';
 
 import ApplicationsApi from 'api/applications';
 import EmployerReviewsApi from 'api/employer_reviews';
 import GigsApi from 'api/gigs';
 import ResumesApi from 'api/resumes';
-import UserGigsApi from 'api/user_gigs';
-import UsersApi from 'api/users';
-import employers from 'mock/employers.json';
-import titles from 'mock/titles.json';
+import { usePrevious } from 'hooks/usePrevious';
+import { generateRandomBackground, generateRandomExperience } from 'libs/gigs';
+import { useAuth } from 'providers/auth';
 import UserContext from 'providers/user/context';
 import settings from 'settings';
-import {
-  EmployerReview, Gig, ApplicationStatus, PopulatedApplication, Resume, User,
-} from 'types';
+import { EmployerReview, Gig, ApplicationStatus, PopulatedApplication, Resume } from 'types';
 import generateGUID from 'utils/generateGUID';
-import getRandomValueFromList from 'utils/getRandomValueFromList';
 import replaceExistingItemInList from 'utils/replaceExistingItemInList';
 
 const UserProvider = (props: object) => {
+  // provider variables
+  const { user } = useAuth();
+  const userId = user?.id;
+  const prevUserId = usePrevious(userId);
+
+  // local state variables and functions
   const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [activeResumeId, setActiveResumeId] = useState<string | undefined>(undefined);
   const [employerReviews, setEmployerReviews] = useState<EmployerReview[] | undefined>();
-  const [favoriteGigs, setFavoriteGigs] = useState<Gig[]>([]);
   const [applications, setApplications] = useState<PopulatedApplication[]>([]);
   const [resumes, setResumes] = useState<Resume[] | undefined>();
 
@@ -30,28 +30,6 @@ const UserProvider = (props: object) => {
     const localActiveResumeId = window.localStorage.getItem('activeResumeId');
     if (localActiveResumeId) setActiveResumeId(localActiveResumeId);
     // eslint-disable-next-line
-  }, []);
-
-  const getUserById = useCallback(async (userId: string): Promise<User | undefined> => {
-    const userById = await UsersApi.getById(userId);
-    if (userById?.length) {
-      return userById[0];
-    }
-    return undefined;
-  }, [])
-
-  const getFavoriteGigs = useCallback(async (userId: string) => {
-    const allUserGigs = await UserGigsApi.get({ userId });
-    let userGigs = await Promise.all<Gig>(
-      allUserGigs.map(userGig => GigsApi.getById(userGig.gigId))
-    );
-    userGigs = userGigs.map(userGig => {
-      userGig.favoriteGigId = allUserGigs.find(
-        favoriteGig => favoriteGig.gigId === userGig.id,
-      ).id;
-      return userGig;
-    });
-    setFavoriteGigs(userGigs);
   }, []);
 
   const getResumes = useCallback(async (userId: string) => {
@@ -72,52 +50,20 @@ const UserProvider = (props: object) => {
     setApplications(userApplications);
   }, []);
 
-  const toggleFavoriteGig = useCallback(async (userId: string, gigId: string) => {
-    const userGigsResponse = await UserGigsApi.get({ userId, gigId });
-    if (userGigsResponse.length) {
-      await UserGigsApi.deleteById(userGigsResponse[0].id);
-      setFavoriteGigs(favoriteGigs?.filter(favoriteGig => favoriteGig.id !== gigId));
-    } else {
-      await UserGigsApi.post({ id: generateGUID(), userId, gigId });
-      const favoritedGig = await GigsApi.getById(gigId);
-      setFavoriteGigs([...favoriteGigs, favoritedGig]);
+  useEffect(() => {
+    if (userId && userId !== prevUserId) {
+      getApplications(userId);
+      getResumes(userId);
     }
-  }, [favoriteGigs, setFavoriteGigs]);
+  }, [userId, prevUserId, getApplications, getResumes]);
 
-  const generateRandomExperience = () => {
-    const highlights = loremIpsum({
-      count: 3,
-      format: 'plain',
-      random: Math.random,
-      sentenceLowerBound: 3,
-      sentenceUpperBound: 5,
-      units: 'sentences',
-    });
-
-    return {
-      title: getRandomValueFromList(titles),
-      employer: getRandomValueFromList(employers),
-      highlights,
-    }
-  }
-
-  const generateRandomBackground = () => {
-    return {
-      passedBackgroundCheck: Math.random() < 0.5 ? true : false,
-      hasReleventCredentials: Math.random() < 0.5 ? true : false,
-      meetsMinimumRequirements: Math.random() < 0.5 ? true : false,
-    }
-  }
-
-  const applyToGig = useCallback(async (userId: string, gigId: string) => {
+  const applyToGig = useCallback(async (gig: Gig) => {
     if (activeResumeId) {
-      const gig = await GigsApi.getById(gigId);
-      const user = await getUserById(userId);
       const newApplication = {
         id: generateGUID(),
         employer: gig.employer,
-        gigId,
-        userId,
+        gigId: gig.id,
+        userId: user.id,
         candidate: user,
         currentPosition: generateRandomExperience(),
         previousPosition: generateRandomExperience(),
@@ -134,7 +80,7 @@ const UserProvider = (props: object) => {
           : [populatedGigApplication],
       );
     }
-  }, [activeResumeId, applications, getUserById, setApplications]);
+  }, [activeResumeId, applications, user, setApplications]);
 
   const uploadResume = useCallback(async(resume: Resume): Promise<Resume> => {
     const response = await ResumesApi.post(resume);
@@ -178,7 +124,6 @@ const UserProvider = (props: object) => {
   );
 
   const addReviewToEmployerReviews = useCallback((employerReview: EmployerReview): void => {
-    console.log({employerReview})
     if (employerReview) {
       setEmployerReviews(
         employerReviews.length ? [...employerReviews, employerReview] : [employerReview],
@@ -191,15 +136,10 @@ const UserProvider = (props: object) => {
     activeResumeId,
     applications,
     employerReviews,
-    favoriteGigs,
     resumes,
     addReviewToEmployerReviews,
     applyToGig,
-    getApplications,
-    getFavoriteGigs,
-    getResumes,
     submitReviewFeedback,
-    toggleFavoriteGig,
     updateActiveGig,
     updateActiveResume,
     uploadResumes,

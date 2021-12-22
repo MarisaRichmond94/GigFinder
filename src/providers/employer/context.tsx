@@ -7,7 +7,6 @@ interface EmployerContextType {
   gigs?: Gig[],
   addGig: (newGig: Gig) => void,
   closeGig: (gigId: string) => void,
-  getGigs: (employer: string) => void,
   setActiveGig: (gig: Gig | undefined) => void,
   updateGig: (gig: Gig) => void,
 }

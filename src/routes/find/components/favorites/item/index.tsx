@@ -8,10 +8,10 @@ import GigButton from 'components/gig_button';
 import { Gig } from 'types';
 
 type FavoriteGigItemProps = {
-  apply: (gigId: string) => void,
   isApplyDisabled: boolean,
   item: Gig,
-  unfavoriteGig: (gigId: string) => void,
+  apply: (gig: Gig) => void,
+  unfavoriteGig: (gig: Gig) => void,
 }
 
 const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
@@ -24,7 +24,7 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
         <GigButton
           classNames='remove-favorite-gig-button'
           id={`favorite-gig-menu-button-${id}`}
-          onClick={() => props.unfavoriteGig(id)}
+          onClick={props.unfavoriteGig}
           textBlock={<AiOutlineDelete />}
         />
       </div>
@@ -44,7 +44,7 @@ const FavoriteGigItem = (props: FavoriteGigItemProps): ReactElement => {
           classNames='apply-now-button primary-blue dark-background sub-header-text'
           id={`favorite-gig-apply-now-button-${id}`}
           isDisabled={props.isApplyDisabled}
-          onClick={() => props.apply(props.item.id)}
+          onClick={props.apply}
           text='Apply Now'
         />
       </div>

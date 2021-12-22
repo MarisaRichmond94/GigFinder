@@ -1,4 +1,9 @@
+import { loremIpsum } from 'lorem-ipsum';
 import { ReactElement } from 'react';
+
+import employers from 'mock/employers.json';
+import titles from 'mock/titles.json';
+import getRandomValueFromList from 'utils/getRandomValueFromList';
 
 const calculateDurationSincePosted = (createdAt: string): string => {
   const diffInMilliseconds = Date.now() - Date.parse(createdAt);
@@ -22,6 +27,31 @@ const calculateDurationSincePosted = (createdAt: string): string => {
   else if (minutes > 0) return `${minutes} minute(s)`;
   return `${seconds} seconds`;
 }
+
+const generateRandomBackground = () => {
+  return {
+    passedBackgroundCheck: Math.random() < 0.5 ? true : false,
+    hasReleventCredentials: Math.random() < 0.5 ? true : false,
+    meetsMinimumRequirements: Math.random() < 0.5 ? true : false,
+  }
+};
+
+const generateRandomExperience = () => {
+  const highlights = loremIpsum({
+    count: 3,
+    format: 'plain',
+    random: Math.random,
+    sentenceLowerBound: 3,
+    sentenceUpperBound: 5,
+    units: 'sentences',
+  });
+
+  return {
+    title: getRandomValueFromList(titles),
+    employer: getRandomValueFromList(employers),
+    highlights,
+  }
+};
 
 const getBenefits = (benefits: string[]): ReactElement => {
   if (benefits.length) {
@@ -89,6 +119,8 @@ const populateJobRequirements = (id: string, requirements: string): ReactElement
 
 export {
   calculateDurationSincePosted,
+  generateRandomBackground,
+  generateRandomExperience,
   getBenefits,
   getFormattedViews,
   getRequirements,

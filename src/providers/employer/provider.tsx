@@ -1,10 +1,17 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import GigsApi from 'api/gigs';
+import { usePrevious } from 'hooks/usePrevious';
+import { useAuth } from 'providers/auth';
 import EmployerContext from 'providers/employer/context';
 import { Gig } from 'types';
 
 const EmployerProvider = (props: object) => {
+  // provider variables
+  const { employer } = useAuth();
+  const employerName = employer?.name;
+  const prevEmployerName = usePrevious(employerName);
+  // local state variables and functions
   const [activeGig, setActiveGig] = useState<Gig | undefined>();
   const [gigs, setGigs] = useState<Gig[] | undefined>();
 
@@ -12,6 +19,10 @@ const EmployerProvider = (props: object) => {
     const employerGigs = await GigsApi.get({ employer });
     setGigs(employerGigs);
   }, []);
+
+  useEffect(() => {
+    if (employerName && employerName !== prevEmployerName) getGigs(employerName);
+  }, [employerName, prevEmployerName, getGigs]);
 
   const closeGig = useCallback(async(gigId: string) => {
     if (gigId) {
@@ -35,7 +46,6 @@ const EmployerProvider = (props: object) => {
     gigs,
     addGig,
     closeGig,
-    getGigs,
     setActiveGig,
     updateGig,
   };

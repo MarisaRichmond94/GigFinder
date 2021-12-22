@@ -1,10 +1,9 @@
 import './index.scss';
 
-import { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 
 import GigLoader from 'components/gig_loader';
 import { useAuth } from 'providers/auth';
-import { useEmployer } from 'providers/employer';
 import Header from 'routes/components/header';
 import CenterPanel from 'routes/create/center_panel';
 import LoginPrompt from 'routes/create/components/login_prompt';
@@ -12,17 +11,7 @@ import RightPanel from 'routes/create/right_panel';
 
 const CreatePage = (): ReactElement => {
   // context variables and functions
-  const { employer, isLoggedIn, isLoggingIn } = useAuth();
-  const { getGigs } = useEmployer();
-  // derived variables
-  const employerId = employer?.id;
-  const employerName = employer?.name;
-
-  useEffect(() => {
-    if (employerId && employerName) {
-      getGigs(employerName);
-    }
-  }, [employerId, employerName, getGigs]);
+  const { isLoggedIn, isLoggingIn } = useAuth();
 
   const UnauthenticatedView = (
     <div id='create-page-login'>

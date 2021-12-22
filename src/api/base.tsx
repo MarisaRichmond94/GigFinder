@@ -58,18 +58,6 @@ class BaseApi {
     return this.handleResponse(response);
   };
 
-  async delete(query = {}) {
-    let response;
-
-    try {
-      response = await axios.delete(`${this.url}?${this.buildQueryString(query)}`);
-    } catch (error) {
-      this.handleError(error, 'DELETE');
-    }
-
-    return this.handleResponse(response);
-  };
-
   async deleteById(id: string) {
     let response;
 

@@ -5,7 +5,7 @@ import { BsHeart, BsHeartFill, BsStarFill } from 'react-icons/bs';
 
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
-import { useUser } from 'providers/user';
+import { useFavorites } from 'providers/favorites';
 import { Gig } from 'types';
 
 type HeaderProps = {
@@ -15,7 +15,7 @@ type HeaderProps = {
 const Header = (props: HeaderProps): ReactElement => {
   // context variables and functions
   const { user } = useAuth();
-  const { favoriteGigs, toggleFavoriteGig } = useUser();
+  const { favoriteGigs, toggleFavoriteGig } = useFavorites();
   // destructured prop variables
   if (!props.gig) return null;
   const { id, city, employer, rating, state, title } = props.gig;
@@ -24,7 +24,7 @@ const Header = (props: HeaderProps): ReactElement => {
 
   const handleToggleFavoriteGig = (): void => {
     if (!user) return;
-    toggleFavoriteGig(user.id, id);
+    toggleFavoriteGig(user.id, props.gig);
   }
 
   return (

@@ -8,10 +8,12 @@ import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
+import { useFavorites } from 'providers/favorites';
 import { useUser } from 'providers/user';
 import ActiveResume from 'routes/find/components/active_resume';
 import FavoriteGigItem from 'routes/find/components/favorites/item';
 import settings from 'settings';
+import { Gig } from 'types';
 
 type FavoriteGigsPanelProps = {
   isCenterPanel?: boolean,
@@ -21,7 +23,8 @@ type FavoriteGigsPanelProps = {
 
 const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   const { isLoggedIn, user } = useAuth();
-  const { activeResumeId, applications, favoriteGigs, applyToGig, toggleFavoriteGig } = useUser();
+  const { favoriteGigs, toggleFavoriteGig } = useFavorites();
+  const { activeResumeId, applications, applyToGig } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
   const prevFavoriteGigs = usePrevious(favoriteGigs);
   const listStyling = props.unusableHeight
@@ -43,13 +46,13 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
     return favoriteGigs.map(favoriteGig => {
       return (
         <FavoriteGigItem
-          apply={apply}
+          apply={() => apply(favoriteGig)}
           key={`favorite-gig-item-${favoriteGig.id}`}
           isApplyDisabled={
             !!(!activeResumeId || applications.find(gigApp => gigApp.gig.id === favoriteGig.id))
           }
           item={favoriteGig}
-          unfavoriteGig={unfavoriteGig}
+          unfavoriteGig={() => unfavoriteGig(favoriteGig)}
         />
       )
     });
@@ -64,12 +67,12 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
     );
   };
 
-  const apply = (gigId: string): void => {
-    applyToGig(user.id, gigId);
+  const apply = (gig: Gig): void => {
+    applyToGig(gig);
   };
 
-  const unfavoriteGig = (gigId: string): void => {
-    toggleFavoriteGig(user.id, gigId);
+  const unfavoriteGig = (gig: Gig): void => {
+    toggleFavoriteGig(user.id, gig);
   };
 
   return (
