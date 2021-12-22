@@ -21,6 +21,6 @@ function useOnClickOutside(ref, handler, additionalTargets = []) {
     },
     [additionalTargets, handler, ref]
   );
-}
+};
 
 export { useOnClickOutside };

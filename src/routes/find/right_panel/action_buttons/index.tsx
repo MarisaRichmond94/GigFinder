@@ -60,7 +60,7 @@ const ActionButtons = (props: ActionButtonsProps): ReactElement => {
             text='Sign In'
           />
         </div>
-        <div className='white-text sub-header-text text-center'>
+        <div className='white text sub-header-text text-center'>
           Create an account or sign in to ensure none of your favorite gigs get lost!
         </div>
       </div>

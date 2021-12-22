@@ -7,6 +7,7 @@ import GigButton from 'components/gig_button';
 import UncontrolledSearchableGigInputProps from 'components/gig_input/searchable/uncontrolled';
 import { useApp } from 'providers/app';
 import { useSearch } from 'providers/search';
+import { FilterAction } from 'types';
 
 type FilterPanelProps = {
   id: string,
@@ -14,15 +15,15 @@ type FilterPanelProps = {
 
 const FilterPanel = (props: FilterPanelProps): ReactElement => {
   const { calculateTotalHeight } = useApp();
-  const { filterOptions, searchFilters, deleteSearchFilter, onFilterSelect } = useSearch();
+  const { filterOptions, searchFilters, onFilterAction } = useSearch();
 
   const handleFilterSelect = (filter: string): void => {
-    onFilterSelect(filter);
+    onFilterAction(FilterAction.add, filter);
     calculateTotalHeight();
   }
 
   const handleDeleteFilter = (filter: string): void => {
-    deleteSearchFilter(filter);
+    onFilterAction(FilterAction.remove, filter);
     calculateTotalHeight();
   }
 

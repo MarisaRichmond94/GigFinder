@@ -11,26 +11,26 @@ export interface Application {
   feedback: Feedback,
   background: Background,
   status: ApplicationStatus,
-}
+};
 
 export enum ApplicationStatus {
   pending = 'pending',
   accepted = 'accepted',
   rejected = 'rejected',
-}
+};
 
 export enum AuthFieldType {
   name = 'name',
   email = 'email',
   password = 'password',
   all = 'all',
-}
+};
 
 export interface Background {
   passedBackgroundCheck: boolean,
   hasReleventCredentials: boolean,
   meetsMinimumRequirements: boolean,
-}
+};
 
 export interface Candidate {
   id: string,
@@ -40,27 +40,27 @@ export interface Candidate {
   address: string,
   degree: string,
   college: string,
-}
+};
 
 export enum CreatePanelTypes {
   gigs = 'gigs',
   apps = 'apps',
   post = 'post',
   templates = 'templates',
-}
+};
 
 export interface DropdownOption {
   displayName: string,
   icon?: ReactElement,
   id?: string,
   onClick?: () => void,
-}
+};
 
 export interface Employer {
   id: string,
   name: string,
   email: string,
-}
+};
 
 export interface EmployerReview {
   id: string,
@@ -77,7 +77,7 @@ export interface EmployerReview {
   summary: string,
   positiveFeedbackCounter: number,
   negativeFeedbackCounter: number,
-}
+};
 
 export interface Feedback {
   mood?: number,
@@ -86,13 +86,18 @@ export interface Feedback {
   technicalFit?: number,
   culturalFit?: number,
   additionalNotes?: string,
-}
+};
+
+export enum FilterAction {
+  add = 'add',
+  remove = 'remove',
+};
 
 export enum FindPanelTypes {
   results = 'results',
   favorites = 'favorites',
   applications = 'applications',
-}
+};
 
 export interface Gig {
   abbrevState: string,
@@ -111,7 +116,7 @@ export interface Gig {
   title: string,
   type: string,
   views: number,
-}
+};
 
 export enum GigFormFieldType {
   all = 'all',
@@ -122,33 +127,33 @@ export enum GigFormFieldType {
   salary = 'salary',
   title = 'title',
   type = 'type',
-}
+};
 
 export interface MessageTemplate {
   id: string,
   employerId: string,
   name: string,
   template: string,
-}
+};
 
 export interface PopulatedApplication {
   id: string,
   gig: Gig,
   userId: string,
   status: ApplicationStatus,
-}
+};
 
 export interface Position {
   title: string,
   employer: string,
   highlights: string,
-}
+};
 
 export interface Resume {
   id: string,
   name: string,
   userId: string,
-}
+};
 
 export enum ReviewFormFieldOptions {
   city = 'city',
@@ -157,20 +162,20 @@ export enum ReviewFormFieldOptions {
   rating = 'rating',
   summary = 'summary',
   title = 'title',
-}
+};
 
 export interface SearchParameters {
   title: string,
   location: string,
   type: string,
   filters: string,
-}
+};
 
 export interface UploadFile {
   id: string,
   name: string,
   status?: string,
-}
+};
 
 export interface User {
   id: string,
@@ -180,4 +185,4 @@ export interface User {
   address: string,
   degree: string,
   college: string,
-}
+};

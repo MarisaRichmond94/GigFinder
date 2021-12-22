@@ -3,6 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 
 import { useAuth } from 'providers/auth';
 import { EmployerProvider } from 'providers/employer';
+import { SearchProvider } from 'providers/search';
 import { UserProvider } from 'providers/user';
 import HomePage from 'routes/home';
 import CreatePage from 'routes/create';
@@ -17,7 +18,7 @@ const GigRouter = (): ReactElement => {
       <Route path={settings.FIND_ROUTE} component={FindRoute} />
     </Switch>
   );
-}
+};
 
 const HomeRoute = (): ReactElement => {
   useEffect(() => {
@@ -27,9 +28,11 @@ const HomeRoute = (): ReactElement => {
   }, []);
 
   return (
-    <HomePage />
+    <SearchProvider>
+      <HomePage />
+    </SearchProvider>
   );
-}
+};
 
 const CreateRoute = (): ReactElement => {
   const history = useHistory();

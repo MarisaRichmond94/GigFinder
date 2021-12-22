@@ -33,17 +33,17 @@ export const keysToSnake = value => {
 
 function isObject(value) {
   return value === Object(value) && !Array.isArray(value) && typeof value !== 'function';
-}
+};
 
 function toCamel(string) {
   return string.replace(/([-_][a-z])/ig, ($1) =>
     $1.toUpperCase().replace('-', '').replace('_', ''),
   );
-}
+};
 
 function toSnake(string) {
   return string
     .replace(/\.?([A-Z]+)/g, (x, y) => `_${y.toLowerCase()}`)
     .replace(/^_/, '')
     .replace(' ', '');
-}
+};

@@ -12,7 +12,9 @@ const AppProvider = (props: object) => {
   const { width } = useViewport();
   const prevPathname = usePrevious(pathname);
   const prevWidth = usePrevious(width);
+
   // local state variables and functions
+  const [isMobileView, setIsMobileView] = useState(false);
   const [routePanelIds, setRoutePanelIds] = useState(
     pathname === settings.FIND_ROUTE
       ? settings.PANEL_IDS.FIND_ROUTE
@@ -67,9 +69,17 @@ const AppProvider = (props: object) => {
     }
   }, [calculateTotalHeight, prevWidth, width]);
 
+  useEffect(() => {
+    if ((!prevWidth && width) || (prevWidth && prevWidth !== width)) {
+      if (isMobileView && width >= settings.MIN_DESKTOP_WIDTH) setIsMobileView(false);
+      else if (!isMobileView && width < settings.MIN_DESKTOP_WIDTH) setIsMobileView(true);
+    }
+  }, [isMobileView, prevWidth, width]);
+
   const value = {
     unusableCenterPanelHeight,
     unusableRightPanelHeight,
+    isMobileView,
     calculateTotalHeight,
   };
 

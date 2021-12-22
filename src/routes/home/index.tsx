@@ -1,41 +1,58 @@
 import './index.scss';
 
 import { ReactElement } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import logo from 'assets/icons/logo.png';
 import DemoWarning from 'components/demo_warning';
-import { useViewport } from 'hooks/useViewport';
-import { SearchProvider } from 'providers/search';
+import GigButton from 'components/gig_button';
+import { useApp } from 'providers/app';
+import { useSearch } from 'providers/search';
 import SearchPanel from 'routes/components/search/panel';
-import SubmitButton from 'routes/home/submit_button';
-import SwitchButton from 'routes/home/switch_button';
+import settings from 'settings';
 
 const HomePage = (): ReactElement => {
-  const { width } = useViewport();
+  // hook variables
+  const history = useHistory();
+  // context variables and functions
+  const { isMobileView } = useApp();
+  const { onSearchFormSubmit } = useSearch();
+
+  const SwitchButton = (
+    <GigButton
+      classNames='thick header-text primary-blue text'
+      id='search-form-switch-button'
+      onClick={() => history.push(settings.CREATE_ROUTE)}
+      text='Switch'
+    />
+  );
 
   return (
     <div id='home-page' >
       <DemoWarning />
-      <SearchProvider>
-        <div id='main-search-form-container'>
-          <div className='search-form-item' id='search-form-name-and-logo'>
-            <img alt='logo' src={logo} />
-            <span className={`bold ${width > 749 ? 'large-title-text' : 'sub-title-text'}`}>
-              Gig Search
-            </span>
-          </div>
-          <div className='search-form-item header-text' id='search-form-tag-line'>
-            The ultimate tool for finding your next big gig
-          </div>
-          <SearchPanel />
-          <SubmitButton />
-          <div className='search-form-item header-text' id='search-form-switch-portal'>
-            Looking to hire? <SwitchButton /> to our employer portal instead
-          </div>
+      <div id='main-search-form-container'>
+        <div id='search-form-name-and-logo'>
+          <img alt='main-logo' src={logo} />
+          <span className={`bold ${isMobileView ? 'sub-title-text' : 'large-title-text'}`}>
+            Gig Search
+          </span>
         </div>
-      </SearchProvider>
+        <div className='header-text text off-white text-center'>
+          The ultimate tool for finding your next big gig
+        </div>
+        <SearchPanel />
+        <GigButton
+          classNames={`primary-blue dark-background ${isMobileView ? 'sub-' : ''}header-text`}
+          id='search-form-submit-button'
+          onClick={onSearchFormSubmit}
+          text='Find My Dream Gig'
+        />
+        <div className='header-text text off-white text-center' id='switch-portals-prompt'>
+          Looking to hire? {SwitchButton} to our employer portal instead
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default HomePage;

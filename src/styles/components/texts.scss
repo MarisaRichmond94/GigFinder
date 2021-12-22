@@ -3,13 +3,8 @@
   user-select: none;
 }
 
-.thick {
-  font-family: $sub-header-font-family;
-}
-
-.bold {
-  font-family: $header-font-family;
-}
+.thick { font-family: $sub-header-font-family; }
+.bold { font-family: $header-font-family; }
 
 .large-title-text {
   @include prevent-highlight;
@@ -51,6 +46,8 @@
   font-size: $paragraph-font-size;
 }
 
-.white-text {
-  color: $white;
+.text {
+  &.white { color: $white; }
+  &.off-white { color: $off-white; }
+  &.off-black { color: $off-black; }
 }

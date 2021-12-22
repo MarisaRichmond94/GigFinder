@@ -4,7 +4,7 @@ class Gigs extends BaseApi {
   constructor() {
     super('gigs');
   }
-}
+};
 
 const GigsApi = new Gigs();
 export default GigsApi;

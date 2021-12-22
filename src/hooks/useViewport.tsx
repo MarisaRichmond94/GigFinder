@@ -16,4 +16,4 @@ export const useViewport = () => {
   }, []);
 
   return { height, width };
-}
+};

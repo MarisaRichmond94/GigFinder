@@ -16,10 +16,6 @@
   white-space: nowrap;
 }
 
-.hide-overflow-ellipsis {
-  @include hide-overflow-ellipsis;
-}
-
 .page-container {
   box-sizing: border-box;
   display: grid;
@@ -28,13 +24,9 @@
   width: 100%;
 }
 
-.visible {
-  display: block;
-}
-
-.hidden {
-  display: none;
-}
+.visible { display: block; }
+.hidden { display: none; }
+.text-center { text-align: center; }
 
 .vertical-line {
   border-right: 1px solid;

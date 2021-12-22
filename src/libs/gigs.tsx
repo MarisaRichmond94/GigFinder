@@ -15,17 +15,11 @@ const calculateDurationSincePosted = (createdAt: string): string => {
   hours %= 24;
   minutes %= 60;
 
-  if (years > 0) {
-    return `${years} year(s)`;
-  } else if (months > 0) {
-    return `${months} month(s)`;
-  } else if (days > 0) {
-    return `${days} day(s)`;
-  } else if (hours > 0) {
-    return `${hours} hour(s)`;
-  } else if (minutes > 0) {
-    return `${minutes} minute(s)`;
-  }
+  if (years > 0) return `${years} year(s)`;
+  else if (months > 0) return `${months} month(s)`;
+  else if (days > 0) return `${days} day(s)`;
+  else if (hours > 0) return `${hours} hour(s)`;
+  else if (minutes > 0) return `${minutes} minute(s)`;
   return `${seconds} seconds`;
 }
 

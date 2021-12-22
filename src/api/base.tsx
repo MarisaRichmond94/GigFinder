@@ -8,7 +8,7 @@ class BaseApi {
   url;
   constructor(route) {
     this.url = `${settings.BASE_SERVER_URL}/${route}`;
-  }
+  };
 
   async post(body) {
     let response;
@@ -20,7 +20,7 @@ class BaseApi {
     }
 
     return this.handleResponse(response);
-  }
+  };
 
   async get(query = {}) {
     let response;
@@ -32,7 +32,7 @@ class BaseApi {
     }
 
     return this.handleResponse(response);
-  }
+  };
 
   async getById(id: string) {
     let response;
@@ -44,7 +44,7 @@ class BaseApi {
     }
 
     return this.handleResponse(response);
-  }
+  };
 
   async update(id: string, body) {
     let response;
@@ -56,7 +56,7 @@ class BaseApi {
     }
 
     return this.handleResponse(response);
-  }
+  };
 
   async delete(query = {}) {
     let response;
@@ -68,7 +68,7 @@ class BaseApi {
     }
 
     return this.handleResponse(response);
-  }
+  };
 
   async deleteById(id: string) {
     let response;
@@ -80,26 +80,26 @@ class BaseApi {
     }
 
     return this.handleResponse(response);
-  }
+  };
 
   buildQueryString = query => {
     const queryString = Object.keys(query).reduce((accumulation, key) => {
       return accumulation + `${key}=${encodeURIComponent(query[key])}&`;
     }, '');
     return (queryString.endsWith('&')) ? queryString.slice(0, -1) : queryString;
-  }
+  };
 
   handleError = (error, method: string) => {
     error.message = `${this.route} ${method} failed: ${error.message}`;
     // TODO - route to error page
-  }
+  };
 
   handleResponse = response => {
     if (response?.data) {
       return keysToCamel(response.data);
     }
     // TODO - handle error
-  }
-}
+  };
+};
 
 export default BaseApi;
