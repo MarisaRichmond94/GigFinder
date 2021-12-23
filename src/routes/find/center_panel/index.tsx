@@ -5,6 +5,7 @@ import { FaFilter } from 'react-icons/fa';
 import { GoSearch } from 'react-icons/go';
 
 import CollapsableSection from 'components/collapsable_section';
+import { useViewport } from 'hooks/useViewport';
 import { useApp } from 'providers/app';
 import { useSearch } from 'providers/search';
 import PanelSelector from 'routes/components/panel_selector';
@@ -17,16 +18,18 @@ import { FindPanelTypes } from 'types';
 
 const CenterPanel = (): ReactElement => {
   // context variables and functions
-  const { unusableCenterPanelHeight, isMobileView, calculateTotalHeight } = useApp();
+  const { unusableCenterPanelHeight, calculateTotalHeight } = useApp();
   const { results } = useSearch();
   // local state variables and functions
   const [activePanel, setActivePanel] = useState<FindPanelTypes>(FindPanelTypes.results);
+  // hook variables
+  const { width } = useViewport();
 
   useEffect(() => {
-    if (activePanel !== FindPanelTypes.results && !isMobileView) {
+    if (activePanel !== FindPanelTypes.results && width >= 850) {
       setActivePanel(FindPanelTypes.results);
     }
-  }, [activePanel, setActivePanel, isMobileView]);
+  }, [activePanel, setActivePanel, width]);
 
   const getActivePanel = (): ReactElement => {
     switch (activePanel) {

@@ -18,16 +18,17 @@ const settings = {
   PANEL_IDS: {
     FIND_ROUTE: {
       CENTER: {
-        BUFFER: 49,
+        BUFFER: 30,
         DESKTOP: [
           'header',
-          'search-panel-section'
+          'search-panel-section',
         ],
         MOBILE: [
           'header',
           'search-panel-section',
           'filter-panel-section',
           'find-center-panel-selector',
+          'active-resume-section',
         ]
       },
       RIGHT: {
