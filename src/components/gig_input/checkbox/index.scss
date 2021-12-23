@@ -2,5 +2,6 @@
 
 .gig-checkbox-container {
   @include centered-flex-box;
+  width: 100%;
   &:first-child { margin-right: $medium-margin; }
 }

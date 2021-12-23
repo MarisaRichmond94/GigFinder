@@ -1,7 +1,7 @@
 @import 'global';
 
 #active-message-template-section {
-  border-radius: 5px;
+  border-radius: $small-border-radius;
   color: $off-black;
 
   button {
@@ -16,7 +16,7 @@
 
   #active-message-template-dropdown {
     background-color: $off-white;
-    border-radius: 15px;
+    border-radius: $large-border-radius;
   }
 }
 

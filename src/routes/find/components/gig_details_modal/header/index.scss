@@ -1,6 +1,6 @@
 @import 'global';
 
-#gig-details-modal-header.find {
+#find-gig-details-modal-header {
   width: 100%;
 
   #primary-header {
@@ -13,29 +13,14 @@
       @include hide-overflow-ellipsis;
     }
 
-    #gig-details-star-icon {
-      font-size: 1.25rem;
-    }
-
-    #favorite-gig-button-container {
-      margin-left: auto;
-
-      #favorite-gig-button {
-        font-size: 1.25rem;
-      }
-    }
+    #favorite-gig-button-container { margin-left: auto; }
   }
 }
 
 // tablet view
 @media (min-width: 450px) {
-  #gig-details-modal-header.find {
-    #gig-details-title {
-      font-size: 1.75rem;
-    }
-
-    #sub-header {
-      font-size: 1.25rem;
-    }
+  #find-gig-details-modal-header {
+    #gig-details-title { font-size: 1.75rem; }
+    #sub-header { font-size: $header-font-size; }
   }
 }

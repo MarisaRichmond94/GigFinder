@@ -80,7 +80,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
       {
         isLoggedIn && props.showActiveResumeSelector &&
         <>
-          <ActiveResume isDisplayHeader={false} />
+          <ActiveResume isDisplayHeader />
           <hr className='panel-divider' />
         </>
       }

@@ -1,9 +1,9 @@
 import './index.scss';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import noResultsIcon from 'assets/icons/applications.svg';
+import icon from 'assets/icons/applications.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
@@ -17,7 +17,7 @@ import { Gig } from 'types';
 type UserApplicationsPanelProps = {
   isCenterPanel?: boolean,
   unusableHeight?: number,
-}
+};
 
 const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement => {
   // context variables and functions
@@ -44,7 +44,12 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
     // eslint-disable-next-line
   }, [applications, prevApplications]);
 
-  const buildApplications = (): ReactElement[] => {
+  const learnMoreAboutGig = useCallback((gig: Gig): void => {
+    updateActiveGig(gig);
+    setIsGigDetailsModalOpen(true);
+  }, [updateActiveGig]);
+
+  const buildApplications = useCallback((): ReactElement[] => {
     return applications.map(gigApplication => {
       return (
         <GigApplicationItem
@@ -52,58 +57,51 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
           item={gigApplication}
           learnMoreAboutGig={learnMoreAboutGig}
         />
-      )
+      );
     });
-  }
+  }, [applications, learnMoreAboutGig]);
 
-  const getMoreApplications = (): void => {
+  const getMoreApplications = useCallback((): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
       nextResultsCount <= applications.length
         ? nextResultsCount
         : applications.length
     );
-  };
+  }, [applications?.length, resultsCount]);
 
-  const learnMoreAboutGig = (gig: Gig): void => {
-    if (gig) {
-      updateActiveGig(gig);
-      setIsGigDetailsModalOpen(true);
-    }
-  }
+  if (!applications.length) {
+    return (
+      <div id='gig-applications-panel'>
+        {
+          isLoggedIn
+            ? buildNoPanelContent('You have no active applications', icon, props.isCenterPanel)
+            : buildNoPanelContent(
+              'Log in or create an account to easily apply to gigs in seconds',
+              icon,
+              props.isCenterPanel,
+            )
+        }
+      </div>
+    );
+  };
 
   return (
     <div id='gig-applications-panel'>
       <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
-      {
-        applications?.length
-          ? (
-            <div id='gig-applications-list' style={listStyling}>
-              <InfiniteScroll
-                dataLength={resultsCount}
-                next={getMoreApplications}
-                hasMore={resultsCount !== applications.length}
-                loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
-                scrollableTarget='gig-applications-list'
-              >
-                {buildApplications()}
-              </InfiniteScroll>
-            </div>
-          )
-          : isLoggedIn
-            ? buildNoPanelContent(
-              'You have no active applications',
-              noResultsIcon,
-              props.isCenterPanel,
-            )
-            : buildNoPanelContent(
-              'Log in or create an account to easily apply to gigs in seconds',
-              noResultsIcon,
-              props.isCenterPanel,
-            )
-      }
+      <div id='gig-applications-list' style={listStyling}>
+        <InfiniteScroll
+          dataLength={resultsCount}
+          next={getMoreApplications}
+          hasMore={resultsCount !== applications.length}
+          loader={<GigLoader color='#5BA1C5' height='5%' type='cylon'/>}
+          scrollableTarget='gig-applications-list'
+        >
+          {buildApplications()}
+        </InfiniteScroll>
+      </div>
     </div>
   );
-}
+};
 
 export default UserApplicationsPanel;

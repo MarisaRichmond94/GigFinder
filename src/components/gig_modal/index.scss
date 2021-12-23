@@ -10,7 +10,7 @@
   z-index: 2;
 
   .gig-modal-content {
-    border-radius: 15px;
+    border-radius: $large-border-radius;
     position: absolute;
 
     &.set-max-width {

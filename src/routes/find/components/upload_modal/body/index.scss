@@ -5,7 +5,7 @@
   #drop-zone-dragging-hover {
     @include centered-flex-box;
     border: 2px dashed $off-black;
-    border-radius: 10px;
+    border-radius: $medium-border-radius;
     justify-content: center;
     margin: 0;
     min-height: 35vh;
@@ -13,10 +13,7 @@
 
   #file-upload-drop-zone {
     background-color: $off-white;
-
-    #no-files-text {
-      color: $off-black;
-    }
+    #no-files-text { color: $off-black; }
   }
 
   #drop-zone-dragging-hover {
@@ -27,14 +24,12 @@
       color: $off-black;
       flex-direction: column;
 
-      #drag-over-icon {
+      svg {
         color: $secondary-blue;
-        font-size: 35px;
+        font-size: $small-title-font-size;
       }
     }
   }
 }
 
-#document-drop-zone-input {
-  display: none;
-}
+#document-drop-zone-input { display: none; }

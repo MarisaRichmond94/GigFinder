@@ -45,6 +45,12 @@ button,
   }
 }
 
+.icon {
+  &.medium-grey { color: $grey; }
+  &.primary-red { color: $primary-red; }
+  &.primary-green { color: $primary-green; }
+}
+
 .gig-button {
   &.primary-blue {
     background-color: $primary-blue;

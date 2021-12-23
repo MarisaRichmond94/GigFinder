@@ -1,45 +1,44 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 import { AiOutlineDelete, AiOutlineFileDone, AiOutlineFileText } from 'react-icons/ai';
 
 import GigButton from 'components/gig_button';
 
 interface FileListProps {
   isUploadInProgress: boolean,
-  setUploadFiles: (uploadFiles: any[]) => void,
   uploadFiles: any[],
-}
+  setUploadFiles: (uploadFiles: any[]) => void,
+};
 
 const FileList = (props: FileListProps): ReactElement => {
-  const deleteUploadFile = (event: any, index: number): void => {
+  const { isUploadInProgress, uploadFiles, setUploadFiles } = props;
+
+  const deleteUploadFile = useCallback((event: any, index: number): void => {
     event.preventDefault();
     event.stopPropagation();
-    if (!props.isUploadInProgress) {
-      const uploadFiles = [...props.uploadFiles];
-      uploadFiles.splice(index, 1);
-      props.setUploadFiles(uploadFiles);
+    if (!isUploadInProgress) {
+      const uploadedFiles = [...uploadFiles];
+      uploadedFiles.splice(index, 1);
+      setUploadFiles(uploadedFiles);
     }
-  };
+  }, [isUploadInProgress, uploadFiles, setUploadFiles]);
 
-  const buildUploadFilesList = (): ReactElement[] => {
-    return props.uploadFiles.map((uploadFile, index) => {
+  const buildUploadFilesList = useCallback((): ReactElement[] => {
+    return uploadFiles.map((uploadFile, index) => {
       return (
         <div className='upload-file sub-header-text' key={`upload-file-${uploadFile.name}`}>
           {uploadFile.status ? <AiOutlineFileDone /> : <AiOutlineFileText />}
-          <div className='upload-file-name sub-header-text'>
-            {uploadFile.name}
-          </div>
+          <div className='upload-file-name sub-header-text'>{uploadFile.name}</div>
           <GigButton
             classNames='upload-file-delete-button icon-button off-black'
-            id={`${uploadFile.name}-delete-button`}
             onClick={event => deleteUploadFile(event, index)}
             textBlock={<AiOutlineDelete />}
           />
         </div>
       );
     })
-  };
+  }, [deleteUploadFile, uploadFiles]);
 
   return (
     <div id='upload-files-list'>

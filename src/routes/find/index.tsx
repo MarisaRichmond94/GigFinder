@@ -9,7 +9,6 @@ import UploadModal from 'routes/find/components/upload_modal';
 import RightPanel from 'routes/find/right_panel';
 
 const FindPage = (): ReactElement => {
-  // local state variables and functions
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
@@ -32,6 +31,6 @@ const FindPage = (): ReactElement => {
       </FavoritesProvider>
     </SearchProvider>
   );
-}
+};
 
 export default FindPage;

@@ -12,7 +12,7 @@
 #main-search-form-container {
   @include centered-flex-box;
   background-color: rgba(84, 84, 84, 0.9);
-  border-radius: 15px;
+  border-radius: $large-border-radius;
   flex-direction: column;
   max-width: 1000px;
   min-height: 30vh;

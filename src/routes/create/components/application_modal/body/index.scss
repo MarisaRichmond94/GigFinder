@@ -11,7 +11,7 @@
   #application-panel-container {
     border: 1px solid $light-grey;
     border-top: none;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 $small-border-radius $small-border-radius;
     max-height: 58vh;
     overflow-y: auto;
     padding: $medium-padding;

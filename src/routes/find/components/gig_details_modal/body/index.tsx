@@ -1,47 +1,50 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 
 import GigButton from 'components/gig_button';
-import { ReviewFormProvider } from 'providers/review_form';
+import { useReviewForm } from 'providers/review_form';
+import { useUser } from 'providers/user';
 import DetailPanel from 'routes/find/components/gig_details_modal/body/details_panel';
 import ReviewPanel from 'routes/find/components/gig_details_modal/body/reviews_panel';
 import { Gig } from 'types';
 
 type BodyProps = {
   gig: Gig,
-}
+  isDetailPanel: boolean,
+  setIsDetailPanel: (isDetailPanel: boolean) => void,
+};
 
 const Body = (props: BodyProps): ReactElement => {
-  const [isDetailPanel, setIsDetailPanel] = useState(true);
+  // destructured props
+  const { gig, isDetailPanel, setIsDetailPanel } = props;
+  // provider variables and functions
+  const { userEmployerReviews } = useReviewForm();
+  const { activeGig } = useUser();
+  // derived variables
+  const hasUserReviewed = !!userEmployerReviews.find(x => x.employer === activeGig.employer);
 
   return (
-    <div id='gig-details-modal-body'>
+    <div id='find-gig-details-modal-body'>
       <div id='body-panel-selector-container'>
         <GigButton
           classNames={`${isDetailPanel ? 'active ' : ''}underline-text off-black sub-header-text`}
-          id='gig-info-selector'
           onClick={() => setIsDetailPanel(true)}
           text='Gig Info'
         />
         <GigButton
           classNames={`${!isDetailPanel ? 'active ' : ''}underline-text off-black sub-header-text`}
-          id='review-panel-selector'
           onClick={() => setIsDetailPanel(false)}
           text='Reviews'
         />
       </div>
       {
         isDetailPanel
-          ? <DetailPanel gig={props.gig} />
-          : (
-            <ReviewFormProvider>
-              <ReviewPanel />
-            </ReviewFormProvider>
-          )
+          ? <DetailPanel gig={gig} />
+          : <ReviewPanel hasUserReviewed={hasUserReviewed} />
       }
     </div>
   );
-}
+};
 
 export default Body;

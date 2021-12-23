@@ -2,28 +2,14 @@
 
 .gig-application-item {
   background-color: $off-white;
-  border-radius: 15px;
+  border-radius: $large-border-radius;
   padding: $large-padding;
   margin: $medium-margin 0;
 
-  .gig-application-item-row {
+  .item-row {
     @include centered-flex-box;
-
-    .status-icon {
-      margin-left: auto;
-    }
-
-    .accepted {
-      color: $primary-green;
-    }
-
-    .rejected {
-      color: $primary-red;
-    }
-
-    &:nth-child(3) {
-      padding-bottom: $medium-padding;
-    }
+    .status-icon { margin-left: auto; }
+    &:nth-child(3) { padding-bottom: $medium-padding; }
 
     .gig-application-menu-button {
       background-color: transparent !important;
@@ -31,13 +17,9 @@
       color: $off-black !important;
       padding: $extra-small-padding;
     }
+
+    &:nth-child(4) { justify-content: center; }
   }
 
-  .footer {
-    justify-content: center;
-
-    .learn-more-button {
-      padding: $small-padding $large-padding;
-    }
-  }
+  .learn-more-button { padding: $small-padding $large-padding; }
 }

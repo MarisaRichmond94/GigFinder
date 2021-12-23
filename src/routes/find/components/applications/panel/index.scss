@@ -1,7 +1,7 @@
 @import 'global';
 
 #gig-applications-panel {
-  padding: $medium-padding;
+  padding: 0 $medium-padding;
 
   #gig-applications-list {
     flex: 1 1 auto;
@@ -11,16 +11,10 @@
 
 // mobile view
 @media (min-width: 0) {
-  #no-gig-applications-message {
-    color: $off-black;
-  }
+  #no-gig-applications-message { color: $off-black; }
 }
 
 // desktop view
 @media (min-width: 850px) {
-  #gig-applications-panel {
-    #no-gig-applications-message {
-      color: $off-white;
-    }
-  }
+  #no-gig-applications-message { color: $off-white; }
 }

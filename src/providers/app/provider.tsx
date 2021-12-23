@@ -71,8 +71,8 @@ const AppProvider = (props: object) => {
 
   useEffect(() => {
     if ((!prevWidth && width) || (prevWidth && prevWidth !== width)) {
-      if (isMobileView && width >= settings.MIN_DESKTOP_WIDTH) setIsMobileView(false);
-      else if (!isMobileView && width < settings.MIN_DESKTOP_WIDTH) setIsMobileView(true);
+      if (isMobileView && width > settings.MIN_DESKTOP_WIDTH) setIsMobileView(false);
+      else if (!isMobileView && width <= settings.MIN_DESKTOP_WIDTH) setIsMobileView(true);
     }
   }, [isMobileView, prevWidth, width]);
 

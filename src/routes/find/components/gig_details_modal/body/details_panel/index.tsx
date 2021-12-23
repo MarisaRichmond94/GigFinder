@@ -7,13 +7,13 @@ import { Gig } from 'types';
 
 type DetailPanelProps = {
   gig: Gig,
-}
+};
 
 const DetailPanel = (props: DetailPanelProps): ReactElement => {
   const { benefits, description, requirements, salary, type } = props.gig;
 
   return (
-    <div className='gig-modal-body-panel' id='gig-details-modal-details-panel'>
+    <div className='find-gig-modal-body-panel' id='gig-details-modal-details-panel'>
       <div className='detail-row-flex-container'>
         <div id='salary-details' className='bold sub-header-text'>Salary/Pay</div>
         <div className='sub-header-text'>{getSalary(salary)}/year</div>

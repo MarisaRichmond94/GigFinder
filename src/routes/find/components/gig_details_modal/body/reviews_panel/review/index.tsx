@@ -1,17 +1,17 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
-import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+import { ReactElement, useCallback, useState } from 'react';
 import { FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
 
 import GigButton from 'components/gig_button';
+import { getDatePosted, getStars } from 'libs/reviews';
 import { useUser } from 'providers/user';
 import { EmployerReview } from 'types';
 
 type ReviewProps = {
   review: EmployerReview,
   userId?: string,
-}
+};
 
 const Review = (props: ReviewProps): ReactElement => {
   // context provider variables and functions
@@ -19,53 +19,51 @@ const Review = (props: ReviewProps): ReactElement => {
   // local state variables and functions
   const [isReviewed, setIsReviewed] = useState(false);
   // prop variables
-  const { id, rating, headline, title, isCurrentEmployee } = props.review;
-  const { city, abbrevState, datePosted, summary, userId: reviewUserId } = props.review;
-  const { positiveFeedbackCounter, negativeFeedbackCounter } = props.review;
+  const { review } = props;
+  const { id, rating, headline, title, isCurrentEmployee } = review;
+  const { city, abbrevState, datePosted, summary, userId: reviewUserId } = review;
+  const { positiveFeedbackCounter, negativeFeedbackCounter } = review;
 
-  const getStars = (): ReactElement => {
-    const reviewRating = rating % 1 === 0 ? `${rating}.0` : rating;
-    const stars = [];
-    const [wholeStars, isHalfStar] = reviewRating.toString().split('.');
-    while (stars.length < parseInt(wholeStars)) {
-      stars.push(<BsStarFill className='rating-star' key={`star-${stars.length + 1}`} />);
-    }
-    if (isHalfStar !== '0') {
-      stars.push(<BsStarHalf className='rating-star' key={`star-${stars.length + 1}`} />);
-    }
-    while (stars.length < 5) {
-      stars.push(<BsStar className='rating-star' key={`star-${stars.length + 1}`} />);
-    }
-
-    return <div className='rating-stars'>{stars}</div>;
-  }
-
-  const getDatePosted = (): string => {
-    const dateParts = datePosted.split('.');
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    // @ts-ignore
-    const postedDate = new Date(dateParts[0]);
-    // @ts-ignore
-    return postedDate.toLocaleDateString('en-US', options);
-  }
-
-  const submitFeedback = (isPositive: boolean): void => {
+  const submitFeedback = useCallback((isPositive: boolean): void => {
     setIsReviewed(true);
-    submitReviewFeedback(props.review, isPositive);
+    submitReviewFeedback(review, isPositive);
     setTimeout(() => { setIsReviewed(false); }, 3000);
-  };
+  }, [review, submitReviewFeedback]);
 
   const employeeTitle = `${title}${isCurrentEmployee ? ' (Current Employee)' : ''}`;
   const location = `${city}, ${abbrevState}`;
-  const postedDate = getDatePosted();
+  const postedDate = getDatePosted(datePosted);
   const reviewFeedbackText = 'Was this review helpful?';
+
+  const feedback = (
+    <>
+      <div className='sub-header-text review-feedback-counter'>
+        <GigButton
+          classNames='review-feedback-button header-text icon-button primary-green'
+          id={`review-positive-feedback-button-${id}`}
+          onClick={() => submitFeedback(true)}
+          textBlock={<FiThumbsUp />}
+        />
+        <div>{positiveFeedbackCounter}</div>
+      </div>
+      <div className='sub-header-text review-feedback-counter'>
+        <GigButton
+          classNames='review-feedback-button icon-button primary-red'
+          id={`review-negative-feedback-button-${id}`}
+          onClick={() => submitFeedback(false)}
+          textBlock={<FiThumbsDown />}
+        />
+        <div>{negativeFeedbackCounter}</div>
+      </div>
+    </>
+  );
 
   return (
     <>
       <div className='employer-review-container'>
         <div className='rating-container'>
-          <div className='rating'>{rating}</div>
-          {getStars()}
+          <div className='small-title-text'>{rating}</div>
+          {getStars(rating)}
         </div>
         <div className='details-container'>
           <div className='review-text bold sub-header-text' title={headline}>{headline}</div>
@@ -89,36 +87,15 @@ const Review = (props: ReviewProps): ReactElement => {
                       Thanks for your feedback!
                     </div>
                   )
-                  : (
-                    <>
-                      <div className='sub-header-text review-feedback-counter'>
-                        <GigButton
-                          classNames='review-feedback-button icon-button primary-green'
-                          id={`review-positive-feedback-button-${id}`}
-                          onClick={() => submitFeedback(true)}
-                          textBlock={<FiThumbsUp />}
-                        />
-                        <div>{positiveFeedbackCounter}</div>
-                      </div>
-                      <div className='sub-header-text review-feedback-counter'>
-                        <GigButton
-                          classNames='review-feedback-button icon-button primary-red'
-                          id={`review-negative-feedback-button-${id}`}
-                          onClick={() => submitFeedback(false)}
-                          textBlock={<FiThumbsDown />}
-                        />
-                        <div>{negativeFeedbackCounter}</div>
-                      </div>
-                    </>
-                  )
+                  : feedback
                 }
             </div>
             }
         </div>
       </div>
-      <hr className='review-divider' />
+      <hr />
     </>
   );
-}
+};
 
 export default Review;

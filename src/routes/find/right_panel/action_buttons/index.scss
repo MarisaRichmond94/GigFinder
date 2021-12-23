@@ -4,12 +4,11 @@
   min-height: 110px;
 
   #right-panel-action-buttons {
-    display: flex;
+    @include centered-flex-box;
     margin-bottom: $large-margin;
-
-    :nth-child(2) {
-      flex-grow: 1;
-      margin-left: $large-margin;
+    button {
+      width: 50%;
+      &:first-child { margin-right: $large-margin; }
     }
   }
 }

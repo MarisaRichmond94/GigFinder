@@ -2,13 +2,13 @@
 
 .gig-dropdown {
   @include centered-flex-box;
-  border-radius: 15px;
+  border-radius: $large-border-radius;
 
   button {
     @include centered-flex-box;
     background-color: $off-white !important;
     border: none;
-    border-radius: 5px;
+    border-radius: $small-border-radius;
     box-shadow: none !important;
     box-sizing: border-box;
     color: black !important;

@@ -1,8 +1,6 @@
 @import 'global';
 
-#find-center-panel {
-  margin: 0 3%;
-}
+#find-center-panel { margin: 0 3%; }
 
 #find-center-panel-selector {
   border-bottom: 1px solid $light-grey;
@@ -11,15 +9,11 @@
 
 // mobile view
 @media (min-width: 0) {
-  #find-center-panel-selector {
-    display: flex;
-  }
+  #find-center-panel-selector { display: flex; }
 }
 
 // desktop view
 @media (min-width: 850px) {
   #find-center-panel-selector,
-  #filter-panel-section {
-    display: none;
-  }
+  #filter-panel-section { display: none; }
 }

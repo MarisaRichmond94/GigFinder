@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 
 import GigModal from 'components/gig_modal';
 import GigButton from 'components/gig_button';
@@ -10,21 +10,20 @@ import { UploadFile } from 'types';
 type UploadModalProps = {
   isOpen: boolean,
   setIsOpen: (isOpen: boolean) => void,
-}
+};
 
 const UploadModal = (props: UploadModalProps): ReactElement => {
+  // destructured props
+  const { isOpen, setIsOpen } = props;
+  // provider variables and functions
   const { user } = useAuth();
+  const userId = user?.id;
   const { uploadResumes } = useUser();
+  // local state variables and functions
   const [isUploadInProgress, setIsUploadInProgress] = useState(false);
   const [uploadFiles, setUploadFiles] = useState<UploadFile[]>([]);
 
-  const headerContent = (
-    <div className='thick header-text' id='upload-header-container'>
-      Upload Resume
-    </div>
-  );
-
-  const upload = async() => {
+  const upload = useCallback(async() => {
     if (!isUploadInProgress) {
       setIsUploadInProgress(true);
       let resumes = [];
@@ -33,7 +32,7 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
         resumes.push({
           id: updatedUploadFile.id,
           name: updatedUploadFile.name,
-          userId: user.id,
+          userId,
         });
         updatedUploadFile.status = 'Success';
         const uploadFilesCopy = [...uploadFiles];
@@ -42,26 +41,24 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
       }
       uploadResumes(resumes);
       setUploadFiles([]);
-      props.setIsOpen(false);
+      setIsOpen(false);
     }
-  }
+  }, [isUploadInProgress, uploadFiles, userId, setIsOpen, uploadResumes]);
 
-  const cancel = () => {
+  const cancel = useCallback(() => {
     setUploadFiles([]);
-    props.setIsOpen(false);
-  }
+    setIsOpen(false);
+  }, [setIsOpen]);
 
   const footerContent = (
-    <div id='upload-footer-container'>
+    <div>
       <GigButton
-        classNames='medium-grey dark-background sub-header-text upload-modal-button'
-        id='upload-modal-cancel-button'
+        classNames='medium-grey dark-background sub-header-text'
         onClick={cancel}
         text='Cancel'
       />
       <GigButton
-        classNames='secondary-blue dark-background sub-header-text upload-modal-button'
-        id='upload-modal-upload-button'
+        classNames='secondary-blue dark-background sub-header-text'
         onClick={upload}
         text='Upload'
       />
@@ -69,24 +66,22 @@ const UploadModal = (props: UploadModalProps): ReactElement => {
   );
 
   return (
-    <div id='upload-modal-container'>
-      <GigModal
-        bodyContent={
-          <Body
-            isUploadInProgress={isUploadInProgress}
-            uploadFiles={uploadFiles}
-            setUploadFiles={setUploadFiles}
-          />
-        }
-        classNames='primary-blue'
-        headerContent={headerContent}
-        footerContent={footerContent}
-        id='upload-modal'
-        isOpen={props.isOpen}
-        maxWidth={1000}
-      />
-    </div>
+    <GigModal
+      classNames='primary-blue'
+      headerContent={<div className='thick header-text'>Upload Resume</div>}
+      bodyContent={
+        <Body
+          isUploadInProgress={isUploadInProgress}
+          uploadFiles={uploadFiles}
+          setUploadFiles={setUploadFiles}
+        />
+      }
+      footerContent={footerContent}
+      id='upload-modal'
+      isOpen={isOpen}
+      maxWidth={1000}
+    />
   );
-}
+};
 
 export default UploadModal;

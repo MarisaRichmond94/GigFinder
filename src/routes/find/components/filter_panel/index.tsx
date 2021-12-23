@@ -11,27 +11,27 @@ import { FilterAction } from 'types';
 
 type FilterPanelProps = {
   id: string,
-}
+};
 
 const FilterPanel = (props: FilterPanelProps): ReactElement => {
-  const { calculateTotalHeight } = useApp();
+  const { calculateTotalHeight, isMobileView } = useApp();
   const { filterOptions, searchFilters, onFilterAction } = useSearch();
 
   const handleFilterSelect = (filter: string): void => {
     onFilterAction(FilterAction.add, filter);
     calculateTotalHeight();
-  }
+  };
 
   const handleDeleteFilter = (filter: string): void => {
     onFilterAction(FilterAction.remove, filter);
     calculateTotalHeight();
-  }
+  };
 
   const populateFilters = (filters: string[]): ReactElement[] => {
     return filters.map((filter, index) => {
       return (
         <GigButton
-          classNames='filter-button'
+          classNames={`filter-button ${isMobileView ? 'primary-blue' : 'secondary-blue'}`}
           id={`${filter}-filter-button`}
           key={`${filter}-filter-button`}
           onClick={() => handleDeleteFilter(filter)}
@@ -44,7 +44,7 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
         />
       )
     });
-  }
+  };
 
   return (
     <div id={props.id}>
@@ -68,6 +68,6 @@ const FilterPanel = (props: FilterPanelProps): ReactElement => {
       }
     </div>
   );
-}
+};
 
 export default FilterPanel;

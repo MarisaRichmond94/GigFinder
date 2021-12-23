@@ -13,7 +13,7 @@ import { useFavorites } from 'providers/favorites';
 import { useSearch } from 'providers/search';
 import { useUser } from 'providers/user';
 import SearchItem from 'routes/components/search/item';
-import AlertModal from 'routes/find/components/alert_modal';
+import AlertModal from 'components/alert_modal';
 import GigDetailsModal from 'routes/find/components/gig_details_modal';
 import settings from 'settings';
 import { Gig } from 'types';

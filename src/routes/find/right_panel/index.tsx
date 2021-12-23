@@ -1,6 +1,7 @@
 import './index.scss';
 
 import { ReactElement, useState } from 'react';
+import { FaFilter } from 'react-icons/fa';
 
 import { useApp } from 'providers/app';
 import UserApplicationsPanel from 'routes/find/components/applications/panel';
@@ -8,18 +9,16 @@ import PanelSelector from 'routes/components/panel_selector';
 import ActiveResume from 'routes/find/components/active_resume';
 import FavoriteGigsPanel from 'routes/find/components/favorites/panel';
 import ActionButtons from 'routes/find/right_panel/action_buttons';
-import Filters from 'routes/find/right_panel/filters';
 import { FindPanelTypes } from 'types';
+import FilterPanel from 'routes/find/components/filter_panel';
 
 type RightPanelProps = {
   setIsAuthModalOpen?: (isAuthModalOpen: boolean) => void,
   setIsUploadModalOpen: (isUploadModalOpen: boolean) => void,
-}
+};
 
 const RightPanel = (props: RightPanelProps): ReactElement => {
-  // context variables and functions
   const { unusableRightPanelHeight } = useApp();
-  // local state variables and functions
   const [activePanel, setActivePanel] = useState<FindPanelTypes>(FindPanelTypes.favorites);
 
   const getActivePanel = (): ReactElement => {
@@ -29,7 +28,7 @@ const RightPanel = (props: RightPanelProps): ReactElement => {
       case FindPanelTypes.favorites:
         return <FavoriteGigsPanel unusableHeight={unusableRightPanelHeight} />;
     }
-  }
+  };
 
   return (
     <div id='right-panel'>
@@ -38,7 +37,12 @@ const RightPanel = (props: RightPanelProps): ReactElement => {
         setIsUploadModalOpen={props.setIsUploadModalOpen}
       />
       <ActiveResume isDisplayHeader />
-      <Filters />
+      <div id='search-filters-section'>
+        <div id='search-filters-header' className='thick header-text'>
+          <FaFilter /> Filters
+        </div>
+        <FilterPanel id='right-panel-filters' />
+      </div>
       <PanelSelector
         activePanel={activePanel}
         buttonClasses='underline-text off-white header-text'
@@ -49,6 +53,6 @@ const RightPanel = (props: RightPanelProps): ReactElement => {
       {getActivePanel()}
     </div>
   );
-}
+};
 
 export default RightPanel;

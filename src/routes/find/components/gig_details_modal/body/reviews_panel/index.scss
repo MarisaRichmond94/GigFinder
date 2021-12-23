@@ -1,0 +1,12 @@
+@import 'global';
+
+#review-panel-actions-container {
+  display: flex;
+  justify-content: center;
+
+  #write-a-review-button {
+    margin: $medium-margin $medium-margin 0 $medium-margin;
+    max-width: 500px;
+    width: 100%;
+  }
+}

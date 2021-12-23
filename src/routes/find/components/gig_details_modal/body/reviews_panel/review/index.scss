@@ -7,28 +7,18 @@
     width: 100%;
 
     .rating-container {
-      align-items: center;
+      @include centered-flex-box;
       align-self: self-start;
-      display: flex;
       flex-direction: column;
       width: 20%;
-
-      .rating {
-        font-size: 2rem;
-        height: 30px;
-      }
+      div { height: 30px; }
     }
 
     .details-container {
       width: 80%;
 
-      .review-text {
-        @include hide-overflow-ellipsis;
-      }
-
-      .summary {
-        margin-top: $medium-margin;
-      }
+      .review-text { @include hide-overflow-ellipsis; }
+      .summary { margin-top: $medium-margin; }
 
       .review-feedback-container {
         @include centered-flex-box;
@@ -36,10 +26,7 @@
 
         .review-feedback-counter {
           @include centered-flex-box;
-
-          &:last-child {
-            margin-left: $small-margin;
-          }
+          &:last-child { margin-left: $small-margin; }
         }
 
         .review-feedback {
@@ -50,34 +37,27 @@
         .review-feedback-button {
           background-color: transparent !important;
           border: none;
-          font-size: 1.25rem;
           margin-bottom: $small-margin;
           padding: 0 $small-padding;
         }
       }
     }
 
-    .review-divider {
+    hr {
       color: $grey;
       width: 100%;
     }
   }
 }
 
-hr:last-child {
-  display: none;
-}
+hr:last-child { display: none; }
 
 // mobile view
 @media (min-width: 0) {
-  .rating-star {
-    font-size: 0.5rem;
-  }
+  .rating-star { font-size: 0.5rem; }
 }
 
 // desktop view
-@media (min-width: 500px) {
-  .rating-star {
-    font-size: 1rem;
-  }
+@media (min-width: 525px) {
+  .rating-star { font-size: 1rem; }
 }

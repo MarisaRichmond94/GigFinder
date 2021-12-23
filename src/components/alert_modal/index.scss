@@ -3,7 +3,7 @@
 #alert-modal {
   .gig-modal-header {
     background-color: $primary-blue;
-    border-radius: 15px 15px 0 0;
+    border-radius: $large-border-radius $large-border-radius 0 0;
 
     #alert-header-container {
       @include centered-flex-box;

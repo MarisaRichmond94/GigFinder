@@ -2,26 +2,19 @@
 
 #active-resume-section {
   color: $off-white;
+  #active-resume-header { @include vertically-centered-inline-flex-box; }
+  #active-resume-dropdown { background-color: $off-white; }
+}
 
-  &.with-header {
+// mobile view
+@media (min-width: 0) {
+  #active-resume-header { color: $off-black; }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #active-resume-section {
     padding-top: $extra-large-padding + 5px;
-
-    #active-resume-header {
-      color: $off-white;
-    }
-  }
-
-  &.without-header {
-    #active-resume-header {
-      color: $off-black;
-    }
-  }
-
-  #active-resume-header {
-    @include vertically-centered-inline-flex-box;
-  }
-
-  #active-resume-dropdown {
-    background-color: $off-white;
+    #active-resume-header { color: $off-white; }
   }
 }

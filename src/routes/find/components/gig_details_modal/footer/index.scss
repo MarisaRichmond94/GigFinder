@@ -1,40 +1,31 @@
 @import 'global';
 
 #gig-details-modal-content {
-  &.find {
-    .gig-modal-footer {
-      padding: $large-padding $large-padding 0 $large-padding;
-    };
-  }
+  .gig-modal-footer { padding: $large-padding $large-padding 0 $large-padding; };
 }
 
-#gig-details-modal-footer {
-  #resume-application-message,
-  #gig-application-message {
-    &.primary-red {
-      color: $primary-red;
-    }
-
-    &.transparent {
-      color: transparent !important;
+#find-gig-details-modal-footer {
+  #gig-details-modal-resume-selector-container {
+    button {
+      margin-right: 0;
+      width: 100%;
     }
   }
 
   #action-buttons {
     button {
       padding: 7px $extra-large-padding;
+      &:first-child { margin-right: $large-margin; }
     }
   }
 }
 
 @media (min-width: 0) and (max-width: 679px) {
-  #gig-details-modal-footer {
+  #find-gig-details-modal-footer {
     width: calc(92vw - 30px);
 
     #gig-details-modal-resume-selector-container {
-      #resume-application-message {
-        padding-bottom: $medium-padding;
-      }
+      .message { padding-bottom: $medium-padding; }
 
       #active-resume-section {
         padding-top: 0;
@@ -43,17 +34,10 @@
     }
 
     #gig-details-modal-button-container {
-      #gig-application-message {
+      .message {
+        margin-top: 0;
         padding-bottom: $medium-padding;
       }
-    }
-
-    #gig-application-message {
-      margin-top: 0;
-    }
-
-    #gig-details-modal-cancel-button {
-      margin-right: $large-margin;
     }
 
     .gig-details-modal-button {
@@ -63,7 +47,7 @@
 }
 
 @media (min-width: 680px) {
-  #gig-details-modal-footer {
+  #find-gig-details-modal-footer {
     @include centered-flex-box;
     width: 100%;
 
@@ -79,19 +63,13 @@
 
     #action-buttons {
       margin: 0 0 $extra-large-margin $medium-margin;
+
+      button {
+        width: 150px;
+        &:first-child { margin-right: $large-margin; }
+      }
     }
 
-    #gig-application-message,
-    #resume-application-message {
-      margin-top: -20px;
-    }
-
-    #gig-details-modal-cancel-button {
-      margin-right: $large-margin;
-    }
-
-    .gig-details-modal-button {
-      width: 150px;
-    }
+    .message { margin-top: -20px; }
   }
 }

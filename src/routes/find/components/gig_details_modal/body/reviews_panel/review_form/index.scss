@@ -1,26 +1,16 @@
 @import 'global';
 
-.gig-modal-body-panel {
+#gig-details-modal-review-panel{
   min-height: 260px;
-
-  .filter-options-list {
-    max-height: 100px;
-  }
+  .filter-options-list { max-height: 100px; }
+  .gig-checkbox-container { margin-top: $medium-margin; }
 }
 
-.review-form-flex-container {
-  @include centered-flex-box;
-}
-
-#review-form-title-input {
-  width: calc(100% - 355px);
-}
+.review-form-flex-container { @include centered-flex-box; }
+#review-form-title-input { width: 100%; }
+#review-form-summary-input { margin-top: $medium-margin; }
 
 #review-form-city-input {
   margin-right: $medium-margin;
-  width: calc(100% - 110px);
-}
-
-#review-form-summary-input {
-  margin-top: $medium-margin;
+  width: 100%;
 }

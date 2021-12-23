@@ -5,18 +5,11 @@
     @include centered-flex-box;
 
     div {
-      &:nth-child(1) {
-        margin-right: $medium-margin;
-      }
+      &:nth-child(1) { margin-right: $medium-margin; }
     }
   }
 
   #benefits-list,
-  #requirements-list {
-    margin-bottom: 0;
-  }
-
-  .details {
-    padding-left: $large-padding;
-  }
+  #requirements-list { margin-bottom: 0; }
+  .details { padding-left: $large-padding; }
 }

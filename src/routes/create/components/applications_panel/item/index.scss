@@ -15,7 +15,7 @@
 
 .application {
   background-color: $off-white;
-  border-radius: 5px;
+  border-radius: $small-border-radius;
   padding: $medium-padding $extra-large-padding;
   width: calc(100% - 26px);
 

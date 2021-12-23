@@ -1,7 +1,9 @@
-import { ReactElement, useEffect, useState } from 'react';
+import './index.scss';
+
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import noResultsIcon from 'assets/icons/reviews.svg';
+import icon from 'assets/icons/reviews.svg';
 import GigButton from 'components/gig_button';
 import GigLoader from 'components/gig_loader';
 import buildNoPanelContent from 'libs/no_panel_content';
@@ -12,10 +14,14 @@ import Review from 'routes/find/components/gig_details_modal/body/reviews_panel/
 import ReviewForm from 'routes/find/components/gig_details_modal/body/reviews_panel/review_form';
 import settings from 'settings';
 
-const ReviewPanel = (): ReactElement => {
+type ReviewPanelProps = {
+  hasUserReviewed: boolean,
+};
+
+const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
   const { isLoggedIn, user } = useAuth();
   const userId = user?.id;
-  const { userEmployerReviews, getIsValidInput, resetForm, submitReviewForm } = useReviewForm();
+  const { resetForm, submitReviewForm } = useReviewForm();
   const { activeGig, employerReviews } = useUser();
   const [resultsCount, setResultsCount] = useState(0);
   const [isReviewForm, setIsReviewForm] = useState(false);
@@ -31,64 +37,41 @@ const ReviewPanel = (): ReactElement => {
     // eslint-disable-next-line
   }, [employerReviews]);
 
-  const buildEmployerReviews = (): ReactElement | ReactElement[] => {
+  const buildEmployerReviews = useCallback((): ReactElement | ReactElement[] => {
     if (!employerReviews.length) {
-      return buildNoPanelContent(
-        'There are no reviews for this employer',
-        noResultsIcon,
-        true,
-      );
+      return buildNoPanelContent('There are no reviews for this employer', icon, true);
     }
 
     return employerReviews.map(
       employerReview =>
         <Review review={employerReview} key={`review-${employerReview.id}`} userId={userId}/>
     );
-  }
+  }, [employerReviews, userId]);
 
-  const getMoreEmployerReviews = (): void => {
+  const getMoreEmployerReviews = useCallback((): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
       nextResultsCount <= employerReviews.length
         ? nextResultsCount
         : employerReviews.length
     );
-  };
+  }, [employerReviews.length, resultsCount]);
 
-  const submitReview = (): void => {
+  const submitReview = useCallback((): void => {
     submitReviewForm(activeGig.employer);
     setIsReviewForm(false);
-  }
+  }, [activeGig.employer, submitReviewForm]);
 
-  const cancelReview = (): void => {
-    resetForm()
+  const cancelReview = useCallback((): void => {
+    resetForm();
     setIsReviewForm(false);
-  }
+  }, [resetForm]);
 
   return isReviewForm
-    ? (
-      <>
-        <ReviewForm />
-        <div id='review-panel-actions-container'>
-          <GigButton
-            classNames='sub-header-text medium-grey'
-            id='write-a-review-button'
-            onClick={() => cancelReview()}
-            text='Cancel'
-          />
-          <GigButton
-            classNames='sub-header-text primary-blue'
-            id='write-a-review-button'
-            isDisabled={!getIsValidInput('all')}
-            onClick={() => submitReview()}
-            text='Submit Review'
-          />
-        </div>
-      </>
-    )
+    ? <ReviewForm cancelReview={cancelReview} submitReview={submitReview} />
     : (
       <>
-        <div className='gig-modal-body-panel' id='gig-details-modal-review-panel'>
+        <div className='find-gig-modal-body-panel' id='gig-details-modal-review-panel'>
           <InfiniteScroll
             dataLength={resultsCount}
             next={getMoreEmployerReviews}
@@ -100,7 +83,7 @@ const ReviewPanel = (): ReactElement => {
           </InfiniteScroll>
         </div>
         {
-          isLoggedIn && !userEmployerReviews.find(x => x.employer === activeGig.employer) &&
+          isLoggedIn && !props.hasUserReviewed &&
           <div id='review-panel-actions-container'>
             <GigButton
               classNames='sub-header-text primary-blue'
@@ -112,6 +95,6 @@ const ReviewPanel = (): ReactElement => {
         }
       </>
     );
-}
+};
 
 export default ReviewPanel;

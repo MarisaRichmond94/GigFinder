@@ -1,25 +1,11 @@
 @import 'global';
 
-#gig-details-modal-body {
-  #body-panel-selector-container {
-    display: flex;
-  }
-
-  .gig-modal-body-panel {
+#find-gig-details-modal-body {
+  #body-panel-selector-container { @include centered-flex-box; }
+  .find-gig-modal-body-panel {
     border: 1px solid $light-grey;
     max-height: 45vh;
     overflow-y: auto;
-    padding: $medium-padding;
-  }
-
-  #review-panel-actions-container {
-    display: flex;
-    justify-content: center;
-
-    #write-a-review-button {
-      margin: $medium-margin $medium-margin 0 $medium-margin;
-      max-width: 500px;
-      width: 100%;
-    }
+    padding: $medium-padding $medium-padding $medium-padding 0;
   }
 }

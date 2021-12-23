@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, SyntheticEvent, useState } from 'react';
+import { ReactElement, SyntheticEvent, useCallback, useState } from 'react';
 import { BiArrowToBottom } from 'react-icons/bi';
 
 import GigButton from 'components/gig_button';
@@ -12,20 +12,23 @@ interface BodyProps {
   isUploadInProgress: boolean,
   uploadFiles: UploadFile[],
   setUploadFiles: (uploadFiles: UploadFile[]) => void,
-}
+};
 
 const Body = (props: BodyProps): ReactElement => {
+  // destructured props
+  const { isUploadInProgress, uploadFiles, setUploadFiles } = props;
+  // local state variables and functions
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  const getIsAllowedDocumentType = (type: string): boolean => {
+  const getIsAllowedDocumentType = useCallback((type: string): boolean => {
     return (
       type === 'application/pdf' ||
       type === 'application/msword' ||
       type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     );
-  };
+  }, []);
 
-  const addUploadFileToList = (selectedFiles: FileList): void => {
+  const addUploadFileToList = useCallback((selectedFiles: FileList): void => {
     if (selectedFiles && selectedFiles.length > 0) {
       // @ts-ignore
       delete selectedFiles.length;
@@ -34,52 +37,51 @@ const Body = (props: BodyProps): ReactElement => {
         .filter(file => getIsAllowedDocumentType(file.type))
         // @ts-ignore
         .map(file => { return { id: generateGUID(), name: file.name, status: undefined } });
-      props.setUploadFiles(props.uploadFiles ? [...props.uploadFiles, ...files] : files);
+      setUploadFiles(uploadFiles ? [...uploadFiles, ...files] : files);
     }
-  }
+  }, [uploadFiles, getIsAllowedDocumentType, setUploadFiles]);
 
-  const handleDocumentsDrop = (event): void => {
-    if (!props.isUploadInProgress) {
+  const handleDocumentsDrop = useCallback((event): void => {
+    if (!isUploadInProgress) {
       event.preventDefault();
       event.stopPropagation();
       addUploadFileToList(event.dataTransfer.files);
       setIsDraggingOver(false);
     }
-  }
+  }, [addUploadFileToList, isUploadInProgress]);
 
-  const onDragEnter = (event: SyntheticEvent): void => {
+  const onDragEnter = useCallback((event: SyntheticEvent): void => {
     event.preventDefault();
     setIsDraggingOver(true);
-  }
+  }, []);
 
-  const onDragLeave = (event: SyntheticEvent): void => {
+  const onDragLeave = useCallback((event: SyntheticEvent): void => {
     event.preventDefault();
     setIsDraggingOver(false);
-  }
+  }, []);
 
-  const handleClick = (event: SyntheticEvent): void => {
-    if (!props.isUploadInProgress) {
+  const handleClick = useCallback((event: SyntheticEvent): void => {
+    if (!isUploadInProgress) {
       event.preventDefault();
       event.stopPropagation();
       // @ts-ignore
       document.querySelector('#document-drop-zone-input').click();
     }
-  }
+  }, [isUploadInProgress]);
 
   const dragOverDisplay = (
     <div id='drag-over-display' className='header-text'>
       Drop files here
-      <BiArrowToBottom id='drag-over-icon'/>
+      <BiArrowToBottom />
     </div>
   );
 
   const noUploadFilesText = (
     <div id='no-files-text' className='text-center'>
-      <h5 className='upload-instructions'>Drag files here</h5>
-      <h5 className='upload-instructions'>or</h5>
+      <h5>Drag files here</h5>
+      <h5>or</h5>
       <GigButton
         classNames='secondary-blue dark-background'
-        id='browse-files-button'
         text='Click To Browse'
         onClick={() => { }}
       />
@@ -99,12 +101,12 @@ const Body = (props: BodyProps): ReactElement => {
         {
           isDraggingOver
             ? dragOverDisplay
-            : !!props.uploadFiles.length
+            : !!uploadFiles.length
               ? (
                 <FileList
-                  isUploadInProgress={props.isUploadInProgress}
-                  uploadFiles={props.uploadFiles}
-                  setUploadFiles={props.setUploadFiles}
+                  isUploadInProgress={isUploadInProgress}
+                  uploadFiles={uploadFiles}
+                  setUploadFiles={setUploadFiles}
                 />
               )
               : noUploadFilesText
@@ -119,6 +121,6 @@ const Body = (props: BodyProps): ReactElement => {
       />
     </div>
   );
-}
+};
 
 export default Body;

@@ -108,9 +108,11 @@
     }
 
     #right-panel {
+      background-color: #083F89;
       display: inline-block;
       grid-column: right-start / right-end;
       grid-row: header-start / center-end;
+      padding: $large-padding;
     }
   }
 }
