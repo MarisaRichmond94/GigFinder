@@ -1,9 +1,9 @@
 import './index.scss';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import noResultsIcon from 'assets/icons/results.svg';
+import icon from 'assets/icons/results.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
@@ -38,7 +38,7 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
   const prevResults = usePrevious(results);
   // derived variables
   const listStyling = props.unusableHeight
-    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    ? { maxHeight: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
 
   useEffect(() => {
@@ -56,15 +56,23 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
     }
   }, [results, prevResults]);
 
-  const handleToggleFavoriteGig = (gig: Gig): void => {
+  const handleToggleFavoriteGig = useCallback((gig: Gig): void => {
     if (!user) {
       setIsAlertModalOpen(true);
       return;
     }
     toggleFavoriteGig(user.id, gig);
-  }
+  }, [toggleFavoriteGig, user]);
 
-  const buildSearchResults = (): ReactElement[] => {
+  const learnMoreAboutGig = useCallback((gigId: string): void => {
+    const matchingGig = results?.find(gig => gig.id === gigId);
+    if (matchingGig) {
+      updateActiveGig(matchingGig);
+      setIsGigDetailsModalOpen(true);
+    }
+  }, [results, updateActiveGig]);
+
+  const buildSearchResults = useCallback((): ReactElement[] => {
     const favoriteGigIds = favoriteGigs?.map(favoriteGig => favoriteGig.id);
     const visibleSearchResults = results.slice(0, resultsCount + 1);
     return visibleSearchResults?.map(
@@ -78,24 +86,16 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
         />
       )
     );
-  };
+  }, [favoriteGigs, handleToggleFavoriteGig, learnMoreAboutGig, results, resultsCount]);
 
-  const getMoreSearchResults = (): void => {
+  const getMoreSearchResults = useCallback((): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
       nextResultsCount <= results.length
         ? nextResultsCount
         : results.length
     );
-  };
-
-  const learnMoreAboutGig = (gigId: string): void => {
-    const matchingGig = results?.find(gig => gig.id === gigId);
-    if (matchingGig) {
-      updateActiveGig(matchingGig);
-      setIsGigDetailsModalOpen(true);
-    }
-  }
+  }, [results?.length, resultsCount]);
 
   if (results === undefined) {
     return (
@@ -103,7 +103,7 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
         <GigLoader color='#5BA1C5' type='cylon'/>
       </div>
     );
-  }
+  };
 
   return (
     <div id='search-results' style={listStyling}>
@@ -127,14 +127,10 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
               {buildSearchResults()}
             </InfiniteScroll>
           )
-          : buildNoPanelContent(
-            'No gigs found matching this search',
-            noResultsIcon,
-            props.isCenterPanel,
-          )
+          : buildNoPanelContent('No gigs found matching this search', icon, props.isCenterPanel)
       }
     </div>
   );
-}
+};
 
 export default SearchResults;

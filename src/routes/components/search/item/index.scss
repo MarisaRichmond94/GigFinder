@@ -7,24 +7,12 @@
 
   .sub-header-row,
   .requirements-row,
-  .posted-row {
-    margin: 0 $large-margin;
-  }
+  .posted-row { margin: 0 $large-margin; }
 
-  .sub-header-row,
-  .posted-row {
-    color: $medium-grey;
-  }
-
-  .posted-row {
-    margin-bottom: $medium-margin;
-  }
+  .posted-row { margin-bottom: $medium-margin; }
 
   .requirements-row {
     padding: $small-padding 0;
-
-    .job-requirements-list {
-      margin-bottom: 0;
-    }
+    .job-requirements-list { margin-bottom: 0; }
   }
 }

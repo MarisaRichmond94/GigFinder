@@ -12,7 +12,7 @@ type SearchItemProps = {
   item: Gig,
   isFavorite: boolean,
   learnMoreAboutGig: (gigId: string) => void,
-}
+};
 
 const SearchItem = (props: SearchItemProps): ReactElement => {
   const { id, employer, city, state, rating, createdAt, requirements, title } = props.item;
@@ -27,25 +27,24 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
         rating={rating}
         title={title}
       />
-      <div className='sub-header-row sub-header-text'>
+      <div className='sub-header-row sub-header-text text medium-grey'>
         {city}, {state}
       </div>
       <div className='requirements-row paragraph-text'>
         {populateJobRequirements(id, requirements)}
       </div>
-      <div className='posted-row sub-header-text'>
+      <div className='posted-row sub-header-text text medium-grey'>
         Posted {calculateDurationSincePosted(createdAt)} ago
       </div>
       <div className='text-center'>
         <GigButton
           classNames='primary-blue dark-background sub-header-text'
-          id={`learn-more-button-${id}`}
           onClick={() => props.learnMoreAboutGig(id)}
           text='Learn More'
         />
       </div>
     </div>
   );
-}
+};
 
 export default SearchItem;

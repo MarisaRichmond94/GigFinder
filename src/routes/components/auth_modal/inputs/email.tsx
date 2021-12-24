@@ -28,6 +28,6 @@ const EmailInput = (): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default EmailInput;

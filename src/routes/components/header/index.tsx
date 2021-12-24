@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useHistory, useLocation } from 'react-router-dom';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
@@ -26,8 +26,11 @@ const Header = (props: HeaderProps): ReactElement => {
   // provider variables and functions
   const { employer, isLoggedIn, user, logout } = useAuth();
   const { setIsSignUp } = useAuthForm();
+  // destructured props
+  const setIsAuthModalOpen = props?.setIsAuthModalOpen;
+  const setIsUploadModalOpen = props?.setIsUploadModalOpen;
 
-  const generateHeaderMessage = (): string => {
+  const generateHeaderMessage = useCallback((): string => {
     switch (pathname) {
       case settings.CREATE_ROUTE:
         return employer.name;
@@ -35,17 +38,17 @@ const Header = (props: HeaderProps): ReactElement => {
       default:
         return `Welcome back, ${user.name}!`;
     }
-  }
+  }, [employer?.name, pathname, user?.name]);
 
-  const handleLogin = (): void => {
-    props.setIsAuthModalOpen(true);
+  const handleLogin = useCallback((): void => {
+    setIsAuthModalOpen(true);
     setIsSignUp(false);
-  }
+  }, [setIsAuthModalOpen, setIsSignUp]);
 
-  const handleSignUp = (): void => {
-    props.setIsAuthModalOpen(true);
+  const handleSignUp = useCallback((): void => {
+    setIsAuthModalOpen(true);
     setIsSignUp(true);
-  }
+  }, [setIsAuthModalOpen, setIsSignUp]);
 
   return (
     <div id='header'>
@@ -75,7 +78,7 @@ const Header = (props: HeaderProps): ReactElement => {
           <GigButton
             classNames='grey header icon-button large-header-text'
             id='upload-resume-icon-button'
-            onClick={() => props.setIsUploadModalOpen(true)}
+            onClick={() => setIsUploadModalOpen(true)}
             textBlock={<GrCloudUpload />}
           />
         }
@@ -88,6 +91,6 @@ const Header = (props: HeaderProps): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

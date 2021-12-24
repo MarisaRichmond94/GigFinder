@@ -21,7 +21,7 @@ const PasswordInput = (): ReactElement => {
           classNames='auth-modal-input'
           formValue={password}
           id='auth-password-input'
-          placeholder='8-digit password w/ mixed-casing and at least 1 #'
+          placeholder='8-digit password w/ mixed-casing and at least 1 number'
           setFormValue={
             updatedPassword => updateInput(AuthFieldType.password, updatedPassword)
           }
@@ -36,6 +36,6 @@ const PasswordInput = (): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default PasswordInput;

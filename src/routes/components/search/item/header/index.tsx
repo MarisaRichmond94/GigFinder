@@ -12,7 +12,7 @@ type SearchItemHeaderProps = {
   isFavorite: boolean,
   rating: number,
   title: string,
-}
+};
 
 const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
   const { id, isFavorite, employer, rating, title } = props;
@@ -36,12 +36,12 @@ const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
         onClick={() => props.handleToggleFavoriteGig()}
         textBlock={
           isFavorite
-            ? <BsHeartFill className='favorite-gig-button-icon red-icon' />
+            ? <BsHeartFill className='favorite-gig-button-icon primary-red icon-button' />
             : <BsHeart className='favorite-gig-button-icon' />
         }
       />
     </div>
   );
-}
+};
 
 export default SearchItemHeader;

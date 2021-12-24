@@ -8,16 +8,11 @@
   .search-item {
     border-bottom: 1px solid $light-grey;
     padding-bottom: $large-padding;
-
-    &:last-child{
-      border: 0;
-    }
+    &:last-child{ border: 0; }
   }
 }
 
 // desktop view
 @media (min-width: 850px) {
-  #search-results {
-    width: calc(96vw - 350px);
-  }
+  #search-results { width: calc(96vw - 350px); }
 }

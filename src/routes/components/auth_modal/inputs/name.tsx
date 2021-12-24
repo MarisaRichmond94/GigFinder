@@ -28,6 +28,6 @@ const NameInput = (): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default NameInput;

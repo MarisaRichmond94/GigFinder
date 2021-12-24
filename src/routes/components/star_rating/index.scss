@@ -8,9 +8,6 @@
     color: $off-white;
     font-size: $header-font-size;
     padding: 0;
-
-    &.filled {
-      color: $mood-yellow;
-    }
+    &.filled { color: $mood-yellow; }
   }
 }

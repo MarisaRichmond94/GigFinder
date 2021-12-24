@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
@@ -7,11 +7,15 @@ import { AuthFieldType } from 'types';
 
 type FooterProps = {
   setIsOpen: (isOpen: boolean) => void,
-}
+};
 
 const Footer = (props: FooterProps): ReactElement => {
+  // provider variables and functions
   const { isSignUp, isUserAuth, getIsValidInput, resetForm } = useAuthForm();
   const { loginEmployer, loginUser, signUpEmployer, signUpUser } = useAuth();
+  // destructured props
+  const { setIsOpen } = props;
+  // derived variables
   const isSubmitEnabled = isSignUp
     ? (
       getIsValidInput(AuthFieldType.name) &&
@@ -23,15 +27,15 @@ const Footer = (props: FooterProps): ReactElement => {
       getIsValidInput(AuthFieldType.password)
     );
 
-  const close = (): void => {
-    props.setIsOpen(false);
+  const close = useCallback((): void => {
+    setIsOpen(false);
     resetForm();
-  };
+  }, [resetForm, setIsOpen]);
 
-  const handleFormSubmit = (): void => {
+  const handleFormSubmit = useCallback((): void => {
     if (isSignUp) isUserAuth ? signUpUser(close) : signUpEmployer(close);
     else isUserAuth ? loginUser(close) : loginEmployer(close);
-  }
+  }, [close, isSignUp, isUserAuth, loginEmployer, loginUser, signUpEmployer, signUpUser]);
 
   return (
     <div id='auth-footer-container'>
@@ -50,6 +54,6 @@ const Footer = (props: FooterProps): ReactElement => {
       />
     </div>
   );
-}
+};
 
 export default Footer;

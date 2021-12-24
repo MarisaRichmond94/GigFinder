@@ -56,6 +56,6 @@ const StarRating = (props: StarRatingProps): ReactElement => {
       </button>
     </div>
   );
-}
+};
 
 export default StarRating;

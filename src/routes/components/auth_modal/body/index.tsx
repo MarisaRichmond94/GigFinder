@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import GigButton from 'components/gig_button';
@@ -14,12 +14,12 @@ const Body = (): ReactElement => {
   const { authError, isUserAuth, isSignUp, resetForm, setIsApplicationSignUp } = useAuthForm();
   const { pathname } = useLocation();
 
-  const handleSignUpSelectorClick = (updatedisUserAuth: boolean): void => {
+  const handleSignUpSelectorClick = useCallback((updatedisUserAuth: boolean): void => {
     if (updatedisUserAuth !== isUserAuth) {
       setIsApplicationSignUp(updatedisUserAuth);
       resetForm();
     }
-  }
+  }, [isUserAuth, resetForm, setIsApplicationSignUp]);
 
   return (
     <div id='auth-body-container' className={pathname === settings.FIND_ROUTE ? 'find' : 'create'}>
@@ -46,6 +46,6 @@ const Body = (): ReactElement => {
       {authError && <div id='auth-form-error' className='thick sub-header-text'>{authError}</div>}
     </div>
   );
-}
+};
 
 export default Body;

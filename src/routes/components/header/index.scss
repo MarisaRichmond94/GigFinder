@@ -25,13 +25,8 @@
     line-height: $header-height;
     padding: $medium-padding 0 0 0;
 
-    .header.icon-button {
-      margin: 0 4px 6px 0;
-    }
-
-    #upload-resume-icon-button {
-      margin-right: -$medium-margin;
-    }
+    .header.icon-button { margin: 0 4px 6px 0; }
+    #upload-resume-icon-button { margin-right: -$medium-margin; }
 
     #sign-up-button {
       color: $off-black;
@@ -43,27 +38,18 @@
 
 // mobile view
 @media (min-width: 0) {
-  #greeting {
-    display: inline-block;
-  }
+  #greeting { display: inline-block; }
 
   #header {
     #header-title {
-      #header-title-icon {
-        margin: $medium-margin $small-margin $medium-margin $large-margin;
-      }
-
-      #header-title-text {
-        display: none;
-      }
+      #header-title-icon { margin: $medium-margin $small-margin $medium-margin $large-margin; }
+      #header-title-text { display: none; }
     }
   }
 }
 
 @media (min-width: 0) and (max-width: 499px) {
-  #greeting {
-    display: none;
-  }
+  #greeting { display: none; }
 }
 
 // desktop view
@@ -76,22 +62,13 @@
     }
 
     #upload-resume-icon-button,
-    #auth-button {
-      display: none;
-    }
+    #auth-button { display: none; }
 
     #header-title {
-      #header-title-icon {
-        margin: 0 $small-margin $medium-margin 0;
-      }
-
-      #header-title-text {
-        display: inline-block;
-      }
+      #header-title-icon { margin: 0 $small-margin $medium-margin 0; }
+      #header-title-text { display: inline-block; }
     }
   }
 
-  .header-icon-button {
-    display: none;
-  }
+  .header-icon-button { display: none; }
 }

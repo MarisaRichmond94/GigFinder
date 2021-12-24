@@ -6,13 +6,8 @@
 
   .gig-item-job-title,
   .gig-item-employer,
-  .gig-item-rating {
-    @include hide-overflow-ellipsis;
-  }
-
-  .search-item-star {
-    font-size: 1.25rem;
-  }
+  .gig-item-rating { @include hide-overflow-ellipsis; }
+  .search-item-star { font-size: $header-font-size; }
 }
 
 .favorite-gig-button {
@@ -21,9 +16,6 @@
 
   .favorite-gig-button-wrapper {
     @include vertically-centered-inline-flex-box;
-
-    .favorite-gig-button-icon {
-      font-size: 1.5rem;
-    }
+    .favorite-gig-button-icon { font-size: $large-header-font-size; }
   }
 }

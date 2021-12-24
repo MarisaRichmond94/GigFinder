@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import GigDropdown from 'components/gig_input/dropdown';
@@ -37,7 +37,7 @@ const SearchPanel = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, location, type]);
 
-  const updateSearchText = (key: string, value: string): void => {
+  const updateSearchText = useCallback((key: string, value: string): void => {
     switch (key) {
       case 'title':
         setTitle(value);
@@ -47,17 +47,17 @@ const SearchPanel = (): ReactElement => {
         setLocation(value);
         break;
     };
-  };
+  }, []);
 
-  const updateSelectedOption = (option: DropdownOption): void => {
+  const updateSelectedOption = useCallback((option: DropdownOption): void => {
     setType(typeOptions?.find(x => x === option.displayName) || undefined);
-  };
+  }, [typeOptions]);
 
-  const getClassNames = (): string => {
+  const getClassNames = useCallback((): string => {
     const pageType = width >= settings.MIN_DESKTOP_WIDTH ? 'desktop': 'mobile';
     const route = pathname === settings.FIND_ROUTE ? 'find' : 'home';
     return `${pageType} search-panel-item search-panel-input ${route}`;
-  };
+  }, [pathname, width]);
 
   return (
     <div id={`${pathname === settings.FIND_ROUTE ? 'find-' : 'home-'}search-panel`}>

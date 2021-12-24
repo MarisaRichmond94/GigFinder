@@ -7,7 +7,7 @@ interface SelectorButtonProps {
   isActive: boolean,
   panelType: string,
   setActivePanel: (activePanel: string) => void,
-}
+};
 
 const SelectorButton = (props: SelectorButtonProps): ReactElement => {
   const buttonClasses = props.buttonClasses || 'underline-text off-black header-text';
@@ -15,11 +15,10 @@ const SelectorButton = (props: SelectorButtonProps): ReactElement => {
   return (
     <GigButton
       classNames={`${props.isActive ? 'active ' : ''}${buttonClasses}`}
-      id={`${props.panelType.toLowerCase()}-panel-selector-button`}
       onClick={() => props.setActivePanel(props.panelType.toLowerCase())}
       text={props.panelType}
     />
   );
-}
+};
 
 export default SelectorButton;

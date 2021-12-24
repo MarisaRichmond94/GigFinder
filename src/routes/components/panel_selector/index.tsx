@@ -9,7 +9,7 @@ interface PanelSelectorProps {
   id: string,
   panels: string[],
   setActivePanel: (activePanel: any) => void,
-}
+};
 
 const PanelSelector = (props: PanelSelectorProps): ReactElement => {
   return (
@@ -33,6 +33,6 @@ const PanelSelector = (props: PanelSelectorProps): ReactElement => {
       }
     </div>
   );
-}
+};
 
 export default PanelSelector;
