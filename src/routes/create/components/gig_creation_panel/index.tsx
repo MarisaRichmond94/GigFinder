@@ -2,10 +2,8 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import GigButton from 'components/gig_button';
-import { useAuth } from 'providers/auth';
-import { useEmployer } from 'providers/employer';
-import { GigFormProvider, useGigForm } from 'providers/gig_form';
+import { GigFormProvider } from 'providers/gig_form';
+import GigCreationActions from 'routes/create/components/gig_creation_panel/actions';
 import BenefitsInput from 'routes/create/components/inputs/benefits';
 import DescriptionInput from 'routes/create/components/inputs/description';
 import LocationInput from 'routes/create/components/inputs/location';
@@ -13,7 +11,6 @@ import RequirementsInput from 'routes/create/components/inputs/requirements';
 import SalaryInput from 'routes/create/components/inputs/salary';
 import TitleInput from 'routes/create/components/inputs/title';
 import TypeInput from 'routes/create/components/inputs/type';
-import { GigFormFieldType } from 'types';
 
 type GigCreationPanelProps = {
   unusableHeight?: number,
@@ -21,12 +18,16 @@ type GigCreationPanelProps = {
 
 const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
   const listStyling = props.unusableHeight
-    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    ? { maxHeight: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
 
   return (
     <GigFormProvider>
-      <div id='gig-creation-panel' style={listStyling}>
+      <div
+        id='gig-creation-panel'
+        className={props.unusableHeight ? 'right-sidebar' : 'center-panel'}
+        style={listStyling}
+      >
         <TitleInput />
         <TypeInput />
         <LocationInput />
@@ -34,40 +35,10 @@ const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
         <DescriptionInput />
         <RequirementsInput />
         <SalaryInput />
-        <GigCreationActions />
       </div>
+      <GigCreationActions />
     </GigFormProvider>
   );
-}
-
-const GigCreationActions = (): ReactElement => {
-  const { employer } = useAuth();
-  const { addGig } = useEmployer();
-  const { getIsValidInput, resetForm, submitForm } = useGigForm();
-
-  const createGig = async() => {
-    const newGig = await submitForm(undefined, employer.name);
-    resetForm();
-    addGig(newGig);
-  }
-
-  return (
-    <div className='detail-row-flex-container' id='gig-creation-button-container'>
-      <GigButton
-        classNames='medium-grey'
-        id='clear-create-gig-button'
-        onClick={() => resetForm()}
-        text='Clear'
-      />
-      <GigButton
-        classNames='secondary-blue'
-        id='create-gig-button'
-        isDisabled={!getIsValidInput(GigFormFieldType.all)}
-        onClick={createGig}
-        text='Create Gig'
-      />
-    </div>
-  );
-}
+};
 
 export default GigCreationPanel;

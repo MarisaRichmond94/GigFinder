@@ -7,9 +7,6 @@
 
 #message-template-actions {
   text-align: right;
-  margin-top: $small-margin;
-
-  #message-template-delete-button {
-    margin-right: $medium-margin;
-  }
+  margin-top: $large-margin;
+  #message-template-delete-button { margin-right: $medium-margin; }
 }

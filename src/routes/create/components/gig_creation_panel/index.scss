@@ -1,44 +1,26 @@
 @import 'global';
 
 #gig-creation-panel {
-  margin: $medium-margin 0;
+  &.center-panel { max-height: calc(100vh - 195px); }
+  margin: $large-margin 0;
   overflow-y: auto;
 
-  .gig-type-dropdown {
-    border-radius: $medium-border-radius;
-  }
-
   .detail-row-flex-container {
-    margin-bottom: $medium-margin;
+    margin-bottom: $large-margin;
     width: 100%;
   }
 
   .detail-row-container {
-    margin-bottom: $medium-margin;
+    margin-bottom: $large-margin;
+    &:last-child { margin-bottom: 0; }
   }
 
   #benefits-list {
     button {
       background-color: $secondary-blue;
-      margin: 0 $medium-margin $large-margin 0;
     }
   }
 
-  .gig-detail-title {
-    display: none;
-  }
-
-  .gig-details-input {
-    background-color: $off-white;
-  }
-
-  #gig-creation-button-container {
-    button {
-      width: calc(50% - (15px / 2));
-
-      &:nth-child(1) {
-        margin-right: $medium-margin;
-      }
-    }
-  }
+  .gig-detail-title { display: none; }
+  .gig-details-input { background-color: $off-white; }
 }

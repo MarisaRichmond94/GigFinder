@@ -1,8 +1,6 @@
 @import 'global';
 
 #application-modal-body {
-  padding: 0 $medium-padding;
-
   hr {
     border-top: 1px solid $off-black;
     margin: -8px 0 0 0;
@@ -12,7 +10,7 @@
     border: 1px solid $light-grey;
     border-top: none;
     border-radius: 0 0 $small-border-radius $small-border-radius;
-    max-height: 58vh;
+    max-height: 42vh;
     overflow-y: auto;
     padding: $medium-padding;
   }

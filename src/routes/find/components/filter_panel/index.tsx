@@ -5,8 +5,10 @@ import { FaTimes } from 'react-icons/fa';
 
 import GigButton from 'components/gig_button';
 import UncontrolledSearchableGigInputProps from 'components/gig_input/searchable/uncontrolled';
+import { useViewport } from 'hooks/useViewport';
 import { useApp } from 'providers/app';
 import { useSearch } from 'providers/search';
+import settings from 'settings';
 import { FilterAction } from 'types';
 
 type FilterPanelProps = {
@@ -14,8 +16,13 @@ type FilterPanelProps = {
 };
 
 const FilterPanel = (props: FilterPanelProps): ReactElement => {
-  const { calculateTotalHeight, isMobileView } = useApp();
+  // provider variables and functions
+  const { calculateTotalHeight } = useApp();
   const { filterOptions, searchFilters, onFilterAction } = useSearch();
+    // hook variables
+  const { width } = useViewport();
+  // derived variables
+  const isMobileView = width < settings.MIN_DESKTOP_WIDTH;
 
   const handleFilterSelect = (filter: string): void => {
     onFilterAction(FilterAction.add, filter);

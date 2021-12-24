@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import noResultsIcon from 'assets/icons/candidates.svg';
@@ -15,35 +15,39 @@ import { Application } from 'types';
 
 type ApplicationsListProps = {
   applications?: Application[],
-}
+};
 
 const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
   // context provider variables and functions
   const { employer } = useAuth();
-  const {
-    selectedApplicationIds,
-    setActiveApplication,
-    toggleApplicationIsSelected,
-  } = useApplications();
+  const { selectedApplicationIds } = useApplications();
+  const { setActiveApplication, toggleApplicationIsSelected } = useApplications();
   const { activeGig } = useEmployer();
   // local variables and functions
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
   const [resultsCount, setResultsCount] = useState(0);
+  // destructured props
+  const applications = props?.applications;
   // hook variables
-  const prevApplications = usePrevious(props.applications);
+  const prevApplications = usePrevious(applications);
 
   useEffect(() => {
-    if (!prevApplications && props.applications?.length) {
+    if (!prevApplications && applications?.length) {
       setResultsCount(
-        props.applications.length >= settings.MIN_RESULTS_PER_LOAD
+        applications.length >= settings.MIN_RESULTS_PER_LOAD
           ? settings.MIN_RESULTS_PER_LOAD
-          : props.applications.length
+          : applications.length
       );
     };
-  }, [props.applications, prevApplications]);
+  }, [applications, prevApplications]);
 
-  const buildApplicationsList = (): ReactElement[] => {
-    const visibleApplications = props.applications.slice(0, resultsCount + 1);
+  const viewApplicationDetails = useCallback((application: Application): void => {
+    setActiveApplication(application);
+    setIsApplicationModalOpen(true);
+  }, [setActiveApplication]);
+
+  const buildApplicationsList = useCallback((): ReactElement[] => {
+    const visibleApplications = applications.slice(0, resultsCount + 1);
     return visibleApplications?.map(
       application => (
         <ApplicationItem
@@ -55,23 +59,21 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
         />
       )
     );
-  };
+  }, [
+    applications, resultsCount, selectedApplicationIds,
+    toggleApplicationIsSelected, viewApplicationDetails,
+  ]);
 
-  const getMoreApplications = (): void => {
+  const getMoreApplications = useCallback((): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(
-      nextResultsCount <= props.applications.length
+      nextResultsCount <= applications.length
         ? nextResultsCount
-        : props.applications.length
+        : applications.length
     );
-  };
+  }, [applications?.length, resultsCount]);
 
-  const viewApplicationDetails = (application: Application): void => {
-    setActiveApplication(application);
-    setIsApplicationModalOpen(true);
-  };
-
-  if (props.applications === undefined) {
+  if (applications === undefined) {
     return (
       <div id='applications-panel'>
         <GigLoader color='#5BA1C5' type='cylon'/>
@@ -83,12 +85,12 @@ const ApplicationsList = (props: ApplicationsListProps): ReactElement => {
     <div id='applications-list'>
       <ApplicationModal isOpen={isApplicationModalOpen} setIsOpen={setIsApplicationModalOpen} />
       {
-        props.applications.length
+        applications.length
           ? (
             <InfiniteScroll
               dataLength={resultsCount}
               next={getMoreApplications}
-              hasMore={resultsCount !== props.applications.length}
+              hasMore={resultsCount !== applications.length}
               loader={<GigLoader color='#5BA1C5' height='5%' type='cylon' />}
               scrollableTarget='applications-list'
             >

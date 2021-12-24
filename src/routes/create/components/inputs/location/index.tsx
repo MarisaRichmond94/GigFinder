@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { ReactElement } from 'react';
 
 import ControlledSearchableGigInput from 'components/gig_input/searchable/controlled';
@@ -10,9 +8,12 @@ const LocationInput = (): ReactElement => {
   const { location, locationOptions, updateInput } = useGigForm();
 
   return (
-    <div className='detail-row-flex-container'>
+    <div className='detail-row-container'>
+      <div className='bold sub-header-text gig-detail-title'>
+        Location
+      </div>
       <ControlledSearchableGigInput
-        classNames='off-white'
+        classNames='gig-details-input off-white'
         formValue={location || ''}
         id='gig-location-searchable-input'
         onChange={updatedLocation => updateInput(GigFormFieldType.location, updatedLocation)}

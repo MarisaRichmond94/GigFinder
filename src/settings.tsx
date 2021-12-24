@@ -32,7 +32,7 @@ const settings = {
         ]
       },
       RIGHT: {
-        BUFFER: 25,
+        BUFFER: 40,
         DESKTOP: [
           'action-button-wrapper',
           'active-resume-section',
@@ -48,10 +48,11 @@ const settings = {
         MOBILE: []
       },
       RIGHT: {
-        BUFFER: 95,
+        BUFFER: 120,
         DESKTOP: [
           'employer-sign-out-button',
           'message-template-section',
+          'gig-creation-button-container',
         ],
       },
     },

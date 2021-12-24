@@ -1,9 +1,7 @@
 @import 'global';
 
 #gig-details-modal-body {
-  #body-panel-selector-container {
-    display: flex;
-  }
+  #body-panel-selector-container { display: flex; }
 
   .gig-modal-body-panel {
     border: 1px solid $light-grey;

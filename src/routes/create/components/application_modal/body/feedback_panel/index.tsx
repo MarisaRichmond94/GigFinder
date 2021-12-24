@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { debounce } from 'throttle-debounce';
 
@@ -14,7 +14,7 @@ import { Application, Feedback } from 'types';
 
 type FeedbackPanelProps = {
   application: Application,
-}
+};
 
 const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
   // context providers variables and functions
@@ -35,31 +35,31 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
     }),
   );
 
-  const updateMood = (updatedMood: number): void => {
+  const updateMood = useCallback((updatedMood: number): void => {
     if (updatedMood !== mood) {
       updateApplicationFeedback({ ...feedback, mood: updatedMood });
     }
-  }
+  }, [feedback, mood, updateApplicationFeedback]);
 
-  const updateTraits = (type: 'positive' | 'negative', trait: string): void => {
+  const updateTraits = useCallback((type: 'positive' | 'negative', trait: string): void => {
     const key = `${type}Traits`;
     const updatedTraitsList = feedback[key]?.find(x => x === trait)
       ? feedback[key].filter(x => x !== trait)
       : [...feedback[key], trait];
     updateApplicationFeedback({ ...feedback, [key]: updatedTraitsList });
-  };
+  }, [feedback, updateApplicationFeedback]);
 
-  const updateRating = (type: 'cultural' | 'technical', rating: number): void => {
+  const updateRating = useCallback((type: 'cultural' | 'technical', rating: number): void => {
     const key = `${type}Fit`;
     updateApplicationFeedback({ ...feedback, [key]: rating });
-  };
+  }, [feedback, updateApplicationFeedback]);
 
-  const updateLocalNotes = (updatedLocalNotes: string): void => {
+  const updateLocalNotes = useCallback((updatedLocalNotes: string): void => {
     setLocalNotes(updatedLocalNotes);
     updateAdditionalNotes(feedback, updatedLocalNotes);
-  };
+  }, [feedback, updateAdditionalNotes]);
 
-  const populateTraits = (type: 'positive' | 'negative'): ReactElement[] => {
+  const populateTraits = useCallback((type: 'positive' | 'negative'): ReactElement[] => {
     const traits = type === 'positive' ? selectedPositiveTraits : selectedNegativeTraits;
     return traits?.map((trait, index) => {
       return (
@@ -77,7 +77,7 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
         />
       )
     });
-  };
+  }, [selectedNegativeTraits, selectedPositiveTraits, updateTraits]);
 
   return (
     <div id='application-feedback-panel'>
@@ -85,7 +85,7 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
         <div className='bold paragraph-text'>Mood:</div>
         <MoodRating mood={mood} updateMood={updateMood} />
       </div>
-      <div className='application-feedback-flex-container' id='positive-traits-input-container'>
+      <div className='application-feedback-flex-container'>
         <div className='bold paragraph-text'>Positive Traits:</div>
         <UncontrolledSearchableGigInput
           classNames='paragraph-text off-white'
@@ -99,7 +99,7 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
       <div className='traits-container' id='positive-traits-container'>
         {populateTraits('positive')}
       </div>
-      <div className='application-feedback-flex-container' id='negative-traits-input-container'>
+      <div className='application-feedback-flex-container'>
         <div className='bold paragraph-text'>Negative Traits:</div>
         <UncontrolledSearchableGigInput
           classNames='paragraph-text off-white'
@@ -132,7 +132,6 @@ const FeedbackPanel = (props: FeedbackPanelProps): ReactElement => {
         <GigTextAreaInput
           classNames='paragraph-text off-white'
           formValue={localNotes}
-          id='additional-notes-text-area'
           placeholder='Anything else notable about the candidate you want to remember'
           setFormValue={updateLocalNotes}
         />

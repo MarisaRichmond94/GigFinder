@@ -9,7 +9,7 @@ import { Gig } from 'types';
 type BodyProps = {
   gig: Gig,
   isInEditMode: boolean,
-}
+};
 
 const Body = (props: BodyProps): ReactElement => {
   return (
@@ -17,6 +17,6 @@ const Body = (props: BodyProps): ReactElement => {
       {props.isInEditMode ? <EditPanel gig={props.gig} /> : <ViewPanel gig={props.gig} />}
     </div>
   );
-}
+};
 
 export default Body;

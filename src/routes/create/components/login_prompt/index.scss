@@ -9,10 +9,7 @@
     border-bottom: 2px solid $secondary-blue;
     margin: 12vh 0 $large-margin 0;
     padding: $medium-padding;
-
-    .gig-search-title {
-      color: $primary-blue;
-    }
+    .gig-search-title { color: $primary-blue; }
   }
 
   .login-prompt-header {
@@ -31,38 +28,25 @@
 
   .auth-buttons {
     margin-top: $large-margin;
-
-    button {
-      height: 50px;
-    }
+    button { height: 50px; }
   }
 }
 
-#create-account-button {
-  margin-right: $large-margin;
-}
+#create-account-button { margin-right: $large-margin; }
 
 // small mobile view
 @media (min-width: 0) {
   #create-login-prompt {
     .logo-container {
-      .gig-search-icon {
-        height: 4vh;
-      }
-
+      .gig-search-icon { height: 4vh; }
       .gig-search-title {
         font-size: 2.5rem;
         margin-left: $large-margin;
       }
     }
 
-    .login-prompt-header {
-      font-size: 1.5rem;
-    }
-
-    #login-prompt-sub-header {
-      font-size: 1rem;
-    }
+    .login-prompt-header { font-size: 1.5rem; }
+    #login-prompt-sub-header { font-size: 1rem; }
   }
 }
 
@@ -70,23 +54,15 @@
 @media (min-width: 450px) {
   #create-login-prompt {
     .logo-container {
-      .gig-search-icon {
-        height: 6vh;
-      }
-
+      .gig-search-icon { height: 6vh; }
       .gig-search-title {
         font-size: 4rem;
         margin-left: $large-margin;
       }
     }
 
-    .login-prompt-header {
-      font-size: 2rem;
-    }
-
-    #login-prompt-sub-header {
-      font-size: 1rem;
-    }
+    .login-prompt-header { font-size: 2rem; }
+    #login-prompt-sub-header { font-size: 1rem; }
   }
 }
 
@@ -94,22 +70,14 @@
 @media (min-width: 850px) {
   #create-login-prompt {
     .logo-container {
-      .gig-search-icon {
-        height: 10vh;
-      }
-
+      .gig-search-icon { height: 10vh; }
       .gig-search-title {
         font-size: 6rem;
         margin-left: $large-margin;
       }
     }
 
-    .login-prompt-header {
-      font-size: 3.5rem;
-    }
-
-    #login-prompt-sub-header {
-      font-size: 1.5rem;
-    }
+    .login-prompt-header { font-size: 3.5rem; }
+    #login-prompt-sub-header { font-size: 1.5rem; }
   }
 }

@@ -3,14 +3,8 @@
 .application-container {
   @include centered-flex-box;
   margin-bottom: $medium-margin;
-
-  input {
-    margin-right: $medium-margin;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  input { margin-right: $medium-margin; }
+  &:last-child { margin-bottom: 0; }
 }
 
 .application {
@@ -24,15 +18,5 @@
     justify-content: center;
   }
 
-  .primary-green {
-    color: $primary-green;
-  }
-
-  .primary-red {
-    color: $primary-red;
-  }
-
-  svg {
-    font-size: $header-font-size;
-  }
+  svg { font-size: $header-font-size; }
 }

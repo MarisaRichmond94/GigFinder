@@ -13,7 +13,7 @@ import GigCreationPanel from 'routes/create/components/gig_creation_panel';
 import MessageTemplatePanel from 'routes/create/components/message_template_panel';
 
 const RightPanel = (): ReactElement => {
-  // context variables and functions
+  // provider variables and functions
   const { unusableRightPanelHeight, calculateTotalHeight } = useApp();
   const { isLoggedIn, logout } = useAuth();
 
@@ -54,6 +54,6 @@ const RightPanel = (): ReactElement => {
       </CollapsableSection>
     </div>
   );
-}
+};
 
 export default RightPanel;

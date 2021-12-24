@@ -12,13 +12,8 @@
   .header-row {
     @include centered-flex-box;
     margin: 0 $large-margin;
-
-    :last-child {
-      margin-left: auto;
-    }
+    :last-child { margin-left: auto; }
   }
 
-  .body-row {
-    margin: 0 $large-margin;
-  }
+  .body-row { margin: 0 $large-margin; }
 }

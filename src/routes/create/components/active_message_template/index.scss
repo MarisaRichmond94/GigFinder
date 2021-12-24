@@ -4,15 +4,12 @@
   border-radius: $small-border-radius;
   color: $off-black;
 
-  button {
+  button.dropdown-toggle {
     margin: 0;
     width: 100%;
   }
 
-  #active-message-template-header {
-    align-items: center;
-    display: inline-flex;
-  }
+  #active-message-template-header { @include vertically-centered-inline-flex-box; }
 
   #active-message-template-dropdown {
     background-color: $off-white;
@@ -23,6 +20,7 @@
 // mobile view
 @media (min-width: 0) {
   #active-message-template-section {
+    margin-bottom: $medium-margin;
     width: 100%;
   }
 }
@@ -30,7 +28,7 @@
 // desktop view
 @media (min-width: 1085px) {
   #active-message-template-section {
-    margin: 0 $medium-margin;
-    width: calc(100% - 490px);
+    margin: 0 $medium-margin 0 0;
+    width: calc(100% - 480px);
   }
 }

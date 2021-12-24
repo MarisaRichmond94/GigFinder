@@ -2,11 +2,12 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import { Application, ApplicationStatus } from 'types';
+import { getStatus } from 'libs/applications';
+import { Application } from 'types';
 
 type HeaderProps = {
   application?: Application,
-}
+};
 
 const Header = (props: HeaderProps): ReactElement => {
   // destructured prop variables
@@ -15,32 +16,20 @@ const Header = (props: HeaderProps): ReactElement => {
   const { name } = candidate;
   const { title } = previousPosition;
 
-  const getStatus = () => {
-    switch (status) {
-      case ApplicationStatus.rejected:
-        return 'Rejected';
-      case ApplicationStatus.accepted:
-        return 'Undergoing Consideration';
-      case ApplicationStatus.pending:
-      default:
-        return 'Awaiting Review';
-    }
-  }
+  const applicationStatus = getStatus(status);
 
   return (
     <div id='application-modal-header'>
-      <div id='applicant-header-details'>
-        <div className='bold large-header-text'>{name}</div>
-        <div className='sub-header-text'>{title}</div>
-      </div>
-      <div id='status-header-details'>
-        <div>
-          <div className='bold sub-header-text'>Status:</div>
-          <div className='sub-header-text'>{getStatus()}</div>
+      <div className='bold large-header-text hide-overflow-ellipsis' title={name}>{name}</div>
+      <div className='sub-header-text hide-overflow-ellipsis' title={title}>{title}</div>
+      <div className='flex-row'>
+        <div className='bold small-header-text'>Status:</div>
+        <div className='small-header-text hide-overflow-ellipsis' title={applicationStatus}>
+          {applicationStatus}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Header;

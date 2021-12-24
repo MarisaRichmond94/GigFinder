@@ -6,25 +6,20 @@
   max-width: 96vw;
   overflow-y: auto;
 
-  .posted-row {
-    margin-bottom: $medium-margin;
-  }
+  .posted-row { margin-bottom: $medium-margin; }
+  .gig-item-views { @include hide-overflow-ellipsis; }
 
   .close-gig-button {
     @include centered-flex-box;
-
-    .close-gig-button-text {
-      margin-right: $medium-margin;
-    }
-  }
-
-  .gig-item-views {
-    @include hide-overflow-ellipsis;
+    div  { margin-right: $medium-margin; }
   }
 }
 
 @media (min-width: 0) and (max-width: 455px) {
-  .close-gig-button-text {
-    display: none;
-  }
+  .close-gig-button > div { display: none; }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  #gigs-panel { width: calc(96vw - 350px); }
 }

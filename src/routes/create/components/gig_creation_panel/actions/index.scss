@@ -1,0 +1,8 @@
+@import 'global';
+
+#gig-creation-button-container {
+  button {
+    width: calc(50% - (10px / 2));
+    &:nth-child(1) { margin-right: $medium-margin; }
+  }
+}

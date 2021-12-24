@@ -23,7 +23,6 @@ const ApplicationItem = (props: ApplicationItemProps): ReactElement => {
       {
         <GigButton
           classNames='icon-button off-black'
-          id={`application-checkbox-${id}`}
           onClick={() => props.toggleApplicationSelect(id)}
           textBlock={props.isSelected ? <BsCheckSquare /> : <BsSquare />}
         />
@@ -34,7 +33,6 @@ const ApplicationItem = (props: ApplicationItemProps): ReactElement => {
         <div className='application-footer'>
           <GigButton
             classNames='primary-blue'
-            id={`application-details-button-${id}`}
             onClick={() => props.viewApplicationDetails(props.item)}
             text='View Details'
           />

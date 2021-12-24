@@ -1,35 +1,36 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 
 import { Application } from 'types';
 
 type DetailsPanelProps = {
   application: Application,
-}
+};
 
 const DetailsPanel = (props: DetailsPanelProps): ReactElement => {
   // destructured prop variables
-  if (!props.application) return null;
   const { candidate, currentPosition, previousPosition } = props.application;
   const { address, email, phone, college, degree } = candidate;
   const { title: currTitle, employer: currEmployer, highlights: currHighlights } = currentPosition;
   const { title: prevTitle, employer: prevEmployer, highlights: prevHighlights } = previousPosition;
 
-  const getFormattedHighlights = (highlights: string): ReactElement => {
+  const getFormattedHighlights = useCallback((highlights: string): ReactElement => {
     return (
-    <ul id='highlights-list'>
-      {highlights.split('.').map((highlight, index) => {
-        if (highlight === '') return undefined;
-        return (
-          <li className='paragraph-text' key={`highlight-${index}`}>
-            {highlight.trim()}
-          </li>
-        )
-      })}
-    </ul>
-  );
-  };
+      <ul id='highlights-list'>
+        {highlights.split('.').map((highlight, index) => {
+          if (highlight === '') return undefined;
+          return (
+            <li className='paragraph-text' key={`highlight-${index}`}>
+              {highlight.trim()}
+            </li>
+          )
+        })}
+      </ul>
+    );
+  }, []);
+
+  if (!props.application) return null;
 
   return (
     <div id='application-details-panel'>
@@ -62,6 +63,6 @@ const DetailsPanel = (props: DetailsPanelProps): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default DetailsPanel;

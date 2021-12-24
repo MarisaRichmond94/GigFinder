@@ -18,31 +18,31 @@ const Body = (props: BodyProps): ReactElement => {
   const backgroundBody = (
     <>
       <div className='application-detail-flex-container'>
-        <div className='application-icon'>
+        <div>
           {
             passedBackgroundCheck
-              ? <BsCheckCircle className='primary-green' />
-              : <BsXCircle className='primary-red' />
+              ? <BsCheckCircle className='text primary-green' />
+              : <BsXCircle className='text primary-red' />
           }
         </div>
         <div className='paragraph-text'>Clean background check</div>
       </div>
       <div className='application-detail-flex-container'>
-        <div className='application-icon'>
+        <div>
           {
             hasReleventCredentials
-              ? <BsCheckCircle className='primary-green' />
-              : <BsXCircle className='primary-red' />
+              ? <BsCheckCircle className='text primary-green' />
+              : <BsXCircle className='text primary-red' />
           }
         </div>
         <div className='paragraph-text'>Relevant education/experience credentials</div>
       </div>
       <div className='application-detail-flex-container'>
-        <div className='application-icon'>
+        <div>
           {
             meetsMinimumRequirements
-              ? <BsCheckCircle className='primary-green' />
-              : <BsXCircle className='primary-red' />
+              ? <BsCheckCircle className='text primary-green' />
+              : <BsXCircle className='text primary-red' />
           }
         </div>
         <div className='paragraph-text'>Meets minimum requirements</div>

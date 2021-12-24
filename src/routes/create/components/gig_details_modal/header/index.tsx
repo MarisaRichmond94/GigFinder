@@ -9,7 +9,7 @@ import { Gig } from 'types';
 
 type HeaderProps = {
   gig?: Gig,
-}
+};
 
 const Header = (props: HeaderProps): ReactElement => {
   // destructured prop variables
@@ -37,6 +37,6 @@ const Header = (props: HeaderProps): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

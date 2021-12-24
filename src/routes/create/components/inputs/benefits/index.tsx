@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 import GigButton from 'components/gig_button';
@@ -9,17 +9,16 @@ import { useGigForm } from 'providers/gig_form';
 
 type BenefitsInputProps = {
   gigId?: string,
-}
+};
 
 const BenefitsInput = (props: BenefitsInputProps): ReactElement => {
   const { benefits, benefitOptions, addBenefit, deleteBenefit } = useGigForm();
 
-  const populateBenefits = (benefits: string[]): ReactElement[] => {
+  const populateBenefits = useCallback((benefits: string[]): ReactElement[] => {
     return benefits.map((benefit, index) => {
       return (
         <GigButton
           classNames='benefit-button'
-          id={`${benefit}-benefit-button`}
           key={`${benefit}-benefit-button`}
           onClick={() => deleteBenefit(benefit)}
           textBlock={
@@ -31,14 +30,12 @@ const BenefitsInput = (props: BenefitsInputProps): ReactElement => {
         />
       )
     });
-  }
+  }, [deleteBenefit]);
 
   return (
     <>
       <div className='detail-row-container'>
-        <div id='benefits-details' className='bold sub-header-text gig-detail-title'>
-          Benefits
-        </div>
+        <div id='benefits-details' className='bold sub-header-text gig-detail-title'>Benefits</div>
         {
           benefitOptions &&
           <UncontrolledSearchableGigInputProps

@@ -1,9 +1,5 @@
 @import 'global';
 
-#gig-details-modal-content {
-  .gig-modal-footer { padding: $large-padding $large-padding 0 $large-padding; };
-}
-
 #find-gig-details-modal-footer {
   #gig-details-modal-resume-selector-container {
     button {
@@ -62,8 +58,6 @@
     }
 
     #action-buttons {
-      margin: 0 0 $extra-large-margin $medium-margin;
-
       button {
         width: 150px;
         &:first-child { margin-right: $large-margin; }

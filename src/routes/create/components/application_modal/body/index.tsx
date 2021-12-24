@@ -9,7 +9,7 @@ import { Application } from 'types';
 
 type BodyProps = {
   application: Application,
-}
+};
 
 const Body = (props: BodyProps): ReactElement => {
   // local state variables and functions
@@ -20,13 +20,11 @@ const Body = (props: BodyProps): ReactElement => {
       <div id='application-panel-selector-container'>
         <GigButton
           classNames={`${isDetailsPanel ? 'active ' : ''}underline-text off-black sub-header-text`}
-          id='application-details-panel-selector'
           onClick={() => setIsDetailsPanel(true)}
           text='Details'
         />
         <GigButton
           classNames={`${isDetailsPanel ? '' : 'active '}underline-text off-black sub-header-text`}
-          id='application-feedback-panel-selector'
           onClick={() => setIsDetailsPanel(false)}
           text='Feedback'
         />
@@ -41,6 +39,6 @@ const Body = (props: BodyProps): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default Body;

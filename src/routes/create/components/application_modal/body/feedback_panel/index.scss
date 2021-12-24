@@ -1,23 +1,20 @@
 @import 'global';
 
 #application-modal-body {
+  .star-rating-container { width: auto; }
   .application-feedback-flex-container,
   .application-feedback-container {
     margin-bottom: $medium-margin;
 
     &:first-child,
-    &:last-child {
-      margin-bottom: 0;
-    }
+    &:last-child { margin-bottom: 0; }
   }
 
   .application-feedback-flex-container {
     @include centered-flex-box;
 
     div {
-      &:first-child {
-        margin-right: $small-margin;
-      }
+      &:first-child { margin-right: $small-margin; }
     }
 
     #mood-rating-container {
@@ -39,21 +36,10 @@
     }
   }
 
-  #positive-traits-searchable-dropdown {
-    width: calc(100% - 108px);
-  }
-
-  #positive-traits-container {
-    margin-left: 108px;
-  }
-
-  #negative-traits-searchable-dropdown {
-    width: calc(100% - 117px);
-  }
-
-  #negative-traits-container {
-    margin-left: 117px;
-  }
+  #positive-traits-searchable-dropdown { width: calc(100% - 108px); }
+  #positive-traits-container { margin-left: 108px; }
+  #negative-traits-searchable-dropdown { width: calc(100% - 117px); }
+  #negative-traits-container { margin-left: 117px; }
 
   .traits-container {
     margin-bottom: $medium-margin;

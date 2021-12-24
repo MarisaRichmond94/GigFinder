@@ -8,14 +8,14 @@ import { GigFormFieldType } from 'types';
 
 type RequirementsInputProps = {
   gigId?: string,
-}
+};
 
 const RequirementsInput = (props: RequirementsInputProps): ReactElement => {
   const { requirements, updateInput } = useGigForm();
 
   return (
     <div className='detail-row-container'>
-      <div id='job-requirements-details' className='bold sub-header-text gig-detail-title'>
+      <div className='bold sub-header-text gig-detail-title'>
         Requirements
       </div>
       <GigTextAreaInput

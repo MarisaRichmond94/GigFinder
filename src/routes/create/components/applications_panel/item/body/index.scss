@@ -7,13 +7,9 @@
     @include centered-flex-box;
 
     div {
-      &:first-child {
-        margin-right: $small-margin;
-      }
+      &:first-child {  margin-right: $small-margin; }
     }
   }
 
-  .baseline-aligned {
-    align-self: baseline;
-  }
+  .baseline-aligned { align-self: baseline; }
 }

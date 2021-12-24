@@ -9,20 +9,13 @@
     width: 100%;
 
     #gig-details-title,
-    #gig-details-employer {
-      @include hide-overflow-ellipsis;
-    }
+    #gig-details-employer { @include hide-overflow-ellipsis; }
 
-    #gig-details-star-icon {
-      font-size: 1.25rem;
-    }
+    #gig-details-star-icon { font-size: $header-font-size; }
 
     #favorite-gig-button-container {
       margin-left: auto;
-
-      #favorite-gig-button {
-        font-size: 1.25rem;
-      }
+      #favorite-gig-button { font-size: $header-font-size; }
     }
   }
 }
@@ -30,12 +23,7 @@
 // tablet view
 @media (min-width: 450px) {
   #gig-details-modal-header.create {
-    #gig-details-title {
-      font-size: 1.75rem;
-    }
-
-    #sub-header {
-      font-size: 1.25rem;
-    }
+    #gig-details-title { font-size: 1.75rem; }
+    #sub-header { font-size: $header-font-size; }
   }
 }

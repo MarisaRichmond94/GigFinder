@@ -5,7 +5,7 @@ import { useOnClickOutside } from 'hooks/useOnClickOutside';
 type ControlledSearchableGigInputProps = {
   classNames?: string,
   formValue: string,
-  id: string,
+  id?: string,
   options: string[],
   placeholder: string,
   onChange: (updatedValue: string) => void,

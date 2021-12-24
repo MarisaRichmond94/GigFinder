@@ -5,7 +5,7 @@
 
   .search-panel-input {
     align-self: stretch;
-    padding-bottom: $medium-padding;
+    padding-bottom: $large-padding;
 
     input,
     #search-form-type-input > button,
@@ -28,10 +28,6 @@
 
 .search-panel-item.mobile {
   &:not(:last-child) { padding-bottom: $medium-padding; }
-}
-
-.search-panel-item {
-  &:last-child { padding-top: $small-padding; }
 }
 
 // mobile view

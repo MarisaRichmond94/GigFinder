@@ -9,7 +9,7 @@ import Header from 'routes/create/components/application_modal/header';
 type ApplicationModalProps = {
   isOpen: boolean,
   setIsOpen: (isOpen: boolean) => void,
-}
+};
 
 const ApplicationModal = (props: ApplicationModalProps): ReactElement => {
   // context provider variables and functions
@@ -29,6 +29,6 @@ const ApplicationModal = (props: ApplicationModalProps): ReactElement => {
       />
     </div>
   );
-}
+};
 
 export default ApplicationModal;

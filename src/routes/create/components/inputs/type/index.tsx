@@ -8,7 +8,7 @@ import { DropdownOption, GigFormFieldType } from 'types';
 
 type TypeInputProps = {
   gigId?: string,
-}
+};
 
 const TypeInput = (props: TypeInputProps): ReactElement => {
   const { type, typeOptions, updateInput } = useGigForm();
@@ -20,7 +20,6 @@ const TypeInput = (props: TypeInputProps): ReactElement => {
       </div>
       <GigDropdown
         classNames='sub-header-text gig-details-input gig-type-dropdown'
-        id={`gig-type-dropdown${props.gigId ? `-${props.gigId}` : ''}`}
         onOptionSelect={
           (selectedType: DropdownOption) => updateInput(
             GigFormFieldType.type, selectedType.displayName

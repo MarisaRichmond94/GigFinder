@@ -4,7 +4,7 @@ type GigTextAreaInputProps = {
   classNames?: string,
   clearKey?: string,
   formValue?: string,
-  id: string,
+  id?: string,
   onKeyPress?: (e: object) => void,
   placeholder: string,
   rowCount?: number,

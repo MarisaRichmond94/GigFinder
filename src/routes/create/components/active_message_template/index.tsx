@@ -7,11 +7,8 @@ import { useMessageTemplates } from 'providers/message_templates';
 
 const ActiveMessageTemplate = (): ReactElement => {
   // context variables and functions
-  const {
-    activeMessageTemplateId,
-    messageTemplates,
-    updateActiveMessageTemplateId,
-  } = useMessageTemplates();
+  const { activeMessageTemplateId, messageTemplates } = useMessageTemplates();
+  const { updateActiveMessageTemplateId } = useMessageTemplates();
   // derived variables
   const doesEmployerHaveMessageTemplates = !!messageTemplates?.length;
   const activeMessageTemplate = messageTemplates?.find(
@@ -33,10 +30,14 @@ const ActiveMessageTemplate = (): ReactElement => {
           }) || []
         }
         placeholder={
-          doesEmployerHaveMessageTemplates ? 'Select A Message Template' : 'No Message Templates'
+          doesEmployerHaveMessageTemplates
+            ? 'Select A Message Template'
+            : 'No Message Templates'
         }
         selectedOption={
-          activeMessageTemplateId ? { displayName: activeMessageTemplate.name } : undefined
+          activeMessageTemplateId
+            ? { displayName: activeMessageTemplate.name }
+            : undefined
         }
       />
     </div>

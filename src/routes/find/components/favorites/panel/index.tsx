@@ -28,7 +28,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   const [resultsCount, setResultsCount] = useState(0);
   const prevFavoriteGigs = usePrevious(favoriteGigs);
   const listStyling = props.unusableHeight
-    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    ? { maxHeight: `calc(100vh - ${props.unusableHeight}px)`}
     : {};
 
   useEffect(() => {

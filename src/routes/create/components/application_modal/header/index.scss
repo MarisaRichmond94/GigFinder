@@ -3,17 +3,13 @@
 #application-modal-header {
   align-items: flex-start;
   display: flex;
+  flex-direction: column;
   width: 100%;
 
-  #status-header-details {
-    margin-left: auto;
-
+  .flex-row {
+    @include centered-flex-box;
     div {
-      @include centered-flex-box;
-
-      &:first-child {
-        margin-right: $small-margin;
-      }
+      &:first-child { margin-right: $small-margin; }
     }
   }
 }

@@ -23,10 +23,9 @@ const Header = (props: HeaderProps): ReactElement => {
   const history = useHistory();
   const { pathname } = useLocation();
   const { width } = useViewport();
-  // context variables and functions
+  // provider variables and functions
   const { employer, isLoggedIn, user, logout } = useAuth();
   const { setIsSignUp } = useAuthForm();
-  // local state variables and functions
 
   const generateHeaderMessage = (): string => {
     switch (pathname) {
@@ -72,6 +71,7 @@ const Header = (props: HeaderProps): ReactElement => {
         }
         {
           isLoggedIn && !isMobile && width < settings.MIN_DESKTOP_WIDTH &&
+          pathname === settings.FIND_ROUTE &&
           <GigButton
             classNames='grey header icon-button large-header-text'
             id='upload-resume-icon-button'

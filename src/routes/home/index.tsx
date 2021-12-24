@@ -6,17 +6,19 @@ import { useHistory } from 'react-router-dom';
 import logo from 'assets/icons/logo.png';
 import DemoWarning from 'components/demo_warning';
 import GigButton from 'components/gig_button';
-import { useApp } from 'providers/app';
+import { useViewport } from 'hooks/useViewport';
 import { useSearch } from 'providers/search';
 import SearchPanel from 'routes/components/search/panel';
 import settings from 'settings';
 
 const HomePage = (): ReactElement => {
+  // provider variables and functions
+  const { onSearchFormSubmit } = useSearch();
   // hook variables
   const history = useHistory();
-  // context variables and functions
-  const { isMobileView } = useApp();
-  const { onSearchFormSubmit } = useSearch();
+  const { width } = useViewport();
+  // derived variables
+  const isMobileView = width < settings.MIN_DESKTOP_WIDTH;
 
   const SwitchButton = (
     <GigButton

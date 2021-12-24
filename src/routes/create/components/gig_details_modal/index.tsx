@@ -43,22 +43,20 @@ const GigDetailsModal = (props: GigDetailsModalProps): ReactElement => {
   }
 
   return (
-    <div id='gig-details-modal'>
-      <GigModal
-        bodyContent={<Body gig={activeGig} isInEditMode={isInEditMode} />}
-        classNames='white'
-        headerContent={<Header gig={activeGig} />}
-        footerContent={
-          <Footer
-            cancel={cancel}
-            isInEditMode={isInEditMode}
-            toggleIsInEditMode={toggleIsInEditMode}
-          />
-        }
-        id='gig-details-modal'
-        isOpen={props.isOpen}
-      />
-    </div>
+    <GigModal
+      bodyContent={<Body gig={activeGig} isInEditMode={isInEditMode} />}
+      classNames='white'
+      headerContent={<Header gig={activeGig} />}
+      footerContent={
+        <Footer
+          cancel={cancel}
+          isInEditMode={isInEditMode}
+          toggleIsInEditMode={toggleIsInEditMode}
+        />
+      }
+      id='gig-details-modal'
+      isOpen={props.isOpen}
+    />
   );
 }
 

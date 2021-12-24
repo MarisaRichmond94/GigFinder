@@ -8,14 +8,14 @@ import { GigFormFieldType } from 'types';
 
 type SalaryInputProps = {
   gigId?: string,
-}
+};
 
 const SalaryInput = (props: SalaryInputProps): ReactElement => {
   const { salary, updateInput, validateSalary } = useGigForm();
 
   return (
     <div className='detail-row-container'>
-      <div id='salary-details' className='bold sub-header-text gig-detail-title'>
+      <div className='bold sub-header-text gig-detail-title'>
         Salary/Pay
       </div>
       <GigTextInput

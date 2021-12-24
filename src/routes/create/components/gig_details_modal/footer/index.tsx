@@ -9,7 +9,7 @@ type FooterProps = {
   cancel: () => void,
   isInEditMode: boolean,
   toggleIsInEditMode: () => void,
-}
+};
 
 const Footer = (props: FooterProps): ReactElement => {
   const { isValidSalary } = useGigForm();
@@ -33,6 +33,6 @@ const Footer = (props: FooterProps): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default Footer;

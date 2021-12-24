@@ -36,7 +36,7 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
       <div className='posted-row sub-header-text'>
         Posted {calculateDurationSincePosted(createdAt)} ago
       </div>
-      <div className='button-row text-center'>
+      <div className='text-center'>
         <GigButton
           classNames='primary-blue dark-background sub-header-text'
           id={`learn-more-button-${id}`}

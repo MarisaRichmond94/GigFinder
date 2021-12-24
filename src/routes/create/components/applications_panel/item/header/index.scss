@@ -2,15 +2,7 @@
 
 .application-header {
   @include centered-flex-box;
-
-  div {
-    margin-right: $small-margin;
-  }
-
-  .applicant-name,
-  .applicant-title {
-    @include hide-overflow-ellipsis;
-  }
+  div { margin-right: $small-margin; }
 
   .application-status {
     margin-left: auto;

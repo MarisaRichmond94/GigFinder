@@ -3,11 +3,12 @@
 #application-modal-footer {
   width: 100%;
 
-  button {
-    margin-right: $medium-margin;
+  #application-actions-button-container {
+    @include centered-flex-box;
 
-    &:last-child {
-      margin-right: 0;
+    button {
+      margin-right: $medium-margin;
+      &:last-child { margin-right: 0; }
     }
   }
 }
@@ -15,29 +16,13 @@
 // mobile view
 @media (min-width: 0) {
   #application-modal-footer {
-    #active-message-template-section {
-      margin-bottom: $medium-margin;
-      width: 100%;
-    }
-
-    button {
-      width: calc(33% - 5px);
-    }
+    button { width: calc(33% - 5px); }
   }
 }
 
-// desktop view
-@media (min-width: 850px) {
+@media (min-width: 1085px) {
   #application-modal-footer {
     @include centered-flex-box;
-
-    #active-message-template-section {
-      margin: 0 $medium-margin 0 0;
-      width: calc(100% - 480px);
-    }
-
-    button {
-      width: 150px;
-    }
+    button { width: 150px; }
   }
 }

@@ -3,21 +3,13 @@
 #gig-details-modal-footer {
   #resume-application-message,
   #gig-application-message {
-    &.primary-red {
-      color: $primary-red;
-    }
-
-    &.transparent {
-      color: transparent !important;
-    }
+    &.primary-red { color: $primary-red; }
+    &.transparent { color: transparent !important; }
   }
 
   #action-buttons {
     margin-left: auto;
-
-    button {
-      padding: 7px $extra-large-padding;
-    }
+    button { padding: 7px $extra-large-padding; }
   }
 }
 
@@ -26,9 +18,7 @@
     width: calc(92vw - 30px);
 
     #gig-details-modal-resume-selector-container {
-      #resume-application-message {
-        padding-bottom: $medium-padding;
-      }
+      #resume-application-message { padding-bottom: $medium-padding; }
 
       #active-resume-section {
         padding-top: 0;
@@ -39,23 +29,12 @@
 
     #gig-details-modal-button-container {
       width: 104%;
-
-      #gig-application-message {
-        padding-bottom: $medium-padding;
-      }
+      #gig-application-message { padding-bottom: $medium-padding; }
     }
 
-    #gig-application-message {
-      margin-top: 0;
-    }
-
-    #gig-details-modal-cancel-button {
-      margin-right: $medium-margin;
-    }
-
-    .gig-details-modal-button {
-      width: calc((100% - 15px) / 2);
-    }
+    #gig-application-message { margin-top: 0; }
+    #gig-details-modal-cancel-button { margin-right: $medium-margin; }
+    .gig-details-modal-button { width: calc((100% - 15px) / 2); }
   }
 }
 
@@ -73,20 +52,8 @@
       }
     }
 
-    #action-buttons {
-      margin: 0 0 $extra-large-margin $medium-margin;
-    }
-
-    #gig-application-message {
-      margin-top: -20px;
-    }
-
-    #gig-details-modal-cancel-button {
-      margin-right: $large-margin;
-    }
-
-    .gig-details-modal-button {
-      width: 150px;
-    }
+    #gig-application-message { margin-top: -20px; }
+    #gig-details-modal-cancel-button { margin-right: $large-margin; }
+    .gig-details-modal-button { width: 150px; }
   }
 }

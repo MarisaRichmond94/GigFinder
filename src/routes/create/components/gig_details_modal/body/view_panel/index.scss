@@ -1,30 +1,20 @@
 @import 'global';
 
-#gig-details-modal-details-panel {
+#create-gig-details-modal-details-panel {
   .detail-row-flex-container {
     @include centered-flex-box;
     margin-bottom: $medium-margin;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    &:last-child { margin-bottom: 0; }
 
     div {
-      &:nth-child(1) {
-        margin-right: $medium-margin;
-      }
+      &:nth-child(1) { margin-right: $medium-margin; }
     }
   }
 
   .detail-row-container {
     margin-bottom: $medium-margin;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    &:last-child { margin-bottom: 0; }
   }
 
-  .details {
-    padding-left: $large-padding;
-  }
+  .details { padding-left: $large-padding; }
 }

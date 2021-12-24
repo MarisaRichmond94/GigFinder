@@ -1,6 +1,7 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import logo from 'assets/icons/logo.png';
 import DemoWarning from 'components/demo_warning';
@@ -9,32 +10,32 @@ import { useAuthForm } from 'providers/auth_form';
 import AuthModal from 'routes/components/auth_modal';
 
 const LoginPrompt = (): ReactElement => {
+  // hook variables
+  const history = useHistory();
+  // provider variables and functions
   const { setIsSignUp } = useAuthForm();
+  // local state variables and functions
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  const handleLoginUser = (): void => {
+  const handleLoginUser = useCallback((): void => {
     setIsAuthModalOpen(true);
     setIsSignUp(false);
-  }
+  }, [setIsSignUp]);
 
-  const handleSignUpUser = (): void => {
+  const handleSignUpUser = useCallback((): void => {
     setIsAuthModalOpen(true);
     setIsSignUp(true);
-  }
+  }, [setIsSignUp]);
 
   return (
     <div id='create-login-prompt'>
       <DemoWarning />
-      <div className='logo-container'>
+      <div className='logo-container' onClick={() => history.push('/')}>
         <img alt='logo' className='gig-search-icon' src={logo} />
         <div className='bold title-text gig-search-title'>Gig Search</div>
       </div>
-      <div className='bold title-text login-prompt-header'>
-        You're here to hire.
-      </div>
-      <div className='bold title-text login-prompt-header'>
-        We're here to help.
-      </div>
+      <div className='bold title-text login-prompt-header'>You're here to hire.</div>
+      <div className='bold title-text login-prompt-header'>We're here to help.</div>
       <div className='sub-title-text' id='login-prompt-sub-header'>
         Helping you navigate the hiring process with ease from start to finish.
       </div>
@@ -54,7 +55,7 @@ const LoginPrompt = (): ReactElement => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoginPrompt;

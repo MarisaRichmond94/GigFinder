@@ -13,10 +13,7 @@ button,
 
   &.grey {
     color: $grey;
-
-    &:hover {
-      color: $light-grey;
-    }
+    &:hover { color: $light-grey; }
   }
 
   &.off-black {
@@ -30,18 +27,12 @@ button,
 
   &.primary-red {
     color: $primary-red;
-
-    &:hover {
-      color: $secondary-red;
-    }
+    &:hover { color: $secondary-red; }
   }
 
   &.primary-green {
     color: $primary-green;
-
-    &:hover {
-      color: $secondary-green;
-    }
+    &:hover { color: $secondary-green; }
   }
 }
 
@@ -61,9 +52,7 @@ button,
     }
 
     &:active,
-    &:focus {
-      background-color: $primary-blue;
-    }
+    &:focus { background-color: $primary-blue; }
   }
 
   &.secondary-blue {
@@ -75,13 +64,8 @@ button,
     }
 
     &:active,
-    &:focus {
-      background-color: $secondary-blue;
-    }
-
-    &:disabled {
-      background-color: $grey;
-    }
+    &:focus { background-color: $secondary-blue; }
+    &:disabled { background-color: $grey; }
   }
 
   &.medium-grey {
@@ -102,9 +86,7 @@ button,
     }
 
     &:active,
-    &:focus {
-      background-color: $grey;
-    }
+    &:focus { background-color: $grey; }
   }
 
   &.primary-green {
@@ -116,48 +98,31 @@ button,
     }
 
     &:active,
-    &:focus {
-      background-color: $grey;
-    }
+    &:focus { background-color: $grey; }
   }
 
-  &.light-background {
-    color: $off-black;
-  }
-
-  &.dark-background {
-    color: $white;
-  }
+  &.light-background { color: $off-black; }
+  &.dark-background { color: $white; }
 
   &.underline-text {
     background-color: transparent !important;
     border-bottom: 3px solid transparent;
     border-radius: 0;
-    margin-right: $medium-margin;
+    margin-right: $large-margin;
     padding: 0;
 
     &.off-white {
-      &.active {
-        border-bottom: 3px solid $off-white;
-      }
+      &.active { border-bottom: 3px solid $off-white; }
     }
 
     &.off-black {
       color: $off-black;
-
-      &:hover {
-        color: $dark-grey;
-      }
-
-      &.active {
-        border-bottom: 3px solid $primary-blue;
-      }
+      &:hover { color: $dark-grey; }
+      &.active { border-bottom: 3px solid $primary-blue; }
     }
 
     &.primary-blue {
-      &.active {
-        border-bottom: 3px solid $primary-blue;
-      }
+      &.active { border-bottom: 3px solid $primary-blue; }
     }
   }
 
@@ -168,18 +133,12 @@ button,
 
     &.primary-blue {
       color: $primary-blue;
-
-      &:hover {
-        color: $secondary-blue;
-      }
+      &:hover { color: $secondary-blue; }
     }
   }
 }
 
 .red-icon {
   color: $primary-red;
-
-  &:hover {
-    color: $secondary-red;
-  }
+  &:hover { color: $secondary-red; }
 }

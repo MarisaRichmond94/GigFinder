@@ -31,6 +31,6 @@ const MoodRating = (props: MoodRatingProps): ReactElement => {
       />
     </div>
   );
-}
+};
 
 export default MoodRating;

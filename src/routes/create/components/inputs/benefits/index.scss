@@ -2,33 +2,22 @@
 
 #benefits-list {
   margin-bottom: 0;
-
-  .benefit-item {
-    @include centered-flex-box;
-  }
-
-  .benefit-button {
-    max-width: 100%;
-  }
+  .benefit-item { @include centered-flex-box; }
+  .benefit-button { max-width: 100%; }
 
   button {
     background-color: $primary-blue;
-    margin-right: $medium-margin;
+    margin: 0 $medium-margin $medium-margin 0;
   }
 }
 
-#benefits-details {
-  line-height: 37px;
-}
+#benefits-details { line-height: 37px; }
 
 @media (min-width: 0) and (max-width: 450px) {
-  #gig-details-modal-details-panel {
+  #create-gig-details-modal-details-panel {
     .benefit-button {
       margin-bottom: $medium-margin;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
+      &:last-child { margin-bottom: 0; }
     }
   }
 }

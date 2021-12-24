@@ -6,6 +6,8 @@
   padding: $large-padding;
   margin: $medium-margin 0;
 
+  &:last-child { margin-bottom: 0 };
+
   .item-row {
     @include centered-flex-box;
     .status-icon { margin-left: auto; }

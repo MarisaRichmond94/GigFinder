@@ -16,7 +16,7 @@ import { Gig } from 'types';
 type GigItemProps = {
   item: Gig,
   viewGigDetails: (gigId: string) => void,
-}
+};
 
 const GigItem = (props: GigItemProps): ReactElement => {
   const { id, city, state, createdAt, requirements, title, views } = props.item;
@@ -38,38 +38,36 @@ const GigItem = (props: GigItemProps): ReactElement => {
           {getFormattedViews(views)}
         </div>
         <GigButton
-          classNames='close-gig-button-container icon-button off-black'
-          id={`close-gig-button-${id}`}
+          classNames='icon-button off-black'
           onClick={() => closeGig(id)}
           textBlock={
             <div className='close-gig-button' title='Close Gig'>
-              <div className='close-gig-button-text'>Close Gig</div>
+              <div>Close Gig</div>
               <GiExitDoor className='large-header-text' />
             </div>
           }
         />
       </div>
       <div className='body-row'>
-        <div className='sub-header-row sub-header-text'>
+        <div className='sub-header-text'>
           {city}, {state}
         </div>
-        <div className='requirements-row paragraph-text'>
+        <div className='paragraph-text'>
           {populateJobRequirements(id, requirements)}
         </div>
         <div className='posted-row sub-header-text'>
           Posted {calculateDurationSincePosted(createdAt)} ago
         </div>
       </div>
-      <div className='button-row text-center'>
+      <div className='text-center'>
         <GigButton
           classNames='primary-blue dark-background sub-header-text'
-          id={`gig-details-button-${id}`}
           onClick={() => props.viewGigDetails(id)}
           text='View/Edit Details'
         />
       </div>
     </div>
   );
-}
+};
 
 export default GigItem;

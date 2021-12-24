@@ -30,7 +30,7 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
   const prevApplications = usePrevious(applications);
   // derived variables
   const listStyling = props.unusableHeight
-    ? { height: `calc(100vh - ${props.unusableHeight}px)`}
+    ? { maxHeight: `calc(100vh - ${props.unusableHeight - 10}px)`}
     : {};
 
   useEffect(() => {

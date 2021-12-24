@@ -1,9 +1,9 @@
 import './index.scss';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import noResultsIcon from 'assets/icons/gigs.svg';
+import icon from 'assets/icons/gigs.svg';
 import GigLoader from 'components/gig_loader';
 import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
@@ -15,7 +15,7 @@ import GigItem from 'routes/create/components/gigs_panel/item';
 import settings from 'settings';
 
 const GigsPanel = (): ReactElement => {
-  // context variables and functions
+  // provider variables and functions
   const { employer } = useAuth();
   const { gigs, setActiveGig } = useEmployer();
   // local variables and functions
@@ -34,31 +34,25 @@ const GigsPanel = (): ReactElement => {
     };
   }, [gigs, prevGigs]);
 
-  const viewGigDetails = (gigId: string): void => {
+  const viewGigDetails = useCallback((gigId: string): void => {
     const matchingGig = gigs?.find(gig => gig.id === gigId);
     if (matchingGig) {
       setActiveGig(matchingGig);
       setIsGigDetailsModalOpen(true);
-    }
-  }
+    };
+  }, [gigs, setActiveGig]);
 
-  const buildGigsList = (): ReactElement[] => {
+  const buildGigsList = useCallback((): ReactElement[] => {
     const visibleGigs = gigs.slice(0, resultsCount + 1);
     return visibleGigs?.map(
-      gig => (
-        <GigItem
-          key={`gig-item-${gig.id}`}
-          item={gig}
-          viewGigDetails={viewGigDetails}
-        />
-      )
+      gig => <GigItem key={`gig-item-${gig.id}`} item={gig} viewGigDetails={viewGigDetails} />,
     );
-  };
+  }, [gigs, resultsCount, viewGigDetails]);
 
-  const getMoreGigs = (): void => {
+  const getMoreGigs = useCallback((): void => {
     const nextResultsCount = resultsCount + settings.MIN_RESULTS_PER_LOAD;
     setResultsCount(nextResultsCount <= gigs.length ? nextResultsCount : gigs.length);
-  };
+  }, [gigs?.length, resultsCount]);
 
   if (gigs === undefined) {
     return (
@@ -86,14 +80,10 @@ const GigsPanel = (): ReactElement => {
               {buildGigsList()}
             </InfiniteScroll>
           )
-          : buildNoPanelContent(
-            `${employer.name} has no active gigs`,
-            noResultsIcon,
-            true,
-          )
+          : buildNoPanelContent(`${employer.name} has no active gigs`, icon, true)
       }
     </div>
   );
-}
+};
 
 export default GigsPanel;

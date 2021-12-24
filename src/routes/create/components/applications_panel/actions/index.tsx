@@ -28,20 +28,17 @@ const Actions = (): ReactElement => {
       <div id='application-actions-button-container'>
         <GigButton
           classNames='primary-green'
-          id='contact-applicants-button'
           isDisabled={!activeMessageTemplateId}
           onClick={() => updateApplicationStatuses(ApplicationStatus.accepted)}
           text={selectedCount && width > 450 ? `Contact (${selectedCount})` : 'Contact'}
         />
         <GigButton
           classNames='primary-red'
-          id='reject-applicants-button'
           onClick={() => updateApplicationStatuses(ApplicationStatus.rejected)}
           text={selectedCount && width > 450 ? `Reject (${selectedCount})` : 'Reject'}
         />
         <GigButton
           classNames='medium-grey'
-          id='clear-selected-applicants-button'
           onClick={clearSelectedApplicationIds}
           text='Clear'
         />

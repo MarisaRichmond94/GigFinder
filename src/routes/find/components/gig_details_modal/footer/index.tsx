@@ -31,7 +31,10 @@ const Footer = (props: FooterProps): ReactElement => {
 
   return (
     <div id='find-gig-details-modal-footer'>
-      <div id='gig-details-modal-resume-selector-container' className='paragraph-text text-center'>
+      <div
+        id='gig-details-modal-resume-selector-container'
+        className='paragraph-text text-center text primary-red'
+      >
         {
           isLoggedIn
             ? <ActiveResume isDisplayHeader={false}/>

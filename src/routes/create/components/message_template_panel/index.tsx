@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 
 import GigButton from 'components/gig_button';
 import ControlledSearchableGigInput from 'components/gig_input/searchable/controlled';
@@ -8,28 +8,25 @@ import GigTextAreaInput from 'components/gig_input/text_area';
 import { useViewport } from 'hooks/useViewport';
 import { useAuth } from 'providers/auth';
 import { useMessageTemplates } from 'providers/message_templates';
+import settings from 'settings';
 import { MessageTemplate } from 'types';
 import generateGUID from 'utils/generateGUID';
 
 const MessageTemplatePanel = (): ReactElement => {
-  // context variables and functions
+  // provider variables and functions
   const { employer } = useAuth();
-  const {
-    messageTemplates,
-    createMessageTemplate,
-    deleteMessageTemplate,
-    updateMessageTemplate,
-  } = useMessageTemplates();
-  // hook variables
-  const { width } = useViewport();
+  const { createMessageTemplate, deleteMessageTemplate } = useMessageTemplates();
+  const { updateMessageTemplate, messageTemplates } = useMessageTemplates();
   // local state variables and functions
   const [selectedTemplate, setSelectedTemplate] = useState<MessageTemplate | undefined>();
   const [name, setName] = useState('');
   const [template, setTemplate] = useState('');
+  // hook variables
+  const { width } = useViewport();
   // derived variables
-  const isMobileView = width < 850;
+  const isMobileView = width < settings.MIN_DESKTOP_WIDTH;
 
-  const onChange = (updatedName: string): void => {
+  const onChange = useCallback((updatedName: string): void => {
     const matchingTemplate = messageTemplates?.find(t => t.name === updatedName);
     if (matchingTemplate) {
       setSelectedTemplate(matchingTemplate);
@@ -39,22 +36,22 @@ const MessageTemplatePanel = (): ReactElement => {
       setTemplate('');
     }
     setName(updatedName);
-  };
+  }, [messageTemplates, selectedTemplate]);
 
-  const onOptionSelect = (selectedName: string): void => {
+  const onOptionSelect = useCallback((selectedName: string): void => {
     const matchingTemplate = messageTemplates?.find(t => t.name === selectedName);
     setSelectedTemplate(matchingTemplate);
     setName(matchingTemplate.name);
     setTemplate(matchingTemplate.template);
-  }
+  }, [messageTemplates]);
 
-  const resetPanel = () => {
+  const resetPanel = useCallback((): void => {
     setSelectedTemplate(undefined);
     setName('');
     setTemplate('');
-  };
+  }, []);
 
-  const createNewMessageTemplate = () => {
+  const createNewMessageTemplate = useCallback((): void => {
     createMessageTemplate(
       {
         id: generateGUID(),
@@ -64,9 +61,9 @@ const MessageTemplatePanel = (): ReactElement => {
       }
     );
     resetPanel();
-  };
+  }, [createMessageTemplate, employer?.id, name, resetPanel, template]);
 
-  const updateExistingMessageTemplate = () => {
+  const updateExistingMessageTemplate = useCallback((): void => {
     if (selectedTemplate) {
       updateMessageTemplate(
         selectedTemplate.id,
@@ -74,12 +71,12 @@ const MessageTemplatePanel = (): ReactElement => {
       );
       resetPanel();
     }
-  };
+  }, [selectedTemplate, template, resetPanel, updateMessageTemplate]);
 
-  const deleteExistingMessageTemplate = () => {
+  const deleteExistingMessageTemplate = useCallback((): void => {
     if (selectedTemplate) deleteMessageTemplate(selectedTemplate.id);
     resetPanel();
-  }
+  }, [deleteMessageTemplate, resetPanel, selectedTemplate]);
 
   return (
     <div id='message-template-panel'>

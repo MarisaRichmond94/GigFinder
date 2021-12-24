@@ -14,7 +14,6 @@ const TitleInput = (): ReactElement => {
       <ControlledSearchableGigInput
         classNames='off-white'
         formValue={title || ''}
-        id='gig-title-searchable-input'
         onChange={updatedTitle => updateInput(GigFormFieldType.title, updatedTitle)}
         onOptionSelect={updatedTitle => updateInput(GigFormFieldType.title, updatedTitle)}
         options={titleOptions}
