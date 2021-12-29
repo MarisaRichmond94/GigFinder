@@ -9,7 +9,7 @@ interface SearchContextType {
   searchFilters: string[],
   titleOptions?: string[],
   typeOptions?: string[],
-  debounceUpdateSearch: (searchParameters: SearchParameters) => void,
+  debounceUpdateSearch: (searchParameters: SearchParameters, typeOptions?: string[]) => void,
   onFilterAction: (actionType: FilterAction, filter: string) => void,
   onSearchFormSubmit: () => void,
 }

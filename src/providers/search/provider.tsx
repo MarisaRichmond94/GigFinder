@@ -36,14 +36,16 @@ const SearchProvider = (props: object) => {
 
   // This is a hack to prevent the debounce function from rebuilding and restarting the debounce
   const [debounceUpdateSearch] = useState(
-    () => debounce(250, false, (searchParameters: SearchParameters): void => {
-      const searchParams = new URLSearchParams();
-      for (const [key, value] of Object.entries(searchParameters)) {
-        if (value !== '') searchParams.set(key, value);
+    () => debounce(
+      250, false, (searchParameters: SearchParameters, typeOptions?: string[]): void => {
+        const searchParams = new URLSearchParams();
+        for (const [key, value] of Object.entries(searchParameters)) {
+          if (value !== '') searchParams.set(key, value);
+        }
+        history.replace({ search: searchParams.toString() });
+        if (pathname === settings.FIND_ROUTE) searchGigs(typeOptions);
       }
-      history.replace({ search: searchParams.toString() });
-      if (pathname === settings.FIND_ROUTE) searchGigs();
-    }),
+    ),
   );
 
   useEffect(() => {
@@ -65,14 +67,14 @@ const SearchProvider = (props: object) => {
     };
 
     populateFormOptions();
-    if (pathname === settings.FIND_ROUTE) searchGigs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const searchGigs = useCallback((): void => {
+  const searchGigs = useCallback((typeOptionsList?: string[]): void => {
     setSearchResults(undefined);
     setFilteredResults(undefined);
-    const url = buildSearchUrl(typeOptions);
+    const url = buildSearchUrl(typeOptionsList);
+    console.log({url})
     fetch(url)
       .then(response => response.json())
       .then(results => {
@@ -82,7 +84,7 @@ const SearchProvider = (props: object) => {
         }
         setSearchResults(results);
       });
-  }, [searchFilters, typeOptions, setFilteredResults, setSearchResults]);
+  }, [searchFilters, setFilteredResults, setSearchResults]);
 
   const addFilter = useCallback((filter: string): void => {
     const updatedFilters = createSearchFilter(filter, search, history);

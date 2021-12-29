@@ -12,7 +12,7 @@ const buildSearchUrl = (typeOptions: string[]): string => {
 
   const type = typeOptions?.find(x => x === query.get('type')) || undefined;
   if (type && type !== settings.ANY_TYPE) {
-    url += `type=${type.toLowerCase()}&`;
+    url += `type=${type}&`;
   }
 
   return url.slice(0, -1);

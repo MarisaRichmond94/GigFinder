@@ -12,13 +12,8 @@ import settings from 'settings';
 import { DropdownOption } from 'types';
 
 const SearchPanel = (): ReactElement => {
-  const {
-    debounceUpdateSearch,
-    locationOptions,
-    searchFilters,
-    titleOptions,
-    typeOptions,
-  } = useSearch();
+  const { locationOptions, searchFilters, titleOptions, typeOptions } = useSearch();
+  const { debounceUpdateSearch } = useSearch();
   const { pathname, search } = useLocation();
   const query = useQuery(search);
   const { width } = useViewport();
@@ -28,14 +23,19 @@ const SearchPanel = (): ReactElement => {
   const [type, setType] = useState<undefined | string>(query.get('type') || '');
 
   useEffect(() => {
-    debounceUpdateSearch({
-      title,
-      location,
-      type,
-      filters: searchFilters ? searchFilters.join(',') : '',
-    });
+    if (typeOptions) {
+      debounceUpdateSearch(
+        {
+          title,
+          location,
+          type,
+          filters: searchFilters ? searchFilters.join(',') : '',
+        },
+        typeOptions,
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, location, type]);
+  }, [title, location, type, typeOptions]);
 
   const updateSearchText = useCallback((key: string, value: string): void => {
     switch (key) {
