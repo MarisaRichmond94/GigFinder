@@ -36,7 +36,7 @@ const HomePage = (): ReactElement => {
         <div id='search-form-name-and-logo'>
           <img alt='main-logo' src={logo} />
           <span className={`bold ${isMobileView ? 'sub-title-text' : 'large-title-text'}`}>
-            Gig Search
+            Gig Finder
           </span>
         </div>
         <div className='header-text text off-white text-center'>

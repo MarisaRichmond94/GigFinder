@@ -54,7 +54,7 @@ const Header = (props: HeaderProps): ReactElement => {
     <div id='header'>
       <div id='header-title' onClick={() => history.push('/')}>
         <img alt='logo' id='header-title-icon' src={logo} />
-        <div className='bold title-text' id='header-title-text'>Gig Search</div>
+        <div className='bold title-text' id='header-title-text'>Gig Finder</div>
       </div>
       <div className='sub-header-text' id='header-message'>
         {

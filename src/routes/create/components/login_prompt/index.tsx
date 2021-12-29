@@ -32,7 +32,7 @@ const LoginPrompt = (): ReactElement => {
       <DemoWarning />
       <div className='logo-container' onClick={() => history.push('/')}>
         <img alt='logo' className='gig-search-icon' src={logo} />
-        <div className='bold title-text gig-search-title'>Gig Search</div>
+        <div className='bold title-text gig-search-title'>Gig Finder</div>
       </div>
       <div className='bold title-text login-prompt-header'>You're here to hire.</div>
       <div className='bold title-text login-prompt-header'>We're here to help.</div>
