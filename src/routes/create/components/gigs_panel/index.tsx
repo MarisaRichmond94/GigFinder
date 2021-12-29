@@ -9,7 +9,6 @@ import { usePrevious } from 'hooks/usePrevious';
 import buildNoPanelContent from 'libs/no_panel_content';
 import { useAuth } from 'providers/auth';
 import { useEmployer } from 'providers/employer';
-import { GigFormProvider } from 'providers/gig_form';
 import GigDetailsModal from 'routes/create/components/gig_details_modal';
 import GigItem from 'routes/create/components/gigs_panel/item';
 import settings from 'settings';
@@ -64,9 +63,7 @@ const GigsPanel = (): ReactElement => {
 
   return (
     <div id='gigs-panel'>
-      <GigFormProvider>
-        <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
-      </GigFormProvider>
+      <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
       {
         gigs.length
           ? (

@@ -3,6 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 
 import { useAuth } from 'providers/auth';
 import { EmployerProvider } from 'providers/employer';
+import { GigFormProvider } from 'providers/gig_form';
 import { MessageTemplatesProvider } from 'providers/message_templates';
 import { SearchProvider } from 'providers/search';
 import { UserProvider } from 'providers/user';
@@ -46,9 +47,11 @@ const CreateRoute = (): ReactElement => {
 
   return (
     <EmployerProvider>
-      <MessageTemplatesProvider>
-        <CreatePage />
-      </MessageTemplatesProvider>
+      <GigFormProvider>
+        <MessageTemplatesProvider>
+          <CreatePage />
+        </MessageTemplatesProvider>
+      </GigFormProvider>
     </EmployerProvider>
   );
 };

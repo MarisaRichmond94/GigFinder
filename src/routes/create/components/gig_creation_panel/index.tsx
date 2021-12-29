@@ -2,7 +2,6 @@ import './index.scss';
 
 import { ReactElement } from 'react';
 
-import { GigFormProvider } from 'providers/gig_form';
 import GigCreationActions from 'routes/create/components/gig_creation_panel/actions';
 import BenefitsInput from 'routes/create/components/inputs/benefits';
 import DescriptionInput from 'routes/create/components/inputs/description';
@@ -22,7 +21,7 @@ const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
     : {};
 
   return (
-    <GigFormProvider>
+    <>
       <div
         id='gig-creation-panel'
         className={props.unusableHeight ? 'right-sidebar' : 'center-panel'}
@@ -37,7 +36,7 @@ const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
         <SalaryInput />
       </div>
       <GigCreationActions />
-    </GigFormProvider>
+    </>
   );
 };
 
