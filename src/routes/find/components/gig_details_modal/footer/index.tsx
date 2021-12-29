@@ -38,7 +38,7 @@ const Footer = (props: FooterProps): ReactElement => {
         {
           isLoggedIn
             ? <ActiveResume isDisplayHeader={false}/>
-            : 'Log in or create an account to apply to gigs'
+            : 'Create an account or sign in to apply to gigs'
         }
         {
           isLoggedIn && !activeResumeId &&

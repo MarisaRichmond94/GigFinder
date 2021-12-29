@@ -77,7 +77,7 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
           isLoggedIn
             ? buildNoPanelContent('You have no active applications', icon, props.isCenterPanel)
             : buildNoPanelContent(
-              'Log in or create an account to easily apply to gigs in seconds',
+              'Create an account or sign in to easily apply to gigs in seconds',
               icon,
               props.isCenterPanel,
             )

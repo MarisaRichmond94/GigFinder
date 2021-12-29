@@ -14,7 +14,7 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps): ReactElement => {
   // context variables and functions
-  const { user } = useAuth();
+  const { user, isLoggedIn } = useAuth();
   const { favoriteGigs, toggleFavoriteGig } = useFavorites();
   // destructured prop variables
   if (!props.gig) return null;
@@ -38,6 +38,7 @@ const Header = (props: HeaderProps): ReactElement => {
         <div id='favorite-gig-button-container' className='header-text icon-button'>
           <GigButton
             classNames='favorite-gig-button icon-button off-black'
+            isDisabled={!isLoggedIn}
             onClick={handleToggleFavoriteGig}
             textBlock={
               isFavorite
