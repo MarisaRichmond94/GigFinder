@@ -16,6 +16,7 @@ import settings from 'settings';
 
 type ReviewPanelProps = {
   hasUserReviewed: boolean,
+  setHasUserReviewed: (hasUserReviewed: boolean) => void,
 };
 
 const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
@@ -68,7 +69,13 @@ const ReviewPanel = (props: ReviewPanelProps): ReactElement => {
   }, [resetForm]);
 
   return isReviewForm
-    ? <ReviewForm cancelReview={cancelReview} submitReview={submitReview} />
+    ? (
+      <ReviewForm
+        cancelReview={cancelReview}
+        submitReview={submitReview}
+        setHasUserReviewed={props.setHasUserReviewed}
+      />
+    )
     : (
       <>
         <div className='find-gig-modal-body-panel' id='gig-details-modal-review-panel'>

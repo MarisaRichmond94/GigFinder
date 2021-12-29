@@ -31,12 +31,12 @@ const SearchItemHeader = (props: SearchItemHeaderProps): ReactElement => {
         {rating}
       </div>
       <GigButton
-        classNames='favorite-gig-button icon-button off-black'
+        classNames={`favorite-gig-button icon-button ${isFavorite ? 'primary-red' : 'off-black'}`}
         id={`favorite-gig-button-${id}`}
         onClick={() => props.handleToggleFavoriteGig()}
         textBlock={
           isFavorite
-            ? <BsHeartFill className='favorite-gig-button-icon primary-red icon-button' />
+            ? <BsHeartFill className='favorite-gig-button-icon' />
             : <BsHeart className='favorite-gig-button-icon' />
         }
       />

@@ -13,6 +13,7 @@ import { ReviewFormFieldOptions } from 'types';
 
 type ReviewFormProps = {
   cancelReview: () => void,
+  setHasUserReviewed: (hasUserReviewed: boolean) => void,
   submitReview: () => void,
 };
 
@@ -22,6 +23,11 @@ const ReviewForm = (props: ReviewFormProps): ReactElement => {
 
   const [localTitle, setLocalTitle] = useState(title || '');
   const [localCity, setLocalCity] = useState(city || '');
+
+  const handleSubmitReview = () => {
+    props.setHasUserReviewed(true);
+    props.submitReview();
+  };
 
   return (
     <>
@@ -92,21 +98,19 @@ const ReviewForm = (props: ReviewFormProps): ReactElement => {
       </div>
       <div id='review-panel-actions-container'>
         <GigButton
-          classNames='sub-header-text medium-grey'
-          id='write-a-review-button'
+          classNames='sub-header-text medium-grey review-form-button'
           onClick={props.cancelReview}
           text='Cancel'
         />
         <GigButton
-          classNames='sub-header-text primary-blue'
-          id='write-a-review-button'
+          classNames='sub-header-text primary-blue review-form-button'
           isDisabled={!getIsValidInput('all')}
-          onClick={props.submitReview}
+          onClick={handleSubmitReview}
           text='Submit Review'
         />
       </div>
     </>
   );
-}
+};
 
 export default ReviewForm;

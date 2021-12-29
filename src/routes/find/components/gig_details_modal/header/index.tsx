@@ -37,12 +37,14 @@ const Header = (props: HeaderProps): ReactElement => {
         <div className='header-text'>{rating}</div>
         <div id='favorite-gig-button-container' className='header-text icon-button'>
           <GigButton
-            classNames='favorite-gig-button icon-button off-black'
+            classNames={
+              `favorite-gig-button icon-button ${isFavorite ? 'primary-red' : 'off-black'}`
+            }
             isDisabled={!isLoggedIn}
             onClick={handleToggleFavoriteGig}
             textBlock={
               isFavorite
-                ? <BsHeartFill className='favorite-gig-button-icon primary-red icon-button' />
+                ? <BsHeartFill className='favorite-gig-button-icon' />
                 : <BsHeart className='favorite-gig-button-icon' />
             }
           />

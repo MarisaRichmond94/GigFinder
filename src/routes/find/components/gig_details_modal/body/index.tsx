@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import GigButton from 'components/gig_button';
 import { useReviewForm } from 'providers/review_form';
@@ -21,8 +21,17 @@ const Body = (props: BodyProps): ReactElement => {
   // provider variables and functions
   const { userEmployerReviews } = useReviewForm();
   const { activeGig } = useUser();
-  // derived variables
-  const hasUserReviewed = !!userEmployerReviews.find(x => x.employer === activeGig.employer);
+  // local state variables and functions
+  const [hasUserReviewed, setHasUserReviewed] = useState(
+    !!userEmployerReviews.find(x => x.employer === activeGig.employer),
+  );
+
+  useEffect(() => {
+    if (activeGig && userEmployerReviews) {
+      const isMatchingReview = !!userEmployerReviews.find(x => x.employer === activeGig.employer);
+      setHasUserReviewed(isMatchingReview);
+    }
+  }, [activeGig, activeGig?.employer, userEmployerReviews]);
 
   return (
     <div id='find-gig-details-modal-body'>
@@ -41,7 +50,12 @@ const Body = (props: BodyProps): ReactElement => {
       {
         isDetailPanel
           ? <DetailPanel gig={gig} />
-          : <ReviewPanel hasUserReviewed={hasUserReviewed} />
+          : (
+            <ReviewPanel
+              hasUserReviewed={hasUserReviewed}
+              setHasUserReviewed={setHasUserReviewed}
+            />
+          )
       }
     </div>
   );

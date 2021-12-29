@@ -3,6 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 
 import { useAuth } from 'providers/auth';
 import { EmployerProvider } from 'providers/employer';
+import { MessageTemplatesProvider } from 'providers/message_templates';
 import { SearchProvider } from 'providers/search';
 import { UserProvider } from 'providers/user';
 import HomePage from 'routes/home';
@@ -21,10 +22,11 @@ const GigRouter = (): ReactElement => {
 };
 
 const HomeRoute = (): ReactElement => {
+  const { logout } = useAuth();
+
   useEffect(() => {
-    const localUserId = window.localStorage.getItem('userId');
-    const localEmployerId = window.localStorage.getItem('employerId');
-    if (localUserId || localEmployerId) window.localStorage.clear();
+    logout();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -44,7 +46,9 @@ const CreateRoute = (): ReactElement => {
 
   return (
     <EmployerProvider>
-      <CreatePage />
+      <MessageTemplatesProvider>
+        <CreatePage />
+      </MessageTemplatesProvider>
     </EmployerProvider>
   );
 };

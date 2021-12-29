@@ -80,7 +80,7 @@ const ControlledSearchableGigInput = (props: ControlledSearchableGigInputProps):
         id={props.id}
         name={Math.random().toString()}
         onChange={e => onChange(e.target.value)}
-        onFocus={() => setIsInputFocused(true)}
+        onFocus={() => { if (props.formValue !== '') setIsInputFocused(true) } }
         onKeyPress={onKeyPress}
         placeholder={props.placeholder}
         spellCheck='false'

@@ -1,8 +1,10 @@
 import { ReactElement, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import GigButton from 'components/gig_button';
 import { useAuth } from 'providers/auth';
 import { useAuthForm } from 'providers/auth_form';
+import settings from 'settings';
 import { AuthFieldType } from 'types';
 
 type FooterProps = {
@@ -11,8 +13,11 @@ type FooterProps = {
 
 const Footer = (props: FooterProps): ReactElement => {
   // provider variables and functions
-  const { isSignUp, isUserAuth, getIsValidInput, resetForm } = useAuthForm();
+  const { isSignUp, isUserAuth } = useAuthForm();
+  const { getIsValidInput, resetForm, setIsApplicationSignUp } = useAuthForm();
   const { loginEmployer, loginUser, signUpEmployer, signUpUser } = useAuth();
+  // hook variables
+  const { pathname } = useLocation();
   // destructured props
   const { setIsOpen } = props;
   // derived variables
@@ -30,7 +35,8 @@ const Footer = (props: FooterProps): ReactElement => {
   const close = useCallback((): void => {
     setIsOpen(false);
     resetForm();
-  }, [resetForm, setIsOpen]);
+    setIsApplicationSignUp(pathname === settings.FIND_ROUTE);
+  }, [pathname, resetForm, setIsApplicationSignUp, setIsOpen]);
 
   const handleFormSubmit = useCallback((): void => {
     if (isSignUp) isUserAuth ? signUpUser(close) : signUpEmployer(close);

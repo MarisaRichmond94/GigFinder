@@ -4,7 +4,6 @@ import { ReactElement, useCallback, useEffect, useState } from 'react';
 
 import { useViewport } from 'hooks/useViewport';
 import { ApplicationsProvider } from 'providers/applications';
-import { MessageTemplatesProvider } from 'providers/message_templates';
 import PanelSelector from 'routes/components/panel_selector';
 import ApplicationsPanel from 'routes/create/components/applications_panel';
 import GigCreationPanel from 'routes/create/components/gig_creation_panel';
@@ -53,11 +52,9 @@ const CenterPanel = (): ReactElement => {
         panels={Object.keys(CreatePanelTypes)}
         setActivePanel={setActivePanel}
       />
-        <MessageTemplatesProvider>
-          <ApplicationsProvider>
-            {getActivePanel()}
-          </ApplicationsProvider>
-        </MessageTemplatesProvider>
+        <ApplicationsProvider>
+          {getActivePanel()}
+        </ApplicationsProvider>
     </div>
   );
 };

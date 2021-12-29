@@ -3,14 +3,23 @@
 #gig-details-modal-review-panel{
   min-height: 260px;
   .filter-options-list { max-height: 100px; }
-  .gig-checkbox-container { margin-top: $medium-margin; }
 }
 
-.review-form-flex-container { @include centered-flex-box; }
+.review-form-flex-container {
+  @include centered-flex-box;
+  margin-top: $medium-margin;
+}
+
 #review-form-title-input { width: 100%; }
 #review-form-summary-input { margin-top: $medium-margin; }
 
 #review-form-city-input {
   margin-right: $medium-margin;
   width: 100%;
+}
+
+.review-form-button {
+  margin-top: $medium-margin;
+  width: 50%;
+  &:first-child { margin-right: $medium-margin; }
 }

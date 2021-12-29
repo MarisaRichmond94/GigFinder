@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import AuthFormContext from 'providers/auth_form/context';
@@ -17,6 +17,10 @@ const AuthFormProvider = (props: object) => {
   const [password, setPassword] = useState<string | undefined>();
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [authError, setAuthError] = useState<string | undefined>();
+
+  useEffect(() => {
+    setIsApplicationSignUp(pathname === settings.FIND_ROUTE);
+  }, [pathname]);
 
   const resetForm = useCallback((): void => {
     setName(undefined);

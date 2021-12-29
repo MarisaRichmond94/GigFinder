@@ -8,7 +8,6 @@ import CollapsableSection from 'components/collapsable_section';
 import GigButton from 'components/gig_button';
 import { useApp } from 'providers/app';
 import { useAuth } from 'providers/auth';
-import { MessageTemplatesProvider } from 'providers/message_templates';
 import GigCreationPanel from 'routes/create/components/gig_creation_panel';
 import MessageTemplatePanel from 'routes/create/components/message_template_panel';
 
@@ -40,9 +39,7 @@ const RightPanel = (): ReactElement => {
         onToggleCallback={calculateTotalHeight}
         sectionTitle='Message Templates'
       >
-        <MessageTemplatesProvider>
-          <MessageTemplatePanel />
-        </MessageTemplatesProvider>
+        <MessageTemplatePanel />
       </CollapsableSection>
       <CollapsableSection
         classNames='off-white'

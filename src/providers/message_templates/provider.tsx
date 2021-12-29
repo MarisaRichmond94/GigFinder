@@ -33,28 +33,23 @@ const MessageTemplatesProvider = (props: object) => {
     // eslint-disable-next-line
   }, []);
 
-  const createMessageTemplate = useCallback(async (messageTemplate: MessageTemplate) => {
-    const newMessageTemplate = await MessageTemplatesApi.post(messageTemplate);
+  const createMessageTemplate = useCallback((messageTemplate: MessageTemplate): void => {
+    MessageTemplatesApi.post(messageTemplate);
     setMessageTemplates(
-      messageTemplates ? [...messageTemplates, newMessageTemplate] : [newMessageTemplate],
+      messageTemplates?.length ? [...messageTemplates, messageTemplate] : [messageTemplate],
     );
   }, [messageTemplates]);
 
   const updateMessageTemplate = useCallback(
-    async (messageTemplateId: string, updatedMessageTemplate: MessageTemplate) => {
-      const updatedTemplate = await MessageTemplatesApi.update(
-        messageTemplateId,
-        updatedMessageTemplate,
-      );
-      if (updatedTemplate) {
-        replaceExistingItemInList(updatedTemplate, messageTemplates, setMessageTemplates);
-      }
+    (messageTemplateId: string, updatedMessageTemplate: MessageTemplate): void => {
+      MessageTemplatesApi.update(messageTemplateId, updatedMessageTemplate);
+      replaceExistingItemInList(updatedMessageTemplate, messageTemplates, setMessageTemplates);
     }, [messageTemplates],
   );
 
-  const deleteMessageTemplate = useCallback(async (messageTemplateId: string) => {
+  const deleteMessageTemplate = useCallback((messageTemplateId: string): void => {
     if (messageTemplateId) {
-      await MessageTemplatesApi.deleteById(messageTemplateId);
+      MessageTemplatesApi.deleteById(messageTemplateId);
       setMessageTemplates(messageTemplates.filter(t => t.id !== messageTemplateId));
     }
   }, [messageTemplates]);
