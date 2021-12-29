@@ -74,7 +74,6 @@ const SearchProvider = (props: object) => {
     setSearchResults(undefined);
     setFilteredResults(undefined);
     const url = buildSearchUrl(typeOptionsList);
-    console.log({url})
     fetch(url)
       .then(response => response.json())
       .then(results => {
