@@ -28,9 +28,10 @@ const ApplicationsProvider = (props: object) => {
   }, []);
 
   const initializeApplications = useCallback(async (employer: string) => {
+    if (activeApplication) setActiveApplication(undefined);
     const appsByEmployer = await ApplicationsApi.get({ employer });
     setApplications(appsByEmployer?.filter(x => x.status !== ApplicationStatus.rejected));
-  }, []);
+  }, [activeApplication]);
 
   const filterApplicationsByGigId = useCallback((gigId: string): void => {
     if (gigId) {
