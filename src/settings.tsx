@@ -18,7 +18,7 @@ const settings = {
   PANEL_IDS: {
     FIND_ROUTE: {
       CENTER: {
-        BUFFER: 30,
+        BUFFER: 40,
         DESKTOP: [
           'header',
           'search-panel-section',

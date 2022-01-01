@@ -21,12 +21,13 @@ const HomePage = (): ReactElement => {
   const isMobileView = width < settings.MIN_DESKTOP_WIDTH;
 
   const SwitchButton = (
-    <GigButton
-      classNames='thick header-text primary-blue text'
-      id='search-form-switch-button'
+    <div
+      className='prompt-text'
       onClick={() => history.push(settings.CREATE_ROUTE)}
-      text='Switch'
-    />
+      id='switch-text'
+    >
+      Switch
+    </div>
   );
 
   return (
@@ -49,7 +50,7 @@ const HomePage = (): ReactElement => {
           onClick={onSearchFormSubmit}
           text='Find My Dream Gig'
         />
-        <div className='header-text text off-white text-center' id='switch-portals-prompt'>
+        <div className='header-text text off-white text-center prompt-text' id='switch-portals-prompt'>
           Looking to hire? {SwitchButton} to our employer portal instead
         </div>
       </div>

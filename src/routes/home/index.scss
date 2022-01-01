@@ -21,6 +21,12 @@
   padding: $medium-padding;
   row-gap: 10px;
   width: 90vw;
+
+  .prompt-text { display: inline-block; }
+  #switch-text {
+    color: $primary-blue;
+    &:hover { color: $secondary-blue; }
+  }
 }
 
 #search-form-name-and-logo {
