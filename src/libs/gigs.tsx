@@ -73,8 +73,11 @@ const getBenefits = (benefits: string[]): ReactElement => {
 
 const getFormattedViews = (views: number): string => {
   const viewsString = views.toString();
-  const insertIndex = viewsString.length - 3;
-  return `${[viewsString.slice(0, insertIndex), ',', viewsString.slice(insertIndex)].join('')}`;
+  if (viewsString.length > 3) {
+    const insertIndex = viewsString.length - 3;
+    return `${[viewsString.slice(0, insertIndex), ',', viewsString.slice(insertIndex)].join('')}`;
+  }
+  return viewsString;
 };
 
 const getRequirements = (requirements: string): ReactElement => {
