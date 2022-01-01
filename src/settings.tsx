@@ -1,6 +1,6 @@
 const settings = {
   ANY_TYPE: 'Any',
-  BASE_SERVER_URL: 'http://localhost:5001/gigfinder-83a7f/us-central1/main', // 'https://us-central1-gigfinder-83a7f.cloudfunctions.net/main',
+  BASE_SERVER_URL: 'https://us-central1-gigfinder-83a7f.cloudfunctions.net/main', // 'http://localhost:5001/gigfinder-83a7f/us-central1/main'
   CREATE_ROUTE: '/create',
   FIND_ROUTE: '/find',
   HOME_ROUTE: '/',

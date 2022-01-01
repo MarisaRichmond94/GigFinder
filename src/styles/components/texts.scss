@@ -6,45 +6,14 @@
 .thick { font-family: $sub-header-font-family; }
 .bold { font-family: $header-font-family; }
 
-.large-title-text {
-  @include prevent-highlight;
-  font-size: $large-title-font-size;
-}
-
-.title-text {
-  @include prevent-highlight;
-  font-size: $title-font-size;
-}
-
-.sub-title-text {
-  @include prevent-highlight;
-  font-size: $sub-title-font-size;
-}
-
-.small-title-text {
-  @include prevent-highlight;
-  font-size: $small-title-font-size;
-}
-
-.large-header-text {
-  @include prevent-highlight;
-  font-size: $large-header-font-size;
-}
-
-.header-text {
-  @include prevent-highlight;
-  font-size: $header-font-size;
-}
-
-.sub-header-text {
-  @include prevent-highlight;
-  font-size: $sub-header-font-size;
-}
-
-.paragraph-text {
-  @include prevent-highlight;
-  font-size: $paragraph-font-size;
-}
+.large-title-text { font-size: $large-title-font-size; }
+.title-text { font-size: $title-font-size; }
+.sub-title-text { font-size: $sub-title-font-size; }
+.small-title-text { font-size: $small-title-font-size; }
+.large-header-text { font-size: $large-header-font-size; }
+.header-text { font-size: $header-font-size; }
+.sub-header-text { font-size: $sub-header-font-size; }
+.paragraph-text { font-size: $paragraph-font-size; }
 
 .text {
   &.white { color: $white; }
@@ -54,4 +23,16 @@
   &.primary-red { color: $primary-red; }
   &.primary-green { color: $primary-green; }
   &.transparent { color: transparent !important }
+}
+
+// desktop view
+@media (min-width: 850px) {
+  .large-title-text { @include prevent-highlight; }
+  .title-text { @include prevent-highlight; }
+  .sub-title-text { @include prevent-highlight; }
+  .small-title-text { @include prevent-highlight; }
+  .large-header-text { @include prevent-highlight; }
+  .header-text { @include prevent-highlight; }
+  .sub-header-text { @include prevent-highlight; }
+  .paragraph-text { @include prevent-highlight; }
 }
