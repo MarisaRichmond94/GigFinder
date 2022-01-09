@@ -76,7 +76,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   };
 
   return (
-    <div className='panel' id='favorite-gigs-panel'>
+    <div id='favorite-gigs-panel'>
       {
         isLoggedIn && props.showActiveResumeSelector &&
         <>
@@ -87,7 +87,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
       {
         favoriteGigs?.length
           ? (
-            <div id='favorite-gigs-list' style={listStyling}>
+            <div className='panel' id='favorite-gigs-list' style={listStyling}>
               <InfiniteScroll
                 dataLength={resultsCount}
                 next={getMoreFavoriteGigs}

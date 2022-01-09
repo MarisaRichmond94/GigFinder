@@ -21,6 +21,7 @@
     width: calc(92vw - 30px);
 
     #gig-details-modal-resume-selector-container {
+      margin-bottom: $medium-margin;
       .message { padding-bottom: $medium-padding; }
 
       #active-resume-section {
@@ -63,7 +64,5 @@
         &:first-child { margin-right: $large-margin; }
       }
     }
-
-    .message { margin-top: -20px; }
   }
 }
