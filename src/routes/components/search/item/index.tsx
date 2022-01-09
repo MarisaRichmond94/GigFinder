@@ -17,6 +17,8 @@ type SearchItemProps = {
 const SearchItem = (props: SearchItemProps): ReactElement => {
   const { id, employer, city, state, rating, createdAt, requirements, title } = props.item;
 
+  const durationSincePosted = calculateDurationSincePosted(createdAt);
+
   return (
     <div className='search-item'>
       <SearchItemHeader
@@ -33,9 +35,12 @@ const SearchItem = (props: SearchItemProps): ReactElement => {
       <div className='requirements-row paragraph-text'>
         {populateJobRequirements(id, requirements)}
       </div>
-      <div className='posted-row sub-header-text text medium-grey'>
-        Posted {calculateDurationSincePosted(createdAt)} ago
-      </div>
+      {
+        durationSincePosted !== 'NaN' &&
+        <div className='posted-row sub-header-text text medium-grey'>
+          Posted {durationSincePosted} ago
+        </div>
+      }
       <div className='text-center'>
         <GigButton
           classNames='primary-blue dark-background sub-header-text'
