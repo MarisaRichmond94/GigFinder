@@ -14,6 +14,7 @@
   .logo-container {
     @include centered-flex-box;
     border-bottom: 2px solid $secondary-blue;
+    justify-content: center;
     margin: 12vh 0 $large-margin 0;
     padding: $medium-padding;
     .gig-search-title { color: $primary-blue; }

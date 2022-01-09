@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-import settings from 'settings';
 import { keysToCamel } from 'utils/convertCasing';
 
 class BaseApi {
   route;
   url;
   constructor(route) {
-    this.url = `${settings.BASE_SERVER_URL}/${route}`;
+    this.url = `${process.env.REACT_APP_BASE_SERVER_URL}/${route}`;
   };
 
   async post(body) {
