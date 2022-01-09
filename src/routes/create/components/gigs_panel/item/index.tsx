@@ -22,6 +22,8 @@ const GigItem = (props: GigItemProps): ReactElement => {
   const { id, city, state, createdAt, requirements, title, views } = props.item;
   const { closeGig } = useEmployer();
 
+  const durationSincePosted = calculateDurationSincePosted(createdAt);
+
   return (
     <div className='gig-item'>
       <div className='header-row'>
@@ -55,9 +57,12 @@ const GigItem = (props: GigItemProps): ReactElement => {
         <div className='paragraph-text'>
           {populateJobRequirements(id, requirements)}
         </div>
-        <div className='posted-row sub-header-text'>
-          Posted {calculateDurationSincePosted(createdAt)} ago
-        </div>
+        {
+          durationSincePosted !== 'NaN' &&
+          <div className='posted-row sub-header-text'>
+            Posted {calculateDurationSincePosted(createdAt)} ago
+          </div>
+        }
       </div>
       <div className='text-center'>
         <GigButton
