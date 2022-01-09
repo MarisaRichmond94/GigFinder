@@ -1,11 +1,13 @@
 @import 'global';
 
 #home-page {
+  background-attachment: fixed;
   background-image: url(/assets/images/home_background.png);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden auto;
+  padding-bottom: $extra-large-padding;
   width: 100%;
 }
 

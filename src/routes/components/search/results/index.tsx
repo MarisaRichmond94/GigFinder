@@ -106,7 +106,7 @@ const SearchResults = (props: SearchResultsProps): ReactElement => {
   };
 
   return (
-    <div id='search-results' style={listStyling}>
+    <div className='panel' id='search-results' style={listStyling}>
       <AlertModal
         isOpen={isAlertModalOpen}
         message='You must create an account or sign in in order to use this feature.'

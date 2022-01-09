@@ -62,7 +62,7 @@ const GigsPanel = (): ReactElement => {
   };
 
   return (
-    <div id='gigs-panel'>
+    <div className='panel' id='gigs-panel'>
       <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
       {
         gigs.length

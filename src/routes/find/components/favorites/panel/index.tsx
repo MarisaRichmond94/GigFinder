@@ -76,7 +76,7 @@ const FavoriteGigsPanel = (props: FavoriteGigsPanelProps): ReactElement => {
   };
 
   return (
-    <div id='favorite-gigs-panel'>
+    <div className='panel' id='favorite-gigs-panel'>
       {
         isLoggedIn && props.showActiveResumeSelector &&
         <>

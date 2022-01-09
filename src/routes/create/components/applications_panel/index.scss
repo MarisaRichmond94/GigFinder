@@ -12,7 +12,14 @@
   #applications-list { overflow-y: auto; }
 }
 
-// mobile view
+// mobile view (landscape)
+@media (min-width: 0) and (max-height: 415px) {
+  .panel {
+    #applications-list { min-height: 250px; }
+  }
+}
+
+// mobile view (portrait)
 @media (min-width: 0) {
   #applications-list { height: calc(100vh - 305px); }
 }

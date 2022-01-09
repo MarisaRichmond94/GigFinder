@@ -11,7 +11,7 @@
   background-color: $off-white;
   border-radius: $small-border-radius;
   padding: $medium-padding $extra-large-padding;
-  width: calc(100% - 26px);
+  width: calc(100% - 36px);
 
   .application-footer {
     @include centered-flex-box;

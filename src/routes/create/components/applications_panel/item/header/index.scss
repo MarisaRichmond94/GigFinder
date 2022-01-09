@@ -1,11 +1,32 @@
 @import 'global';
 
 .application-header {
-  @include centered-flex-box;
-  div { margin-right: $small-margin; }
+  line-height: 15px;
+
+  div {
+    display: inline-block;
+    margin-right: $small-margin;
+
+    &:nth-child(1),
+    &:nth-child(3) {
+      max-width: calc(55% - 35px);
+    }
+  }
 
   .application-status {
-    margin-left: auto;
-    margin-right: 0;
+    float: right;
+  }
+}
+
+// above mobile view
+@media (min-width: 400px) {
+  .application-header {
+    @include centered-flex-box;
+    div { margin-right: $small-margin; }
+
+    .application-status {
+      margin-left: auto;
+      margin-right: 0;
+    }
   }
 }

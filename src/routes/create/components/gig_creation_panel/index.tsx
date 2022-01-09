@@ -24,7 +24,7 @@ const GigCreationPanel = (props: GigCreationPanelProps): ReactElement => {
     <>
       <div
         id='gig-creation-panel'
-        className={props.unusableHeight ? 'right-sidebar' : 'center-panel'}
+        className={`panel ${props.unusableHeight ? 'right-sidebar' : 'center-panel'}`}
         style={listStyling}
       >
         <TitleInput />

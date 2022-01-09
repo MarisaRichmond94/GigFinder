@@ -4,3 +4,7 @@
   #employer-sign-out-button { width: 100%; }
   #message-template-section { padding-bottom: $extra-large-padding + 5px; }
 }
+
+@media (min-width: 0) {
+  #right-panel { display: none; }
+}

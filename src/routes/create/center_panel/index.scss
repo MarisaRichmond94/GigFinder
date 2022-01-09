@@ -1,9 +1,23 @@
 @import 'global';
 
-#create-center-panel { margin: 3% 3% 0 3%; }
+#create-center-panel {
+  margin: 3%;
+}
 
 #create-center-panel-selector {
   border-bottom: 1px solid $light-grey;
   display: flex;
   padding: 0 $medium-padding;
+}
+
+@media (min-width: 0) {
+  #create-center-panel {
+    width: calc(100vw - 6%);
+  }
+}
+
+@media (min-width: 850px) {
+  #create-center-panel {
+    width: calc(100vw - (350px + 6%));
+  }
 }

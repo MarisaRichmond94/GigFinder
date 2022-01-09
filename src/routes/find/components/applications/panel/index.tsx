@@ -87,7 +87,7 @@ const UserApplicationsPanel = (props: UserApplicationsPanelProps): ReactElement 
   };
 
   return (
-    <div id='gig-applications-panel'>
+    <div className='panel' id='gig-applications-panel'>
       <GigDetailsModal isOpen={isGigDetailsModalOpen} setIsOpen={setIsGigDetailsModalOpen} />
       <div id='gig-applications-list' style={listStyling}>
         <InfiniteScroll

@@ -43,7 +43,7 @@ const ApplicationsPanel = (): ReactElement => {
   };
 
   return (
-    <div id='applications-panel'>
+    <div className='panel' id='applications-panel'>
       <GigDropdown
         id='applications-panel-gig-filter'
         options={
